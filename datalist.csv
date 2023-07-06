@@ -1,0 +1,2440 @@
+Main Category,Sub Category 1,Sub Category 2,name,type,MSB,LSB,PC#
+PIANO,VRM Piano,,CFX Concert Grand,VRM,108,0,1
+PIANO,VRM Piano,,Studio Grand,VRM,108,1,3
+PIANO,VRM Piano,,Bosendorfer Grand,VRM,108,6,1
+PIANO,VRM Piano,,Mellow Jazz Grand,VRM,108,3,3
+PIANO,VRM Piano,,Rock Piano,VRM,108,16,3
+PIANO,VRM Piano,,Stage Grand,VRM,108,2,3
+PIANO,VRM Piano,,Themic Grand,VRM,108,6,2
+PIANO,VRM Piano,,CFX 1Octave,VRM,108,22,2
+PIANO,VRM Piano,,Ambient Piano,VRM,108,27,4
+PIANO,VRM Piano,,CFX 2Octaves,VRM,108,23,2
+PIANO,VRM Piano,,Mellow Piano,VRM,108,18,1
+PIANO,VRM Piano,,CFX Cocktail Piano,VRM,108,28,4
+PIANO,VRM Piano,,Pop Grand,VRM,108,17,2
+PIANO,VRM Piano,,Concert Upright,VRM,108,5,3
+PIANO,Grand Piano,,CFX Concert Grand,Natural!,0,122,1
+PIANO,Grand Piano,,Studio Grand,Natural!,104,38,1
+PIANO,Grand Piano,,Bosendorfer Grand,Natural!,104,18,1
+PIANO,Grand Piano,,Mellow Jazz Grand,Natural!,104,45,1
+PIANO,Grand Piano,,Rock Piano,Natural!,0,124,3
+PIANO,Grand Piano,,Stage Grand,Natural!,104,44,1
+PIANO,Grand Piano,,Themic Grand,Natural!,104,18,2
+PIANO,Grand Piano,,CFX 1Octave,Natural!,0,123,4
+PIANO,Grand Piano,,Ambient Piano,Natural!,104,19,4
+PIANO,Grand Piano,,CFX 2Octaves,Natural!,0,124,4
+PIANO,Grand Piano,,Mellow Piano,Natural!,0,124,1
+PIANO,Grand Piano,,CFX Cocktail Piano,Natural!,104,20,4
+PIANO,Grand Piano,,Pop Grand,Natural!,104,6,1
+PIANO,Upright Piano,,Concert Upright,Natural!,104,17,2
+PIANO,Upright Piano,,Pop Rock Upright,Natural!,104,16,2
+PIANO,Upright Piano,,Stage Upright,Natural!,104,15,2
+PIANO,Upright Piano,,Honky Tonk Upright,Natural!,104,13,4
+PIANO,Upright Piano,,School Upright,Natural!,104,13,1
+PIANO,Upright Piano,,Saloon Upright,Natural!,104,14,2
+PIANO,Upright Piano,,70s Ballad Upright,Natural!,104,14,1
+PIANO,Upright Piano,,Upright 1Octave,Natural!,104,14,4
+PIANO,Upright Piano,,Chillout Upright,Natural!,104,15,1
+PIANO,Upright Piano,,Upright 2Octaves,Natural!,104,15,4
+PIANO,Piano Layer,,CFX Superstar Grand,Natural!,108,25,5
+PIANO,Piano Layer,,Studio Superstar Grand,Natural!,104,34,1
+PIANO,Piano Layer,,CFX Pad Production,Natural!,104,30,1
+PIANO,Piano Layer,,Studio Pad Production,Natural!,104,35,1
+PIANO,Piano Layer,,CFX Fat Pad,Natural!,104,43,1
+PIANO,Piano Layer,,Studio Grand Pad,Natural!,104,41,1
+PIANO,Piano Layer,,CFX Ballad Mix 1,Natural!,104,19,6
+PIANO,Piano Layer,,Upright Synthetics,Natural!,104,21,4
+PIANO,Piano Layer,,CFX Ballad Mix 2,Natural!,104,22,6
+PIANO,Piano Layer,,Hybrid Rock Upright,Natural!,104,22,4
+PIANO,Piano Layer,,CFX DX Layer,Natural!,108,33,3
+PIANO,Piano Layer,,Bosendorfer DX Layer,Natural!,108,34,3
+PIANO,Piano Layer,,Warm Pad Grand,Natural!,104,25,1
+PIANO,Piano Layer,,Imperial Ballad,Natural!,108,26,5
+PIANO,Piano Layer,,Atmosphere Grand,Natural!,104,24,6
+PIANO,Piano Layer,,Imperial Cosmos,Natural!,104,42,1
+PIANO,Piano Layer,,Celestial Grand,Natural!,104,36,1
+PIANO,Piano Layer,,Shimmer Grand,Natural!,104,23,6
+PIANO,Piano Layer,,CFX & Strings,Natural!,108,23,1
+PIANO,Piano Layer,,Carillon Pad Grand,Natural!,104,37,1
+PIANO,Piano Layer,,Piano & EP 1,Natural!,108,25,3
+PIANO,Piano Layer,,MIDI Grand,Natural!,104,2,3
+PIANO,Piano Layer,,Piano & EP 2,Natural!,108,26,3
+PIANO,Piano Layer,,MIDI Grand Pad,Natural!,104,3,3
+PIANO,Electric Piano,,70s Suitcase Clean,S.Art!,8,41,21
+PIANO,Electric Piano,,70s Suitcase Pan,S.Art!,8,45,21
+PIANO,Electric Piano,,70s Suitcase Amped,S.Art!,8,46,21
+PIANO,Electric Piano,,70s Suitcase Tremolo,S.Art!,8,42,21
+PIANO,Electric Piano,,70s Suitcase Warm 1,S.Art!,8,39,21
+PIANO,Electric Piano,,70s Suitcase Warm 2,S.Art!,8,48,21
+PIANO,Electric Piano,,70s Suitcase Phase,S.Art!,8,47,21
+PIANO,Electric Piano,,70s Ambience EP,S.Art!,8,43,21
+PIANO,Electric Piano,,70s Suitcase Ballad,S.Art!,8,44,21
+PIANO,Electric Piano,,70s Meditation EP,S.Art!,8,51,21
+PIANO,Electric Piano,,CP80 Electric Grand,Natural!,104,10,3
+PIANO,Electric Piano,,70s Vintage EP,S.Art!,8,40,21
+PIANO,Electric Piano,,CP80 Production,Natural!,104,11,3
+PIANO,Electric Piano,,70s Vintage Drive EP,S.Art!,8,49,21
+PIANO,Electric Piano,,CP80 Studio,Natural!,0,123,3
+PIANO,Electric Piano,,70s Vintage Phase EP,S.Art!,8,50,21
+PIANO,Electric Piano,,CP80 Honky Tonk,Cool!,104,15,3
+PIANO,Electric Piano,,Suitcase Sweep Swell,Cool!,104,33,5
+PIANO,Electric Piano,,Ballad Epic EP,Cool!,104,35,5
+PIANO,Electric Piano,,Suitcase String Machine,Cool!,104,34,5
+PIANO,FM E.Piano,,DX Sweet,Cool!,104,0,6
+PIANO,FM E.Piano,,TX Bright,Cool!,104,10,6
+PIANO,FM E.Piano,,DX Dynamic,Cool!,0,123,6
+PIANO,FM E.Piano,,TX Mellow,Cool!,104,11,6
+PIANO,FM E.Piano,,DX Production,Natural!,104,20,6
+PIANO,FM E.Piano,,TX Warm,Cool!,104,12,6
+PIANO,FM E.Piano,,DX Ballad Bells,Cool!,104,2,6
+PIANO,FM E.Piano,,DX Dream,Cool!,104,3,6
+PIANO,FM E.Piano,,DX Midnight,Cool!,104,1,6
+PIANO,FM E.Piano,,DX Padded,Regular,104,21,6
+PIANO,Clavi,,Clavi SW,S.Art!,8,33,21
+PIANO,Clavi,,Clavi Funk SW,S.Art!,8,34,21
+PIANO,Clavi,,Clavi Bright,Regular,0,112,8
+PIANO,Clavi,,Wah Clavi,Regular,0,113,8
+PIANO,Clavi,,Clavi Warm,Natural!,0,122,8
+PIANO,Clavi,,Clavi Funk,Natural!,0,123,8
+PIANO,Clavi,,Clavi Drive SW,S.Art!,8,36,21
+PIANO,Clavi,,Clavi Phase,Regular,0,115,8
+PIANO,Harpsichord,,Harpsichord 1,Natural!,0,122,7
+PIANO,Harpsichord,,Grand Harpsichord,Live!,0,113,7
+PIANO,Harpsichord,,Harpsichord 2 SW,S.Art!,8,32,113
+PIANO,Harpsichord,,Harpsichord Coupler,Natural!,0,123,7
+PIANO,Harpsichord,,Harpsichord 3,Natural!,0,125,7
+PIANO,Harpsichord,,Harpsichord & Strings,Natural!,0,124,7
+ORGAN,Tonewheel Organ,,Jazz Rotary SW,S.Art!,8,32,114
+ORGAN,Tonewheel Organ,,Curved Bars,Cool!,0,121,17
+ORGAN,Tonewheel Organ,,Whiter Bars SW,S.Art!,8,32,30
+ORGAN,Tonewheel Organ,,Even Bars,Cool!,0,111,17
+ORGAN,Tonewheel Organ,,Classic Bars SW,S.Art!,8,34,30
+ORGAN,Tonewheel Organ,,Hollow Bars,Cool!,0,127,17
+ORGAN,Tonewheel Organ,,Rock Organ SW,S.Art!,8,33,114
+ORGAN,Tonewheel Organ,,Classic Scanner,Cool!,0,118,19
+ORGAN,Tonewheel Organ,,All Bars Out SW,S.Art!,8,32,31
+ORGAN,Tonewheel Organ,,Organ A Go Go,Cool!,104,0,17
+ORGAN,Tonewheel Organ,,Classic Jazz,Cool!,0,117,17
+ORGAN,Tonewheel Organ,,Vintage Accomp 1,Regular,0,108,18
+ORGAN,Tonewheel Organ,,Hold It Fast,Cool!,0,111,18
+ORGAN,Tonewheel Organ,,Vintage Accomp 2,Regular,0,107,18
+ORGAN,Tonewheel Organ,,R&B Tremolo Organ,Cool!,0,111,19
+ORGAN,Tonewheel Organ,,Vintage Accomp 3,Regular,0,106,18
+ORGAN,Tonewheel Organ,,Full Rocker,Cool!,0,115,19
+ORGAN,Tonewheel Organ,,Vintage Accomp 4,Regular,0,105,18
+ORGAN,Tonewheel Organ,,Prog Rock Organ SW,S.Art!,8,33,30
+ORGAN,Tonewheel Organ,,Vintage Accomp 5,Regular,0,104,18
+ORGAN,Tonewheel Organ,,Whiter Bars Slow,Cool!,104,1,18
+ORGAN,Tonewheel Organ,,Whiter Bars Fast,Cool!,104,0,18
+ORGAN,Tonewheel Organ,,Jazz Organ Slow,Cool!,0,126,18
+ORGAN,Tonewheel Organ,,Jazz Organ Fast,Cool!,0,127,18
+ORGAN,Tonewheel Organ,,All Bars Out Slow,Cool!,104,1,19
+ORGAN,Tonewheel Organ,,All Bars Out Fast,Cool!,104,0,19
+ORGAN,Tonewheel Organ,,All Bars Phase,Cool!,104,2,19
+ORGAN,Tonewheel Organ,,Rotary Organ,Cool!,0,117,19
+ORGAN,Tonewheel Organ,,Mellow Vintage,Regular,0,115,18
+ORGAN,Tonewheel Organ,,Two Channels Organ,Cool!,0,109,18
+ORGAN,Transistor Organ,,60s Combo Organ 1,Cool!,104,32,17
+ORGAN,Transistor Organ,,Euro Accomp 1,Regular,104,33,18
+ORGAN,Transistor Organ,,60s Combo Organ 2,Cool!,104,33,17
+ORGAN,Transistor Organ,,Euro Accomp 2,Regular,104,34,18
+ORGAN,Transistor Organ,,60s Combo Organ 3,Cool!,104,34,17
+ORGAN,Transistor Organ,,Euro Accomp 3,Regular,104,35,18
+ORGAN,Transistor Organ,,60s Combo Organ 4,Cool!,104,35,17
+ORGAN,Transistor Organ,,Home Accomp 1,Regular,104,37,19
+ORGAN,Transistor Organ,,Home Organ Clarinet,Regular,104,20,19
+ORGAN,Transistor Organ,,Home Accomp 2,Regular,104,38,19
+ORGAN,Transistor Organ,,Home Organ Cello,Regular,104,21,19
+ORGAN,Transistor Organ,,Home Organ E.Horn,Regular,104,22,19
+ORGAN,Transistor Organ,,Home Organ Cornet,Regular,104,23,19
+ORGAN,Transistor Organ,,Home Organ Violin,Regular,104,24,19
+ORGAN,Transistor Organ,,Home Organ Kinura,Regular,104,25,19
+ORGAN,Transistor Organ,,Home Organ Trombone,Regular,104,19,19
+ORGAN,Classical Pipe,,Lieblich Gedackt,Regular,104,6,20
+ORGAN,Classical Pipe,,Fonds Et Anches,Live!,104,2,20
+ORGAN,Classical Pipe,,Diapason,Regular,104,4,20
+ORGAN,Classical Pipe,,Organo Pleno,Live!,104,3,20
+ORGAN,Classical Pipe,,Claribel & Flute,Regular,104,5,20
+ORGAN,Classical Pipe,,Concert Organ Tutti,Live!,104,0,20
+ORGAN,Classical Pipe,,Soft Reeds,Regular,104,7,20
+ORGAN,Classical Pipe,,Chapel Organ 1,Regular,0,113,20
+ORGAN,Classical Pipe,,Grand Jeu,Live!,104,1,20
+ORGAN,Classical Pipe,,Chapel Organ 2,Regular,0,115,20
+ORGAN,Classical Pipe,,Pipe Organ Principal,Natural!,0,123,20
+ORGAN,Classical Pipe,,Pipe Organ Tutti 1,Natural!,0,126,20
+ORGAN,Classical Pipe,,Pipe Organ 8',Natural!,0,124,20
+ORGAN,Classical Pipe,,Pipe Organ Tutti 2,Natural!,0,122,20
+ORGAN,Classical Pipe,,Pipe Organ Twelfth,Natural!,0,125,20
+ORGAN,Classical Pipe,,Full Organ,Regular,0,112,20
+ORGAN,Theatre Pipe,,Theatre Tibia & Vox,Regular,104,28,19
+ORGAN,Theatre Pipe,,Theatre Gamba Celeste,Regular,104,30,19
+ORGAN,Theatre Pipe,,Theatre Open Tibias,Regular,104,29,19
+ORGAN,Theatre Pipe,,Theatre Seaside,Regular,104,26,19
+ORGAN,Theatre Pipe,,Theatre Organ Mix 1,Regular,104,31,19
+ORGAN,Theatre Pipe,,Theatre Flute Accomp,Regular,104,34,19
+ORGAN,Theatre Pipe,,Theatre Organ Mix 2,Regular,104,32,19
+ORGAN,Theatre Pipe,,Theatre Strings Accomp,Regular,104,35,19
+ORGAN,Theatre Pipe,,Theatre Organ Mix 3,Regular,104,33,19
+ORGAN,Theatre Pipe,,Theatre Chrys Accomp,Regular,104,36,19
+ORGAN,Theatre Pipe,,Theatre Chrysoglott,Regular,104,28,18
+ORGAN,Theatre Pipe,,Theatre Organ Chimes,Regular,104,31,18
+ORGAN,Theatre Pipe,,Theatre Xylophone,Regular,104,30,18
+ORGAN,Theatre Pipe,,Theatre Wooden Harp,Regular,104,32,18
+ORGAN,Theatre Pipe,,Theatre Glockenspiel,Regular,104,29,18
+ORGAN,Theatre Pipe,,Theatre Pedal 1,Regular,104,16,19
+ORGAN,Theatre Pipe,,Theatre Trumpet,Regular,0,124,17
+ORGAN,Theatre Pipe,,Theatre Pedal 2,Regular,104,17,19
+ORGAN,Organ Flutes,,Jazz Standard,OrganFlutes,10,0,1
+ORGAN,Organ Flutes,,Rock Organ,OrganFlutes,10,3,1
+ORGAN,Organ Flutes,,Jazz Squabble,OrganFlutes,10,7,1
+ORGAN,Organ Flutes,,Gospel Organ,OrganFlutes,10,4,1
+ORGAN,Organ Flutes,,Upside Down Smile,OrganFlutes,10,1,1
+ORGAN,Organ Flutes,,Organ Pops,OrganFlutes,10,2,1
+ORGAN,Organ Flutes,,Ballad Organ,OrganFlutes,10,5,1
+ORGAN,Organ Flutes,,Euro Percussion,OrganFlutes,10,0,3
+ORGAN,Organ Flutes,,Organ Clarinet,OrganFlutes,10,6,1
+ORGAN,Organ Flutes,,Euro Pops,OrganFlutes,10,5,3
+ORGAN,Organ Flutes,,Euro Reeds,OrganFlutes,10,2,3
+ORGAN,Organ Flutes,,Euro Bright,OrganFlutes,10,4,3
+ORGAN,Organ Flutes,,Euro Melodic,OrganFlutes,10,7,3
+ORGAN,Organ Flutes,,Home Organ Jazz,OrganFlutes,10,3,2
+ORGAN,Organ Flutes,,Euro Full,OrganFlutes,10,6,3
+ORGAN,Organ Flutes,,Home Hollow Tibias,OrganFlutes,10,4,2
+ORGAN,Organ Flutes,,Euro Ballad,OrganFlutes,10,1,3
+ORGAN,Organ Flutes,,Home Theatre Organ,OrganFlutes,10,2,2
+ORGAN,Organ Flutes,,Euro Even Warmth,OrganFlutes,10,3,3
+ORGAN,Organ Flutes,,Home 16 & Odds,OrganFlutes,10,1,2
+ORGAN,Organ Flutes,,Home Organ Ballad,OrganFlutes,10,0,2
+ORGAN,Organ Flutes,,Home Organ Warmth,OrganFlutes,10,6,2
+ORGAN,Organ Flutes,,Home Organ Evens,OrganFlutes,10,5,2
+ORGAN,Organ Flutes,,Home Organ Full,OrganFlutes,10,7,2
+ORGAN,Harmonica,,Harmonica,S.Art2!,8,64,105
+ORGAN,Harmonica,,Blues Harmonica,S.Art2!,8,65,105
+ORGAN,Harmonica,,Harmonica,Sweet!,0,112,23
+ORGAN,Accordion,,Bajan Accordion,Live!,104,4,24
+ORGAN,Accordion,,Master Accordion,Regular,0,118,22
+ORGAN,Accordion,,Jazz Cassotto,Live!,104,28,22
+ORGAN,Accordion,,Full Register,Regular,104,2,22
+ORGAN,Accordion,,Super Musette,Live!,104,25,22
+ORGAN,Accordion,,Cajun Accordion,Regular,104,3,22
+ORGAN,Accordion,,Scots Accordion,Live!,104,5,24
+ORGAN,Accordion,,Tango Accordion,Regular,0,114,24
+ORGAN,Accordion,,Steirische Harmonika,Live!,104,27,22
+ORGAN,Accordion,,Bandoneon,Regular,0,113,24
+ORGAN,Accordion,,Bajan Acc Bass,Live!,104,6,24
+ORGAN,Accordion,,Master Bass,Regular,0,122,22
+ORGAN,Accordion,,Jazz Cassotto Bass,Live!,104,30,22
+ORGAN,Accordion,,Full Register Bass,Regular,104,5,22
+ORGAN,Accordion,,Super Musette Bass,Live!,104,26,22
+ORGAN,Accordion,,Cajun Accordion Bass,Regular,104,6,22
+ORGAN,Accordion,,Scots Acc Bass,Live!,104,7,24
+ORGAN,Accordion,,Tango Accordion Bass,Regular,0,115,24
+ORGAN,Accordion,,Steirischer Bass,Live!,104,29,22
+ORGAN,Accordion,,Accordion Clarinet,Regular,104,1,22
+GUITAR&BASS,Nylon Acoustic,,Concert Guitar,S.Art!,8,32,1
+GUITAR&BASS,Nylon Acoustic,,Electro Acoustic Guitar,S.Art!,8,35,1
+GUITAR&BASS,Nylon Acoustic,,Spanish Guitar,S.Art!,8,34,2
+GUITAR&BASS,Nylon Acoustic,,Spanish Electro,S.Art!,8,36,2
+GUITAR&BASS,Nylon Acoustic,,Flamenco Guitar,S.Art!,8,35,2
+GUITAR&BASS,Nylon Acoustic,,Hard Flamenco,Live!,0,118,25
+GUITAR&BASS,Nylon Acoustic,,Spanish Guitar Slide,Live!,104,9,26
+GUITAR&BASS,Nylon Acoustic,,Nylon Guitar Slide,Live!,0,117,25
+GUITAR&BASS,Nylon Acoustic,,Nylon Guitar SW,S.Art!,8,34,1
+GUITAR&BASS,Nylon Acoustic,,Dynamic Nylon Guitar,Live!,0,116,25
+GUITAR&BASS,Nylon Acoustic,,Ukulele,S.Art!,8,33,14
+GUITAR&BASS,Nylon Acoustic,,Ukulele Strum,S.Art!,8,34,14
+GUITAR&BASS,Nylon Acoustic,,Ukulele Unison Duo,S.Art!,8,35,14
+GUITAR&BASS,Steel Acoustic,,Steel Acoustic Finger,S.Art!,8,49,2
+GUITAR&BASS,Steel Acoustic,,D-Folk Guitar,S.Art!,8,47,2
+GUITAR&BASS,Steel Acoustic,,Steel Acoustic Pick,S.Art!,8,37,2
+GUITAR&BASS,Steel Acoustic,,D-Folk Guitar Amped,S.Art!,8,55,2
+GUITAR&BASS,Steel Acoustic,,Steel Thumb Pick,S.Art!,8,54,2
+GUITAR&BASS,Steel Acoustic,,D-Folk Guitar Strum,S.Art!,8,48,2
+GUITAR&BASS,Steel Acoustic,,Steel Acoustic Amp,S.Art!,8,56,2
+GUITAR&BASS,Steel Acoustic,,Folk Guitar Doubled,S.Art!,8,51,2
+GUITAR&BASS,Steel Acoustic,,Steel Acoustic Strum,S.Art!,8,50,2
+GUITAR&BASS,Steel Acoustic,,Latin Amped Guitar,S.Art!,8,57,2
+GUITAR&BASS,Steel Acoustic,,12String Fingered,S.Art!,8,53,2
+GUITAR&BASS,Steel Acoustic,,Resonator Guitar,S.Art!,8,45,2
+GUITAR&BASS,Steel Acoustic,,12String Picked,S.Art!,8,39,2
+GUITAR&BASS,Steel Acoustic,,Resonator Slap Back,S.Art!,8,58,2
+GUITAR&BASS,Steel Acoustic,,12String Strumming SW,S.Art!,8,40,2
+GUITAR&BASS,Steel Acoustic,,Resonator Blues Amp,S.Art!,8,59,2
+GUITAR&BASS,Steel Acoustic,,Chicken Pick Guitar,Live!,104,11,26
+GUITAR&BASS,Steel Acoustic,,Resonator Mute Velocity,S.Art!,8,46,2
+GUITAR&BASS,Steel Acoustic,,Chicken Pick SW,S.Art!,8,38,2
+GUITAR&BASS,Steel Acoustic,,Resonator Slide Velocity,Live!,104,19,26
+GUITAR&BASS,Clean Solid,,60s Shadow Lead,S.Art!,8,32,8
+GUITAR&BASS,Clean Solid,,60s Funk Pick,S.Art!,8,48,8
+GUITAR&BASS,Clean Solid,,60s Shadow Mute,S.Art!,8,46,8
+GUITAR&BASS,Clean Solid,,60s Chicken Pick,S.Art!,8,37,8
+GUITAR&BASS,Clean Solid,,60s Vintage Echo,S.Art!,8,44,8
+GUITAR&BASS,Clean Solid,,60s Vintage Palm,S.Art!,8,45,8
+GUITAR&BASS,Clean Solid,,60s Vintage Clean,S.Art!,8,36,8
+GUITAR&BASS,Clean Solid,,50s Vintage Pure,S.Art!,8,42,6
+GUITAR&BASS,Clean Solid,,60s Ballad Guitar,S.Art!,8,33,8
+GUITAR&BASS,Clean Solid,,50s Vintage Delay,S.Art!,8,48,6
+GUITAR&BASS,Clean Solid,,Country Pick Drive,S.Art!,8,40,5
+GUITAR&BASS,Clean Solid,,Clean Fingers,S.Art!,8,38,5
+GUITAR&BASS,Clean Solid,,Country Pick Vintage,S.Art!,8,41,5
+GUITAR&BASS,Clean Solid,,Rough Fingers,S.Art!,8,39,5
+GUITAR&BASS,Clean Solid,,60s Country Mute,S.Art!,8,47,8
+GUITAR&BASS,Clean Solid,,Bluesy Fingers,S.Art!,8,37,5
+GUITAR&BASS,Clean Solid,,Finger Slap Slide SW,S.Art!,8,51,4
+GUITAR&BASS,Clean Solid,,Finger Bright,S.Art!,8,50,4
+GUITAR&BASS,Clean Solid,,Shadowed Guitar,S.Art!,8,56,4
+GUITAR&BASS,Clean Solid,,Finger Chorus,S.Art!,8,42,4
+GUITAR&BASS,Clean Solid,,70s Jazz Combo,S.Art!,8,54,6
+GUITAR&BASS,Clean Solid,,Clean Solid,S.Art!,8,34,4
+GUITAR&BASS,Clean Solid,,Jazz Guitar Amp,S.Art!,8,38,7
+GUITAR&BASS,Clean Solid,,Bright Chorus,S.Art!,8,45,4
+GUITAR&BASS,Clean Solid,,Jazz Artist Guitar,S.Art!,8,39,7
+GUITAR&BASS,Clean Solid,,Vintage Slap,S.Art!,8,48,4
+GUITAR&BASS,Clean Solid,,Warm Solid,S.Art!,8,33,4
+GUITAR&BASS,Clean Solid,,Ballad Delay,S.Art!,8,46,4
+GUITAR&BASS,Clean Solid,,Single Coil Clean,S.Art!,8,39,4
+GUITAR&BASS,Clean Solid,,Vintage Pure,S.Art!,8,47,4
+GUITAR&BASS,Distortion Solid,,60s Vintage Blues,S.Art!,8,34,8
+GUITAR&BASS,Distortion Solid,,50s Vintage Full,S.Art!,8,43,6
+GUITAR&BASS,Distortion Solid,,60s Rock Hero,S.Art!,8,35,8
+GUITAR&BASS,Distortion Solid,,50s Vintage Solo,S.Art!,8,44,6
+GUITAR&BASS,Distortion Solid,,60s Guitar Hero,S.Art!,8,38,8
+GUITAR&BASS,Distortion Solid,,50s Vintage Stage,S.Art!,8,45,6
+GUITAR&BASS,Distortion Solid,,60s Blues Rock,S.Art!,8,40,8
+GUITAR&BASS,Distortion Solid,,50s Heavy Rock,S.Art!,8,47,6
+GUITAR&BASS,Distortion Solid,,60s Texas Blues,S.Art!,8,43,8
+GUITAR&BASS,Distortion Solid,,50s Drive Wah Wah,S.Art!,8,46,6
+GUITAR&BASS,Distortion Solid,,50s Vintage Warm,S.Art!,8,49,6
+GUITAR&BASS,Distortion Solid,,Solo King,S.Art!,8,50,6
+GUITAR&BASS,Distortion Solid,,50s Vintage Amp,S.Art!,8,41,4
+GUITAR&BASS,Distortion Solid,,Rhythm King,S.Art!,8,53,6
+GUITAR&BASS,Distortion Solid,,50s Vintage Rock,S.Art!,8,36,6
+GUITAR&BASS,Distortion Solid,,Rock Hero,S.Art!,8,35,6
+GUITAR&BASS,Distortion Solid,,50s Vintage Blues,S.Art!,8,37,6
+GUITAR&BASS,Distortion Solid,,Stage Lead,S.Art!,8,38,6
+GUITAR&BASS,Distortion Solid,,Grunge Guitar,S.Art!,8,40,6
+GUITAR&BASS,Distortion Solid,,Overdrive Wah Wah,S.Art!,8,39,6
+GUITAR&BASS,Distortion Solid,,Rock Legend,S.Art!,8,34,6
+GUITAR&BASS,Distortion Solid,,Big Amp Combo,S.Art!,8,51,6
+GUITAR&BASS,Distortion Solid,,Guitar Hero,S.Art!,8,32,6
+GUITAR&BASS,Distortion Solid,,Classic Amp Stack,S.Art!,8,41,6
+GUITAR&BASS,Distortion Solid,,Heavy Rock Guitar,S.Art!,8,32,5
+GUITAR&BASS,Distortion Solid,,Bluesy Slap Slide SW,S.Art!,8,36,5
+GUITAR&BASS,Distortion Solid,,Finger Amp,S.Art!,8,43,4
+GUITAR&BASS,Distortion Solid,,Crunch Guitar,S.Art!,8,33,6
+GUITAR&BASS,Distortion Solid,,Oldies Guitar,S.Art!,8,52,6
+GUITAR&BASS,Distortion Solid,,Half Drive,S.Art!,8,37,4
+GUITAR&BASS,Distortion Solid,,Bluesy Night,S.Art!,8,55,4
+GUITAR&BASS,Distortion Solid,,Bright Blues,S.Art!,8,35,5
+GUITAR&BASS,Distortion Solid,,Warm Blues,S.Art!,8,34,5
+GUITAR&BASS,World,,Mandolin,S.Art!,8,41,13
+GUITAR&BASS,World,,Pedal Steel Guitar 1,S.Art!,8,61,4
+GUITAR&BASS,World,,Mandolin Mute Velocity,S.Art!,8,42,13
+GUITAR&BASS,World,,Pedal Steel Guitar 2,S.Art!,8,36,4
+GUITAR&BASS,World,,Mandolin Tremolo,Live!,104,19,25
+GUITAR&BASS,World,,Pedal Steel Guitar  3,Regular,104,25,28
+GUITAR&BASS,World,,Mandolin Slide,Live!,104,20,25
+GUITAR&BASS,World,,Pedal Steel Amp,S.Art!,8,52,4
+GUITAR&BASS,World,,Banjo,Regular,104,0,106
+GUITAR&BASS,World,,Aloha Guitar,Regular,0,118,27
+GUITAR&BASS,World,,Zither 1,Regular,104,1,16
+GUITAR&BASS,World,,Shamisen,Regular,0,112,107
+GUITAR&BASS,World,,Zither 2,Regular,104,0,16
+GUITAR&BASS,World,,Koto,Regular,0,112,108
+GUITAR&BASS,World,,Dulcimer,Regular,0,112,16
+GUITAR&BASS,World,,Sitar,Regular,104,0,105
+GUITAR&BASS,World,,Hackbrett,Regular,104,2,47
+GUITAR&BASS,Bass,,Active Bass Finger,S.Art!,8,37,18
+GUITAR&BASS,Bass,,Fretless Bass,S.Art!,8,32,20
+GUITAR&BASS,Bass,,Active Bass Fngr Mute,S.Art!,8,38,18
+GUITAR&BASS,Bass,,Vintage Round Bass,S.Art!,8,32,18
+GUITAR&BASS,Bass,,Active Bass Pick,S.Art!,8,36,19
+GUITAR&BASS,Bass,,Vintage Mute Bass,S.Art!,8,32,19
+GUITAR&BASS,Bass,,Active Bass Pick Mute,S.Art!,8,37,19
+GUITAR&BASS,Bass,,Vintage Pick Bass,Regular,104,1,35
+GUITAR&BASS,Bass,,Active Bass Slap,S.Art!,8,39,18
+GUITAR&BASS,Bass,,Vintage Flatwound Bass,S.Art!,8,33,18
+GUITAR&BASS,Bass,,Acoustic Bass,S.Art!,8,32,17
+GUITAR&BASS,Bass,,Active Bass Finger,Regular,104,4,34
+GUITAR&BASS,Bass,,Soft Acoustic Bass,S.Art!,8,33,17
+GUITAR&BASS,Bass,,Active Bass Fngr Mute,Regular,104,5,34
+GUITAR&BASS,Bass,,Fusion Bass,Regular,0,113,37
+GUITAR&BASS,Bass,,Active Bass Pick,Regular,104,3,35
+GUITAR&BASS,Bass,,Pick Bass,Regular,0,112,35
+GUITAR&BASS,Bass,,Active Bass Pick Mute,Regular,104,4,35
+GUITAR&BASS,Bass,,Pick Dyno Bass,Cool!,0,113,35
+GUITAR&BASS,Bass,,Active Bass Slap,Regular,104,0,37
+GUITAR&BASS,Bass,,Acoustic Bass & Cymbal,Regular,0,114,33
+GUITAR&BASS,Bass,,Electric Bass,Cool!,0,114,34
+GUITAR&BASS,Bass,,Ballroom Bass,Regular,104,0,33
+GUITAR&BASS,Bass,,Vintage Dyno Bass,Cool!,104,2,35
+GUITAR&BASS,Bass,,Mellow Finger Bass,Regular,0,112,34
+GUITAR&BASS,Bass,,Rock Bass,Regular,0,114,35
+GUITAR&BASS,Bass,,Half Mute Bass,Cool!,0,115,34
+GUITAR&BASS,Bass,,Funk Bass,Regular,0,112,38
+GUITAR&BASS,Bass,,Super Fretless Bass,Regular,0,113,36
+GUITAR&BASS,Synth Bass,,80s Dyn Filter Bass,Regular,104,12,39
+GUITAR&BASS,Synth Bass,,80s Seq Bass,Regular,104,18,39
+GUITAR&BASS,Synth Bass,,80s FM Metal Bass,Regular,104,13,39
+GUITAR&BASS,Synth Bass,,80s Arnold Bass,Regular,104,19,39
+GUITAR&BASS,Synth Bass,,80s EX Pulse Bass,Regular,104,14,39
+GUITAR&BASS,Synth Bass,,80s Unison Bass,Regular,104,22,39
+GUITAR&BASS,Synth Bass,,80s Retro Pulse Bass,Regular,104,20,39
+GUITAR&BASS,Synth Bass,,80s Synth Pop Bass,Regular,104,17,39
+GUITAR&BASS,Synth Bass,,80s Pulse Bass,Regular,104,15,39
+GUITAR&BASS,Synth Bass,,Velo Taurean Bass,Regular,104,21,39
+GUITAR&BASS,Synth Bass,,BPF Buzz SW,S.Art!,8,32,123
+GUITAR&BASS,Synth Bass,,Wobble SW,S.Art!,8,33,123
+GUITAR&BASS,Synth Bass,,Ramp Bass SW,S.Art!,8,34,123
+GUITAR&BASS,Synth Bass,,Square Pluck SW,S.Art!,8,35,123
+GUITAR&BASS,Synth Bass,,Powerdrone,Regular,104,23,39
+GUITAR&BASS,Synth Bass,,Modern Pop,Regular,104,19,88
+GUITAR&BASS,Synth Bass,,Deep Sub,Regular,104,18,88
+GUITAR&BASS,Synth Bass,,Softwood,Regular,104,25,88
+GUITAR&BASS,Synth Bass,,Multi Saw Bass,Regular,104,20,88
+GUITAR&BASS,Synth Bass,,Brite Dub Bass,Regular,104,21,88
+GUITAR&BASS,Synth Bass,,Pulse & Saw,Regular,104,22,88
+GUITAR&BASS,Synth Bass,,Twenty Five,Regular,104,23,88
+GUITAR&BASS,Synth Bass,,Punchy Square,Regular,104,24,88
+GUITAR&BASS,Synth Bass,,Dark Sequence Bass,Regular,104,27,88
+GUITAR&BASS,Synth Bass,,Punchy DX,Regular,104,26,88
+GUITAR&BASS,Synth Bass,,Fat Pulse,Regular,104,2,40
+GUITAR&BASS,Synth Bass,,Pumping Saw,Regular,104,28,88
+GUITAR&BASS,Synth Bass,,Lo Bass,Regular,104,0,40
+GUITAR&BASS,Synth Bass,,Pumping Square,Regular,104,29,88
+GUITAR&BASS,Synth Bass,,Dark Bass,Regular,104,1,40
+GUITAR&BASS,Synth Bass,,Wazzo Saw,Regular,104,3,81
+GUITAR&BASS,Synth Bass,,Deep Point,Regular,104,3,39
+GUITAR&BASS,Synth Bass,,Moon Bass,Regular,104,0,39
+GUITAR&BASS,Synth Bass,,Competitor,Regular,104,4,39
+GUITAR&BASS,Synth Bass,,Kick Bass,Regular,104,1,39
+GUITAR&BASS,Synth Bass,,Little Bass Synth,Regular,104,6,39
+GUITAR&BASS,Synth Bass,,Tight Bass,Regular,104,3,40
+GUITAR&BASS,Synth Bass,,1o1 Sub,Regular,104,5,39
+GUITAR&BASS,Synth Bass,,Club Bass,Regular,104,2,39
+GUITAR&BASS,Synth Bass,,Mini Sub,Regular,104,6,40
+GUITAR&BASS,Synth Bass,,Trance Bass,Regular,104,9,39
+GUITAR&BASS,Synth Bass,,Sub Cut Bass,Regular,104,5,40
+GUITAR&BASS,Synth Bass,,Tekno Bass,Regular,104,7,39
+GUITAR&BASS,Synth Bass,,Perc Punch,Regular,104,8,39
+GUITAR&BASS,Synth Bass,,Dyno Acid Bass,Regular,104,10,39
+GUITAR&BASS,Synth Bass,,Fat Sine Resonance,Regular,104,11,39
+GUITAR&BASS,Synth Bass,,Square Bass,Regular,104,4,40
+GUITAR&BASS,Synth Bass,,Resonance Bass,Regular,0,112,39
+GUITAR&BASS,Synth Bass,,Ballad Bass,Regular,104,7,40
+GUITAR&BASS,Synth Bass,,Velo Master,Regular,104,17,82
+GUITAR&BASS,Synth Bass,,House Bass,Regular,0,116,39
+GUITAR&BASS,Synth Bass,,Big Drone,Regular,0,118,39
+GUITAR&BASS,Synth Bass,,Sub Bass,Regular,0,114,40
+GUITAR&BASS,Synth Bass,,Hard Bass,Regular,0,114,39
+GUITAR&BASS,Synth Bass,,TB Bass,Regular,0,117,40
+STRINGS&VOCAL,String Solo,,Jazz Violin,S.Art2!,8,64,49
+STRINGS&VOCAL,String Solo,,Orchestral 1st Violin,S.Art!,8,33,44
+STRINGS&VOCAL,String Solo,,Celtic Violin,S.Art2!,8,65,49
+STRINGS&VOCAL,String Solo,,Orchestral 2nd Violin,S.Art!,8,33,45
+STRINGS&VOCAL,String Solo,,Classical Cello,S.Art2!,8,64,51
+STRINGS&VOCAL,String Solo,,Orchestral Viola,S.Art!,8,33,46
+STRINGS&VOCAL,String Solo,,Pop Cello,S.Art2!,8,65,51
+STRINGS&VOCAL,String Solo,,Orchestral Cello,S.Art!,8,33,47
+STRINGS&VOCAL,String Solo,,Hoedown Violin,Sweet!,0,113,41
+STRINGS&VOCAL,String Solo,,Country Fiddle,Regular,0,112,111
+STRINGS&VOCAL,String Ensemble,,Kino Strings,S.Art!,8,47,50
+STRINGS&VOCAL,String Ensemble,,Kino Strings Violins,S.Art!,8,35,44
+STRINGS&VOCAL,String Ensemble,,Kino Strings Warm,S.Art!,8,51,50
+STRINGS&VOCAL,String Ensemble,,Kino Strings Violas,S.Art!,8,35,46
+STRINGS&VOCAL,String Ensemble,,Kino Strings Low,S.Art!,8,52,50
+STRINGS&VOCAL,String Ensemble,,Kino Strings Vn Vc,S.Art!,8,48,50
+STRINGS&VOCAL,String Ensemble,,Kino Strings Slow,S.Art!,8,55,50
+STRINGS&VOCAL,String Ensemble,,Kino Strings Cellos,S.Art!,8,35,47
+STRINGS&VOCAL,String Ensemble,,Kino Strings Natural,S.Art!,8,46,50
+STRINGS&VOCAL,String Ensemble,,Kino Strings Basses,S.Art!,8,35,48
+STRINGS&VOCAL,String Ensemble,,Kino Strings Vn Va Vc,S.Art!,8,45,50
+STRINGS&VOCAL,String Ensemble,,Kino Strings Trem Vn,S.Art!,8,36,44
+STRINGS&VOCAL,String Ensemble,,Kino Strings Warm Vc,S.Art!,8,54,50
+STRINGS&VOCAL,String Ensemble,,Kino Strings Trem Va,S.Art!,8,36,46
+STRINGS&VOCAL,String Ensemble,,Kino Strings 1Octave,S.Art!,8,49,50
+STRINGS&VOCAL,String Ensemble,,Kino Strings Trem Vc,S.Art!,8,36,47
+STRINGS&VOCAL,String Ensemble,,Kino Strings 2Octaves,S.Art!,8,53,50
+STRINGS&VOCAL,String Ensemble,,Kino Strings Trem Cb,S.Art!,8,36,48
+STRINGS&VOCAL,String Ensemble,,Pizzicato Strings,Live!,0,113,46
+STRINGS&VOCAL,String Ensemble,,Kino Strings Tremolo,S.Art!,8,44,50
+STRINGS&VOCAL,String Ensemble,,Seattle Strings,S.Art!,8,33,50
+STRINGS&VOCAL,String Ensemble,,Seattle 1st Violins,S.Art!,8,32,44
+STRINGS&VOCAL,String Ensemble,,Seattle Romance,S.Art!,8,43,50
+STRINGS&VOCAL,String Ensemble,,Seattle 2nd Violins,S.Art!,8,32,45
+STRINGS&VOCAL,String Ensemble,,Seattle Classical,S.Art!,8,36,49
+STRINGS&VOCAL,String Ensemble,,Seattle Violas,S.Art!,8,32,46
+STRINGS&VOCAL,String Ensemble,,Broadway Strings,S.Art!,8,38,49
+STRINGS&VOCAL,String Ensemble,,Seattle Cellos,S.Art!,8,32,47
+STRINGS&VOCAL,String Ensemble,,Seattle Lush Strings,S.Art!,8,41,49
+STRINGS&VOCAL,String Ensemble,,Seattle Basses,S.Art!,8,32,48
+STRINGS&VOCAL,String Ensemble,,Kino Strings Spic Vn,Live!,104,4,41
+STRINGS&VOCAL,String Ensemble,,Classic 1st Violins,S.Art!,8,34,44
+STRINGS&VOCAL,String Ensemble,,Kino Strings Spic Va,Live!,104,2,42
+STRINGS&VOCAL,String Ensemble,,Classic 2nd Violins,S.Art!,8,34,45
+STRINGS&VOCAL,String Ensemble,,Kino Strings Spic Vc,Live!,104,2,43
+STRINGS&VOCAL,String Ensemble,,Classic Violas,S.Art!,8,34,46
+STRINGS&VOCAL,String Ensemble,,Kino Strings Spic Cb,Live!,104,2,44
+STRINGS&VOCAL,String Ensemble,,Classic Cellos,S.Art!,8,34,47
+STRINGS&VOCAL,String Ensemble,,Kino Strings Spic Sct,Live!,104,20,49
+STRINGS&VOCAL,String Ensemble,,Seattle Spiccato,Live!,104,6,49
+STRINGS&VOCAL,String Ensemble,,Disco Strings 1,Live!,0,123,50
+STRINGS&VOCAL,String Ensemble,,Kino Strings Tension,S.Art!,8,50,50
+STRINGS&VOCAL,String Ensemble,,Disco Strings 2,Live!,0,124,50
+STRINGS&VOCAL,String Ensemble,,Seattle Tremolo Strings,Live!,104,0,45
+STRINGS&VOCAL,String Ensemble,,Seattle String Pad,S.Art!,8,43,49
+STRINGS&VOCAL,String Ensemble,,Seattle Chamber,S.Art!,8,42,49
+STRINGS&VOCAL,String Ensemble,,Seattle Slow Strings,S.Art!,8,35,50
+STRINGS&VOCAL,String Ensemble,,Seattle Warm,S.Art!,8,39,49
+STRINGS&VOCAL,String Ensemble,,Strings Pad,Live!,0,117,50
+STRINGS&VOCAL,String Ensemble,,Seattle Quartet,S.Art!,8,34,48
+STRINGS&VOCAL,Orchestral Layers,,Horns & Strings,S.Art!,8,38,50
+STRINGS&VOCAL,Orchestral Layers,,Symphonic Unison,Regular,104,0,50
+STRINGS&VOCAL,Orchestral Layers,,Orchestra Tutti,Regular,0,120,50
+STRINGS&VOCAL,Orchestral Layers,,Theatre Orchestra,Regular,104,1,50
+STRINGS&VOCAL,Orchestral Layers,,Pizzicato Glocken,Live!,0,115,46
+STRINGS&VOCAL,Pop Vocals,,Pop Vocals,S.Art!,8,40,56
+STRINGS&VOCAL,Pop Vocals,,Ooh,S.Art!,8,32,41
+STRINGS&VOCAL,Pop Vocals,,Aah-Ooh Auto,S.Art!,8,49,41
+STRINGS&VOCAL,Pop Vocals,,Wah,S.Art!,8,38,40
+STRINGS&VOCAL,Pop Vocals,,Hoo-Wee Auto,S.Art!,8,56,56
+STRINGS&VOCAL,Pop Vocals,,Doo,S.Art!,8,38,41
+STRINGS&VOCAL,Pop Vocals,,Hoo-Wah,S.Art!,8,39,56
+STRINGS&VOCAL,Pop Vocals,,Baa,S.Art!,8,41,40
+STRINGS&VOCAL,Pop Vocals,,Soft Wah,S.Art!,8,40,40
+STRINGS&VOCAL,Pop Vocals,,Daa,S.Art!,8,45,40
+STRINGS&VOCAL,Pop Vocals,,Ooh Vibrato,S.Art!,8,33,41
+STRINGS&VOCAL,Pop Vocals,,Yoo Vibrato,S.Art!,8,43,41
+STRINGS&VOCAL,Pop Vocals,,Wah Vibrato,S.Art!,8,39,40
+STRINGS&VOCAL,Pop Vocals,,Bee Vibrato,Live!,104,4,53
+STRINGS&VOCAL,Pop Vocals,,Doo Vibrato,S.Art!,8,39,41
+STRINGS&VOCAL,Pop Vocals,,Boys Haa Vibrato,S.Art!,8,33,40
+STRINGS&VOCAL,Pop Vocals,,Baa Vibrato,S.Art!,8,42,40
+STRINGS&VOCAL,Pop Vocals,,Boys Ooh Vibrato,S.Art!,8,35,41
+STRINGS&VOCAL,Pop Vocals,,Daa Vibrato,S.Art!,8,46,40
+STRINGS&VOCAL,Pop Vocals,,Girls Ooh Vibrato,S.Art!,8,37,41
+STRINGS&VOCAL,Pop Vocals,,Girls Ooh,S.Art!,8,36,41
+STRINGS&VOCAL,Pop Vocals,,Boys Haa,S.Art!,8,34,40
+STRINGS&VOCAL,Pop Vocals,,Girls Doo,S.Art!,8,41,41
+STRINGS&VOCAL,Pop Vocals,,Haa,S.Art!,8,32,40
+STRINGS&VOCAL,Pop Vocals,,Girls Haa,S.Art!,8,35,40
+STRINGS&VOCAL,Pop Vocals,,Yoo,S.Art!,8,42,41
+STRINGS&VOCAL,Pop Vocals,,Boys Ooh,S.Art!,8,34,41
+STRINGS&VOCAL,Pop Vocals,,Accomp Aah,Live!,104,15,53
+STRINGS&VOCAL,Pop Vocals,,Boys Doo,S.Art!,8,40,41
+STRINGS&VOCAL,Pop Vocals,,Accomp Ooh,Live!,104,15,54
+STRINGS&VOCAL,Jazz Vocals,,Jazz Scat Vocals,S.Art!,8,42,56
+STRINGS&VOCAL,Jazz Vocals,,Shoo-Bee-Doo-Bah 1,S.Art!,8,32,56
+STRINGS&VOCAL,Jazz Vocals,,Latin Vocals,S.Art!,8,41,56
+STRINGS&VOCAL,Jazz Vocals,,Do-Be-Do-Be,S.Art!,8,48,56
+STRINGS&VOCAL,Jazz Vocals,,Jazz Scat Shoo,S.Art!,8,45,56
+STRINGS&VOCAL,Jazz Vocals,,Shoo-Bee Dynamic,S.Art!,8,35,56
+STRINGS&VOCAL,Jazz Vocals,,Jazz Scat Dwee,S.Art!,8,46,56
+STRINGS&VOCAL,Jazz Vocals,,Shoo-Ba-Doo-Ba,S.Art!,8,55,56
+STRINGS&VOCAL,Jazz Vocals,,Jazz Scat Legato,S.Art!,8,50,56
+STRINGS&VOCAL,Jazz Vocals,,Baroque Scat,S.Art!,8,43,56
+STRINGS&VOCAL,Jazz Vocals,,Ya-Ba-Da-Ba,S.Art!,8,51,56
+STRINGS&VOCAL,Jazz Vocals,,Shoo-Bee-Doo-Bah 2,S.Art!,8,47,56
+STRINGS&VOCAL,Jazz Vocals,,Ba-Da-Yah,S.Art!,8,36,56
+STRINGS&VOCAL,Jazz Vocals,,What-Should-We-Do,S.Art!,8,53,56
+STRINGS&VOCAL,Jazz Vocals,,Who-Are-You,S.Art!,8,54,56
+STRINGS&VOCAL,Jazz Vocals,,Do-We-Yo-Be,S.Art!,8,52,56
+STRINGS&VOCAL,Gospel Choir,,Gospel Vocals Hmm,S.Art!,8,32,55
+STRINGS&VOCAL,Gospel Choir,,Gospel Hmm-Aah SW,S.Art!,8,36,55
+STRINGS&VOCAL,Gospel Choir,,Gospel Vocals Wow,S.Art!,8,33,55
+STRINGS&VOCAL,Gospel Choir,,Gospel Wow-Hey SW,S.Art!,8,37,55
+STRINGS&VOCAL,Gospel Choir,,Gospel Vocals Hey,S.Art!,8,34,55
+STRINGS&VOCAL,Gospel Choir,,Gospel Wow-Hey-Hmm,S.Art!,8,35,55
+STRINGS&VOCAL,Classical Choir,,Boys Choir Ooh,S.Art!,8,32,52
+STRINGS&VOCAL,Classical Choir,,Boys Choir Aah,S.Art!,8,33,52
+STRINGS&VOCAL,Classical Choir,,Boys Choir Ooh f,S.Art!,8,37,52
+STRINGS&VOCAL,Classical Choir,,Boys Choir Aah f,S.Art!,8,38,52
+STRINGS&VOCAL,Classical Choir,,Boys Choir Ooh p,S.Art!,8,35,52
+STRINGS&VOCAL,Classical Choir,,Boys Choir Aah p,S.Art!,8,36,52
+STRINGS&VOCAL,Classical Choir,,Boys Choir Oh-Ah SW,S.Art!,8,34,52
+STRINGS&VOCAL,Classical Choir,,Boys Choir Oh-Ah,S.Art!,8,49,56
+BRASS&WOODWIND,Brass Solo,,Flugelhorn,S.Art2!,8,64,63
+BRASS&WOODWIND,Brass Solo,,Big Band Trumpet,S.Art2!,8,67,66
+BRASS&WOODWIND,Brass Solo,,Trumpet,S.Art2!,8,66,66
+BRASS&WOODWIND,Brass Solo,,Classic Trumpet,S.Art2!,8,65,66
+BRASS&WOODWIND,Brass Solo,,Soft Trumpet,S.Art2!,8,64,66
+BRASS&WOODWIND,Brass Solo,,Golden Trumpet,S.Art!,8,34,65
+BRASS&WOODWIND,Brass Solo,,Mute Trumpet,S.Art2!,8,64,65
+BRASS&WOODWIND,Brass Solo,,Silver Trumpet,S.Art!,8,33,65
+BRASS&WOODWIND,Brass Solo,,Trombone,S.Art2!,8,65,74
+BRASS&WOODWIND,Brass Solo,,Cornet,Sweet!,0,119,57
+BRASS&WOODWIND,Brass Solo,,Bass Trombone Tenuto,Regular,104,1,58
+BRASS&WOODWIND,Brass Solo,,Baritone Horn Short,Regular,104,10,61
+BRASS&WOODWIND,Brass Solo,,Bass Trombone Staccato,Regular,104,2,58
+BRASS&WOODWIND,Brass Solo,,Baritone Horn Long,Regular,104,11,61
+BRASS&WOODWIND,Brass Solo,,Muted Cornet,Sweet!,104,0,60
+BRASS&WOODWIND,Brass Solo,,Baritone Horn Staccato,Regular,104,12,61
+BRASS&WOODWIND,Brass Solo,,Muted Trumpet,Sweet!,0,114,60
+BRASS&WOODWIND,Brass Solo,,Baritone Horn Tenuto,Regular,104,13,61
+BRASS&WOODWIND,Brass Solo,,Tuba,Regular,104,0,59
+BRASS&WOODWIND,Brass Ensemble,,Pop Horns Dynamic,Live!,104,0,62
+BRASS&WOODWIND,Brass Ensemble,,Pop Horns Doit SW,S.Art!,8,46,57
+BRASS&WOODWIND,Brass Ensemble,,Pop Horns Bright,S.Art!,8,44,57
+BRASS&WOODWIND,Brass Ensemble,,Pop Horns Fall SW,S.Art!,8,47,57
+BRASS&WOODWIND,Brass Ensemble,,Pop Horns Accent,Live!,104,3,62
+BRASS&WOODWIND,Brass Ensemble,,Pop Horns Cresc SW,S.Art!,8,45,57
+BRASS&WOODWIND,Brass Ensemble,,Pop Horns Mellow,S.Art!,8,43,57
+BRASS&WOODWIND,Brass Ensemble,,Pop Horns Swell SW,S.Art!,8,48,57
+BRASS&WOODWIND,Brass Ensemble,,Pop Horns Cresc,Live!,104,5,62
+BRASS&WOODWIND,Brass Ensemble,,Pop Horns Dynamic Shake,Live!,104,4,62
+BRASS&WOODWIND,Brass Ensemble,,Big Band Brass SW,S.Art!,8,37,57
+BRASS&WOODWIND,Brass Ensemble,,Warm Pop Horns,S.Art!,8,41,57
+BRASS&WOODWIND,Brass Ensemble,,Mute Swing Horns,Live!,104,2,62
+BRASS&WOODWIND,Brass Ensemble,,Bright Horn Section,S.Art!,8,42,57
+BRASS&WOODWIND,Brass Ensemble,,Warm Swing Horns,Live!,104,1,62
+BRASS&WOODWIND,Brass Ensemble,,Smooth Brass,S.Art!,8,36,57
+BRASS&WOODWIND,Brass Ensemble,,Ballad Brass,Live!,104,6,62
+BRASS&WOODWIND,Brass Ensemble,,Sforzando Fall,Live!,0,107,62
+BRASS&WOODWIND,Brass Ensemble,,Brass Falls & Doits SW,S.Art!,8,34,57
+BRASS&WOODWIND,Brass Ensemble,,Brass Band,Live!,104,14,62
+BRASS&WOODWIND,Brass Ensemble,,Orch Trumpets Fast,Live!,104,4,57
+BRASS&WOODWIND,Brass Ensemble,,Orchestral Trumpets,Live!,104,3,57
+BRASS&WOODWIND,Brass Ensemble,,Orch Trombones Fast,Live!,104,4,58
+BRASS&WOODWIND,Brass Ensemble,,Orchestral Trombones,Live!,104,3,58
+BRASS&WOODWIND,Brass Ensemble,,Orch Horns Fast,Live!,104,4,61
+BRASS&WOODWIND,Brass Ensemble,,Orchestral Horns,Live!,104,0,61
+BRASS&WOODWIND,Brass Ensemble,,Trumpets & Trombones,Live!,104,9,62
+BRASS&WOODWIND,Brass Ensemble,,Trumpets & Trombones Oct,Live!,104,10,62
+BRASS&WOODWIND,Brass Ensemble,,Warm Orch Horns,S.Art!,8,33,61
+BRASS&WOODWIND,Brass Ensemble,,Soft Orch Horns,S.Art!,8,32,61
+BRASS&WOODWIND,Brass Ensemble,,Symphony Horns,Live!,104,1,61
+BRASS&WOODWIND,Brass Ensemble,,Stopped Orch Ho rns,Live!,104,3,61
+BRASS&WOODWIND,Brass Ensemble,,Symphony Horns Octave,Live!,104,2,61
+BRASS&WOODWIND,Brass Ensemble,,Symphony Brass,Live!,104,8,62
+BRASS&WOODWIND,Brass Ensemble,,Symphony Horns Fast,Live!,104,15,62
+BRASS&WOODWIND,Brass Ensemble,,Orch Horns & Trombones,Live!,104,13,62
+BRASS&WOODWIND,Brass Ensemble,,Orch Brass Octave,Live!,104,12,62
+BRASS&WOODWIND,Brass Ensemble,,Orch Horns Pad,Live!,104,11,62
+BRASS&WOODWIND,Sax Solo,,Ballad Sopra no Sax,S.Art2!,8,65,85
+BRASS&WOODWIND,Sax Solo,,Soft Alto Sax,S.Art!,8,34,67
+BRASS&WOODWIND,Sax Solo,,Pop Soprano Sax,S.Art2!,8,64,85
+BRASS&WOODWIND,Sax Solo,,Tenor Sax,S.Art2!,8,66,81
+BRASS&WOODWIND,Sax Solo,,Alto Sax,S.Art2!,8,65,84
+BRASS&WOODWIND,Sax Solo,,Smooth Tenor Sax,S.Art2!,8,65,81
+BRASS&WOODWIND,Sax Solo,,Funk Alto Sax,S.Art2!,8,64,84
+BRASS&WOODWIND,Sax Solo,,Breathy Tenor Sax,S.Art2!,8,64,81
+BRASS&WOODWIND,Sax Solo,,Big Band Alto Sax,S.Art2!,8,66,84
+BRASS&WOODWIND,Sax Solo,,Big Band Tenor Sax,S.Art2!,8,66,83
+BRASS&WOODWIND,Sax Solo,,Baritone Sax,S.Art2!,8,65,82
+BRASS&WOODWIND,Sax Solo,,Funk Baritone Sax,S.Art2!,8,64,82
+BRASS&WOODWIND,Sax Solo,,Big Band Baritone,S.Art2!,8,66,82
+BRASS&WOODWIND,Sax Ensemble,,Sax Section,Live!,0,116,67
+BRASS&WOODWIND,Sax Ensemble,,Sax Section Octave,S.Art!,8,37,83
+BRASS&WOODWIND,Sax Ensemble,,Sax Section Hard,Live!,0,122,67
+BRASS&WOODWIND,Sax Ensemble,,Mellow Saxes,S.Art!,8,39,83
+BRASS&WOODWIND,Sax Ensemble,,Sax Section Soft,Live!,0,121,67
+BRASS&WOODWIND,Sax Ensemble,,Big Band Horns 1,Live!,0,110,67
+BRASS&WOODWIND,Sax Ensemble,,Smooth Saxes 1,S.Art!,8,38,83
+BRASS&WOODWIND,Sax Ensemble,,Big Band Horns 2,Live!,0,109,67
+BRASS&WOODWIND,Sax Ensemble,,Smooth Saxes 2,S.Art!,8,36,83
+BRASS&WOODWIND,Sax Ensemble,,Big Band Octave,Live!,0,108,67
+BRASS&WOODWIND,Woodwind Solo,,Classical Flute,S.Art2!,8,64,75
+BRASS&WOODWIND,Woodwind Solo,,Classical Oboe,S.Art2!,8,65,69
+BRASS&WOODWIND,Woodwind Solo,,Jazz Flute,S.Art2!,8,65,75
+BRASS&WOODWIND,Woodwind Solo,,Pop Oboe,S.Art2!,8,64,69
+BRASS&WOODWIND,Woodwind Solo,,Clarinet,S.Art2!,8,65,93
+BRASS&WOODWIND,Woodwind Solo,,MOR Oboe,S.Art!,8,32,69
+BRASS&WOODWIND,Woodwind Solo,,Romance Clarinet,S.Art2!,8,66,93
+BRASS&WOODWIND,Woodwind Solo,,Classical Bassoon,S.Art2!,8,65,71
+BRASS&WOODWIND,Woodwind Solo,,Ballad Clarinet,S.Art2!,8,64,93
+BRASS&WOODWIND,Woodwind Solo,,Pop Bassoon,S.Art2!,8,64,71
+BRASS&WOODWIND,Woodwind Solo,,Orchestral Clarinet,Live!,104,0,72
+BRASS&WOODWIND,Woodwind Solo,,Piccolo,Regular,0,112,73
+BRASS&WOODWIND,Woodwind Solo,,German Clarinet,Regular,104,2,72
+BRASS&WOODWIND,Woodwind Ens,,Flute Section,Regular,104,1,74
+BRASS&WOODWIND,Woodwind Ens,,Clarinet & Oboe,Regular,104,1,69
+BRASS&WOODWIND,Woodwind Ens,,Flute Ensemble,Regular,0,116,74
+BRASS&WOODWIND,Woodwind Ens,,Oboe & Bassoon,Regular,104,2,69
+BRASS&WOODWIND,Woodwind Ens,,Flutes & Oboes,Regular,104,2,74
+BRASS&WOODWIND,Woodwind Ens,,Orchestral Woodwind,Regular,104,1,71
+BRASS&WOODWIND,Woodwind Ens,,Clarinet & Flutes,Regular,104,1,72
+BRASS&WOODWIND,Woodwind World,,Irish Pipes Air,S.Art2!,8,64,109
+BRASS&WOODWIND,Woodwind World,,Pan Pipes,Sweet!,0,113,76
+BRASS&WOODWIND,Woodwind World,,Irish Pipes Dance,S.Art2!,8,65,109
+BRASS&WOODWIND,Woodwind World,,Chiff Pan Flute,Regular,0,113,74
+BRASS&WOODWIND,Woodwind World,,Celtic Duo,Regular,0,120,74
+BRASS&WOODWIND,Woodwind World,,Shakuhachi,Regular,0,112,78
+BRASS&WOODWIND,Woodwind World,,Bagpipe,Regular,0,112,110
+BRASS&WOODWIND,Woodwind World,,Recorder,Regular,0,112,75
+BRASS&WOODWIND,Woodwind World,,Whistle,Regular,0,112,79
+BRASS&WOODWIND,Woodwind World,,Ocarina,Regular,0,112,80
+PERC&DRUMS,Chromatic Perc,,Vibraphone,Sweet!,104,1,12
+PERC&DRUMS,Chromatic Perc,,Xylophone,Regular,104,0,14
+PERC&DRUMS,Chromatic Perc,,Jazz Vibraphone,Regular,0,113,12
+PERC&DRUMS,Chromatic Perc,,Marimba,Regular,104,0,13
+PERC&DRUMS,Chromatic Perc,,Vibraphone & Jazz Guitar,S.Art!,8,33,12
+PERC&DRUMS,Chromatic Perc,,Orchestral Marimba,Natural!,0,122,13
+PERC&DRUMS,Chromatic Perc,,Vibraphone & Flutes,Regular,0,114,12
+PERC&DRUMS,Chromatic Perc,,Glockenspiel,Regular,104,0,10
+PERC&DRUMS,Chromatic Perc,,Steel Drums,Regular,0,112,115
+PERC&DRUMS,Chromatic Perc,,Music Box,Regular,0,112,11
+PERC&DRUMS,Chromatic Perc,,Tremolo Vibraphone,Natural!,0,124,12
+PERC&DRUMS,Chromatic Perc,,Kalimba,Regular,0,112,109
+PERC&DRUMS,Chromatic Perc,,Concert Vibraphone,Natural!,0,122,12
+PERC&DRUMS,Chromatic Perc,,Steel Drums,Natural!,0,122,115
+PERC&DRUMS,Chromatic Perc,,Orchestral Harp,Regular,104,1,47
+PERC&DRUMS,Chromatic Perc,,Tubular Bells,Regular,0,112,15
+PERC&DRUMS,Chromatic Perc,,Mellow Harp,Regular,104,0,47
+PERC&DRUMS,Chromatic Perc,,Timpani,Regular,0,112,48
+PERC&DRUMS,Chromatic Perc,,Celesta,Regular,0,112,9
+PERC&DRUMS,Chromatic Perc,,Orchestra Hit,Regular,0,112,56
+PERC&DRUMS,Chromatic Perc,,Concert Celesta,Natural!,0,122,9
+PERC&DRUMS,Drum Kits,,Rock Drum Kit,Revo!Drums,127,8,18
+PERC&DRUMS,Drum Kits,,Jazz Brush Expanded,Revo!Drums,127,8,77
+PERC&DRUMS,Drum Kits,,Pop Drum Kit,Revo!Drums,127,8,74
+PERC&DRUMS,Drum Kits,,Jazz Kit,Drums,127,0,33
+PERC&DRUMS,Drum Kits,,Vintage Open Kit,Revo!Drums,127,8,75
+PERC&DRUMS,Drum Kits,,Real Brushes Kit,Live!Drums,127,0,42
+PERC&DRUMS,Drum Kits,,Vintage Muted Kit,Revo!Drums,127,8,78
+PERC&DRUMS,Drum Kits,,Jazz Brush Kit Comp,Revo!Drums,127,8,76
+PERC&DRUMS,Drum Kits,,Jazz Stick Kit,Revo!Drums,127,8,79
+PERC&DRUMS,Drum Kits,,Symphony Kit,Live!Drums,127,0,49
+PERC&DRUMS,Drum Kits,,80s Pop Kit,Drums,127,0,67
+PERC&DRUMS,Drum Kits,,EDM Kit,Drums,127,0,70
+PERC&DRUMS,Drum Kits,,80s R&B Kit,Drums,127,0,68
+PERC&DRUMS,Drum Kits,,Dubstep Kit,Drums,127,0,69
+PERC&DRUMS,Drum Kits,,Electro Kit,Drums,127,0,71
+PERC&DRUMS,Drum Kits,,Trap Kit,Drums,127,0,72
+PERC&DRUMS,Drum Kits,,Schlager Kit,Drums,127,0,73
+PERC&DRUMS,Drum Kits,,Power Kit 1,Live!Drums,127,0,88
+PERC&DRUMS,Drum Kits,,Real Drum Kit,Live!Drums,127,0,92
+PERC&DRUMS,Drum Kits,,Power Kit 2,Live!Drums,127,0,89
+PERC&DRUMS,Drum Kits,,Acoustic Kit,Live!Drums,127,0,90
+PERC&DRUMS,Drum Kits,,House Kit,Drums,127,0,61
+PERC&DRUMS,Drum Kits,,Drum Machine,Drums,127,0,62
+PERC&DRUMS,Drum Kits,,Rock Kit,Live!Drums,127,0,91
+PERC&DRUMS,Drum Kits,,Analog T8 Kit,Drums,127,0,59
+PERC&DRUMS,Drum Kits,,Studio Kit,Live!Drums,127,0,87
+PERC&DRUMS,Drum Kits,,Analog T9 Kit,Drums,127,0,60
+PERC&DRUMS,Drum Kits,,Hit Kit,Drums,127,0,5
+PERC&DRUMS,Drum Kits,,Break Kit,Drums,127,0,58
+PERC&DRUMS,Drum Kits,,Hip Hop Kit,Drums,127,0,57
+PERC&DRUMS,Drum Kits,,Room Kit,Drums,127,0,9
+PERC&DRUMS,Drum Kits,,Dance Kit,Drums,127,0,28
+PERC&DRUMS,Drum Kits,,Bass Drum Kit,SFX,126,0,21
+PERC&DRUMS,Drum Kits,,Analog Kit,Drums,127,0,26
+PERC&DRUMS,Drum Kits,,Reverse Bass Drum Kit,SFX,126,0,22
+PERC&DRUMS,Drum Kits,,Electro Kit 2,Drums,127,0,25
+PERC&DRUMS,Drum Kits,,Cymbal Kit,Live!SFX,126,0,50
+PERC&DRUMS,World Perc Kits,,Afro Cuban Kit,Revo!SFX,126,8,43
+PERC&DRUMS,World Perc Kits,,Brazilian Kit,Revo!SFX,126,8,120
+PERC&DRUMS,World Perc Kits,,Pop Percussion Kit,Revo!SFX,126,8,46
+PERC&DRUMS,World Perc Kits,,Pop Latin Kit 2 Comp,Live!SFX,126,0,47
+PERC&DRUMS,World Perc Kits,,Turkish Kit,Live!SFX,126,0,68
+PERC&DRUMS,World Perc Kits,,Pop Latin Kit 1,Live!SFX,126,0,44
+PERC&DRUMS,World Perc Kits,,Cuban Kit,Live!SFX,126,0,41
+PERC&DRUMS,World Perc Kits,,Pop Latin Kit 2,Live!SFX,126,0,45
+PERC&DRUMS,World Perc Kits,,Vocal Beatbox,Live!SFX,126,0,107
+PERC&DRUMS,World Perc Kits,,Gospel AdLibs,Live!SFX,126,0,111
+PERC&DRUMS,World Perc Kits,,Vocal Effects Kit,Live!SFX,126,0,110
+PERC&DRUMS,SFX,,New SFX Kit 1,Live!SFX,126,0,3
+PERC&DRUMS,SFX,,Helicopter,Live!,104,0,126
+PERC&DRUMS,SFX,,New SFX Kit 2,Live!SFX,126,0,4
+PERC&DRUMS,SFX,,Applause 1,Live!,104,0,127
+PERC&DRUMS,SFX,,Noises Kit,SFX,126,0,9
+PERC&DRUMS,SFX,,Applause 2,Live!,104,1,127
+PERC&DRUMS,SFX,,Sea Shore,Live!,104,0,123
+PERC&DRUMS,SFX,,Gun Shot,Live!,104,0,128
+SYNTH,Synth Lead,,Mini Classic,Regular,104,28,81
+SYNTH,Synth Lead,,Mini Classic Velocity+,Regular,104,29,81
+SYNTH,Synth Lead,,Mini Classic Soft,Regular,104,30,81
+SYNTH,Synth Lead,,Mini Classic Open,Regular,104,31,81
+SYNTH,Synth Lead,,Stratus Pulse,Regular,104,32,81
+SYNTH,Synth Lead,,Funky Velocity Mini,Regular,104,33,81
+SYNTH,Synth Lead,,Wire Lead Millennial,Regular,104,25,81
+SYNTH,Synth Lead,,Fusion Wire,Regular,104,26,81
+SYNTH,Synth Lead,,Mini Classic Unison,Regular,104,27,81
+SYNTH,Synth Lead,,Mini Saw Velocity,Regular,104,35,81
+SYNTH,Synth Lead,,80s Arnold Lead,Regular,104,41,82
+SYNTH,Synth Lead,,80s Big Lines,Regular,104,42,82
+SYNTH,Synth Lead,,80s Smart Stack,Regular,104,43,82
+SYNTH,Synth Lead,,80s Pitchy Saw,Regular,104,45,82
+SYNTH,Synth Lead,,80s Unison Lead,Regular,104,14,85
+SYNTH,Synth Lead,,80s Small Pulse,Regular,104,46,82
+SYNTH,Synth Lead,,80s Cheap Modulation,Regular,104,47,82
+SYNTH,Synth Lead,,80s Unison Fat,Regular,104,50,82
+SYNTH,Synth Lead,,80s Unison Poly,Regular,104,51,82
+SYNTH,Synth Lead,,80s Bit Square Arpeggio,Regular,104,18,81
+SYNTH,Synth Lead,,80s Saw Attack Arpeggio,Regular,104,50,88
+SYNTH,Synth Lead,,80s LFO Pulse Lead,Regular,104,16,81
+SYNTH,Synth Lead,,OB Scoop Fanfare,Regular,104,36,81
+SYNTH,Synth Lead,,Classic Diamonds,Regular,104,34,81
+SYNTH,Synth Lead,,Gemini,Regular,104,20,91
+SYNTH,Synth Lead,,Hands Up!,Regular,104,21,91
+SYNTH,Synth Lead,,Crowds,Regular,104,19,91
+SYNTH,Synth Lead,,Straight Raver,Regular,104,22,91
+SYNTH,Synth Lead,,Trance Artist,Regular,104,23,91
+SYNTH,Synth Lead,,Nasty Saw,Regular,104,10,91
+SYNTH,Synth Lead,,Growling Hook,Regular,104,11,91
+SYNTH,Synth Lead,,Wire Lead,Regular,0,120,82
+SYNTH,Synth Lead,,Soft Saw,Regular,104,16,82
+SYNTH,Synth Lead,,Crying Lead,Regular,0,114,88
+SYNTH,Synth Lead,,Hip Lead,Regular,0,113,81
+SYNTH,Synth Lead,,Punch Lead,Regular,104,7,82
+SYNTH,Synth Perc,,Paris At Night,Regular,104,17,84
+SYNTH,Synth Perc,,80s Unison Fifth,Regular,104,2,87
+SYNTH,Synth Perc,,Power Of Emotion,Regular,104,6,84
+SYNTH,Synth Perc,,80s Power Envelo pe,Regular,104,40,82
+SYNTH,Synth Perc,,Green Flash,Regular,104,19,85
+SYNTH,Synth Perc,,80s Take Me Out,Regular,104,48,82
+SYNTH,Synth Perc,,Vintage Arpeggio,Regular,104,0,84
+SYNTH,Synth Perc,,80s Poly Pop,Regular,104,49,82
+SYNTH,Synth Perc,,Bizz Chord Arpeggio,Regular,104,5,84
+SYNTH,Synth Perc,,80s Reso Perc Synth,Regular,104,37,88
+SYNTH,Synth Perc,,PWM Unison Arpeggio,Regular,104,12,84
+SYNTH,Synth Perc,,PWM Chord Arpeggio,Regular,104,8,84
+SYNTH,Synth Perc,,80s Bell Synth Stick,Regular,104,39,88
+SYNTH,Synth Perc,,80s Perc Synth & Bell,Regular,104,40,88
+SYNTH,Synth Perc,,80s Small Pulse Poly,Regular,104,17,81
+SYNTH,Synth Perc,,80s FM Polystar,Regular,104,15,85
+SYNTH,Synth Perc,,80s Interlude,Regular,104,42,88
+SYNTH,Synth Perc,,80s 5th Digi Sequence,Regular,104,43,88
+SYNTH,Synth Perc,,80s Glassy Comping,Regular,104,44,88
+SYNTH,Synth Perc,,80s Sharp Perc,Regular,104,47,88
+SYNTH,Synth Perc,,Dreamin Of U,Regular,104,7,84
+SYNTH,Synth Perc,,80s Short Steppe r,Regular,104,48,88
+SYNTH,Synth Perc,,Thinking Of You,Regular,104,15,84
+SYNTH,Synth Perc,,80s Sync Move,Regular,104,49,88
+SYNTH,Synth Perc,,Wheel Tech SW,S.Art!,8,36,124
+SYNTH,Synth Perc,,80s Punchy Synth,Regular,104,38,88
+SYNTH,Synth Perc,,Soft Chord Synth,Regular,104,9,85
+SYNTH,Synth Perc,,80s Wooden Arpeggio,Regular,104,45,88
+SYNTH,Synth Perc,,Square Stepz,Regular,104,26,89
+SYNTH,Synth Perc,,80s Staccato Comping,Regular,104,41,88
+SYNTH,Synth Perc,,Pitchy Patch,Regular,104,8,85
+SYNTH,Synth Perc,,Tri Picks,Regular,104,28,89
+SYNTH,Synth Perc,,Cracky,Regular,104,29,89
+SYNTH,Synth Perc,,Lektro Codes,Regular,104,2,85
+SYNTH,Synth Strings,,80s Dream Strings,Regular,104,14,51
+SYNTH,Synth Strings,,80s Miami Strings,Regular,104,13,52
+SYNTH,Synth Strings,,80s Pop Strings,Regular,104,15,51
+SYNTH,Synth Strings,,80s Glassy Hook,Regular,104,37,89
+SYNTH,Synth Strings,,Octave Strings,Regular,104,4,51
+SYNTH,Synth Strings,,Hipa Strings,Regular,0,114,96
+SYNTH,Synth Strings,,Med Det Strings,Regular,104,10,51
+SYNTH,Synth Strings,,Doux Flange,Regular,104,3,96
+SYNTH,Synth Strings,,Light Pad,Regular,104,2,52
+SYNTH,Synth Strings,,Medium Tune Pad,Regular,104,0,51
+SYNTH,Synth Strings,,Butter Strings,Regular,104,2,51
+SYNTH,Synth Strings,,Bright Pop Pad,Regular,104,3,51
+SYNTH,Synth Strings,,Soft Ensemble,Regular,10,41,51
+SYNTH,Synth Strings,,Bright Saw Pad,Regular,0,113,91
+SYNTH,Synth Strings,,Synth Strings 1,Regular,0,112,51
+SYNTH,Synth Strings,,Synth Strings 2,Regular,0,113,51
+SYNTH,Synth Brass,,1984 Synth,Regular,104,20,82
+SYNTH,Synth Brass,,80s Synth Brass Stab,Regular,104,9,63
+SYNTH,Synth Brass,,Analog Brass,Regular,0,112,64
+SYNTH,Synth Brass,,80s Synth Brass Tack,Regular,104,10,63
+SYNTH,Synth Brass,,Fat Synth Brass,Regular,0,116,64
+SYNTH,Synth Brass,,80s Stack Brass,Regular,104,44,82
+SYNTH,Synth Brass,,Techno Brass,Regular,0,114,63
+SYNTH,Synth Brass,,80s Synth Pro Swell,Regular,104,14,96
+SYNTH,Synth Brass,,Ober Brass,Regular,0,113,64
+SYNTH,Synth Brass,,80s Synth Slow Swell,Regular,104,15,96
+SYNTH,Synth Brass,,Slow PWM Brass,Regular,104,2,63
+SYNTH,Synth Brass,,80s Brass,Regular,0,113,63
+SYNTH,Synth Brass,,Fast PWM Brass,Regular,104,6,63
+SYNTH,Synth Brass,,80s Synth Brass Thin,Regular,104,0,63
+SYNTH,Synth Brass,,Ober Horns,Regular,0,115,64
+SYNTH,Synth Brass,,80s Synth Brass Prof,Regular,104,1,63
+SYNTH,Synth Brass,,Soft Velocity Brass,Regular,0,120,63
+SYNTH,Synth Brass,,Soft Analog,Regular,0,114,64
+SYNTH,Synth Pad,,80s Harpvox,Regular,104,4,100
+SYNTH,Synth Pad,,80s Ballad Pad,Regular,104,16,51
+SYNTH,Synth Pad,,80s Soft Pad,Regular,104,10,90
+SYNTH,Synth Pad,,80s Breathy Voice,Regular,104,0,55
+SYNTH,Synth Pad,,80s Dreamy Vox,Regular,104,1,55
+SYNTH,Synth Pad,,80s Warm VCF Pad,Regular,104,11,90
+SYNTH,Synth Pad,,New Heaven,Regular,104,10,89
+SYNTH,Synth Pad,,Fantasy Bells,Regular,104,11,89
+SYNTH,Synth Pad,,Itopia Bells,Regular,104,13,89
+SYNTH,Synth Pad,,Sinesphere,Regular,104,18,89
+SYNTH,Synth Pad,,Heaven Pad,Regular,104,3,92
+SYNTH,Synth Pad,,Breath Bells,Regular,104,15,89
+SYNTH,Synth Pad,,Organ Bells,Regular,104,12,89
+SYNTH,Synth Pad,,Sky Bells,Regular,104,16,89
+SYNTH,Synth Pad,,Spectrum Pad,Regular,104,5,95
+SYNTH,Synth Pad,,Early Digital,Regular,104,0,94
+SYNTH,Synth Pad,,Pad Voices,Live!,104,6,96
+SYNTH,Synth Pad,,Cross Phase,Regular,104,1,102
+SYNTH,Synth Pad,,New Atmosphere,Regular,104,4,90
+SYNTH,Synth Pad,,Hot Swell,Regular,104,2,96
+SYNTH,Synth Pad,,Breath Pad,Regular,104,0,92
+SYNTH,Synth Pad,,Noble Man,Regular,104,1,89
+SYNTH,Synth Pad,,Dark Light,Regular,104,3,90
+SYNTH,Synth Pad,,Ambient Pad,Regular,104,0,89
+SYNTH,Synth Pad,,Dark Fat Saw,Regular,104,2,90
+SYNTH,Synth Pad,,Mellow Pad,Regular,0,117,96
+SYNTH,Synth Pad,,Analog Pad,Regular,0,120,90
+SYNTH,Synth Pad,,Hybrid Lines,Regular,104,4,92
+SYNTH,Synth Pad,,VP Soft,Regular,104,0,90
+SYNTH,Synth Pad,,Bright Fat Saw,Regular,104,5,91
+SYNTH,Synth Dance,,Glass Ceiling,Regular,104,0,86
+SYNTH,Synth Dance,,Dance Survivor,Regular,104,16,85
+SYNTH,Synth Dance,,Hyper Trance,Regular,104,17,85
+SYNTH,Synth Dance,,Freaky Dancer,Regular,104,18,85
+SYNTH,Synth Dance,,Trance Arpeggio,Regular,104,19,81
+SYNTH,Synth Dance,,DJ Montage,Regular,104,20,81
+SYNTH,Synth Dance,,Trance Gates,Regular,104,20,85
+SYNTH,Synth Dance,,Big Increase,Regular,104,21,81
+SYNTH,Synth Dance,,Trance Picks,Regular,104,22,81
+SYNTH,Synth Dance,,VA-Attacks,Regular,104,23,81
+SYNTH,Synth Dance,,Pearly Gates,Regular,104,24,81
+SYNTH,Synth Dance,,Monster VCOs,Regular,104,35,91
+SYNTH,Synth Dance,,Champ Arpeggio,Regular,104,11,84
+SYNTH,Synth Dance,,Pearl Fishers,Regular,104,1,84
+SYNTH,Synth Dance,,Big Spender,Regular,104,13,84
+SYNTH,Synth Dance,,House Of Chordz,Regular,104,2,84
+SYNTH,Synth Dance,,Mega Stack,Regular,104,14,84
+SYNTH,Synth Dance,,Saw Eight Detune,Regular,104,3,84
+SYNTH,Synth Dance,,Pizzy Dance Chords,Regular,104,4,84
+SYNTH,Synth Dance,,Festival Of Harmony,Regular,104,16,84
+SYNTH,Synth Dance,,Wave Dancer,Regular,104,9,84
+SYNTH,Synth Dance,,Power Chords,Regular,104,10,84
+SYNTH,Synth Dance,,HPF Dance,Regular,104,0,91
+SYNTH,Synth Dance,,Dancy Hook,Regular,104,9,82
+SYNTH,Synth Dance,,Club Lead,Regular,104,3,63
+SYNTH,Synth Dance,,Talk Mod Lead,Regular,104,0,88
+SYNTH,Synth Dance,,Trance Lead,Regular,0,121,81
+SYNTH,Synth Effects,,80s Fifth Slow,Regular,104,13,96
+SYNTH,Synth Effects,,Digisweeper,Regular,104,7,102
+SYNTH,Synth Effects,,Mystic Pad,Regular,104,6,95
+SYNTH,Synth Effects,,Deep Motion,Regular,104,4,96
+SYNTH,Synth Effects,,Space Rider,Regular,104,1,96
+SYNTH,Synth Effects,,Ober Sweep,Regular,0,115,96
+SYNTH,Synth Effects,,Morning Dew,Regular,104,0,95
+SYNTH,Synth Effects,,Ambient Theme,Regular,104,20,89
+SYNTH,Synth Effects,,Aerosphere,Regular,104,1,95
+SYNTH,Synth Effects,,Galaxy Pad,Regular,104,3,89
+SYNTH,Synth Effects,,Sound Pictures,Regular,104,3,95
+SYNTH,Synth Effects,,Atlantis,Regular,104,11,102
+SYNTH,Synth Effects,,Ballad Comp,Regular,104,6,89
+SYNTH,Synth Effects,,Bright Pad Bell,Regular,104,7,89
+OTHERS,Legacy,Piano,Studio Grand,VRM,108,30,1
+OTHERS,Legacy,Piano,Bright Piano,VRM,108,16,2
+OTHERS,Legacy,Piano,Stage Piano,VRM,108,31,1
+OTHERS,Legacy,Piano,Ambient Piano,Natural!,104,9,1
+OTHERS,Legacy,Piano,Bright Grand Pad,Natural!,104,8,1
+OTHERS,Legacy,Piano,Bright Piano,Natural!,0,123,1
+OTHERS,Legacy,Piano,Cocktail Piano,Natural!,104,1,4
+OTHERS,Legacy,Piano,Grand Pad Layer,Natural!,108,32,3
+OTHERS,Legacy,Piano,Grand Piano & Choir,Natural!,108,25,1
+OTHERS,Legacy,Piano,Grand Piano & Orchestra,Natural!,104,12,1
+OTHERS,Legacy,Piano,Grand Piano 1Octave,Natural!,104,2,4
+OTHERS,Legacy,Piano,Grand Piano 2Octaves,Natural!,104,3,4
+OTHERS,Legacy,Piano,Pop Grand 2,Natural!,104,11,1
+OTHERS,Legacy,Piano,Studio Grand,Natural!,104,19,1
+OTHERS,Legacy,Piano,Stage Piano,Natural!,104,20,1
+OTHERS,Legacy,Piano,Stage Piano 2,Natural!,104,10,1
+OTHERS,Legacy,Piano,Pop Upright,Natural!,104,13,2
+OTHERS,Legacy,Piano,Honky Tonk,Natural!,0,122,4
+OTHERS,Legacy,Piano,Warm Grand Pad,Natural!,108,24,1
+OTHERS,Legacy,Piano,Ambient Piano,Live!,104,3,1
+OTHERS,Legacy,Piano,Bright Piano,Live!,0,112,2
+OTHERS,Legacy,Piano,Cocktail Piano,Live!,104,0,4
+OTHERS,Legacy,Piano,Grand Piano,Live!,0,113,1
+OTHERS,Legacy,Piano,MIDI Grand,Live!,104,0,3
+OTHERS,Legacy,Piano,MIDI Grand Pad,Live!,104,1,3
+OTHERS,Legacy,Piano,MIDI Grand Syn,Live!,104,1,1
+OTHERS,Legacy,Piano,Octave Piano 1,Live!,0,113,4
+OTHERS,Legacy,Piano,Octave Piano 2,Live!,0,114,4
+OTHERS,Legacy,Piano,Pop Grand 3,Live!,104,5,1
+OTHERS,Legacy,Piano,Rock Piano,Live!,104,4,1
+OTHERS,Legacy,Piano,Studio Grand,Live!,0,115,1
+OTHERS,Legacy,Piano,Warm Grand,Live!,0,114,1
+OTHERS,Legacy,Piano,Honky Tonk,Regular,0,112,4
+OTHERS,Legacy,Piano,MIDI Grand,Regular,0,112,3
+OTHERS,Legacy,Piano,Piano Orchestra,Live!,104,2,1
+OTHERS,Legacy,Piano,Harpsichord,Live!,0,112,7
+OTHERS,Legacy,E.Piano,Electric Piano 2,Natural!,0,122,5
+OTHERS,Legacy,E.Piano,Funky EP,Natural!,0,123,5
+OTHERS,Legacy,E.Piano,Tremolo Stage EP,Natural!,0,124,5
+OTHERS,Legacy,E.Piano,Electric Piano 1,Cool!,0,119,5
+OTHERS,Legacy,E.Piano,Suitcase Ballad,Cool!,104,9,5
+OTHERS,Legacy,E.Piano,Suitcase Drive,Cool!,104,11,5
+OTHERS,Legacy,E.Piano,Suitcase EP,Cool!,0,118,5
+OTHERS,Legacy,E.Piano,Suitcase Hard,Cool!,104,16,5
+OTHERS,Legacy,E.Piano,Suitcase Jazz,Cool!,104,13,5
+OTHERS,Legacy,E.Piano,Suitcase Phaser,Cool!,104,10,5
+OTHERS,Legacy,E.Piano,Suitcase So ft,Cool!,104,7,5
+OTHERS,Legacy,E.Piano,Suitcase Tremolo,Cool!,104,12,5
+OTHERS,Legacy,E.Piano,Suitcase Warmth,Cool!,104,14,5
+OTHERS,Legacy,E.Piano,Tremolo Suitcase EP,Cool!,0,113,5
+OTHERS,Legacy,E.Piano,Vintage EP,Cool!,104,8,5
+OTHERS,Legacy,E.Piano,Vintage EP Drive,Cool!,104,15,5
+OTHERS,Legacy,E.Piano,Ballad Stack,Regular,0,114,3
+OTHERS,Legacy,E.Piano,Chorus Bell,Regular,0,120,6
+OTHERS,Legacy,E.Piano,Funk EP,Regular,0,112,5
+OTHERS,Legacy,E.Piano,Jazz Chorus,Regular,0,118,6
+OTHERS,Legacy,E.Piano,Modern EP,Regular,0,115,6
+OTHERS,Legacy,E.Piano,Hyper Tines,Regular,0,113,6
+OTHERS,Legacy,E.Piano,Phase EP,Regular,0,120,5
+OTHERS,Legacy,E.Piano,New Tines,Regular,0,116,6
+OTHERS,Legacy,E.Piano,Stage EP,Regular,0,117,5
+OTHERS,Legacy,E.Piano,Smooth Tine,Regular,0,119,6
+OTHERS,Legacy,E.Piano,Vintage EP,Regular,0,116,5
+OTHERS,Legacy,E.Piano,CP80 Stage,Regular,0,113,3
+OTHERS,Legacy,E.Piano,DX7 EP,Natural!,0,122,6
+OTHERS,Legacy,E.Piano,Galaxy EP,Cool!,0,114,5
+OTHERS,Legacy,E.Piano,DX Ballad,Cool!,0,124,6
+OTHERS,Legacy,E.Piano,DX Sparkle,Cool!,0,121,6
+OTHERS,Legacy,E.Piano,Pianosphere,Regular,104,19,89
+OTHERS,Legacy,E.Piano,Studio Ballad DX,Regular,104,9,6
+OTHERS,Legacy,E.Piano,Piano Sweeper,Regular,104,3,100
+OTHERS,Legacy,E.Piano,DX Modern,Regular,0,112,6
+OTHERS,Legacy,E.Piano,Polaris EP,Regular,0,115,5
+OTHERS,Legacy,E.Piano,Super DX,Regular,0,117,6
+OTHERS,Legacy,E.Piano,Venus EP,Regular,0,114,6
+OTHERS,Legacy,E.Piano,Magnetics,Regular,104,0,5
+OTHERS,Legacy,E.Piano,Stereo Clavi,Regular,0,114,8
+OTHERS,Legacy,Organ,Full Rocker 2,Cool!,104,3,19
+OTHERS,Legacy,Organ,Rotary Switch,Cool!,0,110,18
+OTHERS,Legacy,Organ,Bright Drawbar,Regular,0,116,17
+OTHERS,Legacy,Organ,Click Organ,Regular,0,112,18
+OTHERS,Legacy,Organ,Dance Organ,Regular,0,113,18
+OTHERS,Legacy,Organ,Drawbar Organ 1,Regular,0,120,18
+OTHERS,Legacy,Organ,Drawbar Organ 2,Regular,0,115,17
+OTHERS,Legacy,Organ,Electric Organ,Regular,0,118,18
+OTHERS,Legacy,Organ,Gospel Organ,Regular,0,119,17
+OTHERS,Legacy,Organ,Jazz Organ 1,Regular,0,112,17
+OTHERS,Legacy,Organ,Jazz Organ 2,Regular,0,113,17
+OTHERS,Legacy,Organ,Jazz Organ 3,Regular,0,120,17
+OTHERS,Legacy,Organ,Percussive Organ,Regular,0,119,18
+OTHERS,Legacy,Organ,Purple Organ,Regular,0,114,19
+OTHERS,Legacy,Organ,Rock Organ 1,Regular,0,112,19
+OTHERS,Legacy,Organ,Rock Organ 2,Regular,0,119,19
+OTHERS,Legacy,Organ,Rock Organ 3,Regular,0,113,19
+OTHERS,Legacy,Organ,Rotary Drive Organ,Regular,0,116,19
+OTHERS,Legacy,Organ,60s Organ,Regular,0,116,18
+OTHERS,Legacy,Organ,Hymn Organ,Regular,0,114,20
+OTHERS,Legacy,Organ,Ballroom Organ,Regular,0,115,4
+OTHERS,Legacy,Organ,Euro Organ,Regular,0,118,17
+OTHERS,Legacy,Organ,Full Theatre,Regular,0,127,19
+OTHERS,Legacy,Organ,Reed Organ,Regular,0,112,21
+OTHERS,Legacy,Organ,Sweet Theatre,Regular,0,126,19
+OTHERS,Legacy,Organ,Theatre Kinura 8',Regular,0,123,17
+OTHERS,Legacy,Organ,Theatre Trumpet & Kinura,Regular,0,125,18
+OTHERS,Legacy,Organ,Theatre Trumpet 16'&8',Regular,0,124,18
+OTHERS,Legacy,Organ,Tibia 16'&4',Regular,104,8,17
+OTHERS,Legacy,Organ,Tibia 16'&4' Accomp,Regular,0,114,17
+OTHERS,Legacy,Organ,Tibia 8',Regular,104,6,18
+OTHERS,Legacy,Organ,Tibia 8' Accomp,Regular,0,122,18
+OTHERS,Legacy,Organ,Tibia 8'&4',Regular,104,9,17
+OTHERS,Legacy,Organ,Tibia 8'&4' Accomp,Regular,0,122,17
+OTHERS,Legacy,Organ,Tibia Chorus,Regular,104,5,18
+OTHERS,Legacy,Organ,Tibia Full Accomp,Regular,0,114,18
+OTHERS,Legacy,Organ,Vox & Tibia Accomp,Regular,0,125,17
+OTHERS,Legacy,Organ,Vox 8' Accomp,Regular,0,123,18
+OTHERS,Legacy,Organ,Vox Humana & Tibia,Regular,104,10,17
+OTHERS,Legacy,Organ,Vox Humana 8',Regular,104,7,18
+OTHERS,Legacy,Organ,Organ Flutes,OrganFlutes,10,0,9
+OTHERS,Legacy,Organ,USD Smile,OrganFlutes,10,1,9
+OTHERS,Legacy,Organ,Reggae Bars,OrganFlutes,10,2,9
+OTHERS,Legacy,Organ,Warm Theatre,OrganFlutes,10,3,9
+OTHERS,Legacy,Organ,Organ Pops,OrganFlutes,10,4,9
+OTHERS,Legacy,Organ,Rock Organ,OrganFlutes,10,5,9
+OTHERS,Legacy,Organ,Soul Percussion,OrganFlutes,10,6,9
+OTHERS,Legacy,Organ,Gospel Truth,OrganFlutes,10,7,9
+OTHERS,Legacy,Organ,Pad Organ,OrganFlutes,10,8,9
+OTHERS,Legacy,Organ,Full Organ,OrganFlutes,10,9,9
+OTHERS,Legacy,Organ,String Bars,OrganFlutes,10,0,10
+OTHERS,Legacy,Organ,Latin Spin,OrganFlutes,10,1,10
+OTHERS,Legacy,Organ,Shady Bars,OrganFlutes,10,2,10
+OTHERS,Legacy,Organ,Funk Organ,OrganFlutes,10,3,10
+OTHERS,Legacy,Organ,Ballad Organ,OrganFlutes,10,4,10
+OTHERS,Legacy,Organ,Rich Bars,OrganFlutes,10,5,10
+OTHERS,Legacy,Organ,Trumpet Bars,OrganFlutes,10,6,10
+OTHERS,Legacy,Organ,Soul Bars,OrganFlutes,10,7,10
+OTHERS,Legacy,Organ,Clari Bars,OrganFlutes,10,8,10
+OTHERS,Legacy,Organ,Jazz Squabble,OrganFlutes,10,9,10
+OTHERS,Legacy,Organ,Euro Perc,OrganFlutes,10,0,11
+OTHERS,Legacy,Organ,Ballad Euro,OrganFlutes,10,1,11
+OTHERS,Legacy,Organ,Euro Reeds,OrganFlutes,10,2,11
+OTHERS,Legacy,Organ,Even Warmth,OrganFlutes,10,3,11
+OTHERS,Legacy,Organ,Bright Euro,OrganFlutes,10,4,11
+OTHERS,Legacy,Organ,Euro Accomp 1,OrganFlutes,10,7,11
+OTHERS,Legacy,Organ,Full Euro,OrganFlutes,10,6,11
+OTHERS,Legacy,Organ,Euro Accomp 2,OrganFlutes,10,8,11
+OTHERS,Legacy,Organ,Euro Pops,OrganFlutes,10,5,11
+OTHERS,Legacy,Organ,Euro Accomp 3,OrganFlutes,10,9,11
+OTHERS,Legacy,Organ,Classic Jazz,OrganFlutes,0,126,17
+OTHERS,Legacy,A.Guitar,Flamenco Guitar,S.Art!,8,33,1
+OTHERS,Legacy,A.Guitar,Classical Guitar,Live!,0,115,25
+OTHERS,Legacy,A.Guitar,Nylon Mute,Live!,0,119,25
+OTHERS,Legacy,A.Guitar,Steel Guitar,S.Art!,8,32,2
+OTHERS,Legacy,A.Guitar,Folk Gt Harmonics SW,S.Art!,8,33,2
+OTHERS,Legacy,A.Guitar,Dynamic Steel Guitar,Live!,0,116,26
+OTHERS,Legacy,A.Guitar,Steel Guitar Slide,Live!,0,118,26
+OTHERS,Legacy,A.Guitar,Steel Acoustic Strum,Live!,104,10,26
+OTHERS,Legacy,A.Guitar,Steel Guitar Mute,Live!,0,120,26
+OTHERS,Legacy,A.Guitar,Steel Guitar Strum,Live!,0,117,26
+OTHERS,Legacy,A.Guitar,Steel Guitar Twin 1,Live!,104,12,26
+OTHERS,Legacy,A.Guitar,Steel Guitar Twin 2,Live!,104,13,26
+OTHERS,Legacy,A.Guitar,12String Guitar,Live!,0,113,26
+OTHERS,Legacy,A.Guitar,Campfire Guitar,Regular,0,115,26
+OTHERS,Legacy,A.Guitar,Folk Guitar,Regular,0,112,26
+OTHERS,Legacy,A.Guitar,18String Guitar,Regular,0,119,26
+OTHERS,Legacy,A.Guitar,Mandolin,Sweet!,0,114,26
+OTHERS,Legacy,E.Guitar,50s Vintage Spring,S.Art!,8,54,4
+OTHERS,Legacy,E.Guitar,70s Solid Guitar,S.Art!,8,38,4
+OTHERS,Legacy,E.Guitar,Clean Electric SW,S.Art!,8,35,4
+OTHERS,Legacy,E.Guitar,Country Pick,S.Art!,8,44,4
+OTHERS,Legacy,E.Guitar,Funk Slap,S.Art!,8,49,4
+OTHERS,Legacy,E.Guitar,Light Chorus,S.Art!,8,53,4
+OTHERS,Legacy,E.Guitar,Vintage Amp,S.Art!,8,40,4
+OTHERS,Legacy,E.Guitar,Warm Electric SW,S.Art!,8,32,4
+OTHERS,Legacy,E.Guitar,70s Solid Guitar,Cool!,104,1,28
+OTHERS,Legacy,E.Guitar,Ballad Solid,Cool!,0,109,28
+OTHERS,Legacy,E.Guitar,Chorus Solid,Cool!,0,107,28
+OTHERS,Legacy,E.Guitar,Clean Guitar,Cool!,0,112,28
+OTHERS,Legacy,E.Guitar,Clean Solid,Cool!,104,3,28
+OTHERS,Legacy,E.Guitar,Dynamic Mute,Cool!,0,118,29
+OTHERS,Legacy,E.Guitar,Electric Guitar,Cool!,0,114,29
+OTHERS,Legacy,E.Guitar,Funk Guitar,Cool!,0,116,29
+OTHERS,Legacy,E.Guitar,Muted Guitar,Cool!,0,119,29
+OTHERS,Legacy,E.Guitar,Slap Solid,Cool!,0,108,28
+OTHERS,Legacy,E.Guitar,Slapback,Cool!,104,0,28
+OTHERS,Legacy,E.Guitar,Slide Clean,Cool!,0,117,29
+OTHERS,Legacy,E.Guitar,Slide Finger,Cool!,104,5,28
+OTHERS,Legacy,E.Guitar,Slide Pick,Cool!,104,7,28
+OTHERS,Legacy,E.Guitar,Slide Pick Amp,Cool!,104,8,28
+OTHERS,Legacy,E.Guitar,Slide Solid,Cool!,0,110,28
+OTHERS,Legacy,E.Guitar,Slide Warm,Cool!,104,6,28
+OTHERS,Legacy,E.Guitar,Tremolo Solid,Cool!,0,111,28
+OTHERS,Legacy,E.Guitar,Vintage Muted Guitar,Cool!,104,0,29
+OTHERS,Legacy,E.Guitar,Warm Solid,Cool!,104,2,28
+OTHERS,Legacy,E.Guitar,50s Vintage Mute,Regular,0,115,29
+OTHERS,Legacy,E.Guitar,60s Clean,Regular,0,117,28
+OTHERS,Legacy,E.Guitar,Bright Clean,Regular,0,116,28
+OTHERS,Legacy,E.Guitar,Chorus Guitar,Regular,0,124,28
+OTHERS,Legacy,E.Guitar,Cool Wah Guitar,Regular,104,4,28
+OTHERS,Legacy,E.Guitar,Deep Chorus,Regular,0,114,28
+OTHERS,Legacy,E.Guitar,Electric 12String,Regular,0,119,28
+OTHERS,Legacy,E.Guitar,Funk Guitar,Regular,0,113,29
+OTHERS,Legacy,E.Guitar,Muted Guitar,Regular,0,112,29
+OTHERS,Legacy,E.Guitar,Solid Chord,Regular,0,121,28
+OTHERS,Legacy,E.Guitar,Solid Guitar,Regular,0,118,28
+OTHERS,Legacy,E.Guitar,Tremolo Guitar,Regular,0,113,28
+OTHERS,Legacy,E.Guitar,Vintage Open,Regular,0,123,28
+OTHERS,Legacy,E.Guitar,Vintage Strum,Regular,0,126,28
+OTHERS,Legacy,E.Guitar,Vintage Trem,Regular,0,120,28
+OTHERS,Legacy,E.Guitar,Wah Guitar,Regular,0,122,28
+OTHERS,Legacy,E.Guitar,Jazz Guitar Clean,S.Art!,8,32,7
+OTHERS,Legacy,E.Guitar,Jazz Guitar Smooth SW,S.Art!,8,35,7
+OTHERS,Legacy,E.Guitar,Semi Acoustic,S.Art!,8,33,7
+OTHERS,Legacy,E.Guitar,Jazz Guitar,Cool!,0,115,27
+OTHERS,Legacy,E.Guitar,Jazz Solo Guitar,Cool!,0,116,27
+OTHERS,Legacy,E.Guitar,Slide Jazz,Cool!,104,0,27
+OTHERS,Legacy,E.Guitar,DX Jazz Guitar,Regular,0,117,27
+OTHERS,Legacy,E.Guitar,Lounge Guitar,Regular,104,1,27
+OTHERS,Legacy,E.Guitar,Octave Guitar,Regular,0,113,27
+OTHERS,Legacy,E.Guitar,Feedbacker SW,S.Art!,8,33,5
+OTHERS,Legacy,E.Guitar,Blues Guitar,Cool!,0,117,30
+OTHERS,Legacy,E.Guitar,Guitar Hero,Cool!,104,0,31
+OTHERS,Legacy,E.Guitar,Heavy Rock,Cool!,104,1,31
+OTHERS,Legacy,E.Guitar,Power Lead,Cool!,0,115,31
+OTHERS,Legacy,E.Guitar,Stereo Rock Guitar,Cool!,104,2,31
+OTHERS,Legacy,E.Guitar,Crunch Guitar,Regular,0,113,31
+OTHERS,Legacy,E.Guitar,Distortion Guitar,Regular,0,112,31
+OTHERS,Legacy,E.Guitar,Feedback Guitar,Regular,0,113,30
+OTHERS,Legacy,E.Guitar,Heavy Stack,Regular,0,114,31
+OTHERS,Legacy,E.Guitar,Metal Master,Regular,0,120,31
+OTHERS,Legacy,E.Guitar,Power Chord,Regular,0,117,31
+OTHERS,Legacy,E.Guitar,Vodoo Lead,Regular,0,116,31
+OTHERS,Legacy,E.Guitar,Half Drive,Cool!,104,0,30
+OTHERS,Legacy,E.Guitar,Vintage Lead,Cool!,0,125,28
+OTHERS,Legacy,E.Guitar,Lead Guitar,Regular,0,114,30
+OTHERS,Legacy,E.Guitar,Overdrive Guitar,Regular,0,112,30
+OTHERS,Legacy,E.Guitar,Rock Guitar,Regular,0,116,30
+OTHERS,Legacy,E.Guitar,Smooth Lead,Regular,0,119,27
+OTHERS,Legacy,E.Guitar,Vintage Amp,Regular,0,115,30
+OTHERS,Legacy,E.Guitar,Pedal Steel Guit ar,Regular,0,115,28
+OTHERS,Legacy,Bass,Vintage Flatwound Bass,Cool!,104,2,34
+OTHERS,Legacy,Bass,Vintage Mute Bass,Cool!,104,3,34
+OTHERS,Legacy,Bass,Vintage Pick Mute Bass,Cool!,104,0,35
+OTHERS,Legacy,Bass,Vintage Round Bass,Cool!,104,1,34
+OTHERS,Legacy,Bass,Slap Bass,Regular,0,112,37
+OTHERS,Legacy,Bass,Fretless Bass,Cool!,0,112,36
+OTHERS,Legacy,Bass,Acoustic Bass 2,Regular,104,1,33
+OTHERS,Legacy,Bass,Acoustic Bass 3,Regular,0,112,33
+OTHERS,Legacy,Bass,Soft Acoustic Bass,Regular,104,2,33
+OTHERS,Legacy,Bass,80s Synth Bass,Regular,0,115,40
+OTHERS,Legacy,Bass,Analog Bass,Regular,0,112,40
+OTHERS,Legacy,Bass,Bleep Bass,Regular,0,122,40
+OTHERS,Legacy,Bass,Click Bass,Regular,0,115,39
+OTHERS,Legacy,Bass,Click Organ Bass,Regular,104,27,18
+OTHERS,Legacy,Bass,Dark Core Bass,Regular,0,120,40
+OTHERS,Legacy,Bass,Dry Synth Bass,Regular,0,116,40
+OTHERS,Legacy,Bass,DX Funk Bass,Regular,0,113,38
+OTHERS,Legacy,Bass,DX100 Bass,Regular,0,118,40
+OTHERS,Legacy,Bass,Fat Lo Bass,Regular,0,119,39
+OTHERS,Legacy,Bass,Funk Bass,Regular,0,121,40
+OTHERS,Legacy,Bass,HiQ Bass,Regular,0,113,39
+OTHERS,Legacy,Bass,LFO Syn Bass,Regular,0,110,102
+OTHERS,Legacy,Bass,Punchy Bass,Regular,0,117,39
+OTHERS,Legacy,Bass,Ramp Bass,Regular,0,119,40
+OTHERS,Legacy,Accordion,Blues Harp,Regular,0,114,23
+OTHERS,Legacy,Accordion,Modern Harp,Regular,0,113,23
+OTHERS,Legacy,Accordion,Accordion,Regular,0,116,22
+OTHERS,Legacy,Accordion,Accordion Bass,Regular,0,121,22
+OTHERS,Legacy,Accordion,Ballroom Accordion,Regular,0,112,24
+OTHERS,Legacy,Accordion,Cassotto,Regular,104,0,22
+OTHERS,Legacy,Accordion,French Musette Acc.,Regular,0,119,22
+OTHERS,Legacy,Accordion,Jazz Accordion,Regular,0,120,22
+OTHERS,Legacy,Accordion,Musette Accordion,Regular,0,112,22
+OTHERS,Legacy,Accordion,Musette Bass,Regular,0,123,22
+OTHERS,Legacy,Accordion,Small Accordion,Regular,0,115,22
+OTHERS,Legacy,Accordion,Soft Accordion,Regular,0,114,22
+OTHERS,Legacy,Accordion,Steirische,Regular,0,117,22
+OTHERS,Legacy,Accordion,Tutti Accordion,Regular,0,113,22
+OTHERS,Legacy,Strings,Solo Violin,Regular,0,112,41
+OTHERS,Legacy,Strings,Viola,Regular,0,112,42
+OTHERS,Legacy,Strings,Cello,Natural!,0,122,43
+OTHERS,Legacy,Strings,Cello,Regular,0,112,43
+OTHERS,Legacy,Strings,Contrabass,Regular,0,112,44
+OTHERS,Legacy,Strings,Ballad Strings,S.Art!,8,34,50
+OTHERS,Legacy,Strings,Big Strings,S.Art!,8,40,49
+OTHERS,Legacy,Strings,Concert Strings,S.Art!,8,32,50
+OTHERS,Legacy,Strings,Seattle Strings f,S.Art!,8,40,50
+OTHERS,Legacy,Strings,Seattle Strings mf,S.Art!,8,41,50
+OTHERS,Legacy,Strings,Seattle Strings p,S.Art!,8,42,50
+OTHERS,Legacy,Strings,Spiccato,S.Art!,8,33,49
+OTHERS,Legacy,Strings,Studio Strings,S.Art!,8,32,49
+OTHERS,Legacy,Strings,Theatre Strings,S.Art!,8,37,49
+OTHERS,Legacy,Strings,Tremolo Bowing SW,S.Art!,8,34,49
+OTHERS,Legacy,Strings,Allegro,Live!,0,122,50
+OTHERS,Legacy,Strings,Dynamic Strings,Live!,0,124,49
+OTHERS,Legacy,Strings,Movie Strings,Live!,0,123,49
+OTHERS,Legacy,Strings,Orchestra Strings,Live!,0,116,50
+OTHERS,Legacy,Strings,Seattle Strings f,Live!,104,4,50
+OTHERS,Legacy,Strings,Seattle Strings mf,Live!,104,5,50
+OTHERS,Legacy,Strings,Seattle Strings p,Live!,104,6,50
+OTHERS,Legacy,Strings,Seattle Tremolo Sforzando,Live!,104,1,45
+OTHERS,Legacy,Strings,Spiccato,Live!,0,120,49
+OTHERS,Legacy,Strings,String Falls,Live!,0,121,49
+OTHERS,Legacy,Strings,Strings f,Live!,0,119,49
+OTHERS,Legacy,Strings,Strings mf,Live!,0,118,49
+OTHERS,Legacy,Strings,Strings p,Live!,0,117,49
+OTHERS,Legacy,Strings,Tremolo Strings,Live!,0,113,45
+OTHERS,Legacy,Strings,Strings,Natural!,0,122,49
+OTHERS,Legacy,Strings,Bow Strings,Regular,0,116,49
+OTHERS,Legacy,Strings,Chamber Strings,Regular,0,112,50
+OTHERS,Legacy,Strings,Concerto Strings,Regular,0,115,49
+OTHERS,Legacy,Strings,Marcato,Regular,0,115,50
+OTHERS,Legacy,Strings,Orch Strings,Regular,0,113,49
+OTHERS,Legacy,Strings,Pizzicato,Regular,0,112,46
+OTHERS,Legacy,Strings,Slow Strings,Regular,0,113,50
+OTHERS,Legacy,Strings,String Quartet,Regular,0,114,50
+OTHERS,Legacy,Strings,Strings,Regular,0,112,49
+OTHERS,Legacy,Strings,Symphonic,Regular,0,114,49
+OTHERS,Legacy,Strings,Tremolo Strings,Regular,0,112,45
+OTHERS,Legacy,Strings,Analog Strings,Regular,0,112,52
+OTHERS,Legacy,Strings,Orchestra & Flute,Regular,0,119,50
+OTHERS,Legacy,Strings,Orchestra & Oboe,Regular,0,121,50
+OTHERS,Legacy,Strings,Orchestra & Horns,Regular,0,118,50
+OTHERS,Legacy,Strings,Harp,Regular,0,112,47
+OTHERS,Legacy,Strings,Hackbrett 2,Regular,0,113,47
+OTHERS,Legacy,Strings,Banjo 2,Regular,0,112,106
+OTHERS,Legacy,Strings,Sitar 2,Regular,0,112,105
+OTHERS,Legacy,Brass,Big Band Trumpet,S.Art!,8,37,65
+OTHERS,Legacy,Brass,Bright Trumpet,S.Art!,8,32,65
+OTHERS,Legacy,Brass,Trumpet Fall SW,S.Art!,8,38,65
+OTHERS,Legacy,Brass,Trumpet Shake SW,S.Art!,8,35,65
+OTHERS,Legacy,Brass,Golden Trumpet,Sweet!,0,122,57
+OTHERS,Legacy,Brass,Mellow Trumpet,Sweet!,0,120,57
+OTHERS,Legacy,Brass,Silver Trumpet,Sweet!,0,121,57
+OTHERS,Legacy,Brass,Trumpet,Sweet!,0,115,57
+OTHERS,Legacy,Brass,Jazz Trumpet,Regular,0,116,57
+OTHERS,Legacy,Brass,Solo Trumpet,Regular,0,112,57
+OTHERS,Legacy,Brass,Muted Trumpet,Regular,0,112,60
+OTHERS,Legacy,Brass,Flugelhorn,Sweet!,0,118,57
+OTHERS,Legacy,Brass,Flugelhorn,Regular,0,113,57
+OTHERS,Legacy,Brass,Bright Trombone,Sweet!,104,0,58
+OTHERS,Legacy,Brass,Sweet Trombone,Sweet!,0,117,58
+OTHERS,Legacy,Brass,Mellow Trombone,Regular,0,114,58
+OTHERS,Legacy,Brass,Smooth Trombone,Regular,0,118,58
+OTHERS,Legacy,Brass,Soft Trombone,Regular,0,115,58
+OTHERS,Legacy,Brass,Solo Trombone,Regular,0,112,58
+OTHERS,Legacy,Brass,Trombone,Regular,0,116,58
+OTHERS,Legacy,Brass,Alp Bass,Regular,0,113,34
+OTHERS,Legacy,Brass,Baritone Hit,Regular,0,114,59
+OTHERS,Legacy,Brass,Baritone Horn,Regular,0,113,59
+OTHERS,Legacy,Brass,Tuba 2,Regular,0,112,59
+OTHERS,Legacy,Brass,Muted Horns,S.Art!,8,34,61
+OTHERS,Legacy,Brass,French Horns,Live!,0,112,61
+OTHERS,Legacy,Brass,Soft Horns,Live!,0,117,61
+OTHERS,Legacy,Brass,Symphony Horns,Live!,0,115,61
+OTHERS,Legacy,Brass,Mellow Horns,Regular,0,119,62
+OTHERS,Legacy,Brass,Soft Trombones,Live!,0,118,61
+OTHERS,Legacy,Brass,Trombone Section,Regular,0,113,58
+OTHERS,Legacy,Brass,Accent Falls SW,S.Art!,8,38,57
+OTHERS,Legacy,Brass,Brass Falls mf SW,S.Art!,8,35,57
+OTHERS,Legacy,Brass,Brass Shake SW,S.Art!,8,32,57
+OTHERS,Legacy,Brass,Accent Brass,Live!,0,109,62
+OTHERS,Legacy,Brass,Brass Band 2,Live!,0,123,57
+OTHERS,Legacy,Brass,Brass Dynamics,Live!,0,106,62
+OTHERS,Legacy,Brass,Brass f,Live!,0,108,62
+OTHERS,Legacy,Brass,Brass mf,Live!,0,110,62
+OTHERS,Legacy,Brass,Brass p,Live!,0,111,62
+OTHERS,Legacy,Brass,Dynamic Brass,Live!,0,127,62
+OTHERS,Legacy,Brass,Hyper Brass,Live!,0,118,63
+OTHERS,Legacy,Brass,Octave Brass,Live!,0,116,63
+OTHERS,Legacy,Brass,Pop Brass,Live!,0,117,63
+OTHERS,Legacy,Brass,Power Brass,Live!,0,121,63
+OTHERS,Legacy,Brass,Sforzando,Live!,0,105,62
+OTHERS,Legacy,Brass,Small Brass,Live!,0,120,61
+OTHERS,Legacy,Brass,Symphony Brass,Live!,0,119,61
+OTHERS,Legacy,Brass,Ballroom Brass,Regular,0,113,60
+OTHERS,Legacy,Brass,Big Band Brass,Regular,0,113,62
+OTHERS,Legacy,Brass,Big Brass,Regular,0,121,62
+OTHERS,Legacy,Brass,Brass Combo,Regular,0,115,67
+OTHERS,Legacy,Brass,Brass Hit,Regular,0,126,62
+OTHERS,Legacy,Brass,Brass Section,Regular,0,112,62
+OTHERS,Legacy,Brass,Breath Brass,Regular,0,116,61
+OTHERS,Legacy,Brass,Bright Brass,Regular,0,120,62
+OTHERS,Legacy,Brass,Full Horns,Regular,0,114,62
+OTHERS,Legacy,Brass,High Brass,Regular,0,115,62
+OTHERS,Legacy,Brass,Mellow Brass,Regular,0,116,62
+OTHERS,Legacy,Brass,Natural Brass,Regular,0,124,62
+OTHERS,Legacy,Brass,Sforzando,Regular,0,125,62
+OTHERS,Legacy,Brass,Small Brass,Regular,0,117,62
+OTHERS,Legacy,Brass,Soft Brass,Regular,0,123,62
+OTHERS,Legacy,Brass,Trumpet Ensemble,Regular,0,122,62
+OTHERS,Legacy,Brass,Funky Analog,Regular,0,115,63
+OTHERS,Legacy,Brass,Hybrid Comp,Regular,0,119,63
+OTHERS,Legacy,Brass,Hybrihorn,Regular,0,113,61
+OTHERS,Legacy,Brass,Hybripad,Regular,0,114,61
+OTHERS,Legacy,Brass,Pop Brass,Regular,0,118,62
+OTHERS,Legacy,Brass,Synth Brass,Regular,0,112,63
+OTHERS,Legacy,Woodwind,Soprano Sax,Sweet!,0,113,65
+OTHERS,Legacy,Woodwind,Soprano Sax,Regular,0,112,65
+OTHERS,Legacy,Woodwind,Clean Alto Sax,S.Art!,8,32,67
+OTHERS,Legacy,Woodwind,Alto Sax,Sweet!,0,114,66
+OTHERS,Legacy,Woodwind,Pop Alto Sax,Sweet!,104,0,66
+OTHERS,Legacy,Woodwind,Alto Sax,Regular,0,112,66
+OTHERS,Legacy,Woodwind,Big Band Sax,S.Art!,8,35,83
+OTHERS,Legacy,Woodwind,Rock Sax SW,S.Art!,8,33,83
+OTHERS,Legacy,Woodwind,Saxophone,S.Art!,8,32,83
+OTHERS,Legacy,Woodwind,Ballad Tenor Sax,Sweet!,0,126,67
+OTHERS,Legacy,Woodwind,Breathy Tenor Sax,Sweet!,0,117,67
+OTHERS,Legacy,Woodwind,Growl Sax,Sweet!,0,111,67
+OTHERS,Legacy,Woodwind,Pop Tenor Sax,Sweet!,0,127,67
+OTHERS,Legacy,Woodwind,Saxophone,Sweet!,104,0,67
+OTHERS,Legacy,Woodwind,Sweet Tenor Sax,Sweet!,0,125,67
+OTHERS,Legacy,Woodwind,Growl Sax,Regular,0,118,67
+OTHERS,Legacy,Woodwind,Tenor Sax,Regular,0,112,67
+OTHERS,Legacy,Woodwind,Baritone Sax 1,Regular,104,0,68
+OTHERS,Legacy,Woodwind,Baritone Sax 2,Regular,0,112,68
+OTHERS,Legacy,Woodwind,Orchestral Flute,S.Art!,8,32,74
+OTHERS,Legacy,Woodwind,Classical Flute,Sweet!,0,115,74
+OTHERS,Legacy,Woodwind,Jazz Flute,Sweet!,0,114,74
+OTHERS,Legacy,Woodwind,Orch Flute,Sweet!,104,0,74
+OTHERS,Legacy,Woodwind,Flute,Regular,0,112,74
+OTHERS,Legacy,Woodwind,Classical Oboe,Sweet!,0,113,69
+OTHERS,Legacy,Woodwind,Orch Oboe,Sweet!,104,0,69
+OTHERS,Legacy,Woodwind,Oboe,Regular,0,112,69
+OTHERS,Legacy,Woodwind,English Horn,Regular,0,112,70
+OTHERS,Legacy,Woodwind,Jazz Clarinet,Sweet!,0,114,72
+OTHERS,Legacy,Woodwind,Clarinet,Regular,0,112,72
+OTHERS,Legacy,Woodwind,Orchestral Bassoon,Sweet!,104,0,71
+OTHERS,Legacy,Woodwind,Bassoon,Regular,0,112,71
+OTHERS,Legacy,Woodwind,Sax Appeal,Live!,0,123,67
+OTHERS,Legacy,Woodwind,Ballad Section,Regular,0,119,67
+OTHERS,Legacy,Woodwind,Sax Stack,Regular,0,124,67
+OTHERS,Legacy,Woodwind,Saxy Mood,Regular,0,120,67
+OTHERS,Legacy,Woodwind,Moonlight,Regular,0,115,72
+OTHERS,Legacy,Woodwind,Woodwinds Ensemble,Regular,0,113,67
+OTHERS,Legacy,Woodwind,Ethnic Flute,Regular,0,112,76
+OTHERS,Legacy,Choir,Boys Choir Aah,Live!,104,8,53
+OTHERS,Legacy,Choir,Boys Choir Ooh,Live!,104,8,54
+OTHERS,Legacy,Choir,Air Choir,Regular,0,112,55
+OTHERS,Legacy,Choir,Choir,Regular,0,112,53
+OTHERS,Legacy,Choir,Gothic Vox,Regular,0,113,54
+OTHERS,Legacy,Choir,Hah Choir,Regular,0,114,53
+OTHERS,Legacy,Choir,Uuh Choir,Regular,0,115,53
+OTHERS,Legacy,Choir,Voices,Regular,0,113,55
+OTHERS,Legacy,Choir,Choir,Natural!,0,122,53
+OTHERS,Legacy,Choir,Choir & Organ,Natural!,0,123,53
+OTHERS,Legacy,Choir,Baa,Live!,104,12,53
+OTHERS,Legacy,Choir,Daa,Live!,104,13,53
+OTHERS,Legacy,Choir,Doo,Live!,104,16,54
+OTHERS,Legacy,Choir,Haa,Live!,104,9,53
+OTHERS,Legacy,Choir,Ooh,Live!,104,17,54
+OTHERS,Legacy,Choir,Wah,Live!,104,10,53
+OTHERS,Legacy,Choir,Yoo,Live!,104,18,54
+OTHERS,Legacy,Choir,Humming,Live!,0,118,53
+OTHERS,Legacy,Choir,Mmh,Live!,0,117,53
+OTHERS,Legacy,Choir,Gospel Vocals Hey,Live!,104,7,53
+OTHERS,Legacy,Choir,Gospel Vocals Hmm,Live!,104,12,54
+OTHERS,Legacy,Choir,Gospel Vocals Wow,Live!,104,13,54
+OTHERS,Legacy,Choir,Gospel Voices,Live!,0,116,53
+OTHERS,Legacy,Choir,Vox Humana,Regular,0,112,54
+OTHERS,Legacy,Choir,Hah Pad,Regular,0,116,95
+OTHERS,Legacy,Choir,Pan Heaven,Regular,0,120,89
+OTHERS,Legacy,Choir,Pro Heaven,Regular,0,122,89
+OTHERS,Legacy,Choir,Sunbeam,Regular,0,123,89
+OTHERS,Legacy,Choir,Bell Heaven,Regular,0,119,89
+OTHERS,Legacy,Choir,Dream Heaven,Regular,0,121,89
+OTHERS,Legacy,Choir,Sweet Heaven,Regular,0,118,89
+OTHERS,Legacy,Percussion,Vibraphone,Regular,0,112,12
+OTHERS,Legacy,Percussion,Marimba,Regular,0,112,13
+OTHERS,Legacy,Percussion,Xylophone,Regular,0,112,14
+OTHERS,Legacy,Percussion,Glockenspiel,Regular,0,112,10
+OTHERS,Legacy,Drum Kit,Standard Kit 1,Live!Drums,127,0,1
+OTHERS,Legacy,Drum Kit,Standard Kit 2,Live!Drums,127,0,2
+OTHERS,Legacy,Drum Kit,Brush Kit,Live!Drums,127,0,41
+OTHERS,Legacy,Drum Kit,Rock Kit,Drums,127,0,17
+OTHERS,Legacy,Drum Kit,Arabic Kit,SFX,126,0,36
+OTHERS,Legacy,Drum Kit,SFX Kit 1,SFX,126,0,1
+OTHERS,Legacy,Drum Kit,SFX Kit 2,SFX,126,0,2
+OTHERS,Legacy,Pad,80s Pad,Regular,104,1,52
+OTHERS,Legacy,Pad,Airy Harp,Regular,104,17,89
+OTHERS,Legacy,Pad,All or Nothing,Regular,104,6,102
+OTHERS,Legacy,Pad,Ana Dayz,Regular,104,3,52
+OTHERS,Legacy,Pad,Analog Swell,Regular,0,119,96
+OTHERS,Legacy,Pad,Angel Vibes,Regular,0,114,99
+OTHERS,Legacy,Pad,Area 51,Regular,0,112,90
+OTHERS,Legacy,Pad,Atmosphere,Regular,0,112,100
+OTHERS,Legacy,Pad,Atmosphere 5th,Regular,104,6,90
+OTHERS,Legacy,Pad,Bellsphere,Regular,104,5,89
+OTHERS,Legacy,Pad,Big Octave Pad,Regular,0,115,91
+OTHERS,Legacy,Pad,Bright Ober,Regular,0,113,96
+OTHERS,Legacy,Pad,Bright Pad Classic,Regular,104,3,91
+OTHERS,Legacy,Pad,Bright Pad Trance,Regular,104,4,91
+OTHERS,Legacy,Pad,Bubblespace,Regular,0,113,102
+OTHERS,Legacy,Pad,Chillin Chords,Regular,104,6,52
+OTHERS,Legacy,Pad,Cyber Pad,Regular,0,113,100
+OTHERS,Legacy,Pad,Dark Angel Pad,Regular,0,121,90
+OTHERS,Legacy,Pad,Dark Moon,Regular,0,113,90
+OTHERS,Legacy,Pad,Dark Pad,Regular,0,118,96
+OTHERS,Legacy,Pad,Digital Pad,Regular,0,115,94
+OTHERS,Legacy,Pad,Disclosure,Regular,0,116,90
+OTHERS,Legacy,Pad,Dunes,Regular,0,114,90
+OTHERS,Legacy,Pad,DX Pad,Regular,0,112,93
+OTHERS,Legacy,Pad,Equinox,Regular,0,112,95
+OTHERS,Legacy,Pad,Evening Stars,Regular,0,117,102
+OTHERS,Legacy,Pad,Fantasia,Regular,0,112,89
+OTHERS,Legacy,Pad,Far East,Regular,0,112,98
+OTHERS,Legacy,Pad,Flying Harm onics,Regular,104,1,100
+OTHERS,Legacy,Pad,Glass Pad,Regular,0,114,94
+OTHERS,Legacy,Pad,Glorious Phase,Regular,0,114,91
+OTHERS,Legacy,Pad,Golden Age,Regular,0,115,89
+OTHERS,Legacy,Pad,Hybrid Pad,Regular,104,22,89
+OTHERS,Legacy,Pad,Insomnia,Regular,0,113,95
+OTHERS,Legacy,Pad,Ionosphere,Regular,0,115,95
+OTHERS,Legacy,Pad,Lite Pad,Regular,0,122,90
+OTHERS,Legacy,Pad,Mediterrain,Regular,0,114,100
+OTHERS,Legacy,Pad,Messenger,Regular,0,116,96
+OTHERS,Legacy,Pad,Metallic Rain,Regular,104,8,102
+OTHERS,Legacy,Pad,Midnight Special,Regular,104,3,102
+OTHERS,Legacy,Pad,Millennium,Regular,0,117,89
+OTHERS,Legacy,Pad,My Generation,Regular,104,5,102
+OTHERS,Legacy,Pad,Mystery,Regular,0,113,98
+OTHERS,Legacy,Pad,Neo Warm Pad,Regular,0,115,90
+OTHERS,Legacy,Pad,Next Generation,Regular,104,9,52
+OTHERS,Legacy,Pad,Night Motion,Regular,104,4,89
+OTHERS,Legacy,Pad,Nylon Heaven,Regular,104,2,100
+OTHERS,Legacy,Pad,Nylon Pad,Regular,104,0,100
+OTHERS,Legacy,Pad,Ober Strings,Regular,0,113,52
+OTHERS,Legacy,Pad,Pearls Pad,Regular,104,2,89
+OTHERS,Legacy,Pad,Perc Pad,Regular,104,0,102
+OTHERS,Legacy,Pad,Pop Pad,Regular,0,112,91
+OTHERS,Legacy,Pad,Premium Pad,Regular,104,0,52
+OTHERS,Legacy,Pad,Psycho Pad,Regular,0,118,102
+OTHERS,Legacy,Pad,Rainy Day,Regular,104,5,90
+OTHERS,Legacy,Pad,Randomizer,Regular,104,10,102
+OTHERS,Legacy,Pad,Reflecting Zone,Regular,104,21,89
+OTHERS,Legacy,Pad,S&H Groove,Regular,0,115,102
+OTHERS,Legacy,Pad,Sirius,Regular,0,114,102
+OTHERS,Legacy,Pad,Sixth Sense,Regular,104,2,102
+OTHERS,Legacy,Pad,Skydiver,Regular,0,112,102
+OTHERS,Legacy,Pad,Solaris,Regular,0,114,95
+OTHERS,Legacy,Pad,Spectralis,Regular,104,4,95
+OTHERS,Legacy,Pad,Spectrum Theme,Regular,104,14,89
+OTHERS,Legacy,Pad,Stargate,Regular,0,114,89
+OTHERS,Legacy,Pad,Super Dark Pad,Regular,0,119,90
+OTHERS,Legacy,Pad,Symbiont,Regular,0,113,89
+OTHERS,Legacy,Pad,The Fog,Regular,104,9,102
+OTHERS,Legacy,Pad,Time Travel,Regular,0,116,89
+OTHERS,Legacy,Pad,Trance,Regular,104,0,96
+OTHERS,Legacy,Pad,Tric-Trac,Regular,104,2,98
+OTHERS,Legacy,Pad,Vapor Pad,Regular,104,1,90
+OTHERS,Legacy,Pad,Velo Ashrami,Regular,0,116,102
+OTHERS,Legacy,Pad,Warped Waves,Regular,104,2,95
+OTHERS,Legacy,Pad,Water Games,Regular,104,4,102
+OTHERS,Legacy,Pad,Wave 2001,Regular,0,112,96
+OTHERS,Legacy,Pad,Whisper Gallery,Regular,104,0,93
+OTHERS,Legacy,Pad,Xenon Pad,Regular,0,112,92
+OTHERS,Legacy,Pad,Magic Bell,S.Art!,8,32,121
+OTHERS,Legacy,Synth,Cool HiPa SW,S.Art!,8,34,124
+OTHERS,Legacy,Synth,Four Stack SW,S.Art!,8,33,124
+OTHERS,Legacy,Synth,Nu Line SW,S.Art!,8,35,124
+OTHERS,Legacy,Synth,Redoubling SW,S.Art!,8,37,124
+OTHERS,Legacy,Synth,Square Stack SW,S.Art!,8,32,124
+OTHERS,Legacy,Synth,Adrenaline,Regular,0,113,85
+OTHERS,Legacy,Synth,Aero Lead,Regular,0,112,84
+OTHERS,Legacy,Synth,Analog Sequenced,Regular,104,3,88
+OTHERS,Legacy,Synth,Analogon,Regular,0,115,82
+OTHERS,Legacy,Synth,Arpeggio Line,Regular,104,12,85
+OTHERS,Legacy,Synth,Attack,Regular,104,4,82
+OTHERS,Legacy,Synth,Attack Saw,Regular,0,126,82
+OTHERS,Legacy,Synth,Big Lead,Regular,0,113,82
+OTHERS,Legacy,Synth,Big Tune,Regular,0,118,90
+OTHERS,Legacy,Synth,Blaster,Regular,0,114,82
+OTHERS,Legacy,Synth,Bleep Lead,Regular,104,0,85
+OTHERS,Legacy,Synth,Brassy Lead,Regular,104,5,63
+OTHERS,Legacy,Synth,Bright Mini,Regular,0,125,81
+OTHERS,Legacy,Synth,Brite Decay,Regular,104,5,85
+OTHERS,Legacy,Synth,Chord Buddy,Regular,104,10,85
+OTHERS,Legacy,Synth,Chordmaster,Regular,104,13,82
+OTHERS,Legacy,Synth,Chorus Saw Lead,Regular,104,10,82
+OTHERS,Legacy,Synth,Crystal Eyes,Regular,0,125,89
+OTHERS,Legacy,Synth,Cyclist,Regular,104,17,91
+OTHERS,Legacy,Synth,Dance Chords,Regular,104,5,52
+OTHERS,Legacy,Synth,Dance Hook,Regular,0,112,87
+OTHERS,Legacy,Synth,Detuned Saw Octa ve,Regular,104,8,82
+OTHERS,Legacy,Synth,Detuned Vintage,Regular,104,1,85
+OTHERS,Legacy,Synth,Digital Sequenced,Regular,104,2,88
+OTHERS,Legacy,Synth,Dyna Sequence,Regular,104,27,89
+OTHERS,Legacy,Synth,Early Lead,Regular,0,118,82
+OTHERS,Legacy,Synth,Eastern Air,Regular,104,1,98
+OTHERS,Legacy,Synth,Faaat Comp,Regular,104,4,52
+OTHERS,Legacy,Synth,Fargo,Regular,0,119,82
+OTHERS,Legacy,Synth,Fat Saw Hook,Regular,104,7,52
+OTHERS,Legacy,Synth,Fire Wire,Regular,0,116,82
+OTHERS,Legacy,Synth,Flange Filter,Regular,104,2,82
+OTHERS,Legacy,Synth,Funky Lead,Regular,0,121,82
+OTHERS,Legacy,Synth,Fusion Lead,Regular,104,15,82
+OTHERS,Legacy,Synth,Hard Teeth,Regular,104,16,91
+OTHERS,Legacy,Synth,Heaven Bell,Regular,104,0,101
+OTHERS,Legacy,Synth,Hi Bias,Regular,0,116,81
+OTHERS,Legacy,Synth,Hipa Lead,Regular,0,118,85
+OTHERS,Legacy,Synth,Hop Lead,Regular,0,117,81
+OTHERS,Legacy,Synth,Impact,Regular,0,113,88
+OTHERS,Legacy,Synth,Loony Lead,Regular,104,15,91
+OTHERS,Legacy,Synth,Matrix,Regular,0,123,82
+OTHERS,Legacy,Synth,Melody Maker,Regular,0,117,90
+OTHERS,Legacy,Synth,Mini Lead,Regular,0,114,81
+OTHERS,Legacy,Synth,Mouth Lead,Regular,104,0,82
+OTHERS,Legacy,Synth,Nice Bell,Regular,104,9,89
+OTHERS,Legacy,Synth,Nomad,Regular,104,1,105
+OTHERS,Legacy,Synth,Octave Hook,Regular,0,113,87
+OTHERS,Legacy,Synth,Orbit Sine,Regular,0,126,81
+OTHERS,Legacy,Synth,Oxygen,Regular,0,122,82
+OTHERS,Legacy,Synth,Padbells,Regular,0,126,89
+OTHERS,Legacy,Synth,Pan Lead,Regular,0,122,81
+OTHERS,Legacy,Synth,Paraglide,Regular,0,114,85
+OTHERS,Legacy,Synth,Perc Sequence FM 1,Regular,104,7,88
+OTHERS,Legacy,Synth,Perc Sequence FM 2,Regular,104,8,88
+OTHERS,Legacy,Synth,Perc Sequence FS,Regular,104,6,88
+OTHERS,Legacy,Synth,Perc Sequence Hi pa,Regular,104,9,88
+OTHERS,Legacy,Synth,Perc Sequence Saw,Regular,104,11,82
+OTHERS,Legacy,Synth,Perc Square,Regular,0,123,81
+OTHERS,Legacy,Synth,Persecutor,Regular,104,14,91
+OTHERS,Legacy,Synth,Pitch Fall,Regular,104,0,104
+OTHERS,Legacy,Synth,Pop Lead,Regular,0,120,81
+OTHERS,Legacy,Synth,Portatone,Regular,0,112,85
+OTHERS,Legacy,Synth,Pro Lead,Regular,0,113,84
+OTHERS,Legacy,Synth,Punchy Chordz,Regular,104,24,91
+OTHERS,Legacy,Synth,Punchy Hook,Regular,0,127,82
+OTHERS,Legacy,Synth,PWM Lead,Regular,104,1,82
+OTHERS,Legacy,Synth,PWM Percussion,Regular,104,6,82
+OTHERS,Legacy,Synth,PWM Picks,Regular,104,25,89
+OTHERS,Legacy,Synth,PWM Wild,Regular,104,4,81
+OTHERS,Legacy,Synth,Resonance Comp,Regular,104,4,63
+OTHERS,Legacy,Synth,Resonant Clavi,Regular,104,2,91
+OTHERS,Legacy,Synth,Robolead,Regular,0,124,82
+OTHERS,Legacy,Synth,Saw Lead,Regular,0,112,82
+OTHERS,Legacy,Synth,Saz Feeze,Regular,104,0,98
+OTHERS,Legacy,Synth,Short Unison,Regular,104,4,85
+OTHERS,Legacy,Synth,Simple Comp,Regular,104,12,82
+OTHERS,Legacy,Synth,Skyline,Regular,0,115,85
+OTHERS,Legacy,Synth,Soft Mini,Regular,0,124,81
+OTHERS,Legacy,Synth,Soft R&B,Regular,0,119,81
+OTHERS,Legacy,Synth,Soft Square,Regular,104,5,81
+OTHERS,Legacy,Synth,Soft Stepper,Regular,104,24,89
+OTHERS,Legacy,Synth,Square Lead,Regular,0,112,81
+OTHERS,Legacy,Synth,Staccato Melody,Regular,104,7,85
+OTHERS,Legacy,Synth,Stack Bell,Regular,104,8,89
+OTHERS,Legacy,Synth,Stardust,Regular,0,112,99
+OTHERS,Legacy,Synth,String Bells,Regular,0,124,89
+OTHERS,Legacy,Synth,Sub Lead,Regular,104,0,81
+OTHERS,Legacy,Synth,Sun Bell,Regular,0,113,99
+OTHERS,Legacy,Synth,Synth Sticks,Regular,104,0,107
+OTHERS,Legacy,Synth,Tech Glide,Regular,104,14,82
+OTHERS,Legacy,Synth,Tech Lead,Regular,0,117,85
+OTHERS,Legacy,Synth,Tekk Tune,Regular,104,6,85
+OTHERS,Legacy,Synth,Tekkline,Regular,0,116,85
+OTHERS,Legacy,Synth,Ten Percent,Regular,104,18,91
+OTHERS,Legacy,Synth,Tiny Lead,Regular,0,118,81
+OTHERS,Legacy,Synth,Trance Perc,Regular,104,5,82
+OTHERS,Legacy,Synth,Trance Sequence 1,Regular,104,4,88
+OTHERS,Legacy,Synth,Trance Sequence 2,Regular,104,5,88
+OTHERS,Legacy,Synth,Trance Sequence 3,Regular,104,1,91
+OTHERS,Legacy,Synth,Trancy Chordz,Regular,104,25,91
+OTHERS,Legacy,Synth,Trumpet Saw,Regular,0,125,82
+OTHERS,Legacy,Synth,Tune Comp,Regular,104,11,85
+OTHERS,Legacy,Synth,Under Heim,Regular,0,112,88
+OTHERS,Legacy,Synth,Unison Strings,Regular,104,9,51
+OTHERS,Legacy,Synth,Unstable Lead,Regular,104,13,91
+OTHERS,Legacy,Synth,Vinalog Saw,Regular,104,3,82
+OTHERS,Legacy,Synth,Vinyl Lead,Regular,0,115,81
+OTHERS,Legacy,Synth,Warp,Regular,0,117,82
+OTHERS,Legacy,Synth,Xtune,Regular,104,1,88
+OTHERS,Legacy,Synth,Yipping,Regular,104,12,91
+OTHERS,Legacy,Synth,RS Analog Pad,Regular,0,126,90
+OTHERS,Legacy,Synth,RS Dist Lead,Regular,0,114,84
+OTHERS,Legacy,Synth,RS Dual Saw,Regular,0,109,82
+OTHERS,Legacy,Synth,RS Dual Square,Regular,0,127,81
+OTHERS,Legacy,Synth,RS Noise Pad,Regular,0,124,90
+OTHERS,Legacy,Synth,RS Quack Lead,Regular,0,119,85
+OTHERS,Legacy,Synth,RS Ramp Lead,Regular,0,107,82
+OTHERS,Legacy,Synth,RS Saw Lead 1,Regular,0,104,82
+OTHERS,Legacy,Synth,RS Saw Lead 2,Regular,0,106,82
+OTHERS,Legacy,Synth,RS Short Resonance,Regular,0,116,91
+OTHERS,Legacy,Synth,RS Sync 1,Regular,0,105,82
+OTHERS,Legacy,Synth,RS Sync 2,Regular,0,119,88
+OTHERS,Legacy,Synth,RS Synth Pad,Regular,0,123,90
+OTHERS,Legacy,Synth,RS Tech Saw,Regular,0,108,82
+OTHERS,Legacy,Synth,RS Tekno Man,Regular,0,125,90
+OTHERS,Legacy,Synth,RS Warm Pad,Regular,0,113,92
+OTHERS,Legacy,Synth,LFO Pad,Regular,0,104,102
+OTHERS,Legacy,Synth,LFO Sync 1,Regular,0,108,102
+OTHERS,Legacy,Synth,LFO Sync 2,Regular,0,107,102
+OTHERS,Legacy,Synth,LFO Sync 3,Regular,0,109,102
+OTHERS,Legacy,Synth,LFO Sync 4,Regular,0,106,102
+OTHERS,Legacy,Synth,LFO Sync 5,Regular,0,105,102
+OTHERS,Legacy,Synth,Trancy Noise,Regular,104,1,123
+OTHERS,Legacy,Synth,Noise,Regular,0,120,123
+OTHERS,MegaVoice,A.Guitar,Nylon Guitar,MegaVoice,8,0,1
+OTHERS,MegaVoice,A.Guitar,Flamenco Guitar,MegaVoice,8,3,1
+OTHERS,MegaVoice,A.Guitar,Spanish Medium Guitar,MegaVoice,8,4,1
+OTHERS,MegaVoice,A.Guitar,Spanish Hard Guitar,MegaVoice,8,5,1
+OTHERS,MegaVoice,A.Guitar,D&Hard Folk Twin 1,MegaVoice,8,13,2
+OTHERS,MegaVoice,A.Guitar,D&Hard Folk Twin 2,MegaVoice,8,15,2
+OTHERS,MegaVoice,A.Guitar,D&Warm Folk Twin 1,MegaVoice,8,14,2
+OTHERS,MegaVoice,A.Guitar,D&Warm Folk Twin 2,MegaVoice,8,16,2
+OTHERS,MegaVoice,A.Guitar,D-Folk Guitar,MegaVoice,8,10,2
+OTHERS,MegaVoice,A.Guitar,Hi String Guitar,MegaVoice,8,0,3
+OTHERS,MegaVoice,A.Guitar,Steel Ac Thumb Pick,MegaVoice,8,12,2
+OTHERS,MegaVoice,A.Guitar,Steel Acoustic Finger,MegaVoice,8,11,2
+OTHERS,MegaVoice,A.Guitar,Steel Acoustic Pick,MegaVoice,8,1,2
+OTHERS,MegaVoice,A.Guitar,Steel Acoustic Slap,MegaVoice,8,2,2
+OTHERS,MegaVoice,A.Guitar,Steel Guitar Twin 1,MegaVoice,8,5,2
+OTHERS,MegaVoice,A.Guitar,Steel Guitar Twin 2,MegaVoice,8,6,2
+OTHERS,MegaVoice,A.Guitar,Steel Guitar,MegaVoice,8,0,2
+OTHERS,MegaVoice,A.Guitar,12String Guitar,MegaVoice,8,1,3
+OTHERS,MegaVoice,A.Guitar,12String Pick Twin 1,MegaVoice,8,7,2
+OTHERS,MegaVoice,A.Guitar,12String Pick Twin 2,MegaVoice,8,8,2
+OTHERS,MegaVoice,A.Guitar,Uklele Thumb Down,MegaVoice,8,0,14
+OTHERS,MegaVoice,A.Guitar,Mandolin,MegaVoice,8,4,13
+OTHERS,MegaVoice,E.Guitar,60s Vintage,MegaVoice,8,10,4
+OTHERS,MegaVoice,E.Guitar,60s Vintage Slap,MegaVoice,8,11,4
+OTHERS,MegaVoice,E.Guitar,Solid Guitar 1,MegaVoice,8,1,4
+OTHERS,MegaVoice,E.Guitar,Solid Guitar 2,MegaVoice,8,2,4
+OTHERS,MegaVoice,E.Guitar,50s Vintage Finger,MegaVoice,8,4,4
+OTHERS,MegaVoice,E.Guitar,50s Vintage Finger Slap,MegaVoice,8,5,4
+OTHERS,MegaVoice,E.Guitar,50s Vintage Pick,MegaVoice,8,6,4
+OTHERS,MegaVoice,E.Guitar,50s Vintage Slap,MegaVoice,8,7,4
+OTHERS,MegaVoice,E.Guitar,Clean Guitar,MegaVoice,8,0,4
+OTHERS,MegaVoice,E.Guitar,Single Coil Guitar,MegaVoice,8,3,4
+OTHERS,MegaVoice,E.Guitar,Slap Amp Guitar,MegaVoice,8,8,4
+OTHERS,MegaVoice,E.Guitar,Jazz Guitar,MegaVoice,8,0,7
+OTHERS,MegaVoice,E.Guitar,Overdrive Guitar,MegaVoice,8,0,5
+OTHERS,MegaVoice,E.Guitar,Distortion Guitar,MegaVoice,8,0,6
+OTHERS,MegaVoice,Bass,Active Bass Pick,MegaVoice,8,3,19
+OTHERS,MegaVoice,Bass,Active Bass Slap,MegaVoice,8,0,21
+OTHERS,MegaVoice,Bass,Active Bass Pick Open,MegaVoice,8,4,19
+OTHERS,MegaVoice,Bass,Active Bass Fing Slap,MegaVoice,8,5,18
+OTHERS,MegaVoice,Bass,Active Bass Pick Mute,MegaVoice,8,5,19
+OTHERS,MegaVoice,Bass,Active Bass Fing Harm,MegaVoice,8,4,18
+OTHERS,MegaVoice,Bass,Active Bass Pick Hmr On,MegaVoice,8,2,19
+OTHERS,MegaVoice,Bass,Active Bass Fing Hmr On,MegaVoice,8,3,18
+OTHERS,MegaVoice,Bass,Vintage Round,MegaVoice,8,1,18
+OTHERS,MegaVoice,Bass,Vintage Flat,MegaVoice,8,2,18
+OTHERS,MegaVoice,Bass,Vintage Pick,MegaVoice,8,1,19
+OTHERS,MegaVoice,Bass,Electric Bass,MegaVoice,8,0,18
+OTHERS,MegaVoice,Bass,Pick Bass,MegaVoice,8,0,19
+OTHERS,MegaVoice,Bass,Fretless Bass,MegaVoice,8,0,20
+OTHERS,MegaVoice,Bass,Acoustic Bass,MegaVoice,8,0,17
+OTHERS,MegaVoice,Strings,Kino Large,MegaVoice,8,2,50
+OTHERS,MegaVoice,Strings,Kino Small,MegaVoice,8,3,49
+OTHERS,MegaVoice,Strings,Kino Large Comp,MegaVoice,8,3,50
+OTHERS,MegaVoice,Strings,Kino Small Comp,MegaVoice,8,4,49
+OTHERS,MegaVoice,Strings,Kino Large Ambi Oct Cb,MegaVoice,8,5,50
+OTHERS,MegaVoice,Strings,Kino Small Comp Oct Cb,MegaVoice,8,5,49
+OTHERS,MegaVoice,Strings,Kino Large Ambi,MegaVoice,8,6,50
+OTHERS,MegaVoice,Strings,Kino Small Ambi,MegaVoice,8,6,49
+OTHERS,MegaVoice,Strings,Seattle Strings,MegaVoice,8,1,50
+OTHERS,MegaVoice,Strings,Classical Strings,MegaVoice,8,1,49
+OTHERS,MegaVoice,Strings,Large Strings,MegaVoice,8,0,50
+OTHERS,MegaVoice,Strings,Small Strings,MegaVoice,8,0,49
+OTHERS,MegaVoice,Strings,Kino Large Octave Cb,MegaVoice,8,4,50
+OTHERS,MegaVoice,Vocal,Gospel Choir,MegaVoice,8,0,55
+OTHERS,MegaVoice,Vocal,Male Voice Choir,MegaVoice,8,0,52
+OTHERS,MegaVoice,Vocal,Pop Haa,MegaVoice,8,0,101
+OTHERS,MegaVoice,Vocal,Pop Daa,MegaVoice,8,0,102
+OTHERS,MegaVoice,Vocal,Pop Baa,MegaVoice,8,0,103
+OTHERS,MegaVoice,Vocal,Pop Hee,MegaVoice,8,0,111
+OTHERS,MegaVoice,Vocal,Pop Bee,MegaVoice,8,0,108
+OTHERS,MegaVoice,Vocal,Pop Hoo,MegaVoice,8,0,106
+OTHERS,MegaVoice,Vocal,Pop Doo,MegaVoice,8,0,107
+OTHERS,MegaVoice,Vocal,Pop Shoo,MegaVoice,8,0,104
+OTHERS,MegaVoice,Vocal,Pop Haa Legato,MegaVoice,8,0,116
+OTHERS,MegaVoice,Vocal,Pop Hoo Legato,MegaVoice,8,0,121
+OTHERS,MegaVoice,Vocal,Pop Hee Legato,MegaVoice,8,0,126
+OTHERS,MegaVoice,Brass,Pop Horns 1,MegaVoice,8,1,57
+OTHERS,MegaVoice,Brass,Pop Horns 2,MegaVoice,8,2,57
+OTHERS,MegaVoice,Brass,Trumpet,MegaVoice,8,0,65
+OTHERS,MegaVoice,Brass,Brass,MegaVoice,8,0,57
+OTHERS,MegaVoice,Woodwind,Tenor Sax,MegaVoice,8,0,83
+OTHERS,GM&XG,Piano,GrandPiano,Regular,0,0,1
+OTHERS,GM&XG,Piano,GrandPiano KSP,Regular,0,1,1
+OTHERS,GM&XG,Piano,MellowGrandPiano,Regular,0,18,1
+OTHERS,GM&XG,Piano,PianoStrings,Regular,0,40,1
+OTHERS,GM&XG,Piano,Dream,Regular,0,41,1
+OTHERS,GM&XG,Piano,BrightPiano,Regular,0,0,2
+OTHERS,GM&XG,Piano,BrightPiano KSP,Regular,0,1,2
+OTHERS,GM&XG,Piano,El.GrandPiano,Regular,0,0,3
+OTHERS,GM&XG,Piano,El.GrandPiano KSP,Regular,0,1,3
+OTHERS,GM&XG,Piano,DetunedCP80,Regular,0,32,3
+OTHERS,GM&XG,Piano,LayeredCP1,Regular,0,40,3
+OTHERS,GM&XG,Piano,LayeredCP2,Regular,0,41,3
+OTHERS,GM&XG,Piano,Honkytonk,Regular,0,0,4
+OTHERS,GM&XG,Piano,Honkytonk KSP,Regular,0,1,4
+OTHERS,GM&XG,Piano,ElectricPiano1,Regular,0,0,5
+OTHERS,GM&XG,Piano,ElectricPiano1 KSP,Regular,0,1,5
+OTHERS,GM&XG,Piano,MellowElectricPiano,Regular,0,18,5
+OTHERS,GM&XG,Piano,ChorusEP1,Regular,0,32,5
+OTHERS,GM&XG,Piano,HardElectricPi ano,Regular,0,40,5
+OTHERS,GM&XG,Piano,VXfadeEl.Piano1,Regular,0,45,5
+OTHERS,GM&XG,Piano,60sElectricPiano1,Regular,0,64,5
+OTHERS,GM&XG,Piano,ElectricPiano2,Regular,0,0,6
+OTHERS,GM&XG,Piano,ElectricPiano2 KSP,Regular,0,1,6
+OTHERS,GM&XG,Piano,ChorusEP2,Regular,0,32,6
+OTHERS,GM&XG,Piano,DXEPHard,Regular,0,33,6
+OTHERS,GM&XG,Piano,DXLegend,Regular,0,34,6
+OTHERS,GM&XG,Piano,DXPhaseEP,Regular,0,40,6
+OTHERS,GM&XG,Piano,DX+AnalogEP,Regular,0,41,6
+OTHERS,GM&XG,Piano,DXKotoEP,Regular,0,42,6
+OTHERS,GM&XG,Piano,VXfadeEl.Piano2,Regular,0,45,6
+OTHERS,GM&XG,Piano,Harpsichord,Regular,0,0,7
+OTHERS,GM&XG,Piano,Harpsichord KSP,Regular,0,1,7
+OTHERS,GM&XG,Piano,Harpsichord2,Regular,0,25,7
+OTHERS,GM&XG,Piano,Harpsichord3,Regular,0,35,7
+OTHERS,GM&XG,Piano,Clavi,Regular,0,0,8
+OTHERS,GM&XG,Piano,Clavi KSP,Regular,0,1,8
+OTHERS,GM&XG,Piano,ClaviWah,Regular,0,27,8
+OTHERS,GM&XG,Piano,PulseClavi,Regular,0,64,8
+OTHERS,GM&XG,Piano,PierceClavi,Regular,0,65,8
+OTHERS,GM&XG,Chromatic Perc,Celesta,Regular,0,0,9
+OTHERS,GM&XG,Chromatic Perc,Glockenspiel,Regular,0,0,10
+OTHERS,GM&XG,Chromatic Perc,MusicBox,Regular,0,0,11
+OTHERS,GM&XG,Chromatic Perc,MusicBox2,Regular,0,64,11
+OTHERS,GM&XG,Chromatic Perc,Vibraphone,Regular,0,0,12
+OTHERS,GM&XG,Chromatic Perc,Vibraphone KSP,Regular,0,1,12
+OTHERS,GM&XG,Chromatic Perc,HardVibes,Regular,0,45,12
+OTHERS,GM&XG,Chromatic Perc,Marimba,Regular,0,0,13
+OTHERS,GM&XG,Chromatic Perc,Marimba KSP,Regular,0,1,13
+OTHERS,GM&XG,Chromatic Perc,SineMarimba,Regular,0,64,13
+OTHERS,GM&XG,Chromatic Perc,Balimba,Regular,0,97,13
+OTHERS,GM&XG,Chromatic Perc,LogDrums,Regular,0,98,13
+OTHERS,GM&XG,Chromatic Perc,Xylophone,Regular,0,0,14
+OTHERS,GM&XG,Chromatic Perc,TubularBells,Regular,0,0,15
+OTHERS,GM&XG,Chromatic Perc,ChurchBells,Regular,0,96,15
+OTHERS,GM&XG,Chromatic Perc,Carillon,Regular,0,97,15
+OTHERS,GM&XG,Chromatic Perc,Dulcimer,Regular,0,0,16
+OTHERS,GM&XG,Chromatic Perc,Dulcimer2,Regular,0,35,16
+OTHERS,GM&XG,Chromatic Perc,Cimbalom,Regular,0,96,16
+OTHERS,GM&XG,Chromatic Perc,Santur,Regular,0,97,16
+OTHERS,GM&XG,Organ,DrawbarOrgan,Regular,0,0,17
+OTHERS,GM&XG,Organ,DetunedDrawOrgan,Regular,0,32,17
+OTHERS,GM&XG,Organ,60sDrawbarOrgan1,Regular,0,33,17
+OTHERS,GM&XG,Organ,60sDrawbarOrgan2,Regular,0,34,17
+OTHERS,GM&XG,Organ,70sDrawbarOrgan1,Regular,0,35,17
+OTHERS,GM&XG,Organ,DrawbarOrgan2,Regular,0,36,17
+OTHERS,GM&XG,Organ,60sDrawbarOrgan3,Regular,0,37,17
+OTHERS,GM&XG,Organ,EvenBarOrgan,Regular,0,38,17
+OTHERS,GM&XG,Organ,16+2'2_3Organ,Regular,0,40,17
+OTHERS,GM&XG,Organ,OrganBass,Regular,0,64,17
+OTHERS,GM&XG,Organ,70sDrawbarOrgan2,Regular,0,65,17
+OTHERS,GM&XG,Organ,CheezyOrgan,Regular,0,66,17
+OTHERS,GM&XG,Organ,DrawbarOrgan3,Regular,0,67,17
+OTHERS,GM&XG,Organ,PercussiveOrgan1,Regular,0,0,18
+OTHERS,GM&XG,Organ,70sPercussiveOrgan1,Regular,0,24,18
+OTHERS,GM&XG,Organ,DetunedPercOrga n,Regular,0,32,18
+OTHERS,GM&XG,Organ,LightOrgan,Regular,0,33,18
+OTHERS,GM&XG,Organ,PercussiveOrgan2,Regular,0,37,18
+OTHERS,GM&XG,Organ,RockOrgan,Regular,0,0,19
+OTHERS,GM&XG,Organ,RotaryOrgan,Regular,0,64,19
+OTHERS,GM&XG,Organ,SlowRotary,Regular,0,65,19
+OTHERS,GM&XG,Organ,FastRotary,Regular,0,66,19
+OTHERS,GM&XG,Organ,ChurchOrgan,Regular,0,0,20
+OTHERS,GM&XG,Organ,ChurchOrgan3,Regular,0,32,20
+OTHERS,GM&XG,Organ,ChurchOrgan2,Regular,0,35,20
+OTHERS,GM&XG,Organ,NotreDame,Regular,0,40,20
+OTHERS,GM&XG,Organ,OrganFlute,Regular,0,64,20
+OTHERS,GM&XG,Organ,TremoloOrganFlute,Regular,0,65,20
+OTHERS,GM&XG,Organ,ReedOrgan,Regular,0,0,21
+OTHERS,GM&XG,Organ,PuffOrgan,Regular,0,40,21
+OTHERS,GM&XG,Organ,Accordion,Regular,0,0,22
+OTHERS,GM&XG,Organ,Accordion Italian,Regular,0,32,22
+OTHERS,GM&XG,Organ,Harmonica,Regular,0,0,23
+OTHERS,GM&XG,Organ,Harmonica2,Regular,0,32,23
+OTHERS,GM&XG,Organ,TangoAccordion,Regular,0,0,24
+OTHERS,GM&XG,Organ,TangoAccordion2,Regular,0,64,24
+OTHERS,GM&XG,Guitar,NylonGuitar,Regular,0,0,25
+OTHERS,GM&XG,Guitar,NylonGuitar2,Regular,0,16,25
+OTHERS,GM&XG,Guitar,NylonGuitar3,Regular,0,25,25
+OTHERS,GM&XG,Guitar,VelocityGtHarmo,Regular,0,43,25
+OTHERS,GM&XG,Guitar,Ukulele,Regular,0,96,25
+OTHERS,GM&XG,Guitar,SteelGuitar,Regular,0,0,26
+OTHERS,GM&XG,Guitar,SteelGuitar2,Regular,0,16,26
+OTHERS,GM&XG,Guitar,12StrGuitar,Regular,0,35,26
+OTHERS,GM&XG,Guitar,Nylon&Steel,Regular,0,40,26
+OTHERS,GM&XG,Guitar,Steel&Body,Regular,0,41,26
+OTHERS,GM&XG,Guitar,Mandolin,Regular,0,96,26
+OTHERS,GM&XG,Guitar,JazzGuitar,Regular,0,0,27
+OTHERS,GM&XG,Guitar,MellowGuitar,Regular,0,18,27
+OTHERS,GM&XG,Guitar,JazzAmp,Regular,0,32,27
+OTHERS,GM&XG,Guitar,CleanGuitar,Regular,0,0,28
+OTHERS,GM&XG,Guitar,ChorusGuitar,Regular,0,32,28
+OTHERS,GM&XG,Guitar,MutedGuitar,Regular,0,0,29
+OTHERS,GM&XG,Guitar,FunkGuitar1,Regular,0,40,29
+OTHERS,GM&XG,Guitar,MuteSteelGuitar,Regular,0,41,29
+OTHERS,GM&XG,Guitar,FunkGuitar2,Regular,0,43,29
+OTHERS,GM&XG,Guitar,JazzMan,Regular,0,45,29
+OTHERS,GM&XG,Guitar,Overdriven,Regular,0,0,30
+OTHERS,GM&XG,Guitar,GuitarPinch,Regular,0,43,30
+OTHERS,GM&XG,Guitar,DistortionGuitar,Regular,0,0,31
+OTHERS,GM&XG,Guitar,FeedbackGuitar,Regular,0,40,31
+OTHERS,GM&XG,Guitar,FeedbackGuitar2,Regular,0,41,31
+OTHERS,GM&XG,Guitar,GuitarHarmonics,Regular,0,0,32
+OTHERS,GM&XG,Guitar,GuitarFeedback,Regular,0,65,32
+OTHERS,GM&XG,Guitar,GuitarHarmonics2,Regular,0,66,32
+OTHERS,GM&XG,Bass,AcousticBass,Regular,0,0,33
+OTHERS,GM&XG,Bass,JazzRhythm,Regular,0,40,33
+OTHERS,GM&XG,Bass,VXUprghtBass,Regular,0,45,33
+OTHERS,GM&XG,Bass,FingerBass,Regular,0,0,34
+OTHERS,GM&XG,Bass,FingerBassDark,Regular,0,18,34
+OTHERS,GM&XG,Bass,FlangeBass,Regular,0,27,34
+OTHERS,GM&XG,Bass,Bass&DistortionEG,Regular,0,40,34
+OTHERS,GM&XG,Bass,FingerSlapBass,Regular,0,43,34
+OTHERS,GM&XG,Bass,FingerBass2,Regular,0,45,34
+OTHERS,GM&XG,Bass,ModulatedBass,Regular,0,65,34
+OTHERS,GM&XG,Bass,PickBass,Regular,0,0,35
+OTHERS,GM&XG,Bass,MutePickBass,Regular,0,28,35
+OTHERS,GM&XG,Bass,FretlessBass,Regular,0,0,36
+OTHERS,GM&XG,Bass,FretlessBass2,Regular,0,32,36
+OTHERS,GM&XG,Bass,FretlessBass3,Regular,0,33,36
+OTHERS,GM&XG,Bass,FretlessBass4,Regular,0,34,36
+OTHERS,GM&XG,Bass,SynthFretless,Regular,0,96,36
+OTHERS,GM&XG,Bass,SmthFretless,Regular,0,97,36
+OTHERS,GM&XG,Bass,SlapBass1,Regular,0,0,37
+OTHERS,GM&XG,Bass,ResonantSlap,Regular,0,27,37
+OTHERS,GM&XG,Bass,PunchThumb,Regular,0,32,37
+OTHERS,GM&XG,Bass,SlapBass2,Regular,0,0,38
+OTHERS,GM&XG,Bass,VelocitySwitchSlap,Regular,0,43,38
+OTHERS,GM&XG,Bass,SynthBass1,Regular,0,0,39
+OTHERS,GM&XG,Bass,SynthBass1 Dark,Regular,0,18,39
+OTHERS,GM&XG,Bass,FastResonantBass,Regular,0,20,39
+OTHERS,GM&XG,Bass,AcidBass,Regular,0,24,39
+OTHERS,GM&XG,Bass,ClaviBass,Regular,0,35,39
+OTHERS,GM&XG,Bass,TechnoBass,Regular,0,40,39
+OTHERS,GM&XG,Bass,Orbiter,Regular,0,64,39
+OTHERS,GM&XG,Bass,SquareBass,Regular,0,65,39
+OTHERS,GM&XG,Bass,RubberBass,Regular,0,66,39
+OTHERS,GM&XG,Bass,Hammer,Regular,0,96,39
+OTHERS,GM&XG,Bass,SynthBass2,Regular,0,0,40
+OTHERS,GM&XG,Bass,MellowSynthBass,Regular,0,6,40
+OTHERS,GM&XG,Bass,SequenceBass,Regular,0,12,40
+OTHERS,GM&XG,Bass,ClickSynthBass,Regular,0,18,40
+OTHERS,GM&XG,Bass,SynthBass2 Dark,Regular,0,19,40
+OTHERS,GM&XG,Bass,SmoothSynthBass,Regular,0,32,40
+OTHERS,GM&XG,Bass,ModulrSynthBass,Regular,0,40,40
+OTHERS,GM&XG,Bass,DXBass,Regular,0,41,40
+OTHERS,GM&XG,Bass,XWireBass,Regular,0,64,40
+OTHERS,GM&XG,Strings,Violin,Regular,0,0,41
+OTHERS,GM&XG,Strings,SlowAttackViolin,Regular,0,8,41
+OTHERS,GM&XG,Strings,Viola,Regular,0,0,42
+OTHERS,GM&XG,Strings,Cello,Regular,0,0,43
+OTHERS,GM&XG,Strings,Contrabass,Regular,0,0,44
+OTHERS,GM&XG,Strings,TremoloStrings,Regular,0,0,45
+OTHERS,GM&XG,Strings,SlwAtkTremStrings,Regular,0,8,45
+OTHERS,GM&XG,Strings,SuspenseStrings,Regular,0,40,45
+OTHERS,GM&XG,Strings,PizzicatoStrings,Regular,0,0,46
+OTHERS,GM&XG,Strings,OrchestralHarp,Regular,0,0,47
+OTHERS,GM&XG,Strings,YangQin,Regular,0,40,47
+OTHERS,GM&XG,Strings,Timpani,Regular,0,0,48
+OTHERS,GM&XG,Ensemble,Strings1,Regular,0,0,49
+OTHERS,GM&XG,Ensemble,StereoStrings,Regular,0,3,49
+OTHERS,GM&XG,Ensemble,SlwAttackStrings,Regular,0,8,49
+OTHERS,GM&XG,Ensemble,ArcoStrings,Regular,0,24,49
+OTHERS,GM&XG,Ensemble,60sStrings,Regular,0,35,49
+OTHERS,GM&XG,Ensemble,Orchestra,Regular,0,40,49
+OTHERS,GM&XG,Ensemble,Orchestra2,Regular,0,41,49
+OTHERS,GM&XG,Ensemble,TremoloOrchstra,Regular,0,42,49
+OTHERS,GM&XG,Ensemble,VelocityStrings,Regular,0,45,49
+OTHERS,GM&XG,Ensemble,Strings2,Regular,0,0,50
+OTHERS,GM&XG,Ensemble,StereoSlowStrings,Regular,0,3,50
+OTHERS,GM&XG,Ensemble,LegatoStrings,Regular,0,8,50
+OTHERS,GM&XG,Ensemble,WarmStrings,Regular,0,40,50
+OTHERS,GM&XG,Ensemble,Kingdom,Regular,0,41,50
+OTHERS,GM&XG,Ensemble,70sStrings,Regular,0,64,50
+OTHERS,GM&XG,Ensemble,Strings3,Regular,0,65,50
+OTHERS,GM&XG,Ensemble,SynthStrings1,Regular,0,0,51
+OTHERS,GM&XG,Ensemble,ResonantStrings,Regular,0,27,51
+OTHERS,GM&XG,Ensemble,SynthStrings4,Regular,0,64,51
+OTHERS,GM&XG,Ensemble,SynthStrings5,Regular,0,65,51
+OTHERS,GM&XG,Ensemble,SynthStrings2,Regular,0,0,52
+OTHERS,GM&XG,Ensemble,ChoirAahs,Regular,0,0,53
+OTHERS,GM&XG,Ensemble,StereoChoir,Regular,0,3,53
+OTHERS,GM&XG,Ensemble,ChoirAahs2,Regular,0,16,53
+OTHERS,GM&XG,Ensemble,MellowChoir,Regular,0,32,53
+OTHERS,GM&XG,Ensemble,ChoirStrings,Regular,0,40,53
+OTHERS,GM&XG,Ensemble,VoiceOohs,Regular,0,0,54
+OTHERS,GM&XG,Ensemble,SynthVoice,Regular,0,0,55
+OTHERS,GM&XG,Ensemble,SynthVoice2,Regular,0,40,55
+OTHERS,GM&XG,Ensemble,Choral,Regular,0,41,55
+OTHERS,GM&XG,Ensemble,AnalogVoice,Regular,0,64,55
+OTHERS,GM&XG,Ensemble,OrchestraHit,Regular,0,0,56
+OTHERS,GM&XG,Ensemble,OrchestraHit2,Regular,0,35,56
+OTHERS,GM&XG,Ensemble,Impact,Regular,0,64,56
+OTHERS,GM&XG,Brass,Trumpet,Regular,0,0,57
+OTHERS,GM&XG,Brass,Trumpet2,Regular,0,16,57
+OTHERS,GM&XG,Brass,BrightTrumpet,Regular,0,17,57
+OTHERS,GM&XG,Brass,WarmTrumpet,Regular,0,32,57
+OTHERS,GM&XG,Brass,Trombone,Regular,0,0,58
+OTHERS,GM&XG,Brass,Trombone2,Regular,0,18,58
+OTHERS,GM&XG,Brass,Tuba,Regular,0,0,59
+OTHERS,GM&XG,Brass,Tuba2,Regular,0,16,59
+OTHERS,GM&XG,Brass,MutedTrumpet,Regular,0,0,60
+OTHERS,GM&XG,Brass,FrenchHorn,Regular,0,0,61
+OTHERS,GM&XG,Brass,FrenchHornSolo,Regular,0,6,61
+OTHERS,GM&XG,Brass,FrenchHorn2,Regular,0,32,61
+OTHERS,GM&XG,Brass,HornOrchestra,Regular,0,37,61
+OTHERS,GM&XG,Brass,BrassSection,Regular,0,0,62
+OTHERS,GM&XG,Brass,Tp&TbSection,Regular,0,35,62
+OTHERS,GM&XG,Brass,BrassSection2,Regular,0,40,62
+OTHERS,GM&XG,Brass,HighBrass,Regular,0,41,62
+OTHERS,GM&XG,Brass,MellowBrass,Regular,0,42,62
+OTHERS,GM&XG,Brass,SynthBrass1,Regular,0,0,63
+OTHERS,GM&XG,Brass,QuackBrass,Regular,0,12,63
+OTHERS,GM&XG,Brass,ResoSynthBrass,Regular,0,20,63
+OTHERS,GM&XG,Brass,PolyBrass,Regular,0,24,63
+OTHERS,GM&XG,Brass,SynthBrass3,Regular,0,27,63
+OTHERS,GM&XG,Brass,JumpBrass,Regular,0,32,63
+OTHERS,GM&XG,Brass,AnalogVeloBrass1,Regular,0,45,63
+OTHERS,GM&XG,Brass,AnalogBrass1,Regular,0,64,63
+OTHERS,GM&XG,Brass,SynthBrass2,Regular,0,0,64
+OTHERS,GM&XG,Brass,SoftBrass,Regular,0,18,64
+OTHERS,GM&XG,Brass,SynthBrass4,Regular,0,40,64
+OTHERS,GM&XG,Brass,ChoirBrass,Regular,0,41,64
+OTHERS,GM&XG,Brass,AnalogVeloBrass2,Regular,0,45,64
+OTHERS,GM&XG,Brass,AnalogBrass2,Regular,0,64,64
+OTHERS,GM&XG,Reed,SopranoSax,Regular,0,0,65
+OTHERS,GM&XG,Reed,AltoSax,Regular,0,0,66
+OTHERS,GM&XG,Reed,SaxSection,Regular,0,40,66
+OTHERS,GM&XG,Reed,HyperAltoSax,Regular,0,43,66
+OTHERS,GM&XG,Reed,TenorSax,Regular,0,0,67
+OTHERS,GM&XG,Reed,BreathyTenor,Regular,0,40,67
+OTHERS,GM&XG,Reed,SoftTenorSax,Regular,0,41,67
+OTHERS,GM&XG,Reed,TenorSax2,Regular,0,64,67
+OTHERS,GM&XG,Reed,BaritoneSax,Regular,0,0,68
+OTHERS,GM&XG,Reed,Oboe,Regular,0,0,69
+OTHERS,GM&XG,Reed,EnglishHorn,Regular,0,0,70
+OTHERS,GM&XG,Reed,Bassoon,Regular,0,0,71
+OTHERS,GM&XG,Reed,Clarinet,Regular,0,0,72
+OTHERS,GM&XG,Pipe,Piccolo,Regular,0,0,73
+OTHERS,GM&XG,Pipe,Flute,Regular,0,0,74
+OTHERS,GM&XG,Pipe,Recorder,Regular,0,0,75
+OTHERS,GM&XG,Pipe,PanFlute,Regular,0,0,76
+OTHERS,GM&XG,Pipe,BlownBottle,Regular,0,0,77
+OTHERS,GM&XG,Pipe,Shakuhachi,Regular,0,0,78
+OTHERS,GM&XG,Pipe,Whistle,Regular,0,0,79
+OTHERS,GM&XG,Pipe,Ocarina,Regular,0,0,80
+OTHERS,GM&XG,Synth.Lead,SquareLead,Regular,0,0,81
+OTHERS,GM&XG,Synth.Lead,SquareLead2,Regular,0,6,81
+OTHERS,GM&XG,Synth.Lead,LMSquare,Regular,0,8,81
+OTHERS,GM&XG,Synth.Lead,Hollow,Regular,0,18,81
+OTHERS,GM&XG,Synth.Lead,Shroud,Regular,0,19,81
+OTHERS,GM&XG,Synth.Lead,Mellow,Regular,0,64,81
+OTHERS,GM&XG,Synth.Lead,SoloSine,Regular,0,65,81
+OTHERS,GM&XG,Synth.Lead,SineLead,Regular,0,66,81
+OTHERS,GM&XG,Synth.Lead,SawtoothLead,Regular,0,0,82
+OTHERS,GM&XG,Synth.Lead,SawtoothLead2,Regular,0,6,82
+OTHERS,GM&XG,Synth.Lead,ThickSaw,Regular,0,8,82
+OTHERS,GM&XG,Synth.Lead,DynamicSaw,Regular,0,18,82
+OTHERS,GM&XG,Synth.Lead,DigitalSaw,Regular,0,19,82
+OTHERS,GM&XG,Synth.Lead,BigLead,Regular,0,20,82
+OTHERS,GM&XG,Synth.Lead,HeavySynth,Regular,0,24,82
+OTHERS,GM&XG,Synth.Lead,WaspySynth,Regular,0,25,82
+OTHERS,GM&XG,Synth.Lead,PulseSaw,Regular,0,40,82
+OTHERS,GM&XG,Synth.Lead,Dr.Lead,Regular,0,41,82
+OTHERS,GM&XG,Synth.Lead,VelocityLead,Regular,0,45,82
+OTHERS,GM&XG,Synth.Lead,SequencedAnalog,Regular,0,96,82
+OTHERS,GM&XG,Synth.Lead,CalliopeLead,Regular,0,0,83
+OTHERS,GM&XG,Synth.Lead,PureLead,Regular,0,65,83
+OTHERS,GM&XG,Synth.Lead,ChiffLead,Regular,0,0,84
+OTHERS,GM&XG,Synth.Lead,Rubby,Regular,0,64,84
+OTHERS,GM&XG,Synth.Lead,CharangLead,Regular,0,0,85
+OTHERS,GM&XG,Synth.Lead,DistortedLead,Regular,0,64,85
+OTHERS,GM&XG,Synth.Lead,WireLead,Regular,0,65,85
+OTHERS,GM&XG,Synth.Lead,VoiceLead,Regular,0,0,86
+OTHERS,GM&XG,Synth.Lead,SynthAahs,Regular,0,24,86
+OTHERS,GM&XG,Synth.Lead,VoxLead,Regular,0,64,86
+OTHERS,GM&XG,Synth.Lead,FifthsLead,Regular,0,0,87
+OTHERS,GM&XG,Synth.Lead,BigFive,Regular,0,35,87
+OTHERS,GM&XG,Synth.Lead,Bass&Lead,Regular,0,0,88
+OTHERS,GM&XG,Synth.Lead,Big&Low,Regular,0,16,88
+OTHERS,GM&XG,Synth.Lead,Fat&Perky,Regular,0,64,88
+OTHERS,GM&XG,Synth.Lead,SoftWhirl,Regular,0,65,88
+OTHERS,GM&XG,Synth.Pad,NewAgePad,Regular,0,0,89
+OTHERS,GM&XG,Synth.Pad,Fantasy,Regular,0,64,89
+OTHERS,GM&XG,Synth.Pad,WarmPad,Regular,0,0,90
+OTHERS,GM&XG,Synth.Pad,ThickPad,Regular,0,16,90
+OTHERS,GM&XG,Synth.Pad,SoftPad,Regular,0,17,90
+OTHERS,GM&XG,Synth.Pad,SinePad,Regular,0,18,90
+OTHERS,GM&XG,Synth.Pad,HornPad,Regular,0,64,90
+OTHERS,GM&XG,Synth.Pad,RotaryStrings,Regular,0,65,90
+OTHERS,GM&XG,Synth.Pad,PolySynthPad,Regular,0,0,91
+OTHERS,GM&XG,Synth.Pad,PolyPad80,Regular,0,64,91
+OTHERS,GM&XG,Synth.Pad,ClickPad,Regular,0,65,91
+OTHERS,GM&XG,Synth.Pad,AnalogPad,Regular,0,66,91
+OTHERS,GM&XG,Synth.Pad,SquarePad,Regular,0,67,91
+OTHERS,GM&XG,Synth.Pad,ChoirPad,Regular,0,0,92
+OTHERS,GM&XG,Synth.Pad,Heaven,Regular,0,64,92
+OTHERS,GM&XG,Synth.Pad,Itopia,Regular,0,66,92
+OTHERS,GM&XG,Synth.Pad,CCPad,Regular,0,67,92
+OTHERS,GM&XG,Synth.Pad,BowedPad,Regular,0,0,93
+OTHERS,GM&XG,Synth.Pad,Glacier,Regular,0,64,93
+OTHERS,GM&XG,Synth.Pad,GlassPad,Regular,0,65,93
+OTHERS,GM&XG,Synth.Pad,MetallicPad,Regular,0,0,94
+OTHERS,GM&XG,Synth.Pad,TinePad,Regular,0,64,94
+OTHERS,GM&XG,Synth.Pad,PanPad,Regular,0,65,94
+OTHERS,GM&XG,Synth.Pad,HaloPad,Regular,0,0,95
+OTHERS,GM&XG,Synth.Pad,SweepPad,Regular,0,0,96
+OTHERS,GM&XG,Synth.Pad,Shwimmer,Regular,0,20,96
+OTHERS,GM&XG,Synth.Pad,Converge,Regular,0,27,96
+OTHERS,GM&XG,Synth.Pad,PolarPad,Regular,0,64,96
+OTHERS,GM&XG,Synth.Pad,Celestial,Regular,0,66,96
+OTHERS,GM&XG,Synth.Effect,Rain,Regular,0,0,97
+OTHERS,GM&XG,Synth.Effect,ClaviPad,Regular,0,45,97
+OTHERS,GM&XG,Synth.Effect,HarmoRain,Regular,0,64,97
+OTHERS,GM&XG,Synth.Effect,AfricanWind,Regular,0,65,97
+OTHERS,GM&XG,Synth.Effect,Carib,Regular,0,66,97
+OTHERS,GM&XG,Synth.Effect,SoundTrack,Regular,0,0,98
+OTHERS,GM&XG,Synth.Effect,Prologue,Regular,0,27,98
+OTHERS,GM&XG,Synth.Effect,Ancestral,Regular,0,64,98
+OTHERS,GM&XG,Synth.Effect,Crystal,Regular,0,0,99
+OTHERS,GM&XG,Synth.Effect,SynthDrumComp,Regular,0,12,99
+OTHERS,GM&XG,Synth.Effect,Popcorn,Regular,0,14,99
+OTHERS,GM&XG,Synth.Effect,TinyBells,Regular,0,18,99
+OTHERS,GM&XG,Synth.Effect,RoundGlocken,Regular,0,35,99
+OTHERS,GM&XG,Synth.Effect,GlockenChime,Regular,0,40,99
+OTHERS,GM&XG,Synth.Effect,ClearBells,Regular,0,41,99
+OTHERS,GM&XG,Synth.Effect,ChorusBells,Regular,0,42,99
+OTHERS,GM&XG,Synth.Effect,SynthMallet,Regular,0,64,99
+OTHERS,GM&XG,Synth.Effect,SoftCrystal,Regular,0,65,99
+OTHERS,GM&XG,Synth.Effect,LoudGlocken,Regular,0,66,99
+OTHERS,GM&XG,Synth.Effect,ChristmasBells,Regular,0,67,99
+OTHERS,GM&XG,Synth.Effect,VibraphoneBells,Regular,0,68,99
+OTHERS,GM&XG,Synth.Effect,DigitalBells,Regular,0,69,99
+OTHERS,GM&XG,Synth.Effect,AirBells,Regular,0,70,99
+OTHERS,GM&XG,Synth.Effect,BellHarp,Regular,0,71,99
+OTHERS,GM&XG,Synth.Effect,Gamelimba,Regular,0,72,99
+OTHERS,GM&XG,Synth.Effect,Atmosphere,Regular,0,0,100
+OTHERS,GM&XG,Synth.Effect,WarmAtmosphere,Regular,0,18,100
+OTHERS,GM&XG,Synth.Effect,HollwRelease,Regular,0,19,100
+OTHERS,GM&XG,Synth.Effect,NylonElectricPiano,Regular,0,40,100
+OTHERS,GM&XG,Synth.Effect,NylonHarp,Regular,0,64,100
+OTHERS,GM&XG,Synth.Effect,HarpVox,Regular,0,65,100
+OTHERS,GM&XG,Synth.Effect,AtmospherePad,Regular,0,66,100
+OTHERS,GM&XG,Synth.Effect,Planet,Regular,0,67,100
+OTHERS,GM&XG,Synth.Effect,Brightness,Regular,0,0,101
+OTHERS,GM&XG,Synth.Effect,FantasyBells,Regular,0,64,101
+OTHERS,GM&XG,Synth.Effect,Smokey,Regular,0,96,101
+OTHERS,GM&XG,Synth.Effect,Goblins,Regular,0,0,102
+OTHERS,GM&XG,Synth.Effect,GoblinsSynth,Regular,0,64,102
+OTHERS,GM&XG,Synth.Effect,Creeper,Regular,0,65,102
+OTHERS,GM&XG,Synth.Effect,RingPad,Regular,0,66,102
+OTHERS,GM&XG,Synth.Effect,Ritual,Regular,0,67,102
+OTHERS,GM&XG,Synth.Effect,ToHeaven,Regular,0,68,102
+OTHERS,GM&XG,Synth.Effect,Night,Regular,0,70,102
+OTHERS,GM&XG,Synth.Effect,Glisten,Regular,0,71,102
+OTHERS,GM&XG,Synth.Effect,BellChoir,Regular,0,96,102
+OTHERS,GM&XG,Synth.Effect,Echoes,Regular,0,0,103
+OTHERS,GM&XG,Synth.Effect,Echoes2,Regular,0,8,103
+OTHERS,GM&XG,Synth.Effect,EchoPan,Regular,0,14,103
+OTHERS,GM&XG,Synth.Effect,EchoBells,Regular,0,64,103
+OTHERS,GM&XG,Synth.Effect,BigPan,Regular,0,65,103
+OTHERS,GM&XG,Synth.Effect,SynthPiano,Regular,0,66,103
+OTHERS,GM&XG,Synth.Effect,Creation,Regular,0,67,103
+OTHERS,GM&XG,Synth.Effect,Stardust,Regular,0,68,103
+OTHERS,GM&XG,Synth.Effect,Resonant&Panning,Regular,0,69,103
+OTHERS,GM&XG,Synth.Effect,ScienceFiction,Regular,0,0,104
+OTHERS,GM&XG,Synth.Effect,Starz,Regular,0,64,104
+OTHERS,GM&XG,Ethnic,Sitar,Regular,0,0,105
+OTHERS,GM&XG,Ethnic,DetunedSitar,Regular,0,32,105
+OTHERS,GM&XG,Ethnic,Sitar2,Regular,0,35,105
+OTHERS,GM&XG,Ethnic,Tambra,Regular,0,96,105
+OTHERS,GM&XG,Ethnic,Tamboura,Regular,0,97,105
+OTHERS,GM&XG,Ethnic,Banjo,Regular,0,0,106
+OTHERS,GM&XG,Ethnic,MutedBanjo,Regular,0,28,106
+OTHERS,GM&XG,Ethnic,Rabab,Regular,0,96,106
+OTHERS,GM&XG,Ethnic,Gopichant,Regular,0,97,106
+OTHERS,GM&XG,Ethnic,Oud,Regular,0,98,106
+OTHERS,GM&XG,Ethnic,Shamisen,Regular,0,0,107
+OTHERS,GM&XG,Ethnic,Koto,Regular,0,0,108
+OTHERS,GM&XG,Ethnic,Taisho-kin,Regular,0,96,108
+OTHERS,GM&XG,Ethnic,Kanoon,Regular,0,97,108
+OTHERS,GM&XG,Ethnic,Kalimba,Regular,0,0,109
+OTHERS,GM&XG,Ethnic,Bagpipe,Regular,0,0,110
+OTHERS,GM&XG,Ethnic,Fiddle,Regular,0,0,111
+OTHERS,GM&XG,Ethnic,Shanai,Regular,0,0,112
+OTHERS,GM&XG,Ethnic,Shanai2,Regular,0,64,112
+OTHERS,GM&XG,Ethnic,Pungi,Regular,0,96,112
+OTHERS,GM&XG,Ethnic,Hichiriki,Regular,0,97,112
+OTHERS,GM&XG,Percussive,TinkleBell,Regular,0,0,113
+OTHERS,GM&XG,Percussive,Bonang,Regular,0,96,113
+OTHERS,GM&XG,Percussive,Altair,Regular,0,97,113
+OTHERS,GM&XG,Percussive,GamelanGongs,Regular,0,98,113
+OTHERS,GM&XG,Percussive,StereoGamlan,Regular,0,99,113
+OTHERS,GM&XG,Percussive,RamaCymbal,Regular,0,100,113
+OTHERS,GM&XG,Percussive,AsianBells,Regular,0,101,113
+OTHERS,GM&XG,Percussive,Agogo,Regular,0,0,114
+OTHERS,GM&XG,Percussive,SteelDrums,Regular,0,0,115
+OTHERS,GM&XG,Percussive,GlassPercussion,Regular,0,97,115
+OTHERS,GM&XG,Percussive,ThaiBells,Regular,0,98,115
+OTHERS,GM&XG,Percussive,Woodblock,Regular,0,0,116
+OTHERS,GM&XG,Percussive,Castanets,Regular,0,96,116
+OTHERS,GM&XG,Percussive,TaikoDrum,Regular,0,0,117
+OTHERS,GM&XG,Percussive,GranCassa,Regular,0,96,117
+OTHERS,GM&XG,Percussive,MelodicTom,Regular,0,0,118
+OTHERS,GM&XG,Percussive,MelodicTom2,Regular,0,64,118
+OTHERS,GM&XG,Percussive,RealTom,Regular,0,65,118
+OTHERS,GM&XG,Percussive,RockTom,Regular,0,66,118
+OTHERS,GM&XG,Percussive,SynthDrum,Regular,0,0,119
+OTHERS,GM&XG,Percussive,AnalogTom,Regular,0,64,119
+OTHERS,GM&XG,Percussive,ElectroPercussion,Regular,0,65,119
+OTHERS,GM&XG,Percussive,ReverseCymbal,Regular,0,0,120
+OTHERS,GM&XG,Sound Effect,GuitarFretNoise,Regular,0,0,121
+OTHERS,GM&XG,Sound Effect,BreathNoise,Regular,0,0,122
+OTHERS,GM&XG,Sound Effect,Seashore,Regular,0,0,123
+OTHERS,GM&XG,Sound Effect,BirdTweet,Regular,0,0,124
+OTHERS,GM&XG,Sound Effect,TelephoneRing,Regular,0,0,125
+OTHERS,GM&XG,Sound Effect,Helicopter,Regular,0,0,126
+OTHERS,GM&XG,Sound Effect,Applause,Regular,0,0,127
+OTHERS,GM&XG,Sound Effect,Gunshot,Regular,0,0,128
+OTHERS,GM&XG,Sound Effect,CuttingNoise,Regular,64,0,1
+OTHERS,GM&XG,Sound Effect,CuttingNoise2,Regular,64,0,2
+OTHERS,GM&XG,Sound Effect,StringSlap,Regular,64,0,4
+OTHERS,GM&XG,Sound Effect,FluteKeyClick,Regular,64,0,17
+OTHERS,GM&XG,Sound Effect,Shower,Regular,64,0,33
+OTHERS,GM&XG,Sound Effect,Thunder,Regular,64,0,34
+OTHERS,GM&XG,Sound Effect,Wind,Regular,64,0,35
+OTHERS,GM&XG,Sound Effect,Stream,Regular,64,0,36
+OTHERS,GM&XG,Sound Effect,Bubble,Regular,64,0,37
+OTHERS,GM&XG,Sound Effect,Feed,Regular,64,0,38
+OTHERS,GM&XG,Sound Effect,Dog,Regular,64,0,49
+OTHERS,GM&XG,Sound Effect,Horse,Regular,64,0,50
+OTHERS,GM&XG,Sound Effect,BirdTweet2,Regular,64,0,51
+OTHERS,GM&XG,Sound Effect,Ghost,Regular,64,0,55
+OTHERS,GM&XG,Sound Effect,Maou,Regular,64,0,56
+OTHERS,GM&XG,Sound Effect,PhoneCall,Regular,64,0,65
+OTHERS,GM&XG,Sound Effect,DoorSqueak,Regular,64,0,66
+OTHERS,GM&XG,Sound Effect,DoorSlam,Regular,64,0,67
+OTHERS,GM&XG,Sound Effect,ScratchCut,Regular,64,0,68
+OTHERS,GM&XG,Sound Effect,ScratchSplit,Regular,64,0,69
+OTHERS,GM&XG,Sound Effect,WindChime,Regular,64,0,70
+OTHERS,GM&XG,Sound Effect,TelephoneRing2,Regular,64,0,71
+OTHERS,GM&XG,Sound Effect,CarEngineIgn,Regular,64,0,81
+OTHERS,GM&XG,Sound Effect,CarTiresSqel,Regular,64,0,82
+OTHERS,GM&XG,Sound Effect,CarPassing,Regular,64,0,83
+OTHERS,GM&XG,Sound Effect,CarCrash,Regular,64,0,84
+OTHERS,GM&XG,Sound Effect,Siren,Regular,64,0,85
+OTHERS,GM&XG,Sound Effect,Train,Regular,64,0,86
+OTHERS,GM&XG,Sound Effect,JetPlane,Regular,64,0,87
+OTHERS,GM&XG,Sound Effect,Starship,Regular,64,0,88
+OTHERS,GM&XG,Sound Effect,Burst,Regular,64,0,89
+OTHERS,GM&XG,Sound Effect,RollerCoaster,Regular,64,0,90
+OTHERS,GM&XG,Sound Effect,Submarine,Regular,64,0,91
+OTHERS,GM&XG,Sound Effect,Laugh,Regular,64,0,97
+OTHERS,GM&XG,Sound Effect,Scream,Regular,64,0,98
+OTHERS,GM&XG,Sound Effect,Punch,Regular,64,0,99
+OTHERS,GM&XG,Sound Effect,Heartbeat,Regular,64,0,100
+OTHERS,GM&XG,Sound Effect,FootSteps,Regular,64,0,101
+OTHERS,GM&XG,Sound Effect,MachineGun,Regular,64,0,113
+OTHERS,GM&XG,Sound Effect,LaserGun,Regular,64,0,114
+OTHERS,GM&XG,Sound Effect,Explosion,Regular,64,0,115
+OTHERS,GM&XG,Sound Effect,Firework,Regular,64,0,116
+OTHERS,GM2,Piano,GrandPiano,Regular,121,0,1
+OTHERS,GM2,Piano,GrandPiano Wide,Regular,121,1,1
+OTHERS,GM2,Piano,GrandPiano Dark,Regular,121,2,1
+OTHERS,GM2,Piano,BrightPiano,Regular,121,0,2
+OTHERS,GM2,Piano,BrightPiano Wide,Regular,121,1,2
+OTHERS,GM2,Piano,El.GrandPiano,Regular,121,0,3
+OTHERS,GM2,Piano,El.GrandPiano Wide,Regular,121,1,3
+OTHERS,GM2,Piano,Honkytonk,Regular,121,0,4
+OTHERS,GM2,Piano,Honkytonk Wide,Regular,121,1,4
+OTHERS,GM2,Piano,ElectricPiano1,Regular,121,0,5
+OTHERS,GM2,Piano,DetunedEP1,Regular,121,1,5
+OTHERS,GM2,Piano,EP1 VelocityMix,Regular,121,2,5
+OTHERS,GM2,Piano,60sElectricPiano,Regular,121,3,5
+OTHERS,GM2,Piano,ElectricPiano2,Regular,121,0,6
+OTHERS,GM2,Piano,DetunedEP2,Regular,121,1,6
+OTHERS,GM2,Piano,EP2 VelocityMix,Regular,121,2,6
+OTHERS,GM2,Piano,EPLegend,Regular,121,3,6
+OTHERS,GM2,Piano,EPPhase,Regular,121,4,6
+OTHERS,GM2,Piano,Harpsichord,Regular,121,0,7
+OTHERS,GM2,Piano,Harpsi OctaveMix,Regular,121,1,7
+OTHERS,GM2,Piano,Harpsichord Wide,Regular,121,2,7
+OTHERS,GM2,Piano,Harpsi KeyOff,Regular,121,3,7
+OTHERS,GM2,Piano,Clavi,Regular,121,0,8
+OTHERS,GM2,Piano,PulseClavi,Regular,121,1,8
+OTHERS,GM2,Chromatic Perc,Celesta,Regular,121,0,9
+OTHERS,GM2,Chromatic Perc,Glockenspiel,Regular,121,0,10
+OTHERS,GM2,Chromatic Perc,MusicBox,Regular,121,0,11
+OTHERS,GM2,Chromatic Perc,Vibraphone,Regular,121,0,12
+OTHERS,GM2,Chromatic Perc,Vibraphone Wide,Regular,121,1,12
+OTHERS,GM2,Chromatic Perc,Marimba,Regular,121,0,13
+OTHERS,GM2,Chromatic Perc,Marimba Wide,Regular,121,1,13
+OTHERS,GM2,Chromatic Perc,Xylophone,Regular,121,0,14
+OTHERS,GM2,Chromatic Perc,TubularBells,Regular,121,0,15
+OTHERS,GM2,Chromatic Perc,ChurchBells,Regular,121,1,15
+OTHERS,GM2,Chromatic Perc,Carillon,Regular,121,2,15
+OTHERS,GM2,Chromatic Perc,Dulcimer,Regular,121,0,16
+OTHERS,GM2,Organ,DrawbarOrgan,Regular,121,0,17
+OTHERS,GM2,Organ,DetunedDrawOrgan,Regular,121,1,17
+OTHERS,GM2,Organ,Italian60sOrgan,Regular,121,2,17
+OTHERS,GM2,Organ,DrawbarOrgan2,Regular,121,3,17
+OTHERS,GM2,Organ,PercussiveOrgan1,Regular,121,0,18
+OTHERS,GM2,Organ,DetunedPercOrgan,Regular,121,1,18
+OTHERS,GM2,Organ,PercussiveOrgan2,Regular,121,2,18
+OTHERS,GM2,Organ,RockOrgan,Regular,121,0,19
+OTHERS,GM2,Organ,ChurchOrgan,Regular,121,0,20
+OTHERS,GM2,Organ,ChurchOrgan Octave,Regular,121,1,20
+OTHERS,GM2,Organ,DetunedChurchOrgan,Regular,121,2,20
+OTHERS,GM2,Organ,ReedOrgan,Regular,121,0,21
+OTHERS,GM2,Organ,PuffOrgan,Regular,121,1,21
+OTHERS,GM2,Organ,Accordion,Regular,121,0,22
+OTHERS,GM2,Organ,Accordion2,Regular,121,1,22
+OTHERS,GM2,Organ,Harmonica,Regular,121,0,23
+OTHERS,GM2,Organ,TangoAccordion,Regular,121,0,24
+OTHERS,GM2,Guitar,NylonGuitar,Regular,121,0,25
+OTHERS,GM2,Guitar,Ukulele,Regular,121,1,25
+OTHERS,GM2,Guitar,NylonGuitar KeyOff,Regular,121,2,25
+OTHERS,GM2,Guitar,NylonGuitar2,Regular,121,3,25
+OTHERS,GM2,Guitar,SteelGuitar,Regular,121,0,26
+OTHERS,GM2,Guitar,12StrGuitar,Regular,121,1,26
+OTHERS,GM2,Guitar,Mandolin,Regular,121,2,26
+OTHERS,GM2,Guitar,Steel&Body,Regular,12,13,26
+OTHERS,GM2,Guitar,JazzGuitar,Regular,121,0,27
+OTHERS,GM2,Guitar,PedalSteelGuitar,Regular,121,1,27
+OTHERS,GM2,Guitar,CleanGuitar,Regular,121,0,28
+OTHERS,GM2,Guitar,DetunedCleanGuitar,Regular,121,1,28
+OTHERS,GM2,Guitar,MidToneGuitar,Regular,121,2,28
+OTHERS,GM2,Guitar,MutedGuitar,Regular,121,0,29
+OTHERS,GM2,Guitar,FunkGuitar,Regular,121,1,29
+OTHERS,GM2,Guitar,MutedVeloSwGuitar,Regular,121,2,29
+OTHERS,GM2,Guitar,JazzMan,Regular,121,3,29
+OTHERS,GM2,Guitar,Overdriven,Regular,121,0,30
+OTHERS,GM2,Guitar,GuitarPinch,Regular,121,1,30
+OTHERS,GM2,Guitar,Distortion,Regular,121,0,31
+OTHERS,GM2,Guitar,FeedbackGuitar,Regular,121,1,31
+OTHERS,GM2,Guitar,DistortionRhythmGt,Regular,121,2,31
+OTHERS,GM2,Guitar,GuitarHarmonics,Regular,121,0,32
+OTHERS,GM2,Guitar,GuitarFeedback,Regular,121,1,32
+OTHERS,GM2,Bass,AcousticBass,Regular,121,0,33
+OTHERS,GM2,Bass,FingerBass,Regular,121,0,34
+OTHERS,GM2,Bass,FingerSlapBass,Regular,121,1,34
+OTHERS,GM2,Bass,PickBass,Regular,121,0,35
+OTHERS,GM2,Bass,FretlessBass,Regular,121,0,36
+OTHERS,GM2,Bass,SlapBass1,Regular,121,0,37
+OTHERS,GM2,Bass,SlapBass2,Regular,121,0,38
+OTHERS,GM2,Bass,SynthBass1,Regular,121,0,39
+OTHERS,GM2,Bass,WarmSyBass,Regular,121,1,39
+OTHERS,GM2,Bass,ResoSynthBass,Regular,121,2,39
+OTHERS,GM2,Bass,ClaviBass,Regular,121,3,39
+OTHERS,GM2,Bass,Hammer,Regular,121,4,39
+OTHERS,GM2,Bass,SynthBass2,Regular,121,0,40
+OTHERS,GM2,Bass,AttackBass,Regular,121,1,40
+OTHERS,GM2,Bass,RubberBass,Regular,121,2,40
+OTHERS,GM2,Bass,AttackPulse,Regular,121,3,40
+OTHERS,GM2,Strings,Violin,Regular,121,0,41
+OTHERS,GM2,Strings,SlowAttackViolin,Regular,121,1,41
+OTHERS,GM2,Strings,Viola,Regular,121,0,42
+OTHERS,GM2,Strings,Cello,Regular,121,0,43
+OTHERS,GM2,Strings,Contrabass,Regular,121,0,44
+OTHERS,GM2,Strings,TremoloStrings,Regular,121,0,45
+OTHERS,GM2,Strings,PizzicatoStrings,Regular,121,0,46
+OTHERS,GM2,Strings,OrchestralHarp,Regular,121,0,47
+OTHERS,GM2,Strings,YangQin,Regular,121,1,47
+OTHERS,GM2,Strings,Timpani,Regular,121,0,48
+OTHERS,GM2,Ensemble,Strings1,Regular,121,0,49
+OTHERS,GM2,Ensemble,StringsBrass,Regular,121,1,49
+OTHERS,GM2,Ensemble,60sStrings,Regular,121,2,49
+OTHERS,GM2,Ensemble,Strings2,Regular,121,0,50
+OTHERS,GM2,Ensemble,SynthStrings1,Regular,121,0,51
+OTHERS,GM2,Ensemble,SynthStrings3,Regular,121,1,51
+OTHERS,GM2,Ensemble,SynthStrings2,Regular,121,0,52
+OTHERS,GM2,Ensemble,ChoirAahs,Regular,121,0,53
+OTHERS,GM2,Ensemble,ChoirAahs2,Regular,121,1,53
+OTHERS,GM2,Ensemble,VoiceOohs,Regular,121,0,54
+OTHERS,GM2,Ensemble,Humming,Regular,121,1,54
+OTHERS,GM2,Ensemble,SynthVoice,Regular,121,0,55
+OTHERS,GM2,Ensemble,AnalogVoice,Regular,121,1,55
+OTHERS,GM2,Ensemble,OrchestraHit,Regular,121,0,56
+OTHERS,GM2,Ensemble,BassHitPlus,Regular,121,1,56
+OTHERS,GM2,Ensemble,6thHit,Regular,121,2,56
+OTHERS,GM2,Ensemble,EuroHit,Regular,121,3,56
+OTHERS,GM2,Brass,Trumpet,Regular,121,0,57
+OTHERS,GM2,Brass,DarkTrumpetSoft,Regular,121,1,57
+OTHERS,GM2,Brass,Trombone,Regular,121,0,58
+OTHERS,GM2,Brass,Trombone2,Regular,121,1,58
+OTHERS,GM2,Brass,BrightTrombone,Regular,121,2,58
+OTHERS,GM2,Brass,Tuba,Regular,121,0,59
+OTHERS,GM2,Brass,MutedTrumpet,Regular,121,0,60
+OTHERS,GM2,Brass,MutedTrumpet2,Regular,121,1,60
+OTHERS,GM2,Brass,FrenchHorn,Regular,121,0,61
+OTHERS,GM2,Brass,FrenchHorn2,Regular,121,1,61
+OTHERS,GM2,Brass,BrassSection,Regular,121,0,62
+OTHERS,GM2,Brass,BrassSection2,Regular,121,1,62
+OTHERS,GM2,Brass,SynthBrass1,Regular,121,0,63
+OTHERS,GM2,Brass,SynthBrass3,Regular,121,1,63
+OTHERS,GM2,Brass,AnalogSynBrass1,Regular,121,2,63
+OTHERS,GM2,Brass,JumpBrass,Regular,121,3,63
+OTHERS,GM2,Brass,SynthBrass2,Regular,121,0,64
+OTHERS,GM2,Brass,SynthBrass4,Regular,121,1,64
+OTHERS,GM2,Brass,AnalogSynBrass2,Regular,121,2,64
+OTHERS,GM2,Reed,SopranoSax,Regular,121,0,65
+OTHERS,GM2,Reed,AltoSax,Regular,121,0,66
+OTHERS,GM2,Reed,TenorSax,Regular,121,0,67
+OTHERS,GM2,Reed,BaritoneSax,Regular,121,0,68
+OTHERS,GM2,Reed,Oboe,Regular,121,0,69
+OTHERS,GM2,Reed,EnglishHorn,Regular,121,0,70
+OTHERS,GM2,Reed,Bassoon,Regular,121,0,71
+OTHERS,GM2,Reed,Clarinet,Regular,121,0,72
+OTHERS,GM2,Pipe,Piccolo,Regular,121,0,73
+OTHERS,GM2,Pipe,Flute,Regular,121,0,74
+OTHERS,GM2,Pipe,Recorder,Regular,121,0,75
+OTHERS,GM2,Pipe,PanFlute,Regular,121,0,76
+OTHERS,GM2,Pipe,BlownBottle,Regular,121,0,77
+OTHERS,GM2,Pipe,Shakuhachi,Regular,121,0,78
+OTHERS,GM2,Pipe,Whistle,Regular,121,0,79
+OTHERS,GM2,Pipe,Ocarina,Regular,121,0,80
+OTHERS,GM2,Synth.Lead,SquareLead,Regular,121,0,81
+OTHERS,GM2,Synth.Lead,SquareLead2,Regular,121,1,81
+OTHERS,GM2,Synth.Lead,SineLead,Regular,121,2,81
+OTHERS,GM2,Synth.Lead,SawtoothLead,Regular,121,0,82
+OTHERS,GM2,Synth.Lead,SawtoothLead2,Regular,121,1,82
+OTHERS,GM2,Synth.Lead,SawPulseLead,Regular,121,2,82
+OTHERS,GM2,Synth.Lead,DoubleSawLead,Regular,121,3,82
+OTHERS,GM2,Synth.Lead,SequencedAnalog,Regular,121,4,82
+OTHERS,GM2,Synth.Lead,CalliopeLead,Regular,121,0,83
+OTHERS,GM2,Synth.Lead,ChiffLead,Regular,121,0,84
+OTHERS,GM2,Synth.Lead,CharangLead,Regular,121,0,85
+OTHERS,GM2,Synth.Lead,WireLead,Regular,121,1,85
+OTHERS,GM2,Synth.Lead,VoiceLead,Regular,121,0,86
+OTHERS,GM2,Synth.Lead,FifthsLead,Regular,121,0,87
+OTHERS,GM2,Synth.Lead,Bass&Lead,Regular,121,0,88
+OTHERS,GM2,Synth.Lead,SoftWhirl,Regular,121,1,88
+OTHERS,GM2,Synth.Pad,NewAgePad,Regular,121,0,89
+OTHERS,GM2,Synth.Pad,WarmPad,Regular,121,0,90
+OTHERS,GM2,Synth.Pad,SinePad,Regular,121,1,90
+OTHERS,GM2,Synth.Pad,PolySynthPad,Regular,121,0,91
+OTHERS,GM2,Synth.Pad,ChoirPad,Regular,121,0,92
+OTHERS,GM2,Synth.Pad,ItopiaPad,Regular,121,1,92
+OTHERS,GM2,Synth.Pad,BowedPad,Regular,121,0,93
+OTHERS,GM2,Synth.Pad,MetallicPad,Regular,121,0,94
+OTHERS,GM2,Synth.Pad,HaloPad,Regular,121,0,95
+OTHERS,GM2,Synth.Pad,SweepPad,Regular,121,0,96
+OTHERS,GM2,Synth.Effect,Rain,Regular,121,0,97
+OTHERS,GM2,Synth.Effect,SoundTrack,Regular,121,0,98
+OTHERS,GM2,Synth.Effect,Crystal,Regular,121,0,99
+OTHERS,GM2,Synth.Effect,SynthMallet,Regular,121,1,99
+OTHERS,GM2,Synth.Effect,Atmosphere,Regular,121,0,100
+OTHERS,GM2,Synth.Effect,Brightness,Regular,121,0,101
+OTHERS,GM2,Synth.Effect,Goblins,Regular,121,0,102
+OTHERS,GM2,Synth.Effect,Echoes,Regular,121,0,103
+OTHERS,GM2,Synth.Effect,EchoBell,Regular,121,1,103
+OTHERS,GM2,Synth.Effect,EchoPan,Regular,121,2,103
+OTHERS,GM2,Synth.Effect,ScienceFiction,Regular,121,0,104
+OTHERS,GM2,Ethnic,Sitar,Regular,121,0,105
+OTHERS,GM2,Ethnic,Sitar2,Regular,121,1,105
+OTHERS,GM2,Ethnic,Banjo,Regular,121,0,106
+OTHERS,GM2,Ethnic,Shamisen,Regular,121,0,107
+OTHERS,GM2,Ethnic,Koto,Regular,121,0,108
+OTHERS,GM2,Ethnic,TaishoKoto,Regular,121,1,108
+OTHERS,GM2,Ethnic,Kalimba,Regular,121,0,109
+OTHERS,GM2,Ethnic,Bagpipe,Regular,121,0,110
+OTHERS,GM2,Ethnic,Fiddle,Regular,121,0,111
+OTHERS,GM2,Ethnic,Shanai,Regular,121,0,112
+OTHERS,GM2,Percussive,TinkleBell,Regular,121,0,113
+OTHERS,GM2,Percussive,Agogo,Regular,121,0,114
+OTHERS,GM2,Percussive,SteelDrums,Regular,121,0,115
+OTHERS,GM2,Percussive,Woodblock,Regular,121,0,116
+OTHERS,GM2,Percussive,Castanets,Regular,121,1,116
+OTHERS,GM2,Percussive,TaikoDrum,Regular,121,0,117
+OTHERS,GM2,Percussive,ConcertBassDrum,Regular,121,1,117
+OTHERS,GM2,Percussive,MelodicTom,Regular,121,0,118
+OTHERS,GM2,Percussive,MelodicTom2,Regular,121,1,118
+OTHERS,GM2,Percussive,SynthDrum,Regular,121,0,119
+OTHERS,GM2,Percussive,RhythmBoxTom,Regular,121,1,119
+OTHERS,GM2,Percussive,ElectricDrum,Regular,121,2,119
+OTHERS,GM2,Percussive,ReverseCymbal,Regular,121,0,120
+OTHERS,GM2,Sound Effect,GuitarFretNoise,Regular,121,0,121
+OTHERS,GM2,Sound Effect,GuitarCutNoise,Regular,121,1,121
+OTHERS,GM2,Sound Effect,StringSlap,Regular,121,2,121
+OTHERS,GM2,Sound Effect,BreathNoise,Regular,121,0,122
+OTHERS,GM2,Sound Effect,FluteKeyClick,Regular,121,1,122
+OTHERS,GM2,Sound Effect,Seashore,Regular,121,0,123
+OTHERS,GM2,Sound Effect,Rain,Regular,121,1,123
+OTHERS,GM2,Sound Effect,Thunder,Regular,121,2,123
+OTHERS,GM2,Sound Effect,Wind,Regular,121,3,123
+OTHERS,GM2,Sound Effect,Stream,Regular,121,4,123
+OTHERS,GM2,Sound Effect,Bubble,Regular,121,5,123
+OTHERS,GM2,Sound Effect,BirdTweet,Regular,121,0,124
+OTHERS,GM2,Sound Effect,Dog,Regular,121,1,124
+OTHERS,GM2,Sound Effect,HorseGallop,Regular,121,2,124
+OTHERS,GM2,Sound Effect,BirdTweet2,Regular,121,3,124
+OTHERS,GM2,Sound Effect,TelephoneRing,Regular,121,0,125
+OTHERS,GM2,Sound Effect,TelephoneRing2,Regular,121,1,125
+OTHERS,GM2,Sound Effect,DoorCreaking,Regular,121,2,125
+OTHERS,GM2,Sound Effect,Door,Regular,121,3,125
+OTHERS,GM2,Sound Effect,Scratch,Regular,121,4,125
+OTHERS,GM2,Sound Effect,WindChime,Regular,121,5,125
+OTHERS,GM2,Sound Effect,Helicopter,Regular,121,0,126
+OTHERS,GM2,Sound Effect,CarEngine,Regular,121,1,126
+OTHERS,GM2,Sound Effect,CarStop,Regular,121,2,126
+OTHERS,GM2,Sound Effect,CarPass,Regular,121,3,126
+OTHERS,GM2,Sound Effect,CarCrash,Regular,121,4,126
+OTHERS,GM2,Sound Effect,Siren,Regular,121,5,126
+OTHERS,GM2,Sound Effect,Train,Regular,121,6,126
+OTHERS,GM2,Sound Effect,JetPlane,Regular,121,7,126
+OTHERS,GM2,Sound Effect,Starship,Regular,121,8,126
+OTHERS,GM2,Sound Effect,BurstNoise,Regular,121,9,126
+OTHERS,GM2,Sound Effect,Applause,Regular,121,0,127
+OTHERS,GM2,Sound Effect,Laughing,Regular,121,1,127
+OTHERS,GM2,Sound Effect,Screaming,Regular,121,2,127
+OTHERS,GM2,Sound Effect,Punch,Regular,121,3,127
+OTHERS,GM2,Sound Effect,Heartbeat,Regular,121,4,127
+OTHERS,GM2,Sound Effect,Footsteps,Regular,121,5,127
+OTHERS,GM2,Sound Effect,Gunshot,Regular,121,0,128
+OTHERS,GM2,Sound Effect,MachineGun,Regular,121,1,128
+OTHERS,GM2,Sound Effect,LaserGun,Regular,121,2,128
+OTHERS,GM2,Sound Effect,Explosion,Regular,121,3,128
+OTHERS,GM2,Drum,StandardSet,Drums,120,0,1
+OTHERS,GM2,Drum,RoomSet,Drums,120,0,9
+OTHERS,GM2,Drum,PowerSet,Drums,120,0,17
+OTHERS,GM2,Drum,ElectroSet,Drums,120,0,25
+OTHERS,GM2,Drum,AnalogSet,Drums,120,0,26
+OTHERS,GM2,Drum,JazzSet,Drums,120,0,33
+OTHERS,GM2,Drum,BrushSet,Drums,120,0,41
+OTHERS,GM2,Drum,OrchestraSet,Drums,120,0,49
+OTHERS,GM2,Drum,SFXSet,SFX,120,0,57
