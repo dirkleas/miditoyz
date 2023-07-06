@@ -56,6 +56,11 @@ as described in the help -- be patient, this can take a while depending on the s
     ```
 
 **note**
+1. several "datalist" files are included in more computer-friendly formats and are based on the
+official cvp-800 series [datalist](https://usa.yamaha.com/files/download/other_assets/7/1264707/cvp809_en_dl_c0.pdf) 
+reference document from yamaha. this is used by various scripts and can be very useful for rolling
+your own solutions for your dat or sequencer presets and other musical mischief ... you're welcome and no thanks 
+yamaha for making me create this myself!
 1. if your computer includes multiple versions of python, this project uses version 3x or greater. 
 you may need to refer to python as `python3` to specifically reference the correct version
 
