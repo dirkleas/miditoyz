@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+
+# Copyright (c) 2023 Dirk Leas
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+#
+# midiraw - dump/debug midi file
+#
+# todo:
+#   - tbd
+#
+
+import typer, mido
+
+
+def main(
+    midi_file: str = typer.Argument(..., help="MIDI file to dump in raw format"),
+    debug: bool = typer.Option(False, help="Enable debug mode"),
+):
+    """Dump a MIDI file in raw text format, optionally with hexdump output."""
+    mido.MidiFile(midi_file, debug=debug).print_tracks()
+
+
+if __name__ == "__main__":
+    typer.run(main)

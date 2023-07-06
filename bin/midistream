@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+
+# Copyright (c) 2023 Dirk Leas
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+#
+# midistream - stream midi files to midi device with revoiced program changes
+# based on voice preferences stored in ~/.miditoyz
+#
+# todo:
+#   - preparse songs looking for other instruments via track titles or
+#     sequencer_specific meta events, plus add extra cli arg "genre" and append
+#     to event.track_name for preference key mapping (e.g. "Jazz Drums" => (0, 0, 1) Jazz Brush Expanded)
+#   - consider integrating music/folder and song metadata like genere,
+#     favorites, wikipedia summaries, etc. renderable to stdout
+#
+
+import os, pathlib, json, platform, mido, typer, sh  # https://github.com/mido/mido
+
+homedir = pathlib.Path.home()
+if not os.path.exists(f"{homedir}/.miditoyz"):
+    os.mkdir(f"{homedir}/.miditoyz")
+if not os.path.exists(f"{homedir}/.miditoyz/settings.json"):
+    open(f"{homedir}/.miditoyz/settings.json", "w").write(
+        {
+            {
+                "device": "Clavinova Port 1",
+                "music": "",
+                "bookmark": 3,
+                "voices": {
+                    "CFX Concert Grand": [[0, 0, 1], [108, 0, 1]],
+                    "Fretless Bass": [[0, 0, 33], [8, 32, 20]],
+                },
+            }
+        }
+    )
+settings = json.load(open(f"{homedir}/.miditoyz/settings.json"))
+voice_preferences = {
+    tuple(v[0]): tuple(v[1]) for k, v in settings.get("voices").items()
+}
+bookmark_default = 3
+
+
+def notify(title, subtitle):
+    """display notification on macos, tested on ventura"""
+    sh.osascript(e=f'display notification "{title}" with title "{subtitle}"')
+
+
+def serialize_settings(new_settings):
+    """update settings.json with specified dictionary"""
+    settings.update(new_settings)
+    json.dump(
+        settings,
+        open(f"{homedir}/.miditoyz/settings.json", "w"),
+    )
+
+
+def song_title(midi):
+    """return song title from midi file object"""
+    return tuple((e.name for e in midi.tracks[0] if e.type == "track_name"))[0]
+
+
+def revoice(ch, msb, lsb, pc):
+    """revoice by generating list of bank select and program change messages"""
+    print(f"  revoicing ch: {ch}, msb: {msb}, lsb: {lsb}, pc: {pc}")
+    return [
+        mido.Message("control_change", channel=ch, control=0, value=msb, time=0),
+        mido.Message("control_change", channel=ch, control=32, value=lsb, time=0),
+        mido.Message("program_change", channel=ch, program=pc - 1, time=0),
+    ]
+
+
+def voice_restreamer(songfile, index, voice_preferences, device):
+    """restream midi file with revoiced program changes based on voice preferences"""
+    channels = {}
+    ch = lsb = msb = 0
+    pc = 1
+    serialize_settings({"bookmark": index + 1})
+    midi = mido.MidiFile(songfile)
+    title = song_title(midi) or "oops, missing title"
+    print(f"{title} ({songfile}), _songlist.txt line #{index+1}")
+    if platform.system() == "Darwin":
+        notify(f"{'/'.join(songfile.split('/')[-2:])}, #{index+1}", title)
+    for event in midi.play():
+        if event.type == "control_change" and event.control == 0:
+            msb = event.value
+        elif event.type == "control_change" and event.control == 32:
+            lsb = event.value
+        elif event.type == "program_change":
+            ch = event.channel
+            voice = (msb, lsb, event.program + 1)
+            voice_preference = voice_preferences.get(voice, voice)
+            print(
+                f"  voicing ch: {ch}, pc: {event.program+1}, voice={voice}, "
+                + f"voice_preference={voice_preference}, revoicing={tuple([*[ch], *voice_preference])}"
+            )
+            for voice_event in revoice(*tuple([*[ch], *voice_preference])):
+                device.send(voice_event)
+        elif event.type == "sequencer_specific":
+            print(f"  seq: {event}")
+        else:
+            device.send(event)
+
+
+def main(
+    music: str = typer.Option(
+        settings.get("music"),  # default to last music
+        help="MIDI music file or directory full of music to stream",
+    ),
+    bookmark: int = typer.Option(
+        settings.get("bookmark", bookmark_default),
+        help="Bookmark for last song line number from music folder's _songlist.txt to start playing",
+    ),
+    device: str = typer.Option(
+        settings.get("device", "Clavinova Port 1"),
+        help='MIDI device to stream to (e.g. "Clavinova Port 1" for USB, "Network Clavinova for WIFI, etc.))',
+    ),
+):
+    """Stream music as either a midi file or directory full of midi files to a midi device with using
+    bank selection and program changes based on voice preferences stored in "~/.miditoyz/settings.json"
+    and created automatically the first time you stream. Options are remembered between streaming sessions, so
+    subequent streamings pick up from the last song played. Bookmark values are based on line numbers
+    from the directory's "_songlist.txt" file, which starts with a title and blank line, so the first
+    song is line 3 (e.g. "--bookmark 3"). Bookmark values are reset to 3 if the music is a song rather than
+    a directory, is either too low/high, or if the music is different than the last time you streamed.
+    """
+    is_song = music.lower().endswith(".mid")
+    if bookmark < bookmark_default or music != settings.get("music") or is_song:
+        bookmark = bookmark_default
+    serialize_settings({"music": music, "device": device, "bookmark": bookmark})
+    device = mido.open_output(device)
+    if is_song:  # stream file...
+        voice_restreamer(music, 0, voice_preferences, device)
+    elif os.path.isdir(music):  # stream folder's midi files...
+        songs = sorted([x for x in os.listdir(music) if x.lower().endswith(".mid")])
+        if bookmark - 3 > len(songs):
+            bookmark = bookmark_default
+        try:  # skip calculation ignores songlist zero-based index and skips title and blank line
+            for skip, song in enumerate(songs):
+                if skip >= bookmark - bookmark_default:
+                    voice_restreamer(
+                        f"{music}/{song}", skip + 2, voice_preferences, device
+                    )
+        except:
+            pass
+    else:
+        print("oops, music must be a midi file or directory full of midi files")
+
+
+if __name__ == "__main__":
+    typer.run(main)

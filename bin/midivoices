@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+
+# Copyright (c) 2023 Dirk Leas
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+#
+# midivoices - generate list of track voices w/ lookup from clavinova datalist.pdf
+# (unpickle to see format for building voices for other midi devices)
+#
+# todo:
+#   - consider generalizing voices source and passing defaulted via cli
+#   - consider multi-voice tracks, ex: ~/h4x/clav.toys/PIANOFORCE MUSIC FILES/Light Jazz/APRPARIS.MID)
+#
+
+import pathlib, pickle, mido, typer
+from collections import defaultdict
+
+
+def get_track_channel_voices(midi_filename, voices):
+    print(f"song file: {midi_filename}")
+    with mido.MidiFile(midi_filename) as mid:
+        for i, track in enumerate(mid.tracks):
+            channels = defaultdict(dict)
+            print(f"  track: {i+1}")
+            for msg in track:
+                if msg.type == "track_name":
+                    print(f'    track name: {track.name.strip() or "n/a"}')
+                elif msg.type == "control_change" and msg.control == 0:
+                    channels[msg.channel]["msb"] = msg.value
+                elif msg.type == "control_change" and msg.control == 32:
+                    channels[msg.channel]["lsb"] = msg.value
+                elif msg.type == "program_change":
+                    channels[msg.channel]["pc"] = msg.program + 1
+            for channel in sorted(channels.keys()):
+                voice = (
+                    channels.get(channel).get("msb", 0),
+                    channels.get(channel).get("lsb", 0),
+                    channels.get(channel).get("pc", 1),
+                )
+                print(
+                    f"      channel {channel}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                )
+
+
+def main(
+    midi_file: str = typer.Argument(..., help="MIDI file for voice list"),
+    voices: str = typer.Option(
+        f"{pathlib.Path.home()}/h4x/clav/datalist.pickle",
+        help="Pickle file of voices, see official clavinova datalist.pdf",
+    ),
+    detail: bool = typer.Option(
+        False,
+        help="include voice MSB, LSB, PC voice values for searching datalist csv or pdf",
+    ),
+):
+    """Generate a list of voices for each track in a midi file"""
+    get_track_channel_voices(midi_file, pickle.load(open(voices, "rb")))
+
+
+if __name__ == "__main__":
+    typer.run(main)

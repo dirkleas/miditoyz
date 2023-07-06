@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+
+# Copyright (c) 2023 Dirk Leas
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+#
+# midi - list available midi devices
+#
+# todo:
+#   - tbd
+#
+
+import mido, typer
+
+
+def main():
+    """list available midi devices"""
+    print(f"available midi device(s): {', '.join(set(mido.get_output_names()))}")
+
+
+if __name__ == "__main__":
+    typer.run(main)
