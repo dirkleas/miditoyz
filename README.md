@@ -1,4 +1,4 @@
-# clav - clavinova h4x
+# miditoyz - midi toolz for hacking songs for your favorite midi instrument
 
 a collection of various hacks (h4x) initially focusing the
 [Yamaha Clavinova CVP-809GP]()
