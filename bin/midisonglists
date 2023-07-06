@@ -60,7 +60,7 @@ def generate_songlist(directory: str, base_directory: str):
 def main(
     directory: str = typer.Argument(..., help="root directory for MIDI song collection")
 ):
-    """Generate a songlist for a directory and all its subdirectories containing MIDI files
+    """Generate a songlist for the specified directory and all its subdirectories containing MIDI files
     named \"_songlist.txt\", including fully-qualified directory name and number of songs in the directory.
     """
     directory = os.path.abspath(directory)
