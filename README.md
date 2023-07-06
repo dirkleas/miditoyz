@@ -33,9 +33,18 @@ this project uses the popular, free scripting language [python](https://www.pyth
     midisonglists --help
     ```
 
-**note**
+## roadmap
+
+1. add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
+1. add housekeeping function to remove song duplicates, whether duplicate song directories, renamed songs, etc.
+1. add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.)
+1. os-native or web-based gui front end for tools (later would require local micro-server)
+
+## notes/other
 1. several "datalist" files are included in more computer-friendly formats and are based on the official cvp-800 series [datalist](https://usa.yamaha.com/files/download/other_assets/7/1264707/cvp809_en_dl_c0.pdf) reference document from yamaha. this is used by various scripts and can be very useful for rolling your own solutions for your dat or sequencer presets and other musical mischief ... you're welcome and no thanks yamaha for making me create this myself! should you be curious, the official "datalist" .pdf was parsed using [PyPDF2](https://pypdf2.readthedocs.io/en/3.0.0/) and manually cleaned up over the course of about two hours
 1. if your computer includes multiple versions of python, this project uses version 3x or greater. you may need to refer to python as `python3` to specifically reference the correct version
+1. consider creating/activating a virtual environment for your repo clone using (e.g. `venv`, `pipenv`, `conda`, etc.) and altering the **installation/setup** accordingly
+1. consider creating a unified songlist by concatenating all the individual `_songlist.txt` files and stripping out the initial directory/blank line
 
 --
 
