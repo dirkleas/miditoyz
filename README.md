@@ -1,7 +1,8 @@
-# miditoyz - midi toolz for hacking songs for your favorite midi instrument
+# miditoyz
 
-a collection of various hacks (h4x) initially focusing the
-[Yamaha Clavinova CVP-809GP]()
+a collection of command line (cli) hacks (h4x) for your midi song collection,
+initially focusing the 
+[Yamaha Clavinova CVP-809GP](https://usa.yamaha.com/products/musical_instruments/pianos/clavinova/cvp-809gp/index.html)
 
 ## miditoolz - command line tools for enjoying your midi song collection
 
@@ -12,7 +13,8 @@ here's the current list of midi tools located in the `bin` project directory:
 
 1. [midi](bin/midi) - display a list of currently availble midi devices to be used by other tools
 to allow you to connect to your clavinova
-1. midivoices - display a list of the tracks and voices for a specified song
+1. [midivoices - display a list of the tracks and voices for a specified song
+1. [midivoices]() - display a list of the tracks and voices for a specified song
 1. [midistream](bin/midistream) - stream a directory full of midi music files or a single midi song to
 your clavinova
 1. [midiraw](bin/midiraw) - display the specified midi song file in plain text. midi files are usually
