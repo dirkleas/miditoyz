@@ -6,14 +6,23 @@
 
 #
 # midistream - stream midi files to midi device with revoiced program changes
-# based on voice preferences stored in ~/.miditoyz
+# based on voice preferences stored in ~/.miditoyz/settings.json['voices']
 #
 # todo:
 #   - preparse songs looking for other instruments via track titles or
 #     sequencer_specific meta events, plus add extra cli arg "genre" and append
-#     to event.track_name for preference key mapping (e.g. "Jazz Drums" => (0, 0, 1) Jazz Brush Expanded)
-#   - consider integrating music/folder and song metadata like genere,
+#     to event.track_name for preference key mapping
+#     (e.g. "Jazz Drums" => (0, 0, 1) Jazz Brush Expanded)
+#   - consider integrating music/folder and song metadata like genre,
 #     favorites, wikipedia summaries, etc. renderable to stdout
+#   - consider advanced analytics in clav repo datalist.ipynb for resolving
+#     sequencer_specific events or metaMessage.track[0[]['title] to resolve
+#     voices for voice_preferences
+#
+# notes/references:
+#   - reference song with rich meta, sysex and sequencer_specific events in my
+#     personal collection:
+#       clav.toys/more clav files/2.NEW FollowLights/02.Prelude.s944.mid
 #
 
 import os, pathlib, json, platform, mido, typer, sh  # https://github.com/mido/mido
