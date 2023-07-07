@@ -9,6 +9,7 @@
 # based on voice preferences stored in ~/.miditoyz/settings.json['voices']
 #
 # todo:
+#   - add windows notification support via win10toast
 #   - preparse songs looking for other instruments via track titles or
 #     sequencer_specific meta events, plus add extra cli arg "genre" and append
 #     to event.track_name for preference key mapping
