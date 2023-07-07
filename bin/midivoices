@@ -46,7 +46,7 @@ def get_track_channel_voices(midi_filename, voices):
 def main(
     midi_file: str = typer.Argument(..., help="MIDI file for voice list"),
     voices: str = typer.Option(
-        f"{pathlib.Path.home()}/h4x/clav/datalist.pickle",
+        f"{pathlib.Path.home()}/.miditoyz/datalist.pickle",
         help="Pickle file of voices, see official clavinova datalist.pdf",
     ),
     detail: bool = typer.Option(

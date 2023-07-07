@@ -19,22 +19,6 @@
 import os, pathlib, json, platform, mido, typer, sh  # https://github.com/mido/mido
 
 homedir = pathlib.Path.home()
-if not os.path.exists(f"{homedir}/.miditoyz"):
-    os.mkdir(f"{homedir}/.miditoyz")
-if not os.path.exists(f"{homedir}/.miditoyz/settings.json"):
-    open(f"{homedir}/.miditoyz/settings.json", "w").write(
-        {
-            {
-                "device": "Clavinova Port 1",
-                "music": "",
-                "bookmark": 3,
-                "voices": {
-                    "CFX Concert Grand": [[0, 0, 1], [108, 0, 1]],
-                    "Fretless Bass": [[0, 0, 33], [8, 32, 20]],
-                },
-            }
-        }
-    )
 settings = json.load(open(f"{homedir}/.miditoyz/settings.json"))
 voice_preferences = {
     tuple(v[0]): tuple(v[1]) for k, v in settings.get("voices").items()
@@ -44,7 +28,10 @@ bookmark_default = 3
 
 def notify(title, subtitle):
     """display notification on macos, tested on ventura"""
-    sh.osascript(e=f'display notification "{title}" with title "{subtitle}"')
+    try:
+        sh.osascript(e=f'display notification "{title}" with title "{subtitle}"')
+    except:
+        pass
 
 
 def serialize_settings(new_settings):
