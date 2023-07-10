@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+
+# mididump - dump midi file events, similar to midiraw w/t --debug option
+
+import typer
+from music21 import midi
+
+app = typer.Typer()
+
+
+def list_midi_metadata(filename: str):
+    mf = midi.MidiFile()
+    mf.open(filename)
+    mf.read()
+    mf.close()
+
+    for i, track in enumerate(mf.tracks):
+        typer.echo(f"track {i}:")
+        time_delta = 0
+        for event in track.events:
+            if isinstance(event, midi.DeltaTime):
+                time_delta = event.time
+            elif isinstance(event, midi.MidiEvent):
+                typer.echo(
+                    f"  {repr(event).replace('<music21.midi.MidiEvent ', '').replace('>', '')}, time={time_delta}"
+                )
+
+
+@app.command()
+def main(
+    filename: str = typer.Argument(
+        ..., help="The path to the MIDI file to be analyzed."
+    )
+):
+    """Dump a MIDI file in raw text format. if you need details, use "midiraw --debug" instead"""
+    list_midi_metadata(filename)
+
+
+if __name__ == "__main__":
+    app()

@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+
+# Copyright (c) 2023 Dirk Leas
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+#
+# midiingest - ingest midi files into a database keyed by hash to remove dupes
+#              saving sources
+#
+# todo:
+#   - tbd
+#
+
+import os, typer
+
+
+def generate_midi_song_list(directory):
+    for dirpath, dirnames, filenames in os.walk(directory):
+        for filename in filenames:
+            if filename.lower().endswith(".mid"):
+                yield os.path.join(dirpath, filename)
+
+
+def main(
+    source_directory: str = typer.Argument(
+        ..., help="directory full of MIDI songs to clean up"
+    ),
+    destination_directory: str = typer.Argument(
+        ..., help="directory for cleaned up MIDI songs"
+    ),
+):
+    """generate a new music collection from a source directory in destination directory without duplicate songs"""
+    pass
+
+
+if __name__ == "__main__":
+    typer.run(main)
