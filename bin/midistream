@@ -131,10 +131,10 @@ def main(
         voice_restreamer(music, 0, voice_preferences, device)
     elif os.path.isdir(music):  # stream folder's midi files...
         songs = sorted([x for x in os.listdir(music) if x.lower().endswith(".mid")])
-        if bookmark > len(songs):
+        if bookmark > len(songs) + 2:
             bookmark = bookmark_default
             print(
-                f"{os.linesep}oops, your bookmark is beyond the last song in your songs -- starting from the beginning...{os.linesep}"
+                f"{os.linesep}oops, your bookmark is beyond the last song in your music -- starting from the beginning...{os.linesep}"
             )
         try:  # skip calculation ignores songlist zero-based index and skips title and blank line
             for skip, song in enumerate(songs):
