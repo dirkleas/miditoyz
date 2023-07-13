@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
+#
 # mididump - dump midi file events, similar to midiraw w/t --debug option
+#
+# notes:
+#   - bpm = 60,000,000 / int.from_bytes(tempo_byte_data, byteorder='big')
+#
 
 import typer
 from music21 import midi
@@ -21,9 +26,13 @@ def list_midi_metadata(filename: str):
             if isinstance(event, midi.DeltaTime):
                 time_delta = event.time
             elif isinstance(event, midi.MidiEvent):
-                typer.echo(
-                    f"  {repr(event).replace('<music21.midi.MidiEvent ', '').replace('>', '')}, time={time_delta}"
-                )
+                if event.type.name == "SET_TEMPO":
+                    tempo = int.from_bytes(event.data, byteorder="big")
+                    bpm = round(60_000_000 / tempo)
+                    typer.echo(f"  TEMPO: {tempo:,} MPQN, {bpm} BPM")
+                else:
+                    typer.echo(f"{event.type}: {event.type.name}")
+                    typer.echo(f"  {event}, time={time_delta}")
 
 
 @app.command()
