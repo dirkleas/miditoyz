@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# Copyright (c) 2023 Dirk Leas
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
 #
 # mididump - dump midi file events, similar to midiraw w/t --debug option
 #
@@ -13,8 +17,8 @@ from music21 import midi
 app = typer.Typer()
 
 
-def dump_midi(filename: str):
-    """Dump a MIDI file in raw text format"""
+def dump_midi(filename: str, metadata: bool = False):
+    """Dump a MIDI file in raw text format, optionally metadata only"""
     mf = midi.MidiFile()
     mf.open(filename)
     mf.read()
@@ -22,33 +26,40 @@ def dump_midi(filename: str):
 
     dump = []
     for i, track in enumerate(mf.tracks):
-        time_delta = 0
+        time_delta = time_total = 0
         for event in track.events:
             if isinstance(event, midi.DeltaTime):
                 time_delta = event.time
-            # elif not isinstance(event, midi.MidiEvent):
-            #     # ensure event.type has name attribute
-            #     if hasattr(event.type, "name") and event.type.name == "SET_TEMPO":
-            #         tempo = int.from_bytes(event.data, byteorder="big")
-            #         bpm = round(60_000_000 / tempo)
-            #         typer.echo(f"  TEMPO: {tempo:,} MPQN, {bpm} BPM")
-            #     else:
-            #         typer.echo(f"  {event.type}: {event.type.name}")
+                time_total += event.time
+            elif (
+                metadata
+                and hasattr(event.type, "name")
+                and (
+                    event.type.name in ["NOTE_ON", "NOTE_OFF"]
+                    or (
+                        event.type.name == "CONTROLLER_CHANGE"
+                        and event.parameter1 in [64, 67]
+                    )
+                    or event.type.name == "END_OF_TRACK"
+                )
+            ):
+                pass
             else:
                 dump.append(
-                    f"{str(event).replace('<music21.midi.MidiEvent ', '')[:-1]}, time={time_delta}"
+                    f"{str(event).replace('<music21.midi.MidiEvent ', '')[:-1]}, time={time_delta}, clock={time_total}"
                 )
     return dump
 
 
 @app.command()
 def main(
-    filename: str = typer.Argument(
-        ..., help="The path to the MIDI file to be analyzed."
-    )
+    song: str = typer.Argument(
+        ..., help="The path to the MIDI song file to be analyzed"
+    ),
+    metadata: bool = typer.Option(False, help="Show only metadata"),
 ):
     """Dump a MIDI file in raw text format. if you need hashdump-esque details, use "midiraw --debug" instead"""
-    for dump in dump_midi(filename):
+    for dump in dump_midi(song, metadata):
         typer.echo(dump)
 
 
