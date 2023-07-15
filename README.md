@@ -9,7 +9,8 @@ these goodies are located in the `bin` project directory:
 1. [midi](bin/midi) - display a list of currently available midi devices to be used by other tools to allow you to connect to your clavinova
 1. [midivoices]() - display a list of the tracks and voices for a specified song
 1. [midistream](bin/midistream) - stream a directory full of midi music files or a single midi song to your clavinova using your voice preferences (see **notes** below for more voice preferences)
-1. [midiraw](bin/midiraw) - display the specified midi song file in plain text. midi files are binary files that aren't readable by humans. `hexdump`-esque details can optionally be displayed too
+1. [mididump](bin/mididump) - display the specified midi song file in readable plain text. midi files are binary files that aren't readable by humans. 
+1. [midiraw](bin/midiraw) - display the specified midi song file in nerdier plain text. `hexdump`-esque details can optionally be displayed too
 1. [midisonglists](midisonglists) - generate a `_songlist.txt` in each directory/subdirectory that includes song filenames and song titles. it's common that midi files have meaningless filenames (i.e. `06-01a01.mid` in my collection is the standards song **nikki** burt bacharach). your os-specific file browser can be configured to sort files alphabetically so this file can conveniently appear first. the file begins with the fully-qualified file name and the number of song in the directory
 
 help is available for each of these commands by including the `--help` option (i.e. `midi --help`, `midivoices --help`, etc.)

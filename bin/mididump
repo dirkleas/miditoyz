@@ -9,6 +9,7 @@
 #
 # notes:
 #   - bpm = 60,000,000 / int.from_bytes(tempo_byte_data, byteorder='big')
+#   - good test case: ../clav.toys.unique/12d20e5c4cbe594e27d8563fe533ebfb.mid
 #
 
 import os, typer
@@ -35,10 +36,10 @@ def dump_midi(filename: str, metadata: bool = False):
                 metadata
                 and hasattr(event.type, "name")
                 and (
-                    event.type.name in ["NOTE_ON", "NOTE_OFF"]
+                    event.type.name in ["NOTE_ON", "NOTE_OFF", "PITCH_BEND"]
                     or (
                         event.type.name == "CONTROLLER_CHANGE"
-                        and event.parameter1 in [64, 67]
+                        and not event.parameter1 in [0, 32]
                     )
                     or event.type.name == "END_OF_TRACK"
                 )
