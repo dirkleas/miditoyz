@@ -12,20 +12,120 @@
 #   - tbd
 #
 
-import os, typer
+import sys, os, pathlib, hashlib, shutil, json, typer, mido, parse
+from collections import defaultdict
+
+homedir = pathlib.Path.home()
+
+
+def is_midi(filename):
+    return filename.lower().endswith((".midi", ".mid"))
+
+
+def ingest_music(source_directory, destination_directory, miditoyz_directory):
+    """ingest music from source_directory into destination_directory"""
+    songs = []
+    typer.echo(
+        f"ingesting source_directory: {source_directory} => destination_directory: {destination_directory}..."
+    )
+    # locate candidate songs...
+    for dirpath, dirnames, filenames in os.walk(source_directory):
+        for filename in filenames:
+            if is_midi(filename):
+                songs.append(os.path.join(dirpath, filename))
+    songs = sorted(songs)
+
+    # hash for duplicates...
+    typer.echo(f"  scanning for duplicate songs...")
+    songs_hashed = [
+        [song, hashlib.md5(open(song, "rb").read()).hexdigest()] for song in songs
+    ]
+    songs_hashed_dict = defaultdict(lambda: defaultdict(list))
+    for song, hash in songs_hashed:
+        songs_hashed_dict[hash]["sources"].append(song)
+    typer.echo(
+        f"  found {len(songs)} total songs of which {len(songs_hashed_dict)} are actually unique..."
+    )
+
+    # identify broken/unstreamable songs...
+    typer.echo(
+        f"  scanning for broken or invalid song files, this will take a while..."
+    )
+    songs_broken = []
+    for hash in songs_hashed_dict.keys():
+        try:
+            mido.MidiFile(f"{homedir}/h4x/clav.toys.unique/{hash}.mid")
+        except:
+            songs_broken.append(hash)
+    # tbd: add broken identifier to catalog or remove broken songs...
+    typer.echo(
+        f'  {len(songs_broken) / len(songs_hashed_dict) * 100:.2f}% of songs are "broken and will be ignored"...'
+    )
+
+    # copy unique songs to destination_directory...
+    typer.echo("  copying unique songs to destination_directory, again patience...")
+    if not len(os.listdir(destination_directory)) == len(songs_hashed_dict.keys()):
+        for hash, v in songs_hashed_dict.items():  # fyi, this took 1m5.3s
+            shutil.copyfile(v["sources"][0], f"{destination_directory}/{hash}.mid")
+
+    # generate catalog...
+    typer.echo("  generating song catalog...")
+    shutil.copyfile(
+        f"{miditoyz_directory}/bin/mididump", f"{destination_directory}/mididump.py"
+    )
+    sys.path.append(f"{destination_directory}")
+    sys.path
+    import mididump
+
+    def get_title(dump):
+        """get first title from dump"""
+        event = next(filter(lambda x: x.startswith("SEQUENCE_TRACK_NAME"), dump), None)
+        if not event:
+            return "n/a"
+        else:
+            return parse.parse(
+                "SEQUENCE_TRACK_NAME, track={track}, channel={channel}, data=b{title}, time={time}",
+                event,
+            )["title"][1:-1]
+
+    # add metadata to catalog using "mididump --metadata"...
+    for song in [s for s in list(songs_hashed_dict.keys()) if s not in songs_broken]:
+        dump = mididump.dump_midi(f"{destination_directory}/{song}.mid", metadata=True)
+        songs_hashed_dict[song] = {
+            **{"title": get_title(dump), "dump": dump},
+            **songs_hashed_dict[song],
+        }
+    json.dump(
+        songs_hashed_dict, open(f"{destination_directory}/catalog.json", "w"), indent=2
+    )
+    typer.echo(
+        f"  song catalog saved to {destination_directory}/catalog.json -- all set, enjoy!!!"
+    )
 
 
 def main(
-    source_directory: str = typer.Argument(
+    source_directory: pathlib.Path = typer.Argument(
         ..., help="directory full of MIDI songs to clean up"
     ),
-    destination_directory: str = typer.Argument(
+    destination_directory: pathlib.Path = typer.Argument(
         ...,
         help="directory for cleaned up MIDI songs with duplicates removed and catalog generated",
     ),
+    miditoyz_directory: pathlib.Path = typer.Argument(
+        ...,
+        help="directory where miditoys are installed",
+    ),
 ):
     """generate a new music collection from a source directory in destination directory without duplicate songs"""
-    pass
+    # create destination_directory if it doesn't exist...
+    if not os.path.exists(destination_directory):
+        os.makedirs(destination_directory)
+    if not os.path.exists(f"{miditoyz_directory}/bin/mididump"):
+        typer.echo(
+            f'{os.linesep}oops, miditoyz directory "{miditoyz_directory}" not found, please find it and try again...{os.linesep}'
+        )
+    else:
+        ingest_music(source_directory, destination_directory, miditoyz_directory)
 
 
 if __name__ == "__main__":
