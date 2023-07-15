@@ -40,16 +40,27 @@ this project uses the popular, free scripting language [python](https://www.pyth
 
 ## roadmap
 
+1. housekeeping, testing [automation], care-and-feeding, etc.
 1. add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
-1. add housekeeping function to remove song duplicates, whether duplicate song directories, renamed songs, etc.
-1. add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.)
-1. os-native or web-based gui front end for tools (later would require local micro-server)
+1. add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.), partially available from catalog `dump` data
+1. command line, os-native, or web-based gui front end for tools (later would require local micro-server)
+1. implement a number of search and query options for choosing songs from the song catalog. possible considerations:
+    * [jq](https://jqlang.github.io/jq/) - query directly or with a wrapper tool:
+    ```
+     jq -r 'to_entries | map(select(.value.dump != null and (.value.dump[] | contains("Ronnell")))) | map("/tmp/songs.unique/\(.key).mid")[]' /tmp/songs.unique/catalog.json
+    ```
+    * [nocodb](https://nocodb.com) - web-based spreadsheet-style option with expected search and filter options. could be run locally or cloud with a bit of extra tooling to feed `midistream`
+
 
 ## notes/other
 1. several "datalist" files are included in more computer-friendly formats and are based on the official cvp-800 series [datalist](https://usa.yamaha.com/files/download/other_assets/7/1264707/cvp809_en_dl_c0.pdf) reference document from yamaha. you can alter default voice preferences in `.miditoyz/settings.json` in the `voices` section where entries map song voices to preferred song voices using the **MSB**, **LSB**, **PC** values from `datalist.csv`. defaults voice preferences include mapping standard midi "Grand Piano" to the better sounding "CSP Grand Piano", etc.
 1. if your computer includes multiple versions of python, this project uses version 3x or greater. you may need to refer to python as `python3` to specifically reference the correct version
 1. consider creating/activating a virtual environment for your repo clone using (e.g. `venv`, `pipenv`, `conda`, etc.) and altering the **installation/setup** accordingly
 1. consider creating a unified songlist by concatenating all the individual `_songlist.txt` files and stripping out the initial directory/blank line
+
+--
+
+questions? suggestions? wanna help? reach out [here](https://github.com/dirkleas/miditoyz/issues) -- it's not just for issues and bugs!
 
 --
 
