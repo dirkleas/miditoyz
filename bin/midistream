@@ -60,7 +60,7 @@ def song_title(midi):
 
 def revoice(ch, msb, lsb, pc):
     """revoice by generating list of bank select and program change messages"""
-    print(f"  revoicing ch: {ch}, msb: {msb}, lsb: {lsb}, pc: {pc}")
+    typer.echo(f"  revoicing ch: {ch}, msb: {msb}, lsb: {lsb}, pc: {pc}")
     return [
         mido.Message("control_change", channel=ch, control=0, value=msb, time=0),
         mido.Message("control_change", channel=ch, control=32, value=lsb, time=0),
@@ -68,7 +68,7 @@ def revoice(ch, msb, lsb, pc):
     ]
 
 
-def stream_revoiced(songfile, index, voice_preferences, device):
+def stream_revoiced(songfile, index, song_count, voice_preferences, device):
     """restream midi file with revoiced program changes based on voice preferences"""
     channels = {}
     ch = lsb = msb = 0
@@ -76,7 +76,7 @@ def stream_revoiced(songfile, index, voice_preferences, device):
     serialize_settings({"bookmark": index + 1})
     midi = mido.MidiFile(songfile)
     title = song_title(midi) or "oops, missing title"
-    print(f"{title} ({songfile}), _songlist.txt line #{index+1}")
+    typer.echo(f"{title} ({songfile}), song {index+1} of {song_count}")
     if platform.system() == "Darwin":
         notify(f"{'/'.join(songfile.split('/')[-2:])}, #{index+1}", title)
     for event in midi.play():
@@ -88,14 +88,14 @@ def stream_revoiced(songfile, index, voice_preferences, device):
             ch = event.channel
             voice = (msb, lsb, event.program + 1)
             voice_preference = voice_preferences.get(voice, voice)
-            print(
+            typer.echo(
                 f"  voicing ch: {ch}, pc: {event.program+1}, voice={voice}, "
                 + f"voice_preference={voice_preference}, revoicing={tuple([*[ch], *voice_preference])}"
             )
             for voice_event in revoice(*tuple([*[ch], *voice_preference])):
                 device.send(voice_event)
         elif event.type == "sequencer_specific":
-            print(f"  seq: {event}")
+            typer.echo(f"  seq: {event}")
         else:
             device.send(event)
 
@@ -127,7 +127,7 @@ def main(
     is_song = music.lower().endswith(".mid")
     is_catalog_list = music.lower().endswith(".json")
     if bookmark < 0 or music != settings.get("music") or is_song:
-        bookmark = 0
+        bookmark = 1
     serialize_settings({"music": music, "device": device, "bookmark": bookmark})
     device = mido.open_output(device)
     if is_song:  # stream file...
@@ -135,7 +135,9 @@ def main(
             music,
         ]
     elif os.path.isdir(music):  # stream folder's midi files...
-        songs = sorted([x for x in os.listdir(music) if x.lower().endswith(".mid")])
+        songs = sorted(
+            [f"{music}/{x}" for x in os.listdir(music) if x.lower().endswith(".mid")]
+        )
     elif is_catalog_list:  # stream or catalog list...
         # catalog list format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...]
         songs = list(
@@ -145,19 +147,19 @@ def main(
             )
         )
     else:
-        print(
+        typer.echo(
             "oops, music must be a catalog list, midi file, or directory full of midi files"
         )
         return
     if bookmark > len(songs):
-        bookmark = 0
-        print(
+        bookmark = 1
+        typer.echo(
             f"{os.linesep}oops, your bookmark is beyond the last song in your music -- starting from the beginning...{os.linesep}"
         )
     try:  # revoice and stream songs...
         for skip, song in enumerate(songs):
-            if skip >= bookmark:
-                stream_revoiced(f"{music}/{song}", skip, voice_preferences, device)
+            if skip >= bookmark - 1:
+                stream_revoiced(song, skip, len(songs), voice_preferences, device)
     except:  # skip broken songs...
         pass
 
