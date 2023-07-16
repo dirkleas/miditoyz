@@ -98,6 +98,9 @@ def ingest_music(source_directory, destination_directory, miditoyz_directory):
     json.dump(
         songs_hashed_dict, open(f"{destination_directory}/catalog.json", "w"), indent=2
     )
+    settings = json.load(open(f"{homedir}/.miditoyz/settings.json"))
+    settings["catalog"] = f"{destination_directory}/catalog.json"
+    json.dump(settings, open(f"{homedir}/.miditoyz/settings.json", "w"))
     typer.echo(
         f"  song catalog saved to {destination_directory}/catalog.json -- all set, enjoy!!!"
     )

@@ -9,7 +9,7 @@ these goodies are located in the `bin` project directory:
 1. [midiingest](bin/midiingest) - create a new, cleaned-up version of your song collection without the duplicate, renamed versions of songs sprinkled across several directories and create a catalog of your new, epic song collection. the catalog incudes helpful details like the song tile, where it came from in your original song collection, and all the "metadata" inside the song midi files (e.g. everything but the performance details like notes played, pedals pressed, etc.)
 1. [midi](bin/midi) - display a list of currently available midi devices to be used by other tools to allow you to connect to your clavinova
 1. [midivoices]() - display a list of the tracks and voices for a specified song from your song collection
-1. [midistream](bin/midistream) - stream a directory full of music /midi song files or a single midi song to your midi device (e.g. yamaha cvp clavinova, etc) using your voice personal preferences (see **notes** below for more voice preferences) from your song collection
+1. [midistream](bin/midistream) - stream a song list from your song catalog, a directory full of music/midi song files or a single midi song to your midi device (e.g. yamaha cvp clavinova, etc) using your voice personal preferences (see **notes** below for more voice preferences) from your song collection
 1. [mididump](bin/mididump) - display the specified midi song file in readable plain text from your song collection. midi files are binary files that aren't readable by humans. 
 1. [midiraw](bin/midiraw) - display the specified midi song file in nerdier plain text from your song collection. `hexdump`-esque details can optionally be displayed too
 
@@ -45,9 +45,9 @@ this project uses the popular, free scripting language [python](https://www.pyth
 1. add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.), partially available from catalog `dump` data
 1. command line, os-native, or web-based gui front end for tools (later would require local micro-server)
 1. implement a number of search and query options for choosing songs from the song catalog. possible considerations:
-    * [jq](https://jqlang.github.io/jq/) - query directly or with a wrapper tool:
+    * [jq](https://jqlang.github.io/jq/) - query directly or with a wrapper tool, for example query for songs by Ronnell Bright:
     ```
-     jq -r 'to_entries | map(select(.value.dump != null and (.value.dump[] | contains("Ronnell")))) | map("/tmp/songs.unique/\(.key).mid")[]' /tmp/songs.unique/catalog.json
+     jq 'to_entries | map(select(.value.dump != null and (.value.dump[] | contains("Ronnell"))) | {"title": .value.title, "song": ("\(.key).mid")})' /tmp/songs.unique/catalog.json
     ```
     * [nocodb](https://nocodb.com) - web-based spreadsheet-style option with expected search and filter options. could be run locally or cloud with a bit of extra tooling to feed `midistream`
 

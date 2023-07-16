@@ -33,7 +33,6 @@ settings = json.load(open(f"{homedir}/.miditoyz/settings.json"))
 voice_preferences = {
     tuple(v[0]): tuple(v[1]) for k, v in settings.get("voices").items()
 }
-bookmark_default = 3
 
 
 def notify(title, subtitle):
@@ -68,7 +67,7 @@ def revoice(ch, msb, lsb, pc):
     ]
 
 
-def voice_restreamer(songfile, index, voice_preferences, device):
+def stream_revoiced(songfile, index, voice_preferences, device):
     """restream midi file with revoiced program changes based on voice preferences"""
     channels = {}
     ch = lsb = msb = 0
@@ -103,10 +102,10 @@ def voice_restreamer(songfile, index, voice_preferences, device):
 def main(
     music: str = typer.Option(
         settings.get("music"),  # default to last music
-        help="MIDI music file or directory full of music to stream",
+        help='MIDI music file, directory full of music, or catalog list to stream. catalog list is a JSON file containing list of song "keys"',
     ),
     bookmark: int = typer.Option(
-        settings.get("bookmark", bookmark_default),
+        settings.get("bookmark", 0),
         help="Bookmark for last song line number from music folder's _songlist.txt to start playing",
     ),
     device: str = typer.Option(
@@ -114,35 +113,49 @@ def main(
         help='MIDI device to stream to (e.g. "Clavinova Port 1" for USB, "Network Clavinova for WIFI, etc.))',
     ),
 ):
-    """Stream music as either a midi file or directory full of midi files to a midi device with using
+    """Stream music as a catalog song list, a midi file, or directory full of midi files to a midi device with using
     bank selection and program changes based on voice preferences stored in "~/.miditoyz/settings.json"
-    and created automatically the first time you stream. Options are remembered between streaming sessions, so
-    subequent streamings pick up from the last song played. Bookmark values are based on line numbers
+    and created automatically the first time you stream. Catalog song lists are JSON files with the format:
+    [{"title": "Autumn Leaves", "song": "hash.mid"}, ...] created from your collections "catalog.json" list.
+    Command line options are remembered between streaming sessions, so
+    subsequent streamings pick up from the last song played. Bookmark values are based on line numbers
     from the directory's "_songlist.txt" file, which starts with a title and blank line, so the first
     song is line 3 (e.g. "--bookmark 3"). Bookmark values are reset to 3 if the music is a song rather than
     a directory, is either too low/high, or if the music is different than the last time you streamed.
     """
     is_song = music.lower().endswith(".mid")
-    if bookmark < bookmark_default or music != settings.get("music") or is_song:
-        bookmark = bookmark_default
+    is_catalog_list = music.lower().endswith(".json")
+    if bookmark < 0 or music != settings.get("music") or is_song:
+        bookmark = 0
+
     serialize_settings({"music": music, "device": device, "bookmark": bookmark})
     device = mido.open_output(device)
     if is_song:  # stream file...
-        voice_restreamer(music, 0, voice_preferences, device)
-    elif os.path.isdir(music):  # stream folder's midi files...
-        songs = sorted([x for x in os.listdir(music) if x.lower().endswith(".mid")])
-        if bookmark > len(songs) + 2:
-            bookmark = bookmark_default
+        stream_revoiced(music, 0, voice_preferences, device)
+    elif (
+        os.path.isdir(music) or is_catalog_list
+    ):  # stream folder's midi files or catalog list...
+        if (
+            is_catalog_list
+        ):  # catalog list format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...]
+            songs = list(
+                map(
+                    lambda x: f'{settings.get("catalog")[:-13]}/{x.get("song")}',
+                    json.load(open(music)),
+                )
+            )
+        else:  # folder's midi files...
+            songs = sorted([x for x in os.listdir(music) if x.lower().endswith(".mid")])
+        if bookmark > len(songs):
+            bookmark = 0
             print(
                 f"{os.linesep}oops, your bookmark is beyond the last song in your music -- starting from the beginning...{os.linesep}"
             )
-        try:  # skip calculation ignores songlist zero-based index and skips title and blank line
+        try:  # revoice and stream songs...
             for skip, song in enumerate(songs):
-                if skip >= bookmark - bookmark_default:
-                    voice_restreamer(
-                        f"{music}/{song}", skip + 2, voice_preferences, device
-                    )
-        except:
+                if skip >= bookmark:
+                    stream_revoiced(f"{music}/{song}", skip, voice_preferences, device)
+        except:  # skip broken songs...
             pass
     else:
         print("oops, music must be a midi file or directory full of midi files")
