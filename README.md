@@ -2,7 +2,9 @@
 
 a collection of command line (cli) hacks (h4x) for your midi song collection, initially focusing the [Yamaha Clavinova CVP-809GP](https://usa.yamaha.com/products/musical_instruments/pianos/clavinova/cvp-809gp/index.html)
 
-why? are you sitting on a collection of a bunch of folders full of midi files purchases, scavanged, or inherited? here are some tools to wrangle and enjoy them
+why? are you sitting on a collection of a bunch of folders full of midi files purchases, scavenged, or inherited? here are some tools to wrangle and enjoy them. great collections are free of duplicate copies of songs stashed in multiple places with different file names -- this project can help with that. big collections need to be cataloged and easily searched with simple ways to create song playlists which reference, but don't make more copies of your songs -- again, this project has your back!
+
+the key is "ingesting" your songs into a new, cleaned up, cataloged collection. one thats finished, and it can take a while depending on the size of your colection, your can play or "stream" songs from your computer to your piano from playlists. yes, you can auto-play a bunch of songs one after another. say goodbye to digging for a song from your piano's console, pressing play, and cueing one more (rinse and repeat)...
 
 these goodies are located in the `bin` project directory:
 
@@ -40,7 +42,7 @@ this project uses the popular, free scripting language [python](https://www.pyth
 
 ## roadmap
 
-1. housekeeping, testing [automation], care-and-feeding, etc.
+1. installation tool, housekeeping, testing [automation], care-and-feeding, etc.
 1. add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
 1. add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.), partially available from catalog `dump` data
 1. command line, os-native, or web-based gui front end for tools (later would require local micro-server)
@@ -50,13 +52,12 @@ this project uses the popular, free scripting language [python](https://www.pyth
      jq 'to_entries | map(select(.value.dump != null and (.value.dump[] | contains("Ronnell"))) | {"title": .value.title, "song": ("\(.key).mid")})' /tmp/songs.unique/catalog.json
     ```
     * [nocodb](https://nocodb.com) - web-based spreadsheet-style option with expected search and filter options. could be run locally or cloud with a bit of extra tooling to feed `midistream`
-
+    * ai/large language model (llm) interface for natural language search with support for providing song background, recommendations, etc. via text or voice (think "hey siri | alexa | siri, play some jazz standards or movie soundtracks or that song brenda and eddie by billy joel)
 
 ## notes/other
 1. several "datalist" files are included in more computer-friendly formats and are based on the official cvp-800 series [datalist](https://usa.yamaha.com/files/download/other_assets/7/1264707/cvp809_en_dl_c0.pdf) reference document from yamaha. you can alter default voice preferences in `.miditoyz/settings.json` in the `voices` section where entries map song voices to preferred song voices using the **MSB**, **LSB**, **PC** values from `datalist.csv`. defaults voice preferences include mapping standard midi "Grand Piano" to the better sounding "CSP Grand Piano", etc.
 1. if your computer includes multiple versions of python, this project uses version 3x or greater. you may need to refer to python as `python3` to specifically reference the correct version
 1. consider creating/activating a virtual environment for your repo clone using (e.g. `venv`, `pipenv`, `conda`, etc.) and altering the **installation/setup** accordingly
-1. consider creating a unified songlist by concatenating all the individual `_songlist.txt` files and stripping out the initial directory/blank line
 
 --
 
