@@ -4,14 +4,17 @@ a collection of command line (cli) hacks (h4x) for your midi song collection, in
 
 why? are you sitting on a collection of a bunch of folders full of midi files purchases, scavenged, or inherited? here are some tools to wrangle and enjoy them. great collections are free of duplicate copies of songs stashed in multiple places with different file names -- this project can help with that. big collections need to be cataloged and easily searched with simple ways to create song playlists which reference, but don't make more copies of your songs -- again, this project has your back!
 
-the key is "ingesting" your songs into a new, cleaned up, cataloged collection. one thats finished, and it can take a while depending on the size of your colection, your can play or "stream" songs from your computer to your piano from playlists. yes, you can auto-play a bunch of songs one after another. say goodbye to digging for a song from your piano's console, pressing play, and cueing one more (rinse and repeat)...
+the key is "ingesting" your songs into a new, cleaned up, and cataloged collection. once thats finished (plan for about 5 minutes per 1000 songs), you can play or "stream" songs from your computer to your piano via usb, MIDI DIN, or wifi via playlists. songs outside your collections can still be played by pointing to a folder full of songs, or an individual song. you can finally auto-play a bunch of songs one after another. say goodbye to digging for a song from your piano's touch screen, pressing play, and cueing one more, then rinse and repeat manually...
 
-these goodies are located in the `bin` project directory:
+these goodies are located in the `bin` project directory
 
+*most common tools:*
 1. [midiingest](bin/midiingest) - create a new, cleaned-up version of your song collection without the duplicate, renamed versions of songs sprinkled across several directories and create a catalog of your new, epic song collection. the catalog incudes helpful details like the song tile, where it came from in your original song collection, and all the "metadata" inside the song midi files (e.g. everything but the performance details like notes played, pedals pressed, etc.)
 1. [midi](bin/midi) - display a list of currently available midi devices to be used by other tools to allow you to connect to your clavinova
+1. [midistream](bin/midistream) - stream a song list from your song catalog, a directory full of music/midi song files or a single midi song to your midi device (e.g. yamaha cvp clavinova, etc) using your voice personal preferences (see **notes** below for more voice preferences) from your song collection. for your convenience, it'll remember where it left off when you stream a setlist or ask it to play a folder full of songs
+
+*research/technical tools:*
 1. [midivoices]() - display a list of the tracks and voices for a specified song from your song collection
-1. [midistream](bin/midistream) - stream a song list from your song catalog, a directory full of music/midi song files or a single midi song to your midi device (e.g. yamaha cvp clavinova, etc) using your voice personal preferences (see **notes** below for more voice preferences) from your song collection
 1. [mididump](bin/mididump) - display the specified midi song file in readable plain text from your song collection. midi files are binary files that aren't readable by humans. 
 1. [midiraw](bin/midiraw) - display the specified midi song file in nerdier plain text from your song collection. `hexdump`-esque details can optionally be displayed too
 
