@@ -12,15 +12,189 @@
 #   - integrate installation/setup into setup (renamed ingest)
 #
 
-import mido, typer
+import sys, os, hashlib, shutil, json, parse, pathlib, pickle, mido, typer
+from collections import defaultdict
+from music21 import midi
+
+homedir = pathlib.Path.home()
 
 app = typer.Typer()
 
 
+## building blocks...
+def dump_midi(filename: str, metadata: bool = False):
+    """Dump a MIDI file in raw text format, optionally metadata only"""
+    mf = midi.MidiFile()
+    mf.open(filename)
+    mf.read()
+    mf.close()
+
+    dump = []
+    for i, track in enumerate(mf.tracks):
+        time_delta = time_total = 0
+        for event in track.events:
+            if isinstance(event, midi.DeltaTime):
+                time_delta = event.time
+                time_total += event.time
+            elif (
+                metadata
+                and hasattr(event.type, "name")
+                and (
+                    event.type.name in ["NOTE_ON", "NOTE_OFF", "PITCH_BEND"]
+                    or (
+                        event.type.name == "CONTROLLER_CHANGE"
+                        and not event.parameter1 in [0, 32]
+                    )
+                    or event.type.name == "END_OF_TRACK"
+                )
+            ):
+                pass
+            else:
+                dump.append(
+                    f"{str(event).replace('<music21.midi.MidiEvent ', '')[:-1]}, time={time_delta}, clock={time_total}"
+                )
+    return dump
+
+
+def get_track_channel_voices(midi_filename, voices):
+    print(f"song file: {midi_filename}")
+    with mido.MidiFile(midi_filename) as mid:
+        for i, track in enumerate(mid.tracks):
+            channels = defaultdict(dict)
+            print(f"  track: {i+1}")
+            for msg in track:
+                if msg.type == "track_name":
+                    print(f'    track name: {track.name.strip() or "n/a"}')
+                elif msg.type == "control_change" and msg.control == 0:
+                    channels[msg.channel]["msb"] = msg.value
+                elif msg.type == "control_change" and msg.control == 32:
+                    channels[msg.channel]["lsb"] = msg.value
+                elif msg.type == "program_change":
+                    channels[msg.channel]["pc"] = msg.program + 1
+            for channel in sorted(channels.keys()):
+                voice = (
+                    channels.get(channel).get("msb", 0),
+                    channels.get(channel).get("lsb", 0),
+                    channels.get(channel).get("pc", 1),
+                )
+                print(
+                    f"      channel {channel}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                )
+
+
+def is_midi(filename):
+    return filename.lower().endswith((".midi", ".mid"))
+
+
+def ingest_music(source_directory, destination_directory, miditoyz_directory):
+    """ingest music from source_directory into destination_directory"""
+    songs = []
+    typer.echo(
+        f"ingesting source_directory: {source_directory} => destination_directory: {destination_directory}..."
+    )
+    # locate candidate songs...
+    for dirpath, dirnames, filenames in os.walk(source_directory):
+        for filename in filenames:
+            if is_midi(filename):
+                songs.append(os.path.join(dirpath, filename))
+    songs = sorted(songs)
+
+    # hash for duplicates...
+    typer.echo(f"  scanning for duplicate songs...")
+    songs_hashed = [
+        [song, hashlib.md5(open(song, "rb").read()).hexdigest()] for song in songs
+    ]
+    songs_hashed_dict = defaultdict(lambda: defaultdict(list))
+    for song, hash in songs_hashed:
+        songs_hashed_dict[hash]["sources"].append(song)
+    typer.echo(
+        f"  found {len(songs)} total songs of which {len(songs_hashed_dict)} are actually unique..."
+    )
+
+    # identify broken/unstreamable songs...
+    typer.echo(
+        f"  scanning for broken or invalid song files, this will take a while..."
+    )
+    songs_broken = []
+    for hash in songs_hashed_dict.keys():
+        try:
+            mido.MidiFile(f"{homedir}/h4x/clav.toys.unique/{hash}.mid")
+        except:
+            songs_broken.append(hash)
+    # tbd: add broken identifier to catalog or remove broken songs...
+    typer.echo(
+        f'  {len(songs_broken) / len(songs_hashed_dict) * 100:.2f}% of songs are "broken and will be ignored"...'
+    )
+
+    # copy unique songs to destination_directory...
+    typer.echo("  copying unique songs to destination_directory, again patience...")
+    if not len(os.listdir(destination_directory)) == len(songs_hashed_dict.keys()):
+        for hash, v in songs_hashed_dict.items():  # fyi, this took 1m5.3s
+            shutil.copyfile(v["sources"][0], f"{destination_directory}/{hash}.mid")
+
+    # generate catalog...
+    typer.echo("  generating song catalog...")
+    shutil.copyfile(
+        f"{miditoyz_directory}/bin/mididump", f"{destination_directory}/mididump.py"
+    )
+    sys.path.append(f"{destination_directory}")
+    sys.path
+    import mididump
+
+    def get_title(dump):
+        """get first title from dump"""
+        event = next(filter(lambda x: x.startswith("SEQUENCE_TRACK_NAME"), dump), None)
+        if not event:
+            return "n/a"
+        else:
+            return parse.parse(
+                "SEQUENCE_TRACK_NAME, track={track}, channel={channel}, data=b{title}, time={time}",
+                event,
+            )["title"][1:-1]
+
+    # add metadata to catalog using "mididump --metadata"...
+    for song in [s for s in list(songs_hashed_dict.keys()) if s not in songs_broken]:
+        dump = mididump.dump_midi(f"{destination_directory}/{song}.mid", metadata=True)
+        songs_hashed_dict[song] = {
+            **{"title": get_title(dump), "dump": dump},
+            **songs_hashed_dict[song],
+        }
+    json.dump(
+        songs_hashed_dict, open(f"{destination_directory}/catalog.json", "w"), indent=2
+    )
+    settings = json.load(open(f"{homedir}/.miditoyz/settings.json"))
+    settings["catalog"] = f"{destination_directory}/catalog.json"
+    json.dump(settings, open(f"{homedir}/.miditoyz/settings.json", "w"))
+    typer.echo(
+        f"  song catalog saved to {destination_directory}/catalog.json -- all set, enjoy!!!"
+    )
+
+
+## cli commands...
 @app.command()
-def setup(name: str):
-    """setup miditoyz"""
-    typer.echo("setup...")
+def init(
+    source_directory: pathlib.Path = typer.Argument(
+        ..., help="directory full of MIDI songs to clean up"
+    ),
+    destination_directory: pathlib.Path = typer.Argument(
+        ...,
+        help="directory for cleaned up MIDI songs with duplicates removed and catalog generated",
+    ),
+    miditoyz_directory: pathlib.Path = typer.Argument(
+        ...,
+        help="directory where miditoys are installed",
+    ),
+):
+    """generate a new music collection from a source directory in destination directory without duplicate songs"""
+    # create destination_directory if it doesn't exist...
+    if not os.path.exists(destination_directory):
+        os.makedirs(destination_directory)
+    if not os.path.exists(f"{miditoyz_directory}/bin/mididump"):
+        typer.echo(
+            f'{os.linesep}oops, miditoyz directory "{miditoyz_directory}" not found, please find it and try again...{os.linesep}'
+        )
+    else:
+        ingest_music(source_directory, destination_directory, miditoyz_directory)
 
 
 @app.command()
@@ -36,15 +210,40 @@ def stream(name: str):
 
 
 @app.command()
-def dump(name: str):
-    """dump midi song in plain text for analysis"""
-    typer.echo("dump...")
+def voices(
+    midi_file: str = typer.Argument(..., help="MIDI file for voice list"),
+    voices: str = typer.Option(
+        f"{pathlib.Path.home()}/.miditoyz/datalist.pickle",
+        help="Pickle file of voices, see official clavinova datalist.pdf",
+    ),
+    detail: bool = typer.Option(
+        False,
+        help="include voice MSB, LSB, PC voice values for searching datalist csv or pdf",
+    ),
+):
+    """Generate a list of voices for each track in a midi file"""
+    get_track_channel_voices(midi_file, pickle.load(open(voices, "rb")))
 
 
 @app.command()
-def raw(name: str):
-    """raw midi song data"""
-    typer.echo("raw...")
+def dump(
+    song: str = typer.Argument(
+        ..., help="The path to the MIDI song file to be analyzed"
+    ),
+    metadata: bool = typer.Option(False, help="Show only metadata"),
+):
+    """Dump a MIDI file in raw text format. if you need hashdump-esque details, use "midiraw --debug" instead"""
+    for dump in dump_midi(song, metadata):
+        typer.echo(dump)
+
+
+@app.command()
+def raw(
+    midi_file: str = typer.Argument(..., help="MIDI file to dump in raw format"),
+    debug: bool = typer.Option(False, help="Enable debug mode"),
+):
+    """Dump a MIDI file in raw text format, optionally with hexdump output."""
+    mido.MidiFile(midi_file, debug=debug).print_tracks()
 
 
 if __name__ == "__main__":
