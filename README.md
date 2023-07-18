@@ -20,11 +20,19 @@ to understand what's available, you can use the built-in help -- simply enter `m
 │ --help                        Show this message and exit.                                                            │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ devices  list available midi devices                                                                                 │
 │ dump     Dump a MIDI file in raw text format. if you need hashdump-esque details, use "midiraw --debug" instead      │
 │ init     generate a new music collection from a source directory in destination directory without duplicate songs    │
-│ list     list available midi devices                                                                                 │
 │ raw      Dump a MIDI file in raw text format, optionally with hexdump output.                                        │
-│ stream   stream playlist, folders, or individual songs to a device                                                   │
+│ stream   Stream music as a catalog song list, a midi file, or directory full of midi files to a midi device with     │
+│          using bank selection and program changes based on voice preferences stored in "~/.miditoyz/settings.json"   │
+│          and created automatically the first time you stream. Catalog song lists are JSON files with the format:     │
+│          [{"title": "Autumn Leaves", "song": "hash.mid"}, ...] created from your collections "catalog.json" list.    │
+│          Command line options are remembered between streaming sessions, so subsequent streamings pick up from the   │
+│          last song played. Bookmark values are based on line numbers from the directory's "_songlist.txt" file,      │
+│          which starts with a title and blank line, so the first song is line 3 (e.g. "--bookmark 3"). Bookmark       │
+│          values are reset to 3 if the music is a song rather than a directory, is either too low/high, or if the     │
+│          music is different than the last time you streamed.                                                         │
 │ voices   Generate a list of voices for each track in a midi file                                                     │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
