@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+
+# Copyright (c) 2023 Dirk Leas
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+#
+# miditoyz - care and feeding for you midi song collection
+#
+# todo:
+#   - integrate ingest, midi, stream, dump, and raw
+#   - integrate installation/setup into setup (renamed ingest)
+#
+
+import mido, typer
+
+app = typer.Typer()
+
+
+@app.command()
+def setup(name: str):
+    """setup miditoyz"""
+    typer.echo("setup...")
+
+
+@app.command()
+def list():
+    """list available midi devices"""
+    typer.echo(f"available midi device(s): {', '.join(set(mido.get_output_names()))}")
+
+
+@app.command()
+def stream(name: str):
+    """stream playlist, folders, or individual songs to a device"""
+    typer.echo("stream...")
+
+
+@app.command()
+def dump(name: str):
+    """dump midi song in plain text for analysis"""
+    typer.echo("dump...")
+
+
+@app.command()
+def raw(name: str):
+    """raw midi song data"""
+    typer.echo("raw...")
+
+
+if __name__ == "__main__":
+    app()

@@ -16,7 +16,7 @@ import mido, typer
 
 def main():
     """list available midi devices"""
-    print(f"available midi device(s): {', '.join(set(mido.get_output_names()))}")
+    typer.echo(f"available midi device(s): {', '.join(set(mido.get_output_names()))}")
 
 
 if __name__ == "__main__":
