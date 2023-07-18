@@ -286,13 +286,16 @@ def stream(
 ):
     """Stream music as a catalog song list, a midi file, or directory full of midi files to a midi device with using
     bank selection and program changes based on voice preferences stored in "~/.miditoyz/settings.json"
-    and created automatically the first time you stream. Catalog song lists are JSON files with the format:
+    and created automatically the first time you stream.
+
+    Catalog song lists are JSON files with the format:
     [{"title": "Autumn Leaves", "song": "hash.mid"}, ...] created from your collections "catalog.json" list.
+
+    Bookmark values are based on the sequential number of the song in the playlist or directory song list starting with 1.
+    We do the right thing if you specify a bookmark number that's too big or small or your play music for another source.
+
     Command line options are remembered between streaming sessions, so
-    subsequent streamings pick up from the last song played. Bookmark values are based on line numbers
-    from the directory's "_songlist.txt" file, which starts with a title and blank line, so the first
-    song is line 3 (e.g. "--bookmark 3"). Bookmark values are reset to 3 if the music is a song rather than
-    a directory, is either too low/high, or if the music is different than the last time you streamed.
+    subsequent streamings pick up from the last song played.
     """
     is_song = music.lower().endswith(".mid")
     is_catalog_list = music.lower().endswith(".json")
