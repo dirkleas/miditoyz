@@ -1,15 +1,15 @@
 # miditoyz
 
-a collection of command line (cli) hacks (h4x) for your midi song collection, initially focusing the [Yamaha Clavinova CVP-809GP](https://usa.yamaha.com/products/musical_instruments/pianos/clavinova/cvp-809gp/index.html)
+a collection of command line (cli) hacks (h4x) for your midi song collection, initially focusing on the [Yamaha Clavinova CVP-809GP](https://usa.yamaha.com/products/musical_instruments/pianos/clavinova/cvp-809gp/index.html)
 
-why? are you sitting on a collection of a bunch of folders full of midi files purchases, scavenged, or inherited? here are some tools to wrangle and enjoy them. great collections are free of duplicate copies of songs stashed in multiple places with different file names -- this project can help with that. big collections need to be cataloged and easily searched with simple ways to create song playlists which reference, but don't make more copies of your songs -- again, this project has your back!
+why? are you sitting on a collection of a bunch of folders full of midi song files you've purchases, scavenged, or inherited? here are some tools to wrangle and enjoy them. great collections are free of duplicate copies of songs stashed in multiple places with different file names -- this project can help with that. big collections need to be cataloged and easily searched with simple ways to create song playlists which reference, but don't make more copies of your songs -- again, this project has your back!
 
-the key is "ingesting" your songs into a new, cleaned up, and cataloged collection. once thats finished (plan for about 5 minutes per 1000 songs), you can play or "stream" songs from your computer to your piano via usb, MIDI DIN, or wifi via playlists. songs outside your collections can still be played by pointing to a folder full of songs, or an individual song. you can finally auto-play a bunch of songs one after another. say goodbye to digging for a song from your piano's touch screen, pressing play, and cueing one more, then rinse and repeat manually...
+the key is "ingesting" your songs into a new, cleaned up, and cataloged collection. once that's finished (plan for about 5 minutes per 1000 songs), you can play or "stream" songs from your computer to your piano via usb, MIDI DIN, or wifi via playlists. songs outside your collections can still be played by pointing to a folder full of songs, or an individual song. you can finally auto-play a bunch of songs one after another. say goodbye to digging for a song from your piano's touch screen, pressing play, and cueing one more, then rinse and repeat manually...
 
 these goodies are located in the `bin` project directory
 
 *most common tools:*
-1. [midiingest](bin/midiingest) - create a new, cleaned-up version of your song collection without the duplicate, renamed versions of songs sprinkled across several directories and create a catalog of your new, epic song collection. the catalog incudes helpful details like the song tile, where it came from in your original song collection, and all the "metadata" inside the song midi files (e.g. everything but the performance details like notes played, pedals pressed, etc.)
+1. [midiingest](bin/midiingest) - create a new, cleaned-up version of your song collection without the duplicate, renamed versions of songs sprinkled across several directories and create a catalog of your new, epic song collection. the catalog incudes helpful details like the song title, where it came from in your original song collection, and all the "metadata" inside the song midi files (e.g. everything but the performance details like notes played, pedals pressed, etc.)
 1. [midi](bin/midi) - display a list of currently available midi devices to be used by other tools to allow you to connect to your clavinova
 1. [midistream](bin/midistream) - stream a song list from your song catalog, a directory full of music/midi song files or a single midi song to your midi device (e.g. yamaha cvp clavinova, etc) using your voice personal preferences (see **notes** below for more voice preferences) from your song collection. for your convenience, it'll remember where it left off when you stream a setlist or ask it to play a folder full of songs
 
@@ -46,6 +46,8 @@ this project uses the popular, free scripting language [python](https://www.pyth
 ## roadmap
 
 1. installation tool, housekeeping, testing [automation], care-and-feeding, etc.
+    * consider moving renaming `midiingest` to `midisetup` and combining **installation/setup** steps with catalog ingestion
+    * consider integrating everything into a single tool with sub-commands (e.g. `miditoyz setup | list | stream | voices | dump` with corresponding arguments) instead of having a bunch of separate tools
 1. add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
 1. add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.), partially available from catalog `dump` data
 1. command line, os-native, or web-based gui front end for tools (later would require local micro-server)
