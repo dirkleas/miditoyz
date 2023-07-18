@@ -4,7 +4,9 @@ a command line (cli) hack (h4x) for your midi song collection, initially focusin
 
 why? are you sitting on a collection of a bunch of folders full of midi song files you've purchases, scavenged, or inherited? here are some tools to wrangle and enjoy them. great collections are free of duplicate copies of songs stashed in multiple places with different file names -- this project can help with that. big collections need to be cataloged and easily searched with simple ways to create song playlists which reference, but don't make more copies of your songs -- again, this project has your back!
 
-[miditoyz](bin/miditoys) incudes a single utility with useful commands for converting your songs into a new, cleaned up, and cataloged collection. once that's finished (plan for at least 3 minutes per 1000 songs), you can play or "stream" songs from your computer to your piano via usb, MIDI DIN, or wifi via playlists. songs outside your collections can still be played by pointing to a folder full of songs, or an individual song. you can finally auto-play a bunch of songs one after another. say goodbye to digging for a song from your piano's touch screen, pressing play, and cueing one more, then rinse and repeat manually...
+[miditoyz](miditoys) is a single utility with useful sub-commands, the first of which is for converting your songs into a new, cleaned up, and cataloged collection -- your original collection is still there untouched of course. once that's finished with the conversion of your catalog (plan for at least 3 minutes per 1000 songs), you can play or "stream" songs from your computer to your piano via usb, MIDI DIN, or wifi via playlists. songs outside your collections can still be played by pointing to a folder full of songs, or an individual song. you can finally auto-play a bunch of songs one after another. say goodbye to digging for a song from your piano's touch screen, pressing play, and cueing one more, then rinse and repeat manually...
+
+you can also poke round and see what midi devices you have access to, check out the voicing on your songs, even peek inside and see what's going on.
 
 to understand what's available, you can use the built-in help -- simply enter `miditoyz --help` to see a list of all the commands, and then see the details for a particular command by entering `miditoyz stream --help`.
 ```
@@ -61,9 +63,10 @@ this project uses the popular, free scripting language [python](https://www.pyth
 
 1. install latest version of [python](https://www.python.org/downloads/) for your operating system (os) and add it to your path
 1. install latest version of [git](https://git-scm.com) for your os and add it to your path
-1. clone this project on your computer via a terminal shell or command prompt in the directory of your choice. cloning the project will create a new folder named `miditoyz` -- change directory into that folder and you'll see a `bin` folder containing the scripts. add this folder to your os path or create aliases for them (i.e. windows `set midistream "python c:\clav\bin\midistream`, etc.):
+1. "clone" this project on your computer via a terminal shell or command prompt in the directory of your choice. cloning the project will create a new folder named `miditoyz` -- change directory into that folder and you'll see the `miditoyz` script. add this folder to your os path or create aliases for them (i.e. windows `set miditoyz "python c:\miditoyz\miditoyz`, etc.):
     ```
-    git clone https://github.com/dirkleas/clav
+    git clone https://github.com/dirkleas/miditoyz
+    cd miditoyz
     ```
 1. create default project configuration in your home directory, altering voice preferences if you wish:
     ```
@@ -73,9 +76,12 @@ this project uses the popular, free scripting language [python](https://www.pyth
     ```
     pip install -r requirements.txt
     ```
-1. generate a new collection from your existing song collection that removes duplicates and broken songs along with a song catalog. depending on the size of your song catalog, this might take a while. on my 2021 fancy apple macbook pro this takes about 5 minutes per 1000 songs -- your mileage may vary ... dramatically ;-). just follow the help instructions:
+1. generate a new collection from your existing song collection that removes duplicates and broken songs along with a song catalog. depending on the size of your song catalog, this might take a while. it might be worth copying a subset of your collection to a temporary directory and playing around with that first before tackling your entire monster collection. on my 2021 fancy apple macbook pro this takes about 3 minutes per 1000 songs -- your mileage may vary ... dramatically ;-). just follow the help instructions and appropriate examples for mac, linux, or windows:
     ```
     miditoyz init --help
+
+    miditoyz ~/music/collection ~/music/collection.new          # mac or linux
+    miditoyz c:\music\collection c:\music\collection.new        # windows
     ```
 
 ## roadmap
@@ -98,7 +104,7 @@ this project uses the popular, free scripting language [python](https://www.pyth
 1. if your computer includes multiple versions of python, this project uses version 3x or greater. you may need to refer to python as `python3` to specifically reference the correct version
 1. consider creating/activating a virtual environment for your repo clone using (e.g. `venv`, `pipenv`, `conda`, etc.) and altering the **installation/setup** accordingly
 
---
+
 
 questions? suggestions? wanna help? reach out [here](https://github.com/dirkleas/miditoyz/issues) -- it's not just for issues and bugs!
 
