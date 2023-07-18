@@ -47,7 +47,7 @@ here's the currently available commands:
 
 *most common commands:*
 1. `miditoys init` - create a new, cleaned-up version of your song collection without the duplicate, renamed versions of songs sprinkled across several directories and create a catalog of your new, epic song collection. the catalog incudes helpful details like the song title, where it came from in your original song collection, and all the "metadata" inside the song midi files (e.g. everything but the performance details like notes played, pedals pressed, etc.)
-1. `miditoyz list` - display a list of currently available midi devices to be used by other tools to allow you to connect to your clavinova
+1. `miditoyz devices` - display a list of currently available midi devices to be used by other tools to allow you to connect to your clavinova
 1. `miditoyz stream` - stream a song list from your song catalog, a directory full of music/midi song files or a single midi song to your midi device (e.g. yamaha cvp clavinova, etc) using your voice personal preferences (see **notes** below for more voice preferences) from your song collection. for your convenience, it'll remember where it left off when you stream a setlist or ask it to play a folder full of songs
 
 *research/technical commands:*
