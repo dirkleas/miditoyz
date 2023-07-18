@@ -6,11 +6,46 @@ why? are you sitting on a collection of a bunch of folders full of midi song fil
 
 [miditoyz](bin/miditoys) incudes a single utility with useful commands for converting your songs into a new, cleaned up, and cataloged collection. once that's finished (plan for at least 3 minutes per 1000 songs), you can play or "stream" songs from your computer to your piano via usb, MIDI DIN, or wifi via playlists. songs outside your collections can still be played by pointing to a folder full of songs, or an individual song. you can finally auto-play a bunch of songs one after another. say goodbye to digging for a song from your piano's touch screen, pressing play, and cueing one more, then rinse and repeat manually...
 
-to understand what's available, you can use the built-in help -- simply enter `miditoyz --help` to see a list of all the commands, and then see the details for a particular command by entering `miditoyz stream --help`. here ae the currently available commands:
+to understand what's available, you can use the built-in help -- simply enter `miditoyz --help` to see a list of all the commands, and then see the details for a particular command by entering `miditoyz stream --help`.
+```
+(clav) ➜  miditoyz git:(main) miditoyz --help
+
+ Usage: miditoyz [OPTIONS] COMMAND [ARGS]...
+
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.                                              │
+│ --show-completion             Show completion for the current shell, to copy it or customize the installation.       │
+│ --help                        Show this message and exit.                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ dump     Dump a MIDI file in raw text format. if you need hashdump-esque details, use "midiraw --debug" instead      │
+│ init     generate a new music collection from a source directory in destination directory without duplicate songs    │
+│ list     list available midi devices                                                                                 │
+│ raw      Dump a MIDI file in raw text format, optionally with hexdump output.                                        │
+│ stream   stream playlist, folders, or individual songs to a device                                                   │
+│ voices   Generate a list of voices for each track in a midi file                                                     │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+(clav) ➜  miditoyz git:(main) miditoyz stream --help
+
+ Usage: miditoyz stream [OPTIONS] NAME
+
+ stream playlist, folders, or individual songs to a device
+
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *    name      TEXT  [default: None] [required]                                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+(clav) ➜  miditoyz git:(main)
+```
+here's the currently available commands:
 
 *most common commands:*
 1. `miditoys init` - create a new, cleaned-up version of your song collection without the duplicate, renamed versions of songs sprinkled across several directories and create a catalog of your new, epic song collection. the catalog incudes helpful details like the song title, where it came from in your original song collection, and all the "metadata" inside the song midi files (e.g. everything but the performance details like notes played, pedals pressed, etc.)
-1. `miditoyz midi` - display a list of currently available midi devices to be used by other tools to allow you to connect to your clavinova
+1. `miditoyz list` - display a list of currently available midi devices to be used by other tools to allow you to connect to your clavinova
 1. `miditoyz stream` - stream a song list from your song catalog, a directory full of music/midi song files or a single midi song to your midi device (e.g. yamaha cvp clavinova, etc) using your voice personal preferences (see **notes** below for more voice preferences) from your song collection. for your convenience, it'll remember where it left off when you stream a setlist or ask it to play a folder full of songs
 
 *research/technical commands:*
