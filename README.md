@@ -1,10 +1,10 @@
 # miditoyz
 
-a command line (cli) hack (h4x) for your midi song collection, initially focusing on the [Yamaha Clavinova CVP-809GP](https://usa.yamaha.com/products/musical_instruments/pianos/clavinova/cvp-809gp/index.html)
+a command line (cli) hacks (h4x) for your midi song collection, initially focusing on the [Yamaha Clavinova CVP-809GP](https://usa.yamaha.com/products/musical_instruments/pianos/clavinova/cvp-809gp/index.html)
 
 why? are you sitting on a collection of a bunch of folders full of midi song files you've purchases, scavenged, or inherited? here are some tools to wrangle and enjoy them. great collections are free of duplicate copies of songs stashed in multiple places with different file names -- this project can help with that. big collections need to be cataloged and easily searched with simple ways to create song playlists which reference, but don't make more copies of your songs -- again, this project has your back!
 
-[miditoyz](miditoyz) is a single utility with useful sub-commands, the first of which is for converting your songs into a new, cleaned up, and cataloged collection -- your original collection is still there untouched of course. once that's finished with the conversion of your catalog (plan for at least 3 minutes per 1000 songs), you can play or "stream" songs from your computer to your piano via usb, MIDI DIN, or wifi via playlists. songs outside your collections can still be played by pointing to a folder full of songs, or an individual song. you can finally auto-play a bunch of songs one after another. say goodbye to digging for a song from your piano's touch screen, pressing play, and cueing one more, then rinse and repeat manually...
+[miditoyz](miditoyz) is a single utility with useful sub-commands, the first of which is for converting your songs into a new, cleaned up, and cataloged collection -- your original collection is still there untouched of course. once that's finished with the conversion of your catalog (plan for at least 3 minutes per 1000 songs), you can play or "stream" songs from your computer to your piano via usb, MIDI DIN, or wifi via playlists. songs outside your collections can still be played by pointing to a folder full of songs, or an individual song. you can finally *auto-play a bunch of songs one after another*. say goodbye to digging for a song from your piano's touch screen, pressing play, and cueing one more, then rinse and repeat manually...
 
 you can also poke round and see what midi devices you have access to, check out the voicing on your songs, even peek inside and see what's going on.
 
@@ -85,16 +85,16 @@ this project uses the popular, free scripting language [python](https://www.pyth
     ```
     miditoyz init --help
 
-    miditoyz ~/music/collection ~/music/collection.new          # mac or linux
-    miditoyz c:\music\collection c:\music\collection.new        # windows
+    miditoyz init ~/music/collection ~/music/collection.new          # mac or linux
+    miditoyz init c:\music\collection c:\music\collection.new        # windows
     ```
 
 ## roadmap
 
-1. installation tool, housekeeping, testing [automation], care-and-feeding, etc.
+1. installation tool to automate **installation/setup** section, housekeeping, [automated] testing, continued care-and-feeding, etc.
 1. add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
 1. add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.), partially available from catalog `miditoyz dump` data
-1. command line, os-native, or web-based gui front end for tools (later would require local micro-server)
+1. command line, os-native, or web-based gui front end for tools to complement
 1. implement a number of search and query options for choosing songs from the song catalog. possible considerations:
     * [jq](https://jqlang.github.io/jq/) - query directly or with a wrapper tool, for example query for songs by Ronnell Bright and view numbered songs with the bit of bash magic if on mac/linux/windows10+wsl:
     ```
