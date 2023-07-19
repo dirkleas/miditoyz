@@ -8,9 +8,9 @@ why? are you sitting on a collection of a bunch of folders full of midi song fil
 
 you can also poke round and see what midi devices you have access to, check out the voicing on your songs, even peek inside and see what's going on.
 
-to understand what's available, you can use the built-in help -- simply enter `miditoyz --help` to see a list of all the commands, and then see the details for a particular command by entering `miditoyz stream --help`.
+to understand what's available, you can use the built-in help by entering `miditoyz --help` to see a list of available commands, or enter `miditoyz <COMMAND> --help` as follows (e.g. replace `<COMMAND>` with one of the commands such as `devices`, omitting the operating system prompt "$"). "--install-completion" and "--show-completion" are advanced options for nerdz, you can ignore them.
 ```
-(clav) ➜  miditoyz git:(main) miditoyz --help
+$ miditoyz --help
 
  Usage: miditoyz [OPTIONS] COMMAND [ARGS]...
 
@@ -20,36 +20,33 @@ to understand what's available, you can use the built-in help -- simply enter `m
 │ --help                        Show this message and exit.                                                            │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ devices  list available midi devices                                                                                 │
-│ dump     Dump a MIDI file in raw text format. if you need hashdump-esque details, use "midiraw --debug" instead      │
-│ init     generate a new music collection from a source directory in destination directory without duplicate songs    │
-│ raw      Dump a MIDI file in raw text format, optionally with hexdump output.                                        │
-│ stream   Stream music as a catalog song list, a midi file, or directory full of midi files to a midi device with     │
+│ devices  List available midi devices.                                                                                │
+│ dump     Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug".                                 │
+│ init     Generate a new music collection from a source directory in destination directory without duplicate songs.   │
+│ raw      Dump a MIDI song file in raw text format, optionally with hexdump-style output. See also: "miditoyz dump    │
+│          --metadata".                                                                                                │
+│ stream   Stream music from a catalog song list, a midi file, or directory full of midi files to a midi device with   │
 │          using bank selection and program changes based on voice preferences stored in "~/.miditoyz/settings.json"   │
-│          and created automatically the first time you stream. Catalog song lists are JSON files with the format:     │
-│          [{"title": "Autumn Leaves", "song": "hash.mid"}, ...] created from your collections "catalog.json" list.    │
-│          Command line options are remembered between streaming sessions, so subsequent streamings pick up from the   │
-│          last song played. Bookmark values are based on line numbers from the directory's "_songlist.txt" file,      │
-│          which starts with a title and blank line, so the first song is line 3 (e.g. "--bookmark 3"). Bookmark       │
-│          values are reset to 3 if the music is a song rather than a directory, is either too low/high, or if the     │
-│          music is different than the last time you streamed.                                                         │
-│ voices   Generate a list of voices for each track in a midi file                                                     │
+│          and saved automatically each time you stream. Catalog song lists are JSON files with the format: [{"title": │
+│          "Autumn Leaves", "song": "hash.mid"}, ...] and can be created from your collections "catalog.json".         │
+│          Bookmark values are based on the sequential number of the song in the playlist or directory song list       │
+│          starting with 1. We do the right thing if you specify a bookmark number that's too big or small or your     │
+│          play different music than last time. Your command line options are remembered between streaming sessions,   │
+│          so subsequent streamings pick up from the last song played.                                                 │
+│ voices   Generate a list of voices for each track in a midi song file.                                               │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
-(clav) ➜  miditoyz git:(main) miditoyz stream --help
+$ miditoyz devices --help
 
- Usage: miditoyz stream [OPTIONS] NAME
+ Usage: miditoyz devices [OPTIONS]
 
- stream playlist, folders, or individual songs to a device
+ List available midi devices.
 
-╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ *    name      TEXT  [default: None] [required]                                                                      │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ --help          Show this message and exit.                                                                          │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
-(clav) ➜  miditoyz git:(main)
+$
 ```
 here's the currently available commands:
 

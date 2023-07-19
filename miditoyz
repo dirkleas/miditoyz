@@ -10,7 +10,7 @@
 # todo:
 #   stream:
 #       - add windows notification support via win10toast
-#       - preparse songs looking for other instruments via track titles or
+#       - scan songs looking for other instruments via track titles or
 #         sequencer_specific meta events, plus add extra cli arg "genre" and append
 #         to event.track_name for preference key mapping
 #         (e.g. "Jazz Drums" => (0, 0, 1) Jazz Brush Expanded)
@@ -249,14 +249,14 @@ def stream_revoiced(songfile, index, song_count, voice_preferences, device):
 @app.command()
 def init(
     source_directory: pathlib.Path = typer.Argument(
-        ..., help="directory full of MIDI songs to clean up"
+        ..., help="Directory full of MIDI songs to clean up."
     ),
     destination_directory: pathlib.Path = typer.Argument(
         ...,
-        help="directory for cleaned up MIDI songs with duplicates removed and catalog generated",
+        help="Directory for cleaned up MIDI song collection with duplicates removed and catalog generated.",
     ),
 ):
-    """generate a new music collection from a source directory in destination directory without duplicate songs"""
+    """Generate a new music collection from a source directory in destination directory without duplicate songs."""
     # create destination_directory if it doesn't exist...
     if not os.path.exists(destination_directory):
         os.makedirs(destination_directory)
@@ -265,37 +265,34 @@ def init(
 
 @app.command()
 def devices():
-    """list available midi devices"""
-    typer.echo(f"available midi device(s): {', '.join(set(mido.get_output_names()))}")
+    """List available midi devices."""
+    typer.echo(f"Available midi device(s): {', '.join(set(mido.get_output_names()))}")
 
 
 @app.command()
 def stream(
     music: str = typer.Option(
         settings.get("music"),  # default to last music
-        help='MIDI music file, directory full of music, or catalog list to stream. catalog list is a JSON file containing list of song "keys"',
+        help='MIDI song file, directory full of music, or catalog list to stream. A catalog list is a JSON file containing list of song titles and "hashes" with the format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...].',
     ),
     bookmark: int = typer.Option(
         settings.get("bookmark", 0),
-        help="Bookmark for last song line number from music folder's _songlist.txt to start playing",
+        help="Bookmark for last song played assuming you don't pick different music.",
     ),
     device: str = typer.Option(
         settings.get("device", "Clavinova Port 1"),
         help='MIDI device to stream to (e.g. "Clavinova Port 1" for USB, "Network Clavinova for WIFI, etc.))',
     ),
 ):
-    """Stream music as a catalog song list, a midi file, or directory full of midi files to a midi device with using
+    """
+    Stream music from a catalog song list, a midi file, or directory full of midi files to a midi device with using
     bank selection and program changes based on voice preferences stored in "~/.miditoyz/settings.json"
-    and created automatically the first time you stream.
-
-    Catalog song lists are JSON files with the format:
-    [{"title": "Autumn Leaves", "song": "hash.mid"}, ...] created from your collections "catalog.json" list.
-
-    Bookmark values are based on the sequential number of the song in the playlist or directory song list starting with 1.
-    We do the right thing if you specify a bookmark number that's too big or small or your play music for another source.
-
-    Command line options are remembered between streaming sessions, so
-    subsequent streamings pick up from the last song played.
+    and saved automatically each time you stream.
+    Catalog song lists are JSON files with the format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...] and
+    can be created from your collections "catalog.json". Bookmark values are based on the sequential number of the
+    song in the playlist or directory song list starting with 1.
+    We do the right thing if you specify a bookmark number that's too big or small or your play different music than last time.
+    Your command line options are remembered between streaming sessions, so subsequent streamings pick up from the last song played.
     """
     is_song = music.lower().endswith(".mid")
     is_catalog_list = music.lower().endswith(".json")
@@ -342,35 +339,35 @@ def voices(
     midi_file: str = typer.Argument(..., help="MIDI file for voice list"),
     voices: str = typer.Option(
         f"{pathlib.Path.home()}/.miditoyz/datalist.pickle",
-        help="Pickle file of voices, see official clavinova datalist.pdf",
+        help='Official Yamaha Clavinova "datalist" of voices. Check vendor documentation for other device voicing.',
     ),
     detail: bool = typer.Option(
         False,
-        help="include voice MSB, LSB, PC voice values for searching datalist csv or pdf",
+        help="Include voice MSB, LSB, PC voice values for searching datalist csv or pdf for voice names.",
     ),
 ):
-    """Generate a list of voices for each track in a midi file"""
+    """Generate a list of voices for each track in a midi song file."""
     get_track_channel_voices(midi_file, pickle.load(open(voices, "rb")))
 
 
 @app.command()
 def dump(
     song: str = typer.Argument(
-        ..., help="The path to the MIDI song file to be analyzed"
+        ..., help="The path to the MIDI song file to be analyzed."
     ),
-    metadata: bool = typer.Option(False, help="Show only metadata"),
+    metadata: bool = typer.Option(False, help="Show only metadata."),
 ):
-    """Dump a MIDI file in raw text format. if you need hashdump-esque details, use "midiraw --debug" instead"""
+    """Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug"."""
     for dump in dump_midi(song, metadata):
         typer.echo(dump)
 
 
 @app.command()
 def raw(
-    midi_file: str = typer.Argument(..., help="MIDI file to dump in raw format"),
-    debug: bool = typer.Option(False, help="Enable debug mode"),
+    midi_file: str = typer.Argument(..., help="MIDI file to dump in raw format."),
+    debug: bool = typer.Option(False, help="Enable debug mode."),
 ):
-    """Dump a MIDI file in raw text format, optionally with hexdump output."""
+    """Dump a MIDI song file in raw text format, optionally with hexdump-style output. See also: "miditoyz dump --metadata"."""
     mido.MidiFile(midi_file, debug=debug).print_tracks()
 
 
