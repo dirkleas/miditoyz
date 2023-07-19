@@ -51,16 +51,16 @@ $
 here's the currently available commands:
 
 *most common commands:*
-1. `miditoys init` - create a new, cleaned-up version of your song collection without the duplicate, renamed versions of songs sprinkled across several directories and create a catalog of your new, epic song collection. the catalog incudes helpful details like the song title, where it came from in your original song collection, and all the "metadata" inside the song midi files (e.g. everything but the performance details like notes played, pedals pressed, etc.)
+1. `miditoyz init` - create a new, cleaned-up version of your song collection without the duplicate, renamed versions of songs sprinkled across several directories and create a catalog of your new, epic song collection. the catalog incudes helpful details like the song title, where it came from in your original song collection, and all the "metadata" inside the song midi files (e.g. everything but the performance details like notes played, pedals pressed, etc.)
 1. `miditoyz devices` - display a list of currently available midi devices to be used by other tools to allow you to connect to your clavinova
 1. `miditoyz stream` - stream a song list from your song catalog, a directory full of music/midi song files or a single midi song to your midi device (e.g. yamaha cvp clavinova, etc) using your voice personal preferences (see **notes** below for more voice preferences) from your song collection. for your convenience, it'll remember where it left off when you stream a setlist or ask it to play a folder full of songs
 
 *research/technical commands:*
 1. `miditoyz voices` - display a list of the tracks and voices for a specified song from your song collection
-1. `miditoyz mididump` - display the specified midi song file in readable plain text from your song collection. midi files are binary files that aren't readable by humans. 
-1. `miditoyz raw` - display the specified midi song file in nerdier plain text from your song collection. `hexdump`-esque details can optionally be displayed too
+1. `miditoyz dump` - display the specified midi song file in readable plain text from your song collection. midi files are binary files that aren't readable by humans. 
+1. `miditoyz raw` - display the specified midi song file in nerdier plain text from your song collection. hexdump-style details can optionally be displayed too
 
-help is available for each of these commands by including the `--help` option (i.e. `midi --help`, `midivoices --help`, etc.)
+remember, help is always available by adding the `--help` option (i.e. `miditoyz --help`, `miditoyz voices --help`, etc.)
 
 ## installation/setup
 
