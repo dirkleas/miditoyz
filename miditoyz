@@ -386,5 +386,20 @@ def raw(
     mido.MidiFile(midi_file, debug=debug).print_tracks()
 
 
+@app.command()
+def catalog(
+    catalog_file: str = typer.Argument(
+        ..., help="Catalog file from your miditoyz song collection."
+    )
+):
+    """Memorize a new catalog file for future streaming."""
+    if os.path.exists(catalog_file):
+        serialize_settings({"catalog": catalog_file})
+    else:
+        typer.echo(
+            f"oops, {catalog_file} doesn't exist. always fully qualify your catalog file paths."
+        )
+
+
 if __name__ == "__main__":
     app()
