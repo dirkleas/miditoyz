@@ -1,5 +1,5 @@
 mido
-click
+typer
 sh
 PyPDF2
 parse
