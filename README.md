@@ -60,7 +60,7 @@ here's the currently available commands:
 1. `miditoyz dump` - display the specified midi song file in readable plain text from your song collection. midi files are binary files that aren't readable by humans. 
 1. `miditoyz raw` - display the specified midi song file in nerdier plain text from your song collection. hexdump-style details can optionally be displayed too
 
-remember, help is always available by adding the `--help` option (i.e. `miditoyz --help`, `miditoyz voices --help`, etc.)
+remember, help is always available by adding the `--help` option (i.e. `miditoyz --help`, `miditoyz voices --help`, etc.). the current help generated from all commands is available online [here](help.md)
 
 ## installation/setup
 
