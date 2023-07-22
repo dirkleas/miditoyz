@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+
+# Copyright (c) 2023 Dirk Leas
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+#
+# helpdocs - generate markdown help summary for all miditoyz commands, assumes
+#            miditoyz in PATH
+#
+# todo:
+#   - tbd
+#
+
+import os, re, sh, typer
+
+help_text = """
+# miditoyz
+here's a full list of all the `miditoyz` command help genrated by 
+calling `miditoyz --help` and `miditoyz <command> --help` for each 
+command:
+
+"""
+
+def extract_commands(stream: str) -> list:
+    # Regex pattern to capture patterns similar to "voices"
+    pattern = re.compile(r'\x1b\[1;36m\s*(\w+)\s*\x1b\[0m')
+    return pattern.findall(stream)
+
+def main():
+    """Generate markdown help summary for all miditoyz commands."""
+    basic_help = sh.miditoyz('--help')
+    help = f'{help_text}```{os.linesep}$ miditoyz --help{os.linesep}{basic_help}'
+    for command in extract_commands(basic_help):
+        help += f"{os.linesep}$ miditoyz {command} --help{os.linesep}{sh.miditoyz(command, '--help')}"
+    typer.echo(help + '```')
+
+if __name__ == "__main__":
+    typer.run(main)
