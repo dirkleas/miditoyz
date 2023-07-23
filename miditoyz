@@ -215,7 +215,7 @@ def song_title(midi):
 
 def revoice(ch, msb, lsb, pc):
     """revoice by generating list of bank select and program change messages"""
-    typer.echo(f"  revoicing ch: {ch}, msb: {msb}, lsb: {lsb}, pc: {pc}")
+    # typer.echo(f"  voicing ch {ch}: msb: {msb}, lsb: {lsb}, pc: {pc}")
     return [
         mido.Message("control_change", channel=ch, control=0, value=msb, time=0),
         mido.Message("control_change", channel=ch, control=32, value=lsb, time=0),
@@ -224,10 +224,8 @@ def revoice(ch, msb, lsb, pc):
 
 
 def stream_revoiced(songfile, index, song_count, voice_preferences, device):
-    """restream midi file with revoiced program changes based on voice preferences"""
-    channels = {}
-    ch = lsb = msb = 0
-    pc = 1
+    """revoice midi file with voice preferences"""
+    channels = defaultdict(dict)
     serialize_settings({"bookmark": index + 1})
     midi = mido.MidiFile(songfile)
     title = song_title(midi) or "oops, missing title"
@@ -236,17 +234,24 @@ def stream_revoiced(songfile, index, song_count, voice_preferences, device):
         notify(f"{'/'.join(songfile.split('/')[-2:])}, #{index+1}", title)
     for event in midi.play():
         if event.type == "control_change" and event.control == 0:
-            msb = event.value
+            channels[event.channel]["msb"] = event.value
         elif event.type == "control_change" and event.control == 32:
-            lsb = event.value
+            channels[event.channel]["lsb"] = event.value
         elif event.type == "program_change":
             ch = event.channel
-            voice = (msb, lsb, event.program + 1)
-            voice_preference = voice_preferences.get(voice, voice)
-            typer.echo(
-                f"  voicing ch: {ch}, pc: {event.program+1}, voice={voice}, "
-                + f"voice_preference={voice_preference}, revoicing={tuple([*[ch], *voice_preference])}"
+            channels[event.channel]["pc"] = event.program + 1
+            voice = (
+                channels.get(ch).get("msb", 0),
+                channels.get(ch).get("lsb", 0),
+                channels.get(ch).get("pc", 1),
             )
+            voice_preference = voice_preferences.get(voice, voice)
+            if voice == voice_preference:
+                typer.echo(f"  voicing channel {ch} with voice {voice}")
+            else:
+                typer.echo(
+                    f"  revoicing channel {ch} from voice {voice} to preferred voice {voice_preference}"
+                )
             for voice_event in revoice(*tuple([*[ch], *voice_preference])):
                 device.send(voice_event)
         elif event.type == "sequencer_specific":
