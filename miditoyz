@@ -99,11 +99,11 @@ def get_track_channel_voices(midi_filename, voices):
                 )
                 if voice in voices.keys():
                     typer.echo(
-                        f"      channel {channel:2.}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                        f"      channel {channel+1}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
                     )
                 else:
                     typer.echo(
-                        f"      channel {channel}: unrecognized voice, MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                        f"      channel {channel+1}: unrecognized voice, MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
                     )
 
 
