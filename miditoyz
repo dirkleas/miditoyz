@@ -97,9 +97,14 @@ def get_track_channel_voices(midi_filename, voices):
                     channels.get(channel).get("lsb", 0),
                     channels.get(channel).get("pc", 1),
                 )
-                typer.echo(
-                    f"      channel {channel}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
-                )
+                if voice in voices.keys():
+                    typer.echo(
+                        f"      channel {channel}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                    )
+                else:
+                    typer.echo(
+                        f"      channel {channel}: unrecognized voice, MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                    )
 
 
 def is_midi(filename):
@@ -213,9 +218,8 @@ def song_title(midi):
     return tuple((e.name for e in midi.tracks[0] if e.type == "track_name"))[0]
 
 
-def revoice(ch, msb, lsb, pc):
-    """revoice by generating list of bank select and program change messages"""
-    # typer.echo(f"  voicing ch {ch}: msb: {msb}, lsb: {lsb}, pc: {pc}")
+def generate_midi_voice_events(ch, msb, lsb, pc):
+    """generate midi voice events for bank select and program change messages"""
     return [
         mido.Message("control_change", channel=ch, control=0, value=msb, time=0),
         mido.Message("control_change", channel=ch, control=32, value=lsb, time=0),
@@ -252,7 +256,9 @@ def stream_revoiced(songfile, index, song_count, voice_preferences, device):
                 typer.echo(
                     f"  revoicing channel {ch} from voice {voice} to preferred voice {voice_preference}"
                 )
-            for voice_event in revoice(*tuple([*[ch], *voice_preference])):
+            for voice_event in generate_midi_voice_events(
+                *tuple([*[ch], *voice_preference])
+            ):
                 device.send(voice_event)
         elif event.type == "sequencer_specific":
             typer.echo(f"  seq: {event}")
