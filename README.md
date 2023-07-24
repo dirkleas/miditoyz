@@ -92,6 +92,7 @@ this project uses the popular, free scripting language [python](https://www.pyth
 ## roadmap
 
 1. installation tool to automate **installation/setup** section, housekeeping, [automated] testing, continued care-and-feeding, etc.
+1. consider python "complier" (i.e. [PyInstaller](https://pyinstaller.org/en/stable/), [cx_Freeze](https://cx-freeze.readthedocs.io/en/stable/), [Nuitka](https://nuitka.net), etc.)
 1. add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
 1. add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.), partially available from catalog `miditoyz dump` data
 1. command line, os-native, or web-based gui front end for tools to complement
