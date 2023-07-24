@@ -362,7 +362,9 @@ def stream(
 
 @app.command()
 def voices(
-    midi_file: str = typer.Argument(..., help="MIDI file for voice list"),
+    midi_file: str = typer.Argument(
+        ..., help="MIDI song file to generate voice list for."
+    ),
     voices: str = typer.Option(
         f"{pathlib.Path.home()}/.miditoyz/datalist.pickle",
         help='Official Yamaha Clavinova "datalist" of voices. Check vendor documentation for other device voicing.',
@@ -378,34 +380,32 @@ def voices(
 
 @app.command()
 def dump(
-    song: str = typer.Argument(
-        ..., help="The path to the MIDI song file to be analyzed."
-    ),
+    midi_file: str = typer.Argument(..., help="MIDI song file to be analyzed."),
     metadata: bool = typer.Option(False, help="Show only metadata."),
 ):
     """Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug"."""
-    for dump in dump_midi(song, metadata):
+    for dump in dump_midi(midi_file, metadata):
         typer.echo(dump)
 
 
 @app.command()
 def raw(
     midi_file: str = typer.Argument(
-        ..., help="MIDI file to dump in extended raw debug format."
+        ..., help="MIDI file to analyze in extended raw debug format."
     ),
     debug: bool = typer.Option(False, help="Enable extended raw debug mode."),
 ):
-    """Dump a MIDI song file in raw text format, optionally with hexdump-style debug output. See also: "miditoyz dump --metadata"."""
+    """Dump a MIDI song file in alternative raw text format with optionally with hexdump-style debug output. See also: "miditoyz dump --metadata"."""
     mido.MidiFile(midi_file, debug=debug).print_tracks()
 
 
 @app.command()
 def catalog(
     catalog_file: str = typer.Argument(
-        ..., help="Catalog file from your miditoyz song collection."
+        ..., help="Alternative catalog file from one of your miditoyz song collections."
     )
 ):
-    """Memorize a new catalog file for future streaming."""
+    """Change to a new catalog file for streaming."""
     if os.path.exists(catalog_file):
         serialize_settings({"catalog": catalog_file})
     else:

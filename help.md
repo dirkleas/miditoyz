@@ -17,11 +17,11 @@ Options:
   --help                          Show this message and exit.
 
 Commands:
-  catalog  Memorize a new catalog file for future streaming.
+  catalog  Change to a new catalog file for streaming.
   devices  List available midi devices.
   dump     Dump a MIDI song file in raw text format.
   init     Generate a new music collection from a source directory in...
-  raw      Dump a MIDI song file in raw text format, optionally with...
+  raw      Dump a MIDI song file in alternative raw text format with...
   stream   Stream music from a catalog song list, a midi file, or...
   voices   Generate a list of voices for each track in a midi song file.
 
@@ -70,7 +70,7 @@ Options:
                       /Users/dirkleas/h4x/clav.toys/PIANOFORCE MUSIC
                       FILES/Standards]
   --bookmark INTEGER  Bookmark for last song played assuming you don't pick
-                      different music.  [default: 14]
+                      different music.  [default: 26]
   --device TEXT       MIDI device to stream to (e.g. "Clavinova Port 1" for
                       USB, "Network Clavinova for WIFI, etc.))  [default:
                       Clavinova Port 1]
@@ -82,7 +82,7 @@ Usage: miditoyz voices [OPTIONS] MIDI_FILE
   Generate a list of voices for each track in a midi song file.
 
 Arguments:
-  MIDI_FILE  MIDI file for voice list  [required]
+  MIDI_FILE  MIDI song file to generate voice list for.  [required]
 
 Options:
   --voices TEXT           Official Yamaha Clavinova "datalist" of voices.
@@ -94,12 +94,12 @@ Options:
   --help                  Show this message and exit.
 
 $ miditoyz dump --help
-Usage: miditoyz dump [OPTIONS] SONG
+Usage: miditoyz dump [OPTIONS] MIDI_FILE
 
   Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug".
 
 Arguments:
-  SONG  The path to the MIDI song file to be analyzed.  [required]
+  MIDI_FILE  MIDI song file to be analyzed.  [required]
 
 Options:
   --metadata / --no-metadata  Show only metadata.  [default: no-metadata]
@@ -108,11 +108,11 @@ Options:
 $ miditoyz raw --help
 Usage: miditoyz raw [OPTIONS] MIDI_FILE
 
-  Dump a MIDI song file in raw text format, optionally with hexdump-style
-  debug output. See also: "miditoyz dump --metadata".
+  Dump a MIDI song file in alternative raw text format with optionally with
+  hexdump-style debug output. See also: "miditoyz dump --metadata".
 
 Arguments:
-  MIDI_FILE  MIDI file to dump in extended raw debug format.  [required]
+  MIDI_FILE  MIDI file to analyze in extended raw debug format.  [required]
 
 Options:
   --debug / --no-debug  Enable extended raw debug mode.  [default: no-debug]
@@ -121,10 +121,11 @@ Options:
 $ miditoyz catalog --help
 Usage: miditoyz catalog [OPTIONS] CATALOG_FILE
 
-  Memorize a new catalog file for future streaming.
+  Change to a new catalog file for streaming.
 
 Arguments:
-  CATALOG_FILE  Catalog file from your miditoyz song collection.  [required]
+  CATALOG_FILE  Alternative catalog file from one of your miditoyz song
+                collections.  [required]
 
 Options:
   --help  Show this message and exit.
