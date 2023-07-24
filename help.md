@@ -18,9 +18,9 @@ Options:
 
 Commands:
   catalog  Change to a new catalog file for streaming.
-  devices  List available midi devices.
+  devices  List currently connected midi output devices attached via USB,...
   dump     Dump a MIDI song file in raw text format.
-  init     Generate a new music collection from a source directory in...
+  init     Generate a new music collection from a source directory into a...
   raw      Dump a MIDI song file in alternative raw text format with...
   stream   Stream music from a catalog song list, a midi file, or...
   voices   Generate a list of voices for each track in a midi song file.
@@ -28,8 +28,10 @@ Commands:
 $ miditoyz init --help
 Usage: miditoyz init [OPTIONS] SOURCE_DIRECTORY DESTINATION_DIRECTORY
 
-  Generate a new music collection from a source directory in destination
-  directory without duplicate songs.
+  Generate a new music collection from a source directory into a destination
+  directory removing duplicates songs. Duplicates include same song in
+  multiple directory paths, renamed versions of the same song, etc. that have
+  identical song content "inside" the song MIDI file.
 
 Arguments:
   SOURCE_DIRECTORY       Directory full of MIDI songs to clean up.  [required]
@@ -42,7 +44,8 @@ Options:
 $ miditoyz devices --help
 Usage: miditoyz devices [OPTIONS]
 
-  List available midi devices.
+  List currently connected midi output devices attached via USB, WIFI, or
+  Bluetooth.
 
 Options:
   --help  Show this message and exit.
@@ -70,7 +73,7 @@ Options:
                       /Users/dirkleas/h4x/clav.toys/PIANOFORCE MUSIC
                       FILES/Standards]
   --bookmark INTEGER  Bookmark for last song played assuming you don't pick
-                      different music.  [default: 26]
+                      different music.  [default: 29]
   --device TEXT       MIDI device to stream to (e.g. "Clavinova Port 1" for
                       USB, "Network Clavinova for WIFI, etc.))  [default:
                       Clavinova Port 1]

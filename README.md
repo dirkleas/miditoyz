@@ -23,18 +23,26 @@ Options:
   --help                          Show this message and exit.
 
 Commands:
-  catalog  Memorize a new catalog file for future streaming.
-  devices  List available midi devices.
+  catalog  Change to a new catalog file for streaming.
+  devices  List currently connected midi output devices attached via USB,...
   dump     Dump a MIDI song file in raw text format.
-  init     Generate a new music collection from a source directory in...
-  raw      Dump a MIDI song file in raw text format, optionally with...
+  init     Generate a new music collection from a source directory into a...
+  raw      Dump a MIDI song file in alternative raw text format with...
   stream   Stream music from a catalog song list, a midi file, or...
   voices   Generate a list of voices for each track in a midi song file.
 
-$ miditoyz devices --help
-Usage: miditoyz devices [OPTIONS]
+$ miditoyz init --help
+Usage: miditoyz init [OPTIONS] SOURCE_DIRECTORY DESTINATION_DIRECTORY
 
-  List available midi devices.
+  Generate a new music collection from a source directory into a destination
+  directory removing duplicates songs. Duplicates include same song in
+  multiple directory paths, renamed versions of the same song, etc. that have
+  identical song content "inside" the song MIDI file.
+
+Arguments:
+  SOURCE_DIRECTORY       Directory full of MIDI songs to clean up.  [required]
+  DESTINATION_DIRECTORY  Directory for cleaned up MIDI song collection with
+                         duplicates removed and catalog generated.  [required]
 
 Options:
   --help  Show this message and exit.

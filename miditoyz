@@ -277,7 +277,9 @@ def init(
         help="Directory for cleaned up MIDI song collection with duplicates removed and catalog generated.",
     ),
 ):
-    """Generate a new music collection from a source directory in destination directory without duplicate songs."""
+    """Generate a new music collection from a source directory into a destination directory removing duplicates
+    songs. Duplicates include same song in multiple directory paths, renamed versions of the same song, etc.
+    that have identical song content "inside" the song MIDI file."""
     # create destination_directory if it doesn't exist...
     if source_directory == destination_directory:
         typer.echo(
@@ -291,8 +293,8 @@ def init(
 
 @app.command()
 def devices():
-    """List available midi devices."""
-    typer.echo(f"Available midi device(s): {', '.join(set(mido.get_output_names()))}")
+    """List currently connected midi output devices attached via USB, WIFI, or Bluetooth."""
+    typer.echo(f"Connected midi device(s): {', '.join(set(mido.get_output_names()))}")
 
 
 @app.command()
