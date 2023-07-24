@@ -390,10 +390,12 @@ def dump(
 
 @app.command()
 def raw(
-    midi_file: str = typer.Argument(..., help="MIDI file to dump in raw format."),
-    debug: bool = typer.Option(False, help="Enable debug mode."),
+    midi_file: str = typer.Argument(
+        ..., help="MIDI file to dump in extended raw debug format."
+    ),
+    debug: bool = typer.Option(False, help="Enable extended raw debug mode."),
 ):
-    """Dump a MIDI song file in raw text format, optionally with hexdump-style output. See also: "miditoyz dump --metadata"."""
+    """Dump a MIDI song file in raw text format, optionally with hexdump-style debug output. See also: "miditoyz dump --metadata"."""
     mido.MidiFile(midi_file, debug=debug).print_tracks()
 
 

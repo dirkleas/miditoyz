@@ -22,18 +22,22 @@ command:
 
 """
 
-def extract_commands(stream: str) -> list:
-    # Regex pattern to capture patterns similar to "voices"
-    pattern = re.compile(r'\x1b\[1;36m\s*(\w+)\s*\x1b\[0m')
-    return pattern.findall(stream)
+
+def extract_commands(code: str) -> list:
+    pattern = r"@app\.command\(\)\s*def\s+([a-zA-Z_]\w*)\("
+    return re.findall(pattern, code)
+
 
 def main():
     """Generate markdown help summary for all miditoyz commands."""
-    basic_help = sh.miditoyz('--help')
-    help = f'{help_text}```{os.linesep}$ miditoyz --help{os.linesep}{basic_help}'
-    for command in extract_commands(basic_help):
+    basic_help = sh.miditoyz("--help")
+    help = f"{help_text}```{os.linesep}$ miditoyz --help{os.linesep}{basic_help}"
+    for command in extract_commands(open("miditoyz").read()):
         help += f"{os.linesep}$ miditoyz {command} --help{os.linesep}{sh.miditoyz(command, '--help')}"
-    typer.echo(help + '```')
+    typer.echo(
+        f"{help}```{os.linesep*2}--{os.linesep*2}This project is licensed under the terms of the MIT license. See LICENSE for details."
+    )
+
 
 if __name__ == "__main__":
     typer.run(main)

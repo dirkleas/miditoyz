@@ -8,46 +8,39 @@ why? are you sitting on a collection of a bunch of folders full of midi song fil
 
 you can also poke round and see what midi devices you have access to, check out the voicing on your songs, even peek inside and see what's going on.
 
-to understand what's available, you can use the built-in help by entering `miditoyz --help` to see a list of available commands, or enter `miditoyz <COMMAND> --help` as follows (e.g. replace `<COMMAND>` with one of the commands such as `devices`, omitting the operating system prompt "$"). "--install-completion" and "--show-completion" are advanced options for nerdz, you can ignore them.
+to understand what's available, you can use the built-in help by entering `miditoyz --help` to see a list of available commands, or enter `miditoyz <COMMAND> --help` as follows (e.g. replace `<COMMAND>` with one of the commands such as `devices`, omitting the operating system prompt "$"). "--install-completion" and "--show-completion" are advanced options for nerdz, you can ignore them. here are a couple of `--help` examples, but you can see all commands [here](help.md):
+
 ```
 $ miditoyz --help
+Usage: miditoyz [OPTIONS] COMMAND [ARGS]...
 
- Usage: miditoyz [OPTIONS] COMMAND [ARGS]...
+Options:
+  --install-completion [bash|zsh|fish|powershell|pwsh]
+                                  Install completion for the specified shell.
+  --show-completion [bash|zsh|fish|powershell|pwsh]
+                                  Show completion for the specified shell, to
+                                  copy it or customize the installation.
+  --help                          Show this message and exit.
 
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --install-completion          Install completion for the current shell.                                              │
-│ --show-completion             Show completion for the current shell, to copy it or customize the installation.       │
-│ --help                        Show this message and exit.                                                            │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ devices  List available midi devices.                                                                                │
-│ dump     Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug".                                 │
-│ init     Generate a new music collection from a source directory in destination directory without duplicate songs.   │
-│ raw      Dump a MIDI song file in raw text format, optionally with hexdump-style output. See also: "miditoyz dump    │
-│          --metadata".                                                                                                │
-│ stream   Stream music from a catalog song list, a midi file, or directory full of midi files to a midi device with   │
-│          using bank selection and program changes based on voice preferences stored in "~/.miditoyz/settings.json"   │
-│          and saved automatically each time you stream. Catalog song lists are JSON files with the format: [{"title": │
-│          "Autumn Leaves", "song": "hash.mid"}, ...] and can be created from your collections "catalog.json".         │
-│          Bookmark values are based on the sequential number of the song in the playlist or directory song list       │
-│          starting with 1. We do the right thing if you specify a bookmark number that's too big or small or your     │
-│          play different music than last time. Your command line options are remembered between streaming sessions,   │
-│          so subsequent streamings pick up from the last song played.                                                 │
-│ voices   Generate a list of voices for each track in a midi song file.                                               │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+Commands:
+  catalog  Memorize a new catalog file for future streaming.
+  devices  List available midi devices.
+  dump     Dump a MIDI song file in raw text format.
+  init     Generate a new music collection from a source directory in...
+  raw      Dump a MIDI song file in raw text format, optionally with...
+  stream   Stream music from a catalog song list, a midi file, or...
+  voices   Generate a list of voices for each track in a midi song file.
 
 $ miditoyz devices --help
+Usage: miditoyz devices [OPTIONS]
 
- Usage: miditoyz devices [OPTIONS]
+  List available midi devices.
 
- List available midi devices.
+Options:
+  --help  Show this message and exit.
 
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --help          Show this message and exit.                                                                          │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-$
 ```
+
 here's the currently available commands:
 
 *most common commands:*
