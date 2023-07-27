@@ -20,7 +20,7 @@ to understand what's available, you can use the built-in help by entering `midit
 1. `miditoyz dump` - display the specified midi song file in readable plain text from your song collection. midi files are binary files that aren't readable by humans. 
 1. `miditoyz raw` - display the specified midi song file in nerdier plain text from your song collection. hexdump-style details can optionally be displayed too
 
-remember, help is always available by adding the `--help` option (i.e. `miditoyz --help`, `miditoyz voices --help`, etc.). the current help generated from all commands is available online [here](help.md)
+remember, help is always available by adding the `--help` option (e.g. `miditoyz --help`, `miditoyz voices --help`, etc.). the current help generated from all commands is available online [here](help.md)
 
 ## installation/setup
 
@@ -28,7 +28,7 @@ this project uses the popular, free scripting language [python](https://www.pyth
 
 1. install latest version of [python](https://www.python.org/downloads/) for your operating system (os) and add it to your path. on windows, tick the last option to have the installer automatically take care of the path for you)
 1. install latest version of [git](https://git-scm.com) for your os and add it to your path
-1. "clone" this project on your computer via a terminal shell or command prompt in the directory of your choice. cloning the project will create a new folder named `miditoyz` -- change directory into that folder and you'll see the `miditoyz` script. add this folder to your os path or create aliases for them (i.e. windows `set miditoyz "python c:\miditoyz\miditoyz`, etc.):
+1. "clone" this project on your computer via a terminal shell or command prompt in the directory of your choice. cloning the project will create a new folder named `miditoyz` -- change directory into that folder and you'll see the `miditoyz` script. add this folder to your os path or create aliases for them (e.g. windows `setx miditoyz "python c:\miditoyz\miditoyz`, etc.):
     ```
     git clone https://github.com/dirkleas/miditoyz
     cd miditoyz
@@ -48,11 +48,15 @@ this project uses the popular, free scripting language [python](https://www.pyth
     miditoyz init ~/music/collection ~/music/collection.new          # mac or linux
     miditoyz init c:\music\collection c:\music\collection.new        # windows
     ```
+1. going forward, you can update your installation as project evolves by running the following command after you change directory into wherever you installed things (e.g. `cd ~/miditoyz` on mac/linux, or `cd C:\miditoyz` on windows):
+    ```
+    git pull
+    ```
 
 ## roadmap
 
 1. installation tool to automate **installation/setup** section, housekeeping, [automated] testing, continued care-and-feeding, etc.
-1. consider python "complier" (i.e. [PyInstaller](https://pyinstaller.org/en/stable/), [cx_Freeze](https://cx-freeze.readthedocs.io/en/stable/), [Nuitka](https://nuitka.net), etc.)
+1. consider python "complier" (e.g. [PyInstaller](https://pyinstaller.org/en/stable/), [cx_Freeze](https://cx-freeze.readthedocs.io/en/stable/), [Nuitka](https://nuitka.net), etc.)
 1. add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
 1. add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.), partially available from catalog `miditoyz dump` data
 1. command line, os-native, or web-based gui front end for tools to complement
