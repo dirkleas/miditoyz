@@ -12,7 +12,7 @@
 #   - tbd
 #
 
-import os, re, sh, typer
+import os, re, subprocess, typer
 
 help_text = """
 # miditoyz
@@ -35,10 +35,12 @@ def main(
     """Generate markdown help summary for a CLI application including all commands."""
     global help_text
     help_text = help_text.replace("miditoyz", cli)
-    basic_help = sh.Command(cli)("--help")
+    basic_help = subprocess.run(
+        [f"{cli} --help"], capture_output=True, text=True, shell=True
+    ).stdout
     help = f"{help_text}```{os.linesep}$ {cli} --help{os.linesep}{basic_help}"
     for command in extract_commands(open(cli).read()):
-        help += f"{os.linesep}$ {cli} {command} --help{os.linesep}{sh.Command(cli)(command, '--help')}"
+        help += f"{os.linesep}$ {cli} {command} --help{subprocess.run([f'{cli} {command} --help'], capture_output=True, text=True, shell=True).stdout}"
     typer.echo(f"{help}```")
     if license:
         typer.echo(

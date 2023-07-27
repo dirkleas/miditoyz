@@ -1,7 +1,6 @@
 python-rtmidi
 mido
 typer
-sh
 PyPDF2
 parse
 music21

@@ -8,48 +8,7 @@ why? are you sitting on a collection of a bunch of folders full of midi song fil
 
 you can also poke round and see what midi devices you have access to, check out the voicing on your songs, even peek inside and see what's going on.
 
-to understand what's available, you can use the built-in help by entering `miditoyz --help` to see a list of available commands, or enter `miditoyz <COMMAND> --help` as follows (e.g. replace `<COMMAND>` with one of the commands such as `devices`, omitting the operating system prompt "$"). "--install-completion" and "--show-completion" are advanced options for nerdz, you can ignore them. here are a couple of `--help` examples, but you can see all commands [here](help.md):
-
-```
-$ miditoyz --help
-Usage: miditoyz [OPTIONS] COMMAND [ARGS]...
-
-Options:
-  --install-completion [bash|zsh|fish|powershell|pwsh]
-                                  Install completion for the specified shell.
-  --show-completion [bash|zsh|fish|powershell|pwsh]
-                                  Show completion for the specified shell, to
-                                  copy it or customize the installation.
-  --help                          Show this message and exit.
-
-Commands:
-  catalog  Change to a new catalog file for streaming.
-  devices  List currently connected midi output devices attached via USB,...
-  dump     Dump a MIDI song file in raw text format.
-  init     Generate a new music collection from a source directory into a...
-  raw      Dump a MIDI song file in alternative raw text format with...
-  stream   Stream music from a catalog song list, a midi file, or...
-  voices   Generate a list of voices for each track in a midi song file.
-
-$ miditoyz init --help
-Usage: miditoyz init [OPTIONS] SOURCE_DIRECTORY DESTINATION_DIRECTORY
-
-  Generate a new music collection from a source directory into a destination
-  directory removing duplicates songs. Duplicates include same song in
-  multiple directory paths, renamed versions of the same song, etc. that have
-  identical song content "inside" the song MIDI file.
-
-Arguments:
-  SOURCE_DIRECTORY       Directory full of MIDI songs to clean up.  [required]
-  DESTINATION_DIRECTORY  Directory for cleaned up MIDI song collection with
-                         duplicates removed and catalog generated.  [required]
-
-Options:
-  --help  Show this message and exit.
-
-```
-
-here's the currently available commands:
+to understand what's available, you can use the built-in help by entering `miditoyz --help` to see a list of available commands, or enter `miditoyz <COMMAND> --help` as follows (e.g. replace `<COMMAND>` with one of the commands such as `devices`, omitting the operating system prompt "$"). "--install-completion" and "--show-completion" are advanced options for nerdz, you can ignore them. here are a couple of `--help` examples, but you can see all commands [here](help.md).
 
 *most common commands:*
 1. `miditoyz init` - create a new, cleaned-up version of your song collection without the duplicate, renamed versions of songs sprinkled across several directories and create a catalog of your new, epic song collection. the catalog incudes helpful details like the song title, where it came from in your original song collection, and all the "metadata" inside the song midi files (e.g. everything but the performance details like notes played, pedals pressed, etc.)
@@ -92,6 +51,7 @@ this project uses the popular, free scripting language [python](https://www.pyth
 
 ## roadmap
 
+1. research `fcntl` not available on windows
 1. installation tool to automate **installation/setup** section, housekeeping, [automated] testing, continued care-and-feeding, etc.
 1. consider python "complier" (i.e. [PyInstaller](https://pyinstaller.org/en/stable/), [cx_Freeze](https://cx-freeze.readthedocs.io/en/stable/), [Nuitka](https://nuitka.net), etc.)
 1. add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
