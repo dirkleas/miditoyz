@@ -40,7 +40,7 @@ def main(
     ).stdout
     help = f"{help_text}```{os.linesep}$ {cli} --help{os.linesep}{basic_help}"
     for command in extract_commands(open(cli).read()):
-        help += f"{os.linesep}$ {cli} {command} --help{subprocess.run([f'{cli} {command} --help'], capture_output=True, text=True, shell=True).stdout}"
+        help += f"{os.linesep}$ {cli} {command} --help{os.linesep}{subprocess.run([f'{cli} {command} --help'], capture_output=True, text=True, shell=True).stdout}"
     typer.echo(f"{help}```")
     if license:
         typer.echo(

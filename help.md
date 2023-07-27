@@ -25,7 +25,8 @@ Commands:
   stream   Stream music from a catalog song list, a midi file, or...
   voices   Generate a list of voices for each track in a midi song file.
 
-$ miditoyz init --helpUsage: miditoyz init [OPTIONS] SOURCE_DIRECTORY DESTINATION_DIRECTORY
+$ miditoyz init --help
+Usage: miditoyz init [OPTIONS] SOURCE_DIRECTORY DESTINATION_DIRECTORY
 
   Generate a new music collection from a source directory into a destination
   directory removing duplicates songs. Duplicates include same song in
@@ -40,7 +41,8 @@ Arguments:
 Options:
   --help  Show this message and exit.
 
-$ miditoyz devices --helpUsage: miditoyz devices [OPTIONS]
+$ miditoyz devices --help
+Usage: miditoyz devices [OPTIONS]
 
   List currently connected midi output devices attached via USB, WIFI, or
   Bluetooth.
@@ -48,7 +50,8 @@ $ miditoyz devices --helpUsage: miditoyz devices [OPTIONS]
 Options:
   --help  Show this message and exit.
 
-$ miditoyz stream --helpUsage: miditoyz stream [OPTIONS]
+$ miditoyz stream --help
+Usage: miditoyz stream [OPTIONS]
 
   Stream music from a catalog song list, a midi file, or directory full of
   midi files to a midi device with using bank selection and program changes
@@ -76,7 +79,8 @@ Options:
                       Clavinova Port 1]
   --help              Show this message and exit.
 
-$ miditoyz voices --helpUsage: miditoyz voices [OPTIONS] MIDI_FILE
+$ miditoyz voices --help
+Usage: miditoyz voices [OPTIONS] MIDI_FILE
 
   Generate a list of voices for each track in a midi song file.
 
@@ -92,7 +96,8 @@ Options:
                           [default: no-detail]
   --help                  Show this message and exit.
 
-$ miditoyz dump --helpUsage: miditoyz dump [OPTIONS] MIDI_FILE
+$ miditoyz dump --help
+Usage: miditoyz dump [OPTIONS] MIDI_FILE
 
   Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug".
 
@@ -103,7 +108,8 @@ Options:
   --metadata / --no-metadata  Show only metadata.  [default: no-metadata]
   --help                      Show this message and exit.
 
-$ miditoyz raw --helpUsage: miditoyz raw [OPTIONS] MIDI_FILE
+$ miditoyz raw --help
+Usage: miditoyz raw [OPTIONS] MIDI_FILE
 
   Dump a MIDI song file in alternative raw text format with optionally with
   hexdump-style debug output. See also: "miditoyz dump --metadata".
@@ -115,7 +121,8 @@ Options:
   --debug / --no-debug  Enable extended raw debug mode.  [default: no-debug]
   --help                Show this message and exit.
 
-$ miditoyz catalog --helpUsage: miditoyz catalog [OPTIONS] CATALOG_FILE
+$ miditoyz catalog --help
+Usage: miditoyz catalog [OPTIONS] CATALOG_FILE
 
   Change to a new catalog file for streaming.
 
