@@ -28,7 +28,7 @@
 #   - catalog list format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...]
 #
 
-import os, hashlib, shutil, json, pathlib, platform, pickle, mido, typer, sh, parse
+import os, hashlib, shutil, json, pathlib, platform, pickle, mido, typer, parse
 from collections import defaultdict
 from music21 import midi
 
