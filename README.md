@@ -26,7 +26,7 @@ remember, help is always available by adding the `--help` option (i.e. `miditoyz
 
 this project uses the popular, free scripting language [python](https://www.python.org). addition bits are required for handling midi files, working with your computer, and so forth. the tools have been successfully tested to work on windows, macos, and linux assuming reasonably current versions. steps 3. and beyond via your os command prompt/terminal shell:
 
-1. install latest version of [python](https://www.python.org/downloads/) for your operating system (os) and add it to your path
+1. install latest version of [python](https://www.python.org/downloads/) for your operating system (os) and add it to your path. on windows, tick the last option to have the installer automatically take care of the path for you)
 1. install latest version of [git](https://git-scm.com) for your os and add it to your path
 1. "clone" this project on your computer via a terminal shell or command prompt in the directory of your choice. cloning the project will create a new folder named `miditoyz` -- change directory into that folder and you'll see the `miditoyz` script. add this folder to your os path or create aliases for them (i.e. windows `set miditoyz "python c:\miditoyz\miditoyz`, etc.):
     ```
@@ -51,7 +51,6 @@ this project uses the popular, free scripting language [python](https://www.pyth
 
 ## roadmap
 
-1. research `fcntl` not available on windows
 1. installation tool to automate **installation/setup** section, housekeeping, [automated] testing, continued care-and-feeding, etc.
 1. consider python "complier" (i.e. [PyInstaller](https://pyinstaller.org/en/stable/), [cx_Freeze](https://cx-freeze.readthedocs.io/en/stable/), [Nuitka](https://nuitka.net), etc.)
 1. add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
