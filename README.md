@@ -10,7 +10,7 @@ Are you sitting on a collection of a bunch of folders full of midi song files yo
 
 You can also poke around and see what midi devices you have access to, check out the voicing on your songs, even peek inside and see what's going on.
 
-To understand what's available, you can use the built-in help by entering `miditoyz --help` to see a list of available commands, or enter `miditoyz <COMMAND> --help` (e.g. replace `<COMMAND>` with one of the commands such as `devices`, omitting the operating system prompt "$"). You can see all commands [here](help.md). The options `--install-completion` and `--show-completion` are advanced features for nerdz, so you can typically ignore them. Lastly, on Windows, you must prefix commands with `python` (e.g. `python miditoyz --help`). For your convenience, this can be omitted on MacOS and Linux.
+To understand what's available, you can use the built-in help by entering `miditoyz --help` to see a list of available commands, or enter `miditoyz <COMMAND> --help` (e.g. replace `<COMMAND>` with one of the commands such as `devices`, omitting the operating system prompt "$"). You can see all commands [here](help.md). The options `--install-completion` and `--show-completion` are advanced features for nerdz, so you can typically ignore them.
 
 *Most Common Commands:*
 1. `miditoyz init` - create a new, cleaned-up version of your song collection without the duplicate, renamed versions of songs sprinkled across several directories and create a catalog of your new, epic song collection. The catalog includes helpful details like the song title, where it came from in your original song collection, and all the "metadata" inside the song midi files (e.g. everything but the performance details like notes played, pedals pressed, etc.).
@@ -43,7 +43,7 @@ This project uses the popular, free scripting language [python](https://www.pyth
     ```
     pip install -r requirements.txt
     ```
-1. Generate a new collection from your existing song collection that removes duplicates and broken songs along with a song catalog. depending on the size of your song catalog, this might take a while. You should consider making a backup copy of your original music collection just to be safe. Before tackling your whole collection, you can do a test run using the included "test" music collection included in this project. On my 2021 full spec Apple Macbook Pro this takes about 3 minutes per 1000 songs -- your mileage may vary ... dramatically ;-). Just follow the help instructions and appropriate examples for MacOS, Linux, or Windows:
+1. Generate a new collection from your existing song collection that removes duplicates and broken songs along with a song catalog. Depending on the size of your song catalog, this might take a while. You should consider making a backup copy of your original music collection just to be safe. Before tackling your whole collection, you can do a test run using the included "test" music collection included in this project. On my 2021 full spec Apple Macbook Pro this takes about 3 minutes per 1000 songs -- your mileage may vary ... dramatically ;-). Just follow the help instructions and appropriate examples for MacOS, Linux, or Windows:
     ```
     miditoyz init --help
 
@@ -65,13 +65,13 @@ This project uses the popular, free scripting language [python](https://www.pyth
 1. Add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
 1. Add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.), partially available from catalog `miditoyz dump` data.
 1. Command line, OS-native, or web-based gui front end for tools to complement.
-1. Implement a number of search and query options for choosing songs from the song catalog. possible considerations:
+1. Implement a number of search and query options for choosing songs from the song catalog. Possible considerations:
     * [jq](https://jqlang.github.io/jq/) - query directly or with a wrapper tool, for example query for songs by Ronnell Bright and view numbered songs with the bit of bash/shell scripting magic if on MacOS/Linux/Windows + WSL:
     ```
     jq 'to_entries | map(select(.value.dump != null and (.value.dump[] | contains("Ronnell"))) | {"title": .value.title, "song": ("\(.key).mid")})' /tmp/songs.unique/catalog.json > /tmp/ronnell.json
     grep title /tmp/ronnell.json | cut -d'"' -f4 | nl -n ln
     ```
-    * [nocodb](https://nocodb.com) - web-based spreadsheet-style option with expected search and filter options. could be run locally or cloud with a bit of extra tooling to feed `midistream`.
+    * [nocodb](https://nocodb.com) - web-based spreadsheet-style option with expected search and filter options. This could be run locally or cloud with a bit of extra tooling to feed `midistream`.
     * AI/large language model (llm) interface for natural language search with support for providing song background, recommendations, etc. via text or voice (think "hey siri | alexa | siri, play some jazz standards or movie soundtracks or that song Brenda and Eddie by Billy Joel).
 
 ## Notes/Other
