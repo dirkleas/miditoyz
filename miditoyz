@@ -324,6 +324,10 @@ def stream(
         settings.get("device", "Clavinova Port 1"),
         help='MIDI device to stream to (e.g. "Clavinova Port 1" for USB, "Network Clavinova for WIFI, etc.))',
     ),
+    debug: bool = typer.Option(
+        False,
+        help="Debug output.))",
+    ),
 ):
     """
     Stream music from a catalog song list, a midi file, or directory full of midi files to a midi device with using
@@ -348,7 +352,7 @@ def stream(
     elif os.path.isdir(music):  # stream folder's midi files...
         songs = sorted(
             [
-                f"{music}{os.pathsep}{x}"
+                f"{music}{os.sep}{x}"
                 for x in os.listdir(music)
                 if x.lower().endswith(".mid")
             ]
@@ -357,7 +361,7 @@ def stream(
         # catalog list format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...]
         songs = list(
             map(
-                lambda x: f'{settings.get("catalog")[:-13]}{os.pathsep}{x.get("song")}',
+                lambda x: f'{settings.get("catalog")[:-13]}{os.sep}{x.get("song")}',
                 json.load(open(music)),
             )
         )
@@ -376,7 +380,10 @@ def stream(
             if skip >= bookmark - 1:
                 stream_revoiced(song, skip, len(songs), voice_preferences, device)
     except:  # skip broken songs...
-        pass
+        if not debug:
+            pass
+        else:  # debug...
+            raise
 
 
 @app.command()
