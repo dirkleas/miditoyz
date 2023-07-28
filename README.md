@@ -2,7 +2,7 @@
 
 This project is a command line (cli) hack for your midi song collection, initially focusing on the [Yamaha Clavinova CVP-809GP](https://usa.yamaha.com/products/musical_instruments/pianos/clavinova/cvp-809gp/index.html). The CLI tool is run from the Windows Command Prompt or the MacOS/Linux terminal/shell.
 
-## rationale
+## Rationale
 
 Are you sitting on a collection of a bunch of folders full of midi song files you've purchases, scavenged, or inherited? Here is a small set of tools to wrangle and enjoy them. Great collections are free of duplicate copies of songs stashed in multiple places with different file names -- this project can help with that. Big collections need to be cataloged and easily searched with simple ways to create song playlists which reference, but don't make more copies of your songs.
 
