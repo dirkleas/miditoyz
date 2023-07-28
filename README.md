@@ -26,16 +26,16 @@ Remember, help is always available by adding the `--help` option (e.g. `miditoyz
 
 ## Installation/Setup
 
-This project uses the popular, free scripting language [python](https://www.python.org). Additional bits are required for handling midi files, working with your computer, and so forth. It's been successfully tested to work on reasonably current versions of Windows, MacOS, and Linux. Complete steps 3. and beyond via your the Windows Command Prompt or the MacOS/Linux terminal/shell by copying and pasting the steps from the grey "code" boxes below.
+This project uses the popular, free scripting language [Python](https://www.python.org). Additional bits are required for handling midi files, working with your computer, and so forth. It's been successfully tested to work on reasonably current versions of Windows, MacOS, and Linux. Complete steps 3. and beyond via your the Windows Command Prompt or the MacOS/Linux terminal/shell by copying and pasting the steps from the grey "code" boxes below. Several steps require you to add things to your operating system (OS) path -- you can wait till the end of the list and add them all at the same time if more convenient.
 
-1. Install latest version of [python](https://www.python.org/downloads/) for your operating system (OS) and add it to your path. *On Windows, don't forget to tick the last option to have the installer automatically take care of adding Python to the OS search path for you!!!*
+1. Install latest version of [python](https://www.python.org/downloads/) for your os and add it to your path. *On Windows, you can tick the last option in the installation prompt dialog to have the installer automatically add Python to your path!!!*
 1. Install latest version of [git](https://git-scm.com) for your OS and add it to your path.
-1. `clone` this project on your computer via a terminal shell or command prompt in the directory of your choice. cloning the project will create a new folder named `miditoyz` -- change directory into that folder and you'll see the `miditoyz` software. Add this folder to your path.
+1. `clone` this project on your computer in the directory of your choice which results in a `miditoyz` folder, navigate there, and add it to you path:
     ```
     git clone https://github.com/dirkleas/miditoyz
     cd miditoyz
     ```
-1. Create default project configuration in your home directory. You may optionally alter default voice preferences (see **Notes** section, item #1 below for more details on voice preferences):
+1. Create default project configuration in your home directory. You may optionally alter the default voice preferences (see **Notes** section, item #1 below for more details on voice preferences):
     ```
     python -c "import os, pathlib, shutil; x = f'{pathlib.Path.home()}/.miditoyz'; os.mkdir(x); shutil.copyfile('settings.json', f'{x}/settings.json'); shutil.copyfile('datalist.pickle', f'{x}/datalist.pickle')"
     ```
@@ -53,8 +53,11 @@ This project uses the popular, free scripting language [python](https://www.pyth
     miditoyz init ~/music/collection ~/music/collection.new          # MacOS or Linux
     miditoyz init c:\music\collection c:\music\collection.new        # Windows
     ```
-1. For future updates as the project evolves, you can use the following command to update your local copy of the project with the latest changes from the official Github repository after you change directory into wherever you installed things (e.g. `cd ~/miditoyz` on MacOS/Linux, or `cd C:\miditoyz` on Windows):
+1. For future project updates, you can pull any changes from the official Github repository into wherever you cloned the project:
     ```
+    cd ~/miditoyz                                                    # MacOS or Linux
+    cd C:\miditoyz                                                   # Windows
+    
     git pull
     ```
 
