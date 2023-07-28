@@ -28,9 +28,9 @@ Remember, help is always available by adding the `--help` option (e.g. `miditoyz
 
 This project uses the popular, free scripting language [python](https://www.python.org). Additional bits are required for handling midi files, working with your computer, and so forth. It's been successfully tested to work on reasonably current versions of Windows, MacOS, and Linux. Complete steps 3. and beyond via your the Windows Command Prompt or the MacOS/Linux terminal/shell by copying and pasting the steps from the grey "code" boxes below.
 
-1. Install latest version of [python](https://www.python.org/downloads/) for your operating system (OS) and add it to your path. *On Windows, tick the last option to have the installer automatically take care of the path for you!!!*
-1. Install latest version of [git](https://git-scm.com) for your OS and add it to your path
-1. `clone` this project on your computer via a terminal shell or command prompt in the directory of your choice. cloning the project will create a new folder named `miditoyz` -- change directory into that folder and you'll see the `miditoyz` software. Add this folder to your OS path or create aliases for them (e.g. Windows `setx miditoyz "python c:\miditoyz\miditoyz`, etc.):
+1. Install latest version of [python](https://www.python.org/downloads/) for your operating system (OS) and add it to your path. *On Windows, don't forget to tick the last option to have the installer automatically take care of adding Python to the OS search path for you!!!*
+1. Install latest version of [git](https://git-scm.com) for your OS and add it to your path.
+1. `clone` this project on your computer via a terminal shell or command prompt in the directory of your choice. cloning the project will create a new folder named `miditoyz` -- change directory into that folder and you'll see the `miditoyz` software. Add this folder to your path.
     ```
     git clone https://github.com/dirkleas/miditoyz
     cd miditoyz
