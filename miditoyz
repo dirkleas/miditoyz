@@ -394,6 +394,11 @@ def voices(
     ),
 ):
     """Generate a list of voices for each track in a midi song file."""
+    if not os.path.exists(midi_file) or not is_midi(midi_file):
+        typer.echo(
+            f"oops, midi_file {midi_file} doesn't exist or isn't a midi song file"
+        )
+        return
     get_track_channel_voices(midi_file, pickle.load(open(voices, "rb")))
 
 
@@ -403,6 +408,11 @@ def dump(
     metadata: bool = typer.Option(False, help="Show only metadata."),
 ):
     """Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug"."""
+    if not os.path.exists(midi_file) or not is_midi(midi_file):
+        typer.echo(
+            f"oops, midi_file {midi_file} doesn't exist or isn't a midi song file"
+        )
+        return
     for dump in dump_midi(midi_file, metadata):
         typer.echo(dump)
 
@@ -415,6 +425,11 @@ def raw(
     debug: bool = typer.Option(False, help="Enable extended raw debug mode."),
 ):
     """Dump a MIDI song file in alternative raw text format with optionally with hexdump-style debug output. See also: "miditoyz dump --metadata"."""
+    if not os.path.exists(midi_file) or not is_midi(midi_file):
+        typer.echo(
+            f"oops, midi_file {midi_file} doesn't exist or isn't a midi song file"
+        )
+        return
     mido.MidiFile(midi_file, debug=debug).print_tracks()
 
 
@@ -425,12 +440,10 @@ def catalog(
     )
 ):
     """Change to a new catalog file for streaming."""
-    if os.path.exists(catalog_file):
+    if os.path.exists(catalog_file) and catalog_file.endswith(".json"):
         serialize_settings({"catalog": catalog_file})
     else:
-        typer.echo(
-            f"oops, {catalog_file} doesn't exist. always fully qualify your catalog file paths."
-        )
+        typer.echo(f"oops, {catalog_file} doesn't exist or isn't a catalog json file")
 
 
 if __name__ == "__main__":
