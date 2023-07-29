@@ -30,7 +30,7 @@
 #   - catalog list format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...]
 #
 
-import os, hashlib, shutil, json, pathlib, platform, pickle, mido, typer, parse
+import os, hashlib, shutil, json, pathlib, platform, pickle, time, mido, typer, parse
 from collections import defaultdict
 from music21 import midi
 
@@ -202,8 +202,9 @@ def ingest_music(source_directory, destination_directory):
         settings, open(pathlib.Path(homedir) / ".miditoyz" / "settings.json", "w")
     )
     typer.echo(
-        f"  song catalog saved to {pathlib.Path(destination_directory) / 'catalog.json'} -- all set, enjoy!!!"
+        f"  song catalog saved to {pathlib.Path(destination_directory) / 'catalog.json'}"
     )
+    return len(songs)
 
 
 def notify(title, subtitle):
@@ -301,7 +302,13 @@ def init(
         return
     if not os.path.exists(destination_directory):
         os.makedirs(destination_directory)
-    ingest_music(source_directory, destination_directory)
+
+    start_time = time.time()
+    songs = ingest_music(source_directory, destination_directory)
+    elapsed = (time.time() - start_time) / 60  # minutes
+    typer.echo(
+        f"  elapsed time: {elapsed:.2f} minutes, {elapsed/songs*1000:.2f} minutes/1000 songs"
+    )
 
 
 @app.command()
