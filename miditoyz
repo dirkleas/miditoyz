@@ -9,7 +9,7 @@
 #
 # todo:
 #   general:
-#       - add error handling on args, esp. --music, etc.
+#       - tbd
 #   init:
 #       - consider whether "broken" songs should be removed from catalog
 #       - add windows notification support via win10toast
@@ -153,12 +153,12 @@ def ingest_music(source_directory, destination_directory):
     typer.echo(
         f"  scanning for broken or invalid song files, this will take a while..."
     )
-    songs_broken_mido = []
+    songs_broken_mido = set()
     for song in [x["sources"][0] for x in songs.values()]:
         try:
             mido.MidiFile(song)
         except:
-            songs_broken_mido.append(hash)
+            songs_broken_mido.add(hash)
     # tbd: add broken identifier to catalog or remove broken songs...
 
     # copy unique songs to destination_directory...
@@ -173,7 +173,7 @@ def ingest_music(source_directory, destination_directory):
     typer.echo("  generating song catalog...")
 
     # add metadata to catalog using dump_midi metadata...
-    songs_broken_music21 = []
+    songs_broken_music21 = set()
     for song in [s for s in songs.keys()]:
         try:
             dump = dump_midi(
@@ -184,14 +184,14 @@ def ingest_music(source_directory, destination_directory):
                 **songs[song],
             }
         except:
-            songs_broken_music21.append(song)
+            songs_broken_music21.add(song)
     json.dump(
-        {"mido": songs_broken_mido, "music21": songs_broken_music21},
+        {"mido": list(songs_broken_mido), "music21": list(songs_broken_music21)},
         open(pathlib.Path(destination_directory) / "songs_broken.json", "w"),
         indent=2,
     )
     typer.echo(
-        f'  {len(songs_broken_mido + songs_broken_music21) / len(songs) * 100:.2f}% of songs are "broken" and have been logged...'
+        f'  {(len(songs_broken_mido) + len(songs_broken_music21)) / len(songs) * 100:.2f}% of songs are "broken" and have been logged...'
     )
     json.dump(
         songs, open(pathlib.Path(destination_directory) / "catalog.json", "w"), indent=2
@@ -438,6 +438,28 @@ def raw(
         )
         return
     mido.MidiFile(midi_file, debug=debug).print_tracks()
+
+
+@app.command()
+def verify(
+    midi_file: str = typer.Argument(
+        ..., help="MIDI file to analyze in extended raw debug format."
+    )
+):
+    """Verify MIDI song file can be processed with mido and music21 packages."""
+    if not os.path.exists(midi_file) or not is_midi(midi_file):
+        typer.echo(
+            f"oops, midi_file {midi_file} doesn't exist or isn't a midi song file"
+        )
+        return
+    typer.echo(f"verifying {midi_file} with mido and music21...")
+    try:
+        midi.MidiFile()
+        typer.echo(f"  music21 ok!")
+        mido.MidiFile(midi_file)
+        typer.echo(f"  mido ok!")
+    except:
+        typer.echo(f"  oops, unable to verify with both mido and music21!")
 
 
 @app.command()

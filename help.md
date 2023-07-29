@@ -23,6 +23,7 @@ Commands:
   init     Generate a new music collection from a source directory into a...
   raw      Dump a MIDI song file in alternative raw text format with...
   stream   Stream music from a catalog song list, a midi file, or...
+  verify   Verify MIDI song file can be processed with mido and music21...
   voices   Generate a list of voices for each track in a midi song file.
 
 $ miditoyz init --help
@@ -66,18 +67,20 @@ Usage: miditoyz stream [OPTIONS]
   subsequent streamings pick up from the last song played.
 
 Options:
-  --music TEXT        MIDI song file, directory full of music, or catalog list
-                      to stream. A catalog list is a JSON file containing list
-                      of song titles and "hashes" with the format: [{"title":
-                      "Autumn Leaves", "song": "hash.mid"}, ...].  [default:
-                      /Users/dirkleas/h4x/clav.toys/PIANOFORCE MUSIC
-                      FILES/Standards]
-  --bookmark INTEGER  Bookmark for last song played assuming you don't pick
-                      different music.  [default: 61]
-  --device TEXT       MIDI device to stream to (e.g. "Clavinova Port 1" for
-                      USB, "Network Clavinova for WIFI, etc.))  [default:
-                      Clavinova Port 1]
-  --help              Show this message and exit.
+  --music TEXT          MIDI song file, directory full of music, or catalog
+                        list to stream. A catalog list is a JSON file
+                        containing list of song titles and "hashes" with the
+                        format: [{"title": "Autumn Leaves", "song":
+                        "hash.mid"}, ...].  [default:
+                        /Users/dirkleas/h4x/clav.toys/PIANOFORCE MUSIC
+                        FILES/Standards and Melodies]
+  --bookmark INTEGER    Bookmark for last song played assuming you don't pick
+                        different music.  [default: 32]
+  --device TEXT         MIDI device to stream to (e.g. "Clavinova Port 1" for
+                        USB, "Network Clavinova for WIFI, etc.))  [default:
+                        Clavinova Port 1]
+  --debug / --no-debug  Debug output.))  [default: no-debug]
+  --help                Show this message and exit.
 
 $ miditoyz voices --help
 Usage: miditoyz voices [OPTIONS] MIDI_FILE
@@ -120,6 +123,17 @@ Arguments:
 Options:
   --debug / --no-debug  Enable extended raw debug mode.  [default: no-debug]
   --help                Show this message and exit.
+
+$ miditoyz verify --help
+Usage: miditoyz verify [OPTIONS] MIDI_FILE
+
+  Verify MIDI song file can be processed with mido and music21 packages.
+
+Arguments:
+  MIDI_FILE  MIDI file to analyze in extended raw debug format.  [required]
+
+Options:
+  --help  Show this message and exit.
 
 $ miditoyz catalog --help
 Usage: miditoyz catalog [OPTIONS] CATALOG_FILE
