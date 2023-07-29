@@ -226,7 +226,9 @@ def serialize_settings(new_settings):
 
 def song_title(midi):
     """return song title from midi file object"""
-    return tuple((e.name for e in midi.tracks[0] if e.type == "track_name"))[0]
+    return [*[e.name for e in midi.tracks[0] if e.type == "track_name"], *["untitled"]][
+        0
+    ]
 
 
 def generate_midi_voice_events(ch, msb, lsb, pc):
@@ -243,7 +245,7 @@ def stream_revoiced(songfile, index, song_count, voice_preferences, device):
     channels = defaultdict(dict)
     serialize_settings({"bookmark": index + 1})
     midi = mido.MidiFile(songfile)
-    title = song_title(midi) or "oops, missing title"
+    title = song_title(midi)
     typer.echo(f"{title} ({songfile}), song {index+1} of {song_count}")
     if platform.system() == "Darwin":
         notify(f"{'/'.join(songfile.split('/')[-2:])}, #{index+1}", title)
@@ -291,7 +293,6 @@ def init(
     """Generate a new music collection from a source directory into a destination directory removing duplicates
     songs. Duplicates include same song in multiple directory paths, renamed versions of the same song, etc.
     that have identical song content "inside" the song MIDI file."""
-    # create destination_directory if it doesn't exist...
     if not os.path.exists(source_directory):
         typer.echo(f"oops, source_directory {source_directory} doesn't exist")
         return
@@ -307,7 +308,7 @@ def init(
     songs = ingest_music(source_directory, destination_directory)
     elapsed = (time.time() - start_time) / 60  # minutes
     typer.echo(
-        f"  elapsed time: {elapsed:.2f} minutes, {elapsed/songs*1000:.2f} minutes/1000 songs"
+        f"  elapsed time was {elapsed:.2f} minutes, {elapsed/songs*1000:.2f} 1000 songs per minute..."
     )
 
 
