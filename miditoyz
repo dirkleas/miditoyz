@@ -346,8 +346,8 @@ def stream(
     We do the right thing if you specify a bookmark number that's too big or small or your play different music than last time.
     Your command line options are remembered between streaming sessions, so subsequent streamings pick up from the last song played.
     """
-    try:
-        device = mido.open_output(device)
+    try:  # pretest device...
+        mido.open_output(device)
     except:
         typer.echo(
             f"oops, device {device} not found, please select from the following connected device list: {', '.join(set(mido.get_output_names()))}"
@@ -389,6 +389,7 @@ def stream(
             f"{os.linesep}oops, your bookmark is beyond the last song in your music -- starting from the beginning...{os.linesep}"
         )
     try:  # revoice and stream songs...
+        device = mido.open_output(device)
         for skip, song in enumerate(songs):
             if skip >= bookmark - 1:
                 stream_revoiced(song, skip, len(songs), voice_preferences, device)
