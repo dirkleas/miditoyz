@@ -226,9 +226,8 @@ def serialize_settings(new_settings):
 
 def song_title(midi):
     """return song title from midi file object"""
-    return [*[e.name for e in midi.tracks[0] if e.type == "track_name"], *["untitled"]][
-        0
-    ]
+    titles = [e.name for e in midi.tracks[0] if e.type == "track_name"]
+    return titles[0] if titles and len(titles) > 0 else "untitled"
 
 
 def generate_midi_voice_events(ch, msb, lsb, pc):
@@ -347,12 +346,18 @@ def stream(
     We do the right thing if you specify a bookmark number that's too big or small or your play different music than last time.
     Your command line options are remembered between streaming sessions, so subsequent streamings pick up from the last song played.
     """
+    try:
+        device = mido.open_output(device)
+    except:
+        typer.echo(
+            f"oops, device {device} not found, please select from the following connected device list: {', '.join(set(mido.get_output_names()))}"
+        )
+        return
     is_song = music.lower().endswith(".mid")
     is_catalog_list = music.lower().endswith(".json")
     if bookmark < 0 or music != settings.get("music") or is_song:
         bookmark = 1
     serialize_settings({"music": music, "device": device, "bookmark": bookmark})
-    device = mido.open_output(device)
     if is_song:  # stream file...
         songs = [
             music,
