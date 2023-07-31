@@ -455,24 +455,34 @@ def raw(
 
 @app.command()
 def verify(
-    midi_file: str = typer.Argument(
-        ..., help="MIDI file to analyze in extended raw debug format."
+    midi_or_json_file: str = typer.Argument(
+        ..., help="MIDI song or JSON file to verify for correct syntax."
     )
 ):
-    """Verify MIDI song file can be processed with mido and music21 packages."""
-    if not os.path.exists(midi_file) or not is_midi(midi_file):
+    """Verify MIDI song file can be processed with mido and music21 packages or that JSON file is syntactically correct format."""
+    if not os.path.exists(midi_or_json_file) or not (
+        is_midi(midi_or_json_file) or midi_or_json_file.lower().endswith(".json")
+    ):
         typer.echo(
-            f"oops, midi_file {midi_file} doesn't exist or isn't a midi song file"
+            f"oops, specified {midi_or_json_file} doesn't exist or isn't a midi song or JSON file"
         )
         return
-    typer.echo(f"verifying {midi_file} with mido and music21...")
-    try:
-        midi.MidiFile()
-        typer.echo(f"  music21 ok!")
-        mido.MidiFile(midi_file)
-        typer.echo(f"  mido ok!")
-    except:
-        typer.echo(f"  oops, unable to verify with both mido and music21!")
+    if is_midi(midi_or_json_file):
+        typer.echo(f"verifying {midi_or_json_file} with mido and music21...")
+        try:
+            midi.MidiFile()
+            typer.echo(f"  music21 ok!")
+            mido.MidiFile(midi_or_json_file)
+            typer.echo(f"  mido ok!")
+        except:
+            typer.echo(f"  oops, unable to verify with both mido and music21!")
+    else:
+        typer.echo(f"verifying {midi_or_json_file} is a valid JSON file...")
+        try:
+            json.load(open(midi_or_json_file))
+            typer.echo(f"  JSON format ok!")
+        except:
+            typer.echo(f"  oops, invalid format!")
 
 
 @app.command()
