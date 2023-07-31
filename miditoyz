@@ -210,7 +210,10 @@ def ingest_music(source_directory, destination_directory):
 def notify(title, subtitle):
     """display notification on macos, tested on ventura"""
     try:
-        sh.osascript(e=f'display notification "{title}" with title "{subtitle}"')
+        if platform.system() == "Darwin":
+            import sh
+
+            sh.osascript(e=f'display notification "{title}" with title "{subtitle}"')
     except:
         pass
 
