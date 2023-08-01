@@ -37,7 +37,7 @@ This project uses the popular, free scripting language [Python](https://www.pyth
     ```
 1. Create default project configuration in your home directory. You may optionally alter the default voice preferences (see **Notes** section, item #1 below for more details on voice preferences):
     ```
-    python -c "import os, pathlib, shutil; x = f'{pathlib.Path.home()}/.miditoyz'; os.mkdir(x); shutil.copyfile('settings.json', f'{x}/settings.json'); shutil.copyfile('datalist.pickle', f'{x}/datalist.pickle')"
+    python -c "import os, pathlib, shutil; x = f'{pathlib.Path.home()}/.miditoyz'; os.mkdir(x); shutil.copyfile('settings.json', f'{x}/settings.json'); shutil.copyfile('datalist.pickle', f'{x}/datalist.pickle'); open('miditoyz.bat', 'w').write(f'@echo off{os.linesep}python {os.getcwd()}{os.sep}miditoyz %*{os.linesep}')"
     ```
 1. Install required Python packages:
     ```
