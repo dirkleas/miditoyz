@@ -317,7 +317,9 @@ def init(
 @app.command()
 def devices():
     """List currently connected midi output devices attached via USB, WIFI, or Bluetooth."""
-    typer.echo(f"Connected midi device(s): {', '.join(set(mido.get_output_names()))}")
+    typer.echo("Connected midi device(s):")
+    for device in mido.get_output_names():
+        typer.echo(f'"{device}"')
 
 
 @app.command()
