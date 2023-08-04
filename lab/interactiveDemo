@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+
+# Copyright (c) 2023 Dirk Leas
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+#
+# interactiveDemo - non-functional proof-of-concept to demonstrate use
+#                   of interactive CLI with streaming MIDI and traditional
+#                   transport play, pause, stop, and skip functionality
+
+import cmd
+import threading
+import time
+
+# Simulated list of songs
+songs = ["Song A", "Song B", "Song C", "Song D"]
+current_song_index = 0
+
+# Events to communicate with the streaming thread
+play_event = threading.Event()
+pause_event = threading.Event()
+stop_event = threading.Event()
+skip_event = threading.Event()
+
+
+def stream_midi():
+    global current_song_index
+    while current_song_index < len(songs):
+        song = songs[current_song_index]
+        for i in range(25):
+            if stop_event.is_set():
+                return
+            if skip_event.is_set():
+                skip_event.clear()
+                break
+            if not pause_event.is_set():
+                print(f"  {song}, event #{i}")
+                time.sleep(1)
+            else:
+                time.sleep(0.5)
+        current_song_index += 1
+    print("Streaming finished.")
+
+
+class MidiToyzCLI(cmd.Cmd):
+    def __init__(self):
+        super().__init__()
+        self.streaming_thread = None
+
+    intro = "Welcome to the MidiToyz CLI. Type help or ? to list commands.\n"
+    prompt = "(miditoyz) "
+
+    def do_play(self, _):
+        global current_song_index
+        if self.streaming_thread and self.streaming_thread.is_alive():
+            print("Songs are already playing. Stop them before starting again.")
+            return
+
+        # Reset song index
+        current_song_index = 0
+
+        # Set and clear necessary events
+        play_event.set()
+        pause_event.clear()
+        stop_event.clear()
+        skip_event.clear()
+
+        self.streaming_thread = threading.Thread(target=stream_midi)
+        self.streaming_thread.start()
+
+    def do_pause(self, _):
+        if pause_event.is_set():
+            pause_event.clear()
+            print("Resuming playback.")
+        else:
+            pause_event.set()
+            print("Paused playback.")
+
+    def do_stop(self, _):
+        stop_event.set()
+        if self.streaming_thread:
+            self.streaming_thread.join()
+        print("Stopped playback.")
+
+    def do_skip(self, _):
+        if not (self.streaming_thread and self.streaming_thread.is_alive()):
+            print("No song is currently playing.")
+            return
+        skip_event.set()
+
+    def do_exit(self, _):
+        if self.streaming_thread and self.streaming_thread.is_alive():
+            stop_event.set()
+            self.streaming_thread.join()
+        print("Goodbye!")
+        return True
+
+
+if __name__ == "__main__":
+    cli = MidiToyzCLI()
+    cli.cmdloop()
