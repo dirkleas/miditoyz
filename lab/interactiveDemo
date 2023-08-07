@@ -8,6 +8,9 @@
 # interactiveDemo - non-functional proof-of-concept to demonstrate use
 #                   of interactive CLI with streaming MIDI and traditional
 #                   transport play, pause, stop, and skip functionality
+# todo:
+#   - consider pub/sub, osc, etc. and os notifications for streaming output
+#
 
 import cmd
 import threading
@@ -28,15 +31,15 @@ def stream_midi():
     global current_song_index
     while current_song_index < len(songs):
         song = songs[current_song_index]
-        for i in range(25):
+        for i in range(10):
             if stop_event.is_set():
                 return
             if skip_event.is_set():
                 skip_event.clear()
                 break
             if not pause_event.is_set():
-                print(f"  {song}, event #{i}")
-                time.sleep(1)
+                print(f"  {song}, part #{i}")
+                time.sleep(5)
             else:
                 time.sleep(0.5)
         current_song_index += 1
@@ -54,7 +57,7 @@ class MidiToyzCLI(cmd.Cmd):
     def do_play(self, _):
         global current_song_index
         if self.streaming_thread and self.streaming_thread.is_alive():
-            print("Songs are already playing. Stop them before starting again.")
+            print("oops, songs are already playing, stop them before starting again.")
             return
 
         # Reset song index
