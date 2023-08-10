@@ -514,11 +514,29 @@ def catalog(
         typer.echo(f"oops, {catalog_file} doesn't exist or isn't a catalog json file")
 
 
+def create_db(catalog: str) -> None:
+    db = settings["catalog"].replace(".json", ".db")
+    if not os.path.exists(db):
+        typer.echo(f"oops, {db} doesn't exist -- creating it now...")
+        conn = duckdb.connect(db, config={"max_memory": "5G"})
+        conn.execute(
+            "create table catalog (title varchar, key varchar, dump varchar, sources varchar)"
+        )
+        catalog_data = [{"key": k, **v} for k, v in json.load(open(catalog)).items()]
+        catalog_flat = catalog.replace(".json", "_flat.json")
+        open(db.replace(".db", "_flat.json"), "w").write(json.dumps(catalog_data))
+        conn.execute(
+            f"insert into catalog select * from read_json_auto('{catalog_flat}');"
+        )
+        conn.commit()
+        conn.close()
+
+
 @app.command()
 def query(
     where_clause: str = typer.Argument(
         ...,
-        help='SQL where clause w/t "where" prefix to query catalog (e.g. "lower(title) like \'%love%\'" would match All You Need is Love, Love Her Madly, Imaginary Lover, etc. but not Used to Be (L.O.V.E.))',
+        help='SQL "where" clause w/t "where" keyword prefix to query catalog (e.g. "lower(title) like \'%love%\'" would match All You Need is Love, Love Her Madly, Imaginary Lover, etc. but not Used to Be (L.O.V.E.))',
     ),
     setlist_file: str = typer.Argument(
         ...,
@@ -527,18 +545,25 @@ def query(
 ):
     """Query a playlist from your catalog for later streaming."""
     # query via duckdb...
-    db = "/tmp/catalog.db"
-    if not os.path.exists(db) and setlist.endswith(".csv"):
-        typer.echo(f"oops, {db} doesn't exist -- creating it now...")
-        conn = duckdb.connect(db, config={"max_memory": "5G"})
-        conn.execute(
-            "create table catalog (title varchar, key varchar, dump varchar, sources varchar)"
-        )
-        # conn.execute("COPY catalog FROM '/tmp/catalog.json' (FORMAT 'JSON')")
-        conn.commit()
-        conn.close()
+    db = settings["catalog"].replace(".json", ".db")
+    create_db(settings["catalog"])
     query = f"copy (select title,key from catalog where {where_clause}) to '{setlist_file}' (header);"
     duckdb.connect(db).execute(query)
+
+
+@app.command()
+def fields():
+    """Show the fields in your catalog that you can use when querying a playlist from your catalog for later streaming."""
+    db = settings["catalog"].replace(".json", ".db")
+    create_db(settings["catalog"])
+    cols = (
+        duckdb.connect(db)
+        .execute(
+            "select column_name from information_schema.columns where table_name='catalog'"
+        )
+        .fetchall()
+    )
+    typer.echo(f'catalog fields: {", ".join([col[0] for col in cols])}')
 
 
 if __name__ == "__main__":

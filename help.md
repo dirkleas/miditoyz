@@ -20,6 +20,7 @@ Commands:
   catalog  Change to a new catalog file for streaming.
   devices  List currently connected midi output devices attached via USB,...
   dump     Dump a MIDI song file in raw text format.
+  fields   Show the fields in your catalog that you can use when querying...
   init     Generate a new music collection from a source directory into a...
   query    Query a playlist from your catalog for later streaming.
   raw      Dump a MIDI song file in alternative raw text format with...
@@ -156,12 +157,21 @@ Usage: miditoyz query [OPTIONS] WHERE_CLAUSE SETLIST_FILE
   Query a playlist from your catalog for later streaming.
 
 Arguments:
-  WHERE_CLAUSE  SQL where clause w/t "where" prefix to query catalog (e.g.
-                "lower(title) like '%love%'" would match All You Need is Love,
-                Love Her Madly, Imaginary Lover, etc. but not Used to Be
+  WHERE_CLAUSE  SQL "where" clause w/t "where" keyword prefix to query catalog
+                (e.g. "lower(title) like '%love%'" would match All You Need is
+                Love, Love Her Madly, Imaginary Lover, etc. but not Used to Be
                 (L.O.V.E.))  [required]
   SETLIST_FILE  Setlist .csv file to save setlist query results to for later
                 streaming.  [required]
+
+Options:
+  --help  Show this message and exit.
+
+$ miditoyz fields --help
+Usage: miditoyz fields [OPTIONS]
+
+  Show the fields in your catalog that you can use when querying a playlist
+  from your catalog for later streaming.
 
 Options:
   --help  Show this message and exit.
