@@ -26,10 +26,11 @@ Remember, help is always available by adding the `--help` option (e.g. `miditoyz
 
 ## Installation/Setup
 
-This project uses the popular, free scripting language [Python](https://www.python.org). Additional bits are required for handling midi files, working with your computer, and so forth. It's been successfully tested to work on reasonably current versions of Windows, MacOS, and Linux. Complete steps 3. and beyond via your the Windows Command Prompt or the MacOS/Linux terminal/shell by copying and pasting the steps from the grey "code" boxes below. Several steps require you to add things to your operating system (OS) path -- you can wait till the end of the list and add them all at the same time if more convenient.
+This project uses the popular, free scripting language [Python](https://www.python.org). Additional bits are required for handling midi files, working with your computer, and so forth. It's been successfully tested to work on reasonably current versions of Windows, MacOS, and Linux. Complete steps 4. and beyond via your the Windows Command Prompt or the MacOS/Linux terminal/shell by copying and pasting the steps from the grey "code" boxes below. Several steps require you to add things to your operating system (OS) path -- you can wait till the end of the list and add them all at the same time if more convenient.
 
 1. Install latest version of [python](https://www.python.org/downloads/) for your os and add it to your path. *On Windows, you can tick the last option in the installation prompt dialog to have the installer automatically add Python to your path!!!*
 1. Install latest version of [git](https://git-scm.com) for your OS and add it to your path.
+1. Install latest version of [duckdb](https://duckdb.org) for your OS and add it to your path.
 1. `clone` this project on your computer in the directory of your choice which results in a `miditoyz` folder, navigate there, and add it to you path:
     ```
     git clone https://github.com/dirkleas/miditoyz
