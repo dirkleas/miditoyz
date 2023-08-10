@@ -520,7 +520,7 @@ def create_db(catalog: str) -> None:
         typer.echo(f"oops, {db} doesn't exist -- creating it now...")
         conn = duckdb.connect(db, config={"max_memory": "5G"})
         conn.execute(
-            "create table catalog (title varchar, key varchar, dump varchar, sources varchar)"
+            "create table catalog (key varchar, title varchar, dump varchar, sources varchar)"
         )
         catalog_data = [{"key": k, **v} for k, v in json.load(open(catalog)).items()]
         catalog_flat = catalog.replace(".json", "_flat.json")
