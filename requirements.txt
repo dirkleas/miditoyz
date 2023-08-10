@@ -5,3 +5,4 @@ typer
 PyPDF2
 parse
 sh
+duckdb

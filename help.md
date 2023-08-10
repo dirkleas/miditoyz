@@ -21,6 +21,7 @@ Commands:
   devices  List currently connected midi output devices attached via USB,...
   dump     Dump a MIDI song file in raw text format.
   init     Generate a new music collection from a source directory into a...
+  query    Query a playlist from your catalog for later streaming.
   raw      Dump a MIDI song file in alternative raw text format with...
   stream   Stream music from a catalog song list, a midi file, or...
   verify   Verify MIDI song file can be processed with mido and music21...
@@ -58,24 +59,24 @@ Usage: miditoyz stream [OPTIONS]
   midi files to a midi device with using bank selection and program changes
   based on voice preferences stored in "~/.miditoyz/settings.json" and saved
   automatically each time you stream. Catalog song lists are JSON files with
-  the format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...] and can be
-  created from your collections "catalog.json". Bookmark values are based on
-  the sequential number of the song in the playlist or directory song list
-  starting with 1. We do the right thing if you specify a bookmark number
-  that's too big or small or your play different music than last time. Your
-  command line options are remembered between streaming sessions, so
-  subsequent streamings pick up from the last song played.
+  the format: [{"title": "Autumn Leaves", "song": "HASH"}, ...] or CSV files
+  with a mandatory header of "title,song" -- don't forget to use comma to
+  separate fields, and quote fields with commas in them. can be created from
+  your collections "catalog.json". Bookmark values are based on the sequential
+  number of the song in the playlist or directory song list starting with 1.
+  We do the right thing if you specify a bookmark number that's too big or
+  small or your play different music than last time. Your command line options
+  are remembered between streaming sessions, so subsequent streamings pick up
+  from the last song played.
 
 Options:
   --music TEXT          MIDI song file, directory full of music, or catalog
                         list to stream. A catalog list is a JSON file
                         containing list of song titles and "hashes" with the
                         format: [{"title": "Autumn Leaves", "song":
-                        "hash.mid"}, ...].  [default:
-                        /Users/dirkleas/h4x/clav.toys/PIANOFORCE MUSIC
-                        FILES/Standards and Melodies]
+                        "hash.mid"}, ...].  [default: /tmp/foo.csv]
   --bookmark INTEGER    Bookmark for last song played assuming you don't pick
-                        different music.  [default: 32]
+                        different music.  [default: 1]
   --device TEXT         MIDI device to stream to (e.g. "Clavinova Port 1" for
                         USB, "Network Clavinova for WIFI, etc.))  [default:
                         Clavinova Port 1]
@@ -125,12 +126,14 @@ Options:
   --help                Show this message and exit.
 
 $ miditoyz verify --help
-Usage: miditoyz verify [OPTIONS] MIDI_FILE
+Usage: miditoyz verify [OPTIONS] MIDI_OR_JSON_FILE
 
-  Verify MIDI song file can be processed with mido and music21 packages.
+  Verify MIDI song file can be processed with mido and music21 packages or
+  that JSON file is syntactically correct format.
 
 Arguments:
-  MIDI_FILE  MIDI file to analyze in extended raw debug format.  [required]
+  MIDI_OR_JSON_FILE  MIDI song or JSON file to verify for correct syntax.
+                     [required]
 
 Options:
   --help  Show this message and exit.
@@ -146,9 +149,19 @@ Arguments:
 
 Options:
   --help  Show this message and exit.
+
+$ miditoyz query --help
+Usage: miditoyz query [OPTIONS] WHERE_CLAUSE SETLIST_FILE
+
+  Query a playlist from your catalog for later streaming.
+
+Arguments:
+  WHERE_CLAUSE  SQL where clause w/t "where" prefix to query catalog (e.g.
+                "lower(title) like '%love%'" to search for Imaginary Lover,
+                etc.)  [required]
+  SETLIST_FILE  Setlist .csv file to save setlist query results to for later
+                streaming.  [required]
+
+Options:
+  --help  Show this message and exit.
 ```
-
-
---
-
-This project is licensed under the terms of the MIT license. See LICENSE for details.

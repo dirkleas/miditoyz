@@ -30,7 +30,7 @@
 #   - catalog list format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...]
 #
 
-import os, hashlib, shutil, json, pathlib, platform, pickle, time, mido, typer, parse
+import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, mido, typer, parse, duckdb
 from collections import defaultdict
 from music21 import midi
 
@@ -345,7 +345,8 @@ def stream(
     Stream music from a catalog song list, a midi file, or directory full of midi files to a midi device with using
     bank selection and program changes based on voice preferences stored in "~/.miditoyz/settings.json"
     and saved automatically each time you stream.
-    Catalog song lists are JSON files with the format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...] and
+    Catalog song lists are JSON files with the format: [{"title": "Autumn Leaves", "song": "HASH"}, ...] or CSV files with
+    a mandatory header of "title,song" -- don't forget to use comma to separate fields, and quote fields with commas in them.
     can be created from your collections "catalog.json". Bookmark values are based on the sequential number of the
     song in the playlist or directory song list starting with 1.
     We do the right thing if you specify a bookmark number that's too big or small or your play different music than last time.
@@ -359,7 +360,9 @@ def stream(
         )
         return
     is_song = music.lower().endswith(".mid")
-    is_catalog_list = music.lower().endswith(".json")
+    is_catalog_list = music.lower().endswith(".json") or music.lower().endswith(
+        ".csv"
+    )  # .csv w/ headers
     if bookmark < 0 or music != settings.get("music") or is_song:
         bookmark = 1
     serialize_settings({"music": music, "device": device, "bookmark": bookmark})
@@ -376,13 +379,20 @@ def stream(
             ]
         )
     elif is_catalog_list:  # stream or catalog list...
-        # catalog list format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...]
-        songs = list(
-            map(
-                lambda x: f'{settings.get("catalog")[:-13]}{os.sep}{x.get("song")}',
-                json.load(open(music)),
+        if music.lower().endswith(".csv"):
+            songs = list(  # includes header, format title, key w/t
+                map(
+                    lambda x: f'{settings.get("catalog")[:-13]}{os.sep}{x.get("key")}.mid',
+                    csv.DictReader(open(music)),
+                )
             )
-        )
+        elif music.lower().endswith(".json"):
+            songs = list(  # catalog list format: [{"title": "Autumn Leaves", "key": "HASH"}, ...]
+                map(
+                    lambda x: f'{settings.get("catalog")[:-13]}{os.sep}{x.get("key")}.mid',
+                    json.load(open(music)),
+                )
+            )
     else:
         typer.echo(
             "oops, music must be a catalog list, midi file, or directory full of midi files"
@@ -502,6 +512,33 @@ def catalog(
         serialize_settings({"catalog": catalog_file})
     else:
         typer.echo(f"oops, {catalog_file} doesn't exist or isn't a catalog json file")
+
+
+@app.command()
+def query(
+    where_clause: str = typer.Argument(
+        ...,
+        help='SQL where clause w/t "where" prefix to query catalog (e.g. "lower(title) like \'%love%\'" to search for Imaginary Lover, etc.)',
+    ),
+    setlist_file: str = typer.Argument(
+        ...,
+        help="Setlist .csv file to save setlist query results to for later streaming.",
+    ),
+):
+    """Query a playlist from your catalog for later streaming."""
+    # query via duckdb...
+    db = "/tmp/catalog.db"
+    if not os.path.exists(db) and setlist.endswith(".csv"):
+        typer.echo(f"oops, {db} doesn't exist -- creating it now...")
+        conn = duckdb.connect(db, config={"max_memory": "5G"})
+        conn.execute(
+            "create table catalog (title varchar, key varchar, dump varchar, sources varchar)"
+        )
+        # conn.execute("COPY catalog FROM '/tmp/catalog.json' (FORMAT 'JSON')")
+        conn.commit()
+        conn.close()
+    query = f"copy (select title,key from catalog where {where_clause}) to '{setlist_file}' (header);"
+    duckdb.connect(db).execute(query)
 
 
 if __name__ == "__main__":
