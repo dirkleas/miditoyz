@@ -518,7 +518,7 @@ def catalog(
 def query(
     where_clause: str = typer.Argument(
         ...,
-        help='SQL where clause w/t "where" prefix to query catalog (e.g. "lower(title) like \'%love%\'" to search for Imaginary Lover, etc.)',
+        help='SQL where clause w/t "where" prefix to query catalog (e.g. "lower(title) like \'%love%\'" would match All You Need is Love, Love Her Madly, Imaginary Lover, etc. but not Used to Be (L.O.V.E.))',
     ),
     setlist_file: str = typer.Argument(
         ...,

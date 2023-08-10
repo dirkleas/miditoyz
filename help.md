@@ -60,7 +60,7 @@ Usage: miditoyz stream [OPTIONS]
   based on voice preferences stored in "~/.miditoyz/settings.json" and saved
   automatically each time you stream. Catalog song lists are JSON files with
   the format: [{"title": "Autumn Leaves", "song": "HASH"}, ...] or CSV files
-  with a mandatory header of "title,song" -- don't forget to use comma to
+  with a mandatory header of "title,key" -- don't forget to use comma to
   separate fields, and quote fields with commas in them. can be created from
   your collections "catalog.json". Bookmark values are based on the sequential
   number of the song in the playlist or directory song list starting with 1.
@@ -157,8 +157,9 @@ Usage: miditoyz query [OPTIONS] WHERE_CLAUSE SETLIST_FILE
 
 Arguments:
   WHERE_CLAUSE  SQL where clause w/t "where" prefix to query catalog (e.g.
-                "lower(title) like '%love%'" to search for Imaginary Lover,
-                etc.)  [required]
+                "lower(title) like '%love%'" would match All You Need is Love,
+                Love Her Madly, Imaginary Lover, etc. but not Used to Be
+                (L.O.V.E.))  [required]
   SETLIST_FILE  Setlist .csv file to save setlist query results to for later
                 streaming.  [required]
 
