@@ -61,7 +61,7 @@ Usage: miditoyz stream [OPTIONS]
   based on voice preferences stored in "~/.miditoyz/settings.json" and saved
   automatically each time you stream. Catalog song lists are JSON files with
   the format: [{"title": "Autumn Leaves", "song": "HASH"}, ...] or CSV files
-  with a mandatory header of "title,key" -- don't forget to use comma to
+  with a mandatory header of "title,id" -- don't forget to use comma to
   separate fields, and quote fields with commas in them. can be created from
   your collections "catalog.json". Bookmark values are based on the sequential
   number of the song in the playlist or directory song list starting with 1.

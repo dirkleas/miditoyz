@@ -346,7 +346,7 @@ def stream(
     bank selection and program changes based on voice preferences stored in "~/.miditoyz/settings.json"
     and saved automatically each time you stream.
     Catalog song lists are JSON files with the format: [{"title": "Autumn Leaves", "song": "HASH"}, ...] or CSV files with
-    a mandatory header of "title,key" -- don't forget to use comma to separate fields, and quote fields with commas in them.
+    a mandatory header of "title,id" -- don't forget to use comma to separate fields, and quote fields with commas in them.
     can be created from your collections "catalog.json". Bookmark values are based on the sequential number of the
     song in the playlist or directory song list starting with 1.
     We do the right thing if you specify a bookmark number that's too big or small or your play different music than last time.
@@ -380,16 +380,16 @@ def stream(
         )
     elif is_catalog_list:  # stream or catalog list...
         if music.lower().endswith(".csv"):
-            songs = list(  # includes header, format title, key w/t
+            songs = list(  # includes header, format title,id
                 map(
-                    lambda x: f'{settings.get("catalog")[:-13]}{os.sep}{x.get("key")}.mid',
+                    lambda x: f'{settings.get("catalog")[:-13]}{os.sep}{x.get("id")}.mid',
                     csv.DictReader(open(music)),
                 )
             )
         elif music.lower().endswith(".json"):
             songs = list(  # catalog list format: [{"title": "Autumn Leaves", "key": "HASH"}, ...]
                 map(
-                    lambda x: f'{settings.get("catalog")[:-13]}{os.sep}{x.get("key")}.mid',
+                    lambda x: f'{settings.get("catalog")[:-13]}{os.sep}{x.get("id")}.mid',
                     json.load(open(music)),
                 )
             )
@@ -520,13 +520,15 @@ def create_db(catalog: str) -> None:
         typer.echo(f"oops, {db} doesn't exist -- creating it now...")
         conn = duckdb.connect(db, config={"max_memory": "5G"})
         conn.execute(
-            "create table catalog (key varchar, title varchar, dump varchar, sources varchar)"
+            "create table catalog (id varchar, title varchar, dump varchar, sources varchar)"
         )
-        catalog_data = [{"key": k, **v} for k, v in json.load(open(catalog)).items()]
+        catalog_data = [{"id": k, **v} for k, v in json.load(open(catalog)).items()]
         catalog_flat = catalog.replace(".json", "_flat.json")
         open(db.replace(".db", "_flat.json"), "w").write(json.dumps(catalog_data))
         conn.execute(
-            f"insert into catalog select * from read_json_auto('{catalog_flat}');"
+            "insert into catalog select * from read_json('"
+            + catalog_flat
+            + "', columns={id: 'varchar', title: 'varchar', dump: 'varchar', sources: 'varchar'});"
         )
         conn.commit()
         conn.close()
@@ -544,10 +546,9 @@ def query(
     ),
 ):
     """Query a playlist from your catalog for later streaming."""
-    # query via duckdb...
     db = settings["catalog"].replace(".json", ".db")
     create_db(settings["catalog"])
-    query = f"copy (select title,key from catalog where {where_clause}) to '{setlist_file}' (header);"
+    query = f"copy (select title,id from catalog where {where_clause}) to '{setlist_file}' (header);"
     duckdb.connect(db).execute(query)
 
 
