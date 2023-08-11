@@ -619,5 +619,19 @@ def title(
     )
 
 
+@app.command()
+def panic(
+    device: str = typer.Option(
+        settings.get("device", "Clavinova Port 1"),
+        help='MIDI device to panic reset (e.g. "Clavinova Port 1" for USB, "Network Clavinova for WIFI, etc.))',
+    ),
+):
+    """Send MIDI panic to turn off any hung notes."""
+    with mido.open_output(device) as outport:
+        for channel in range(16):  # MIDI channels 0-15
+            for note in range(128):  # MIDI notes 0-127
+                outport.send(mido.Message("note_off", note=note, channel=channel))
+
+
 if __name__ == "__main__":
     app()

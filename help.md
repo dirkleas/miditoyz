@@ -22,6 +22,7 @@ Commands:
   dump     Dump a MIDI song file in raw text format.
   fields   Show the fields in your catalog that you can use when querying...
   init     Generate a new music collection from a source directory into a...
+  panic    Send MIDI panic to turn off any hung notes.
   query    Query a playlist from your catalog for later streaming.
   raw      Dump a MIDI song file in alternative raw text format with...
   stream   Stream music from a catalog song list, a midi file, or...
@@ -188,4 +189,15 @@ Arguments:
 
 Options:
   --help  Show this message and exit.
+
+$ miditoyz panic --help
+Usage: miditoyz panic [OPTIONS]
+
+  Send MIDI panic to turn off any hung notes.
+
+Options:
+  --device TEXT  MIDI device to panic reset (e.g. "Clavinova Port 1" for USB,
+                 "Network Clavinova for WIFI, etc.))  [default: Clavinova Port
+                 1]
+  --help         Show this message and exit.
 ```
