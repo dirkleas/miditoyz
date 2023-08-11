@@ -113,7 +113,7 @@ def is_midi(filename):
     return filename.lower().endswith((".midi", ".mid"))
 
 
-def get_title(dump):
+def get_title_music21(dump):
     """get first title from dump"""
     event = next(filter(lambda x: x.startswith("SEQUENCE_TRACK_NAME"), dump), None)
     if not event:
@@ -123,6 +123,12 @@ def get_title(dump):
             "SEQUENCE_TRACK_NAME, track={track}, channel={channel}, data=b{title}, time={time}",
             event,
         )["title"][1:-1]
+
+
+def get_title_mido(midi):
+    """return song title from midi file object"""
+    titles = [e.name for e in midi.tracks[0] if e.type == "track_name"]
+    return titles[0] if titles and len(titles) > 0 else "untitled"
 
 
 def ingest_music(source_directory, destination_directory):
@@ -180,7 +186,7 @@ def ingest_music(source_directory, destination_directory):
                 pathlib.Path(destination_directory) / f"{song}.mid", metadata=True
             )
             songs[song] = {
-                **{"title": get_title(dump), "dump": dump},
+                **{"title": get_title_music21(dump), "dump": dump},
                 **songs[song],
             }
         except:
@@ -207,6 +213,25 @@ def ingest_music(source_directory, destination_directory):
     return len(songs)
 
 
+def create_db(catalog: str) -> None:
+    """lazily create duckdb database from catalog.json for query/fields commands"""
+    db = settings["catalog"].replace(".json", ".db")
+    if not os.path.exists(db):
+        typer.echo(f"creating {db}, just a sec...")
+        conn = duckdb.connect(db, config={"max_memory": "5G"})
+        catalog_data = [{"id": k, **v} for k, v in json.load(open(catalog)).items()]
+        catalog_flat = catalog.replace(".json", "_flat.json")
+        open(db.replace(".db", "_flat.json"), "w").write(json.dumps(catalog_data))
+        conn.execute(
+            # "insert into catalog select * from read_json('"
+            "create table  if not exists catalog as select * from read_json('"
+            + catalog_flat
+            + "', columns={id: 'varchar', title: 'varchar', dump: 'varchar', sources: 'varchar'});"
+        )
+        conn.commit()
+        conn.close()
+
+
 def notify(title, subtitle):
     """display notification on macos, tested on ventura"""
     try:
@@ -227,12 +252,6 @@ def serialize_settings(new_settings):
     )
 
 
-def song_title(midi):
-    """return song title from midi file object"""
-    titles = [e.name for e in midi.tracks[0] if e.type == "track_name"]
-    return titles[0] if titles and len(titles) > 0 else "untitled"
-
-
 def generate_midi_voice_events(ch, msb, lsb, pc):
     """generate midi voice events for bank select and program change messages"""
     return [
@@ -247,7 +266,7 @@ def stream_revoiced(songfile, index, song_count, voice_preferences, device):
     channels = defaultdict(dict)
     serialize_settings({"bookmark": index + 1})
     midi = mido.MidiFile(songfile)
-    title = song_title(midi)
+    title = get_title_mido(midi)
     typer.echo(f"{title} ({songfile}), song {index+1} of {song_count}")
     if platform.system() == "Darwin":
         notify(f"{'/'.join(songfile.split('/')[-2:])}, #{index+1}", title)
@@ -512,26 +531,6 @@ def catalog(
         serialize_settings({"catalog": catalog_file})
     else:
         typer.echo(f"oops, {catalog_file} doesn't exist or isn't a catalog json file")
-
-
-def create_db(catalog: str) -> None:
-    db = settings["catalog"].replace(".json", ".db")
-    if not os.path.exists(db):
-        typer.echo(f"oops, {db} doesn't exist -- creating it now...")
-        conn = duckdb.connect(db, config={"max_memory": "5G"})
-        conn.execute(
-            "create table catalog (id varchar, title varchar, dump varchar, sources varchar)"
-        )
-        catalog_data = [{"id": k, **v} for k, v in json.load(open(catalog)).items()]
-        catalog_flat = catalog.replace(".json", "_flat.json")
-        open(db.replace(".db", "_flat.json"), "w").write(json.dumps(catalog_data))
-        conn.execute(
-            "insert into catalog select * from read_json('"
-            + catalog_flat
-            + "', columns={id: 'varchar', title: 'varchar', dump: 'varchar', sources: 'varchar'});"
-        )
-        conn.commit()
-        conn.close()
 
 
 @app.command()
