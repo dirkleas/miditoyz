@@ -232,6 +232,33 @@ def create_db(catalog: str) -> None:
         conn.close()
 
 
+def format_query_result(data):
+    HORIZONTAL = "─"
+    VERTICAL = "│"
+    TOP_LEFT = "┌"
+    TOP_RIGHT = "┐"
+    BOTTOM_LEFT = "└"
+    BOTTOM_RIGHT = "┘"
+    T_LEFT = "├"
+    T_RIGHT = "┤"
+    T_TOP = "┬"
+    T_BOTTOM = "┴"
+    CROSS = "┼"
+    max_width_col1 = max(len(row[0]) for row in data)
+    max_width_col2 = max(len(row[1]) for row in data)
+    header_top = f"{TOP_LEFT}{HORIZONTAL * (max_width_col1 + 2)}{T_TOP}{HORIZONTAL * (max_width_col2 + 2)}{TOP_RIGHT}"
+    header_row = f"{VERTICAL} {'title'.ljust(max_width_col1)} {VERTICAL} {'id'.ljust(max_width_col2)} {VERTICAL}"
+    header_middle = f"{T_LEFT}{HORIZONTAL * (max_width_col1 + 2)}{CROSS}{HORIZONTAL * (max_width_col2 + 2)}{T_RIGHT}"
+    rows_box = [header_top, header_row, header_middle]
+    for row in data:
+        rows_box.append(
+            f"{VERTICAL} {row[0].strip().ljust(max_width_col1)} {VERTICAL} {row[1].strip().ljust(max_width_col2)} {VERTICAL}"
+        )
+    table_bottom = f"{BOTTOM_LEFT}{HORIZONTAL * (max_width_col1 + 2)}{T_BOTTOM}{HORIZONTAL * (max_width_col2 + 2)}{BOTTOM_RIGHT}"
+    rows_box.append(table_bottom)
+    return "\n".join(rows_box)
+
+
 def notify(title, subtitle):
     """display notification on macos, tested on ventura"""
     try:
@@ -539,16 +566,20 @@ def query(
         ...,
         help='SQL "where" clause w/t "where" keyword prefix to query catalog (e.g. "lower(title) like \'%love%\'" would match All You Need is Love, Love Her Madly, Imaginary Lover, etc. but not Used to Be (L.O.V.E.))',
     ),
-    setlist_file: str = typer.Argument(
-        ...,
+    setlist_file: str = typer.Option(
+        None,
         help="Setlist .csv file to save setlist query results to for later streaming.",
     ),
 ):
     """Query a playlist from your catalog for later streaming."""
     db = settings["catalog"].replace(".json", ".db")
     create_db(settings["catalog"])
-    query = f"copy (select title,id from catalog where {where_clause}) to '{setlist_file}' (header);"
-    duckdb.connect(db).execute(query)
+    if setlist_file:
+        query = f"copy (select title,id from catalog where {where_clause}) to '{setlist_file}' (header);"
+        duckdb.connect(db).execute(query)
+    else:
+        query = f"select title,id from catalog where {where_clause};"
+        typer.echo(format_query_result(duckdb.connect(db).execute(query).fetchall()))
 
 
 @app.command()

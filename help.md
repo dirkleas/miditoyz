@@ -152,7 +152,7 @@ Options:
   --help  Show this message and exit.
 
 $ miditoyz query --help
-Usage: miditoyz query [OPTIONS] WHERE_CLAUSE SETLIST_FILE
+Usage: miditoyz query [OPTIONS] WHERE_CLAUSE
 
   Query a playlist from your catalog for later streaming.
 
@@ -161,11 +161,11 @@ Arguments:
                 (e.g. "lower(title) like '%love%'" would match All You Need is
                 Love, Love Her Madly, Imaginary Lover, etc. but not Used to Be
                 (L.O.V.E.))  [required]
-  SETLIST_FILE  Setlist .csv file to save setlist query results to for later
-                streaming.  [required]
 
 Options:
-  --help  Show this message and exit.
+  --setlist-file TEXT  Setlist .csv file to save setlist query results to for
+                       later streaming.
+  --help               Show this message and exit.
 
 $ miditoyz fields --help
 Usage: miditoyz fields [OPTIONS]
