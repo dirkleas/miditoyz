@@ -605,7 +605,6 @@ def title(
     )
 ):
     """Show the title for a MIDI song file "id" from your catalog."""
-    print(midi_file_id)
     db = settings["catalog"].replace(".json", ".db")
     create_db(settings["catalog"])
     id = (
