@@ -597,5 +597,28 @@ def fields():
     typer.echo(f'catalog fields: {", ".join([col[0] for col in cols])}')
 
 
+@app.command()
+def title(
+    midi_file_id: str = typer.Argument(
+        ...,
+        help='MIDI song file "id" without the .mid file extension .mid for title lookup.',
+    )
+):
+    """Show the title for a MIDI song file "id" from your catalog."""
+    print(midi_file_id)
+    db = settings["catalog"].replace(".json", ".db")
+    create_db(settings["catalog"])
+    id = (
+        duckdb.connect(db)
+        .execute(f"select title from catalog where id='{midi_file_id}';")
+        .fetchone()
+    )
+    typer.echo(
+        id[0]
+        if id
+        else f"oops, {midi_file_id} doesn't exist in the catalog as a MIDI song file."
+    )
+
+
 if __name__ == "__main__":
     app()
