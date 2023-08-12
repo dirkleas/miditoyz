@@ -471,7 +471,6 @@ def stream(
     try:  # revoice and stream songs...
         if shuffle:
             random.shuffle(songs)
-        print(songs)
         device = mido.open_output(device)
         for skip, song in enumerate(songs):
             if skip >= bookmark - 1:
