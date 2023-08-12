@@ -30,7 +30,7 @@
 #   - catalog list format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...]
 #
 
-import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, mido, typer, parse, duckdb
+import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, random, mido, typer, parse, duckdb
 from collections import defaultdict
 from music21 import midi
 
@@ -397,6 +397,7 @@ def stream(
         settings.get("device", "Clavinova Port 1"),
         help='MIDI device to stream to (e.g. "Clavinova Port 1" for USB, "Network Clavinova for WIFI, etc.))',
     ),
+    shuffle: bool = typer.Option(False, help="Shuffle song order."),
     debug: bool = typer.Option(
         False,
         help="Debug output.))",
@@ -465,6 +466,8 @@ def stream(
             f"{os.linesep}oops, your bookmark is beyond the last song in your music -- starting from the beginning...{os.linesep}"
         )
     try:  # revoice and stream songs...
+        if shuffle:
+            random.shuffle(songs)
         device = mido.open_output(device)
         for skip, song in enumerate(songs):
             if skip >= bookmark - 1:

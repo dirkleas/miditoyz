@@ -73,18 +73,20 @@ Usage: miditoyz stream [OPTIONS]
   from the last song played.
 
 Options:
-  --music TEXT          MIDI song file, directory full of music, or catalog
-                        list to stream. A catalog list is a JSON file
-                        containing list of song titles and "hashes" with the
-                        format: [{"title": "Autumn Leaves", "song":
-                        "hash.mid"}, ...].  [default: /tmp/foo.csv]
-  --bookmark INTEGER    Bookmark for last song played assuming you don't pick
-                        different music.  [default: 1]
-  --device TEXT         MIDI device to stream to (e.g. "Clavinova Port 1" for
-                        USB, "Network Clavinova for WIFI, etc.))  [default:
-                        Clavinova Port 1]
-  --debug / --no-debug  Debug output.))  [default: no-debug]
-  --help                Show this message and exit.
+  --music TEXT              MIDI song file, directory full of music, or
+                            catalog list to stream. A catalog list is a JSON
+                            file containing list of song titles and "hashes"
+                            with the format: [{"title": "Autumn Leaves",
+                            "song": "hash.mid"}, ...].  [default:
+                            /tmp/foo.csv]
+  --bookmark INTEGER        Bookmark for last song played assuming you don't
+                            pick different music.  [default: 1]
+  --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
+                            for USB, "Network Clavinova for WIFI, etc.))
+                            [default: Clavinova Port 1]
+  --shuffle / --no-shuffle  Shuffle song order.  [default: no-shuffle]
+  --debug / --no-debug      Debug output.))  [default: no-debug]
+  --help                    Show this message and exit.
 
 $ miditoyz voices --help
 Usage: miditoyz voices [OPTIONS] MIDI_FILE
