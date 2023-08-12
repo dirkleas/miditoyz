@@ -239,6 +239,8 @@ def create_db() -> None:
         + catalog_flat
         + "', columns={id: 'varchar', title: 'varchar', broken_mido: 'boolean', broken_music21: 'boolean', dump: 'varchar', sources: 'varchar'});"
     )
+    # create index on catalog (id);
+    conn.execute("create index idx_catalog_id on catalog (id);")
     conn.commit()
     conn.close()
     os.remove(catalog_flat)
@@ -386,7 +388,7 @@ def devices():
 @app.command()
 def stream(
     music: str = typer.Option(
-        settings.get("music"),  # default to last music
+        settings.get("music") or settings.get("catalog"),  # default to last music
         help='MIDI song file, directory full of music, or catalog list to stream. A catalog list is a JSON file containing list of song titles and "hashes" with the format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...].',
     ),
     bookmark: int = typer.Option(
@@ -579,7 +581,7 @@ def catalog(
 ):
     """Change to a new catalog file for streaming."""
     if os.path.exists(catalog_directory):
-        serialize_settings({"catalog": catalog_directory})
+        serialize_settings({"catalog": catalog_directory, "music": "", "bookmark": 1})
     else:
         typer.echo(
             f"oops, {catalog_directory} doesn't exist or isn't a catalog json file"

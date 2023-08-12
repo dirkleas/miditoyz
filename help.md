@@ -78,7 +78,7 @@ Options:
                             file containing list of song titles and "hashes"
                             with the format: [{"title": "Autumn Leaves",
                             "song": "hash.mid"}, ...].  [default:
-                            /tmp/foo.csv]
+                            /Users/dirkleas/h4x/clav.toys.unique]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
                             pick different music.  [default: 1]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
