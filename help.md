@@ -85,6 +85,8 @@ Options:
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
   --shuffle / --no-shuffle  Shuffle song order.  [default: no-shuffle]
+  --intermission INTEGER    Add specified number of seconds intermission
+                            between songs.  [default: 0]
   --debug / --no-debug      Debug output.))  [default: no-debug]
   --help                    Show this message and exit.
 

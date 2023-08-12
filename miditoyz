@@ -398,6 +398,9 @@ def stream(
         help='MIDI device to stream to (e.g. "Clavinova Port 1" for USB, "Network Clavinova for WIFI, etc.))',
     ),
     shuffle: bool = typer.Option(False, help="Shuffle song order."),
+    intermission: int = typer.Option(
+        0, help="Add specified number of seconds intermission between songs."
+    ),
     debug: bool = typer.Option(
         False,
         help="Debug output.))",
@@ -472,6 +475,7 @@ def stream(
         for skip, song in enumerate(songs):
             if skip >= bookmark - 1:
                 stream_revoiced(song, skip, len(songs), voice_preferences, device)
+                time.sleep(intermission)
     except:  # skip broken songs...
         if not debug:
             pass
