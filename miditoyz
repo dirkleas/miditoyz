@@ -235,11 +235,10 @@ def create_db() -> None:
     catalog_flat = db.replace(".db", "_flat.json")
     open(db.replace(".db", "_flat.json"), "w").write(json.dumps(catalog_data))
     conn.execute(
-        "create table  if not exists catalog as select * from read_json('"
+        "create table catalog as select * from read_json('"
         + catalog_flat
         + "', columns={id: 'varchar', title: 'varchar', broken_mido: 'boolean', broken_music21: 'boolean', dump: 'varchar', sources: 'varchar'});"
     )
-    # create index on catalog (id);
     conn.execute("create index idx_catalog_id on catalog (id);")
     conn.commit()
     conn.close()
