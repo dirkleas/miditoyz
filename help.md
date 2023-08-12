@@ -146,13 +146,13 @@ Options:
   --help  Show this message and exit.
 
 $ miditoyz catalog --help
-Usage: miditoyz catalog [OPTIONS] CATALOG_FILE
+Usage: miditoyz catalog [OPTIONS] CATALOG_DIRECTORY
 
   Change to a new catalog file for streaming.
 
 Arguments:
-  CATALOG_FILE  Alternative catalog file from one of your miditoyz song
-                collections.  [required]
+  CATALOG_DIRECTORY  Alternative catalog directory from one of your miditoyz
+                     song collections.  [required]
 
 Options:
   --help  Show this message and exit.

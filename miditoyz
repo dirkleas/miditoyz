@@ -447,14 +447,14 @@ def stream(
         if music.lower().endswith(".csv"):
             songs = list(  # includes header, format title,id
                 map(
-                    lambda x: f'{settings.get("catalog")[:-13]}{os.sep}{x.get("id")}.mid',
+                    lambda x: f'{settings.get("catalog")}{os.sep}{x.get("id")}.mid',
                     csv.DictReader(open(music)),
                 )
             )
         elif music.lower().endswith(".json"):
             songs = list(  # catalog list format: [{"title": "Autumn Leaves", "key": "HASH"}, ...]
                 map(
-                    lambda x: f'{settings.get("catalog")[:-13]}{os.sep}{x.get("id")}.mid',
+                    lambda x: f'{settings.get("catalog")}{os.sep}{x.get("id")}.mid',
                     json.load(open(music)),
                 )
             )
@@ -471,6 +471,7 @@ def stream(
     try:  # revoice and stream songs...
         if shuffle:
             random.shuffle(songs)
+        print(songs)
         device = mido.open_output(device)
         for skip, song in enumerate(songs):
             if skip >= bookmark - 1:
@@ -571,15 +572,18 @@ def verify(
 
 @app.command()
 def catalog(
-    catalog_file: str = typer.Argument(
-        ..., help="Alternative catalog file from one of your miditoyz song collections."
+    catalog_directory: str = typer.Argument(
+        ...,
+        help="Alternative catalog directory from one of your miditoyz song collections.",
     )
 ):
     """Change to a new catalog file for streaming."""
-    if os.path.exists(catalog_file) and catalog_file.endswith(".json"):
-        serialize_settings({"catalog": catalog_file})
+    if os.path.exists(catalog_directory):
+        serialize_settings({"catalog": catalog_directory})
     else:
-        typer.echo(f"oops, {catalog_file} doesn't exist or isn't a catalog json file")
+        typer.echo(
+            f"oops, {catalog_directory} doesn't exist or isn't a catalog json file"
+        )
 
 
 @app.command()
