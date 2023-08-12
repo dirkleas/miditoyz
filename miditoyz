@@ -245,6 +245,9 @@ def create_db() -> None:
 
 
 def format_query_result(data):
+    if not data:
+        typer.echo("oops, no songs match your query...")
+        return
     HORIZONTAL = "─"
     VERTICAL = "│"
     TOP_LEFT = "┌"
