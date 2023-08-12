@@ -117,7 +117,7 @@ def get_title_music21(dump):
     """get first title from dump"""
     event = next(filter(lambda x: x.startswith("SEQUENCE_TRACK_NAME"), dump), None)
     if not event:
-        return "n/a"
+        return "untitled"
     else:
         return parse.parse(
             "SEQUENCE_TRACK_NAME, track={track}, channel={channel}, data=b{title}, time={time}",
@@ -169,33 +169,42 @@ def ingest_music(source_directory, destination_directory):
 
     # copy unique songs to destination_directory...
     typer.echo("  copying unique songs to destination_directory, again patience...")
-    if not len(os.listdir(destination_directory)) == len(songs.keys()):
-        for hash, v in songs.items():  # fyi, this took 1m5.3s
-            shutil.copyfile(
-                v["sources"][0], pathlib.Path(destination_directory) / f"{hash}.mid"
-            )
+    # if not len(os.listdir(destination_directory)) == len(songs.keys()):
+    for hash, v in songs.items():  # fyi, this took 1m5.3s
+        shutil.copyfile(
+            v["sources"][0], pathlib.Path(destination_directory) / f"{hash}.mid"
+        )
 
     # generate catalog...
     typer.echo("  generating song catalog...")
 
     # add metadata to catalog using dump_midi metadata...
     songs_broken_music21 = set()
-    for song in [s for s in songs.keys()]:
+    for song in songs.keys():  # [s for s in songs.keys()]:
         try:
             dump = dump_midi(
                 pathlib.Path(destination_directory) / f"{song}.mid", metadata=True
             )
             songs[song] = {
-                **{"title": get_title_music21(dump), "dump": dump},
+                **{
+                    "title": get_title_music21(dump),
+                    "broken_mido": song in songs_broken_mido,
+                    "broken_music21": False,
+                    "dump": dump,
+                },
                 **songs[song],
             }
         except:
             songs_broken_music21.add(song)
-    json.dump(
-        {"mido": list(songs_broken_mido), "music21": list(songs_broken_music21)},
-        open(pathlib.Path(destination_directory) / "songs_broken.json", "w"),
-        indent=2,
-    )
+            songs[song] = {
+                **{
+                    "title": get_title_music21(dump),
+                    "broken_mido": song in songs_broken_mido,
+                    "broken_music21": True,
+                    "dump": "n/a",
+                },
+                **songs[song],
+            }
     typer.echo(
         f'  {(len(songs_broken_mido) + len(songs_broken_music21)) / len(songs) * 100:.2f}% of songs are "broken" and have been logged...'
     )
@@ -207,6 +216,7 @@ def ingest_music(source_directory, destination_directory):
     json.dump(
         settings, open(pathlib.Path(homedir) / ".miditoyz" / "settings.json", "w")
     )
+    create_db(settings["catalog"])
     typer.echo(
         f"  song catalog saved to {pathlib.Path(destination_directory) / 'catalog.json'}"
     )
@@ -217,19 +227,19 @@ def create_db(catalog: str) -> None:
     """lazily create duckdb database from catalog.json for query/fields commands"""
     db = settings["catalog"].replace(".json", ".db")
     if not os.path.exists(db):
-        typer.echo(f"creating {db}, just a sec...")
+        typer.echo(f"  creating duckdb database {db}, just a sec...")
         conn = duckdb.connect(db, config={"max_memory": "5G"})
         catalog_data = [{"id": k, **v} for k, v in json.load(open(catalog)).items()]
         catalog_flat = catalog.replace(".json", "_flat.json")
         open(db.replace(".db", "_flat.json"), "w").write(json.dumps(catalog_data))
         conn.execute(
-            # "insert into catalog select * from read_json('"
             "create table  if not exists catalog as select * from read_json('"
             + catalog_flat
-            + "', columns={id: 'varchar', title: 'varchar', dump: 'varchar', sources: 'varchar'});"
+            + "', columns={id: 'varchar', title: 'varchar', broken_mido: 'boolean', broken_music21: 'boolean', dump: 'varchar', sources: 'varchar'});"
         )
         conn.commit()
         conn.close()
+        os.remove(catalog_flat)
 
 
 def format_query_result(data):
@@ -573,7 +583,6 @@ def query(
 ):
     """Query a playlist from your catalog for later streaming."""
     db = settings["catalog"].replace(".json", ".db")
-    create_db(settings["catalog"])
     if setlist_file:
         query = f"copy (select title,id from catalog where {where_clause}) to '{setlist_file}' (header);"
         duckdb.connect(db).execute(query)
@@ -586,7 +595,6 @@ def query(
 def fields():
     """Show the fields in your catalog that you can use when querying a playlist from your catalog for later streaming."""
     db = settings["catalog"].replace(".json", ".db")
-    create_db(settings["catalog"])
     cols = (
         duckdb.connect(db)
         .execute(
@@ -606,7 +614,6 @@ def title(
 ):
     """Show the title for a MIDI song file "id" from your catalog."""
     db = settings["catalog"].replace(".json", ".db")
-    create_db(settings["catalog"])
     id = (
         duckdb.connect(db)
         .execute(f"select title from catalog where id='{midi_file_id}';")
