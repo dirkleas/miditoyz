@@ -366,7 +366,7 @@ def init(
     songs = ingest_music(source_directory, destination_directory)
     elapsed = (time.time() - start_time) / 60  # minutes
     typer.echo(
-        f"  elapsed time was {elapsed:.2f} minutes, {elapsed/songs*1000:.2f} 1000 songs per minute..."
+        f"  elapsed time was {elapsed:.2f} minutes, {elapsed/songs*1000:.2f} minutes/1000 songs..."
     )
 
 
