@@ -202,7 +202,7 @@ def ingest_music(source_directory, destination_directory):
     )
     settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json"))
     settings["catalog"] = str(pathlib.Path(destination_directory))
-    settings["music21"] = ""
+    settings["music"] = ""
     json.dump(
         settings, open(pathlib.Path(homedir) / ".miditoyz" / "settings.json", "w")
     )
