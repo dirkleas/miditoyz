@@ -526,32 +526,41 @@ def raw(
 
 @app.command()
 def verify(
-    midi_or_json_file: str = typer.Argument(
-        ..., help="MIDI song or JSON file to verify for correct syntax."
+    file_name: str = typer.Argument(
+        ..., help="MIDI song, JSON, or CSV file to verify for correct format."
     )
 ):
-    """Verify MIDI song file can be processed with mido and music21 packages or that JSON file is syntactically correct format."""
-    if not os.path.exists(midi_or_json_file) or not (
-        is_midi(midi_or_json_file) or midi_or_json_file.lower().endswith(".json")
+    """Verify MIDI song file can be processed with mido and music21 packages or that a JSON or CSV file is the correct format."""
+    if not os.path.exists(file_name) or not (
+        is_midi(file_name)
+        or file_name.lower().endswith(".json")
+        or file_name.lower().endswith(".csv")
     ):
         typer.echo(
-            f"oops, specified {midi_or_json_file} doesn't exist or isn't a midi song or JSON file"
+            f"oops, specified {file_name} doesn't exist or isn't a midi song, JSON, or CSV file"
         )
         return
-    if is_midi(midi_or_json_file):
-        typer.echo(f"verifying {midi_or_json_file} with mido and music21...")
+    if is_midi(file_name):
+        typer.echo(f"verifying {file_name} with mido and music21...")
         try:
             music21.midi.MidiFile()
             typer.echo(f"  music21 ok!")
-            mido.MidiFile(midi_or_json_file)
+            mido.MidiFile(file_name)
             typer.echo(f"  mido ok!")
         except:
             typer.echo(f"  oops, unable to verify with both mido and music21!")
-    else:
-        typer.echo(f"verifying {midi_or_json_file} is a valid JSON file...")
+    elif file_name.lower().endswith(".json"):
+        typer.echo(f"verifying {file_name} is a valid JSON file...")
         try:
-            json.load(open(midi_or_json_file))
+            json.load(open(file_name))
             typer.echo(f"  JSON format ok!")
+        except:
+            typer.echo(f"  oops, invalid format!")
+    else:
+        typer.echo(f"verifying {file_name} is a valid CSV file...")
+        try:
+            csv.DictReader(open(file_name))
+            typer.echo(f"  CSV format ok!")
         except:
             typer.echo(f"  oops, invalid format!")
 

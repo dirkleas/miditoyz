@@ -78,7 +78,7 @@ Options:
                             mandatory header "title,id".  [default:
                             /tmp/foo.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 1]
+                            pick different music.  [default: 13]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
@@ -131,14 +131,14 @@ Options:
   --help                Show this message and exit.
 
 $ miditoyz verify --help
-Usage: miditoyz verify [OPTIONS] MIDI_OR_JSON_FILE
+Usage: miditoyz verify [OPTIONS] FILE_NAME
 
   Verify MIDI song file can be processed with mido and music21 packages or
-  that JSON file is syntactically correct format.
+  that a JSON or CSV file is the correct format.
 
 Arguments:
-  MIDI_OR_JSON_FILE  MIDI song or JSON file to verify for correct syntax.
-                     [required]
+  FILE_NAME  MIDI song, JSON, or CSV file to verify for correct format.
+             [required]
 
 Options:
   --help  Show this message and exit.
