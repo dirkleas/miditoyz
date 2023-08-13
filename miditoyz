@@ -274,9 +274,10 @@ def notify(title, subtitle):
 
             sh.osascript(e=f'display notification "{title}" with title "{subtitle}"')
         elif platform.system() == "Windows":
-            import win10toast
+            from win10toast import ToastNotifier
 
-            win10toast.ToastNotifier.show_toast(title, subtitle, duration=5)
+            toaster = ToastNotifier()
+            toaster.show_toast(title, subtitle, duration=5)
     except:
         pass
 
