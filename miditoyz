@@ -41,7 +41,7 @@ app = typer.Typer()
 
 
 ## building blocks...
-def dump_midi(filename: str, metadata: bool = False):
+def dump_midi(filename: str, metadata: bool = False) -> list:
     """Dump a MIDI file in raw text format, optionally metadata only"""
     mf = music21.midi.MidiFile()
     mf.open(filename)
@@ -75,7 +75,7 @@ def dump_midi(filename: str, metadata: bool = False):
     return dump
 
 
-def get_track_channel_voices(midi_filename, voices):
+def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
     typer.echo(f"song file: {midi_filename}")
     with mido.MidiFile(midi_filename) as mid:
         for i, track in enumerate(mid.tracks):
@@ -106,11 +106,11 @@ def get_track_channel_voices(midi_filename, voices):
                     )
 
 
-def is_midi(filename):
+def is_midi(filename: str) -> bool:
     return filename.lower().endswith((".midi", ".mid"))
 
 
-def get_title_music21(dump):
+def get_title_music21(dump: list) -> str:
     """get first title from dump"""
     event = next(filter(lambda x: x.startswith("SEQUENCE_TRACK_NAME"), dump), None)
     if not event:
@@ -122,13 +122,35 @@ def get_title_music21(dump):
         )["title"][1:-1]
 
 
-def get_title_mido(midi):
+def get_title_mido(midi: mido.MidiFile) -> str:
     """return song title from midi file object"""
     titles = [e.name for e in midi.tracks[0] if e.type == "track_name"]
     return titles[0] if titles and len(titles) > 0 else "untitled"
 
 
-def ingest_music(source_directory, destination_directory):
+def create_db(catalog: str) -> None:
+    db = f'{pathlib.Path(catalog) / "catalog.db"}'
+    if os.path.exists(db):
+        os.remove(db)
+    typer.echo(f"  creating duckdb database {db}, just a sec...")
+    conn = duckdb.connect(db, config={"max_memory": "5G"})
+    catalog_data = [
+        {"id": k, **v} for k, v in json.load(open(db.replace(".db", ".json"))).items()
+    ]
+    open(db.replace(".db", "_flat.json"), "w").write(json.dumps(catalog_data))
+    catalog_flat = db.replace(".db", "_flat.json")
+    conn.execute(
+        "create table catalog as select * from read_json('"
+        + catalog_flat
+        + "', columns={id: 'varchar', title: 'varchar', broken_mido: 'boolean', broken_music21: 'boolean', dump: 'varchar', sources: 'varchar'});"
+    )
+    conn.execute("create index idx_catalog_id on catalog (id);")
+    conn.commit()
+    conn.close()
+    os.remove(catalog_flat)
+
+
+def ingest_music(source_directory: str, destination_directory: str) -> int:
     """ingest music from source_directory into destination_directory"""
     typer.echo(
         f"ingesting source_directory: {source_directory} => destination_directory: {destination_directory}..."
@@ -206,37 +228,14 @@ def ingest_music(source_directory, destination_directory):
     json.dump(
         settings, open(pathlib.Path(homedir) / ".miditoyz" / "settings.json", "w")
     )
-    create_db()
+    create_db(settings.get("catalog"))
     typer.echo(
         f"  song catalog saved to {pathlib.Path(destination_directory) / 'catalog.json'}"
     )
     return len(songs)
 
 
-def create_db() -> None:
-    settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json"))
-    db = f'{pathlib.Path(settings["catalog"]) / "catalog.db"}'
-    if os.path.exists(db):
-        os.remove(db)
-    typer.echo(f"  creating duckdb database {db}, just a sec...")
-    conn = duckdb.connect(db, config={"max_memory": "5G"})
-    catalog_data = [
-        {"id": k, **v} for k, v in json.load(open(db.replace(".db", ".json"))).items()
-    ]
-    open(db.replace(".db", "_flat.json"), "w").write(json.dumps(catalog_data))
-    catalog_flat = db.replace(".db", "_flat.json")
-    conn.execute(
-        "create table catalog as select * from read_json('"
-        + catalog_flat
-        + "', columns={id: 'varchar', title: 'varchar', broken_mido: 'boolean', broken_music21: 'boolean', dump: 'varchar', sources: 'varchar'});"
-    )
-    conn.execute("create index idx_catalog_id on catalog (id);")
-    conn.commit()
-    conn.close()
-    os.remove(catalog_flat)
-
-
-def format_query_result(data):
+def format_query_result(data: list) -> str:
     if not data:
         typer.echo("oops, no songs match your query...")
         return
@@ -266,7 +265,7 @@ def format_query_result(data):
     return "\n".join(rows_box)
 
 
-def notify(title, subtitle):
+def notify(title: str, subtitle: str) -> None:
     """display notification on macos, tested on ventura"""
     try:
         if platform.system() == "Darwin":
@@ -282,7 +281,7 @@ def notify(title, subtitle):
         pass
 
 
-def serialize_settings(new_settings):
+def serialize_settings(new_settings: dict) -> None:
     """update settings.json with specified dictionary"""
     settings.update(new_settings)
     json.dump(
@@ -291,7 +290,7 @@ def serialize_settings(new_settings):
     )
 
 
-def generate_midi_voice_events(ch, msb, lsb, pc):
+def generate_midi_voice_events(ch: int, msb: int, lsb: int, pc: int) -> list:
     """generate midi voice events for bank select and program change messages"""
     return [
         mido.Message("control_change", channel=ch, control=0, value=msb, time=0),
@@ -300,7 +299,9 @@ def generate_midi_voice_events(ch, msb, lsb, pc):
     ]
 
 
-def stream_revoiced(songfile, index, song_count, voice_preferences, device):
+def stream_revoiced(
+    songfile: str, index: int, song_count: int, voice_preferences: dict, device
+) -> None:
     """revoice midi file with voice preferences"""
     channels = defaultdict(dict)
     serialize_settings({"bookmark": index + 1})
@@ -615,27 +616,6 @@ def fields():
         .fetchall()
     )
     typer.echo(f'catalog fields: {", ".join([col[0] for col in cols])}')
-
-
-@app.command()
-def title(
-    midi_file_id: str = typer.Argument(
-        ...,
-        help='MIDI song file "id" without the .mid file extension .mid for title lookup.',
-    )
-):
-    """Show the title for a MIDI song file "id" from your catalog."""
-    db = f'{pathlib.Path(settings["catalog"]) / "catalog.db"}'
-    id = (
-        duckdb.connect(db)
-        .execute(f"select title from catalog where id='{midi_file_id}';")
-        .fetchone()
-    )
-    typer.echo(
-        id[0]
-        if id
-        else f"oops, {midi_file_id} doesn't exist in the catalog as a MIDI song file."
-    )
 
 
 @app.command()
