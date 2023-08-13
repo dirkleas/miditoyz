@@ -4,5 +4,7 @@ music21
 typer
 PyPDF2
 parse
-sh
 duckdb
+sh; sys_platform == "darwin"
+win10toast; sys_platform == "win32"
+

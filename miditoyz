@@ -11,8 +11,6 @@
 #   general:
 #       - tbd
 #   init:
-#       - consider whether "broken" songs should be removed from catalog
-#       - add windows notification support via win10toast
 #       - scan songs looking for other instruments via track titles or
 #         sequencer_specific meta events, plus add extra cli arg "genre" and append
 #         to event.track_name for preference key mapping
@@ -24,15 +22,14 @@
 #         voices for voice_preferences
 #
 # notes/references:
+#   - duckdb is used for catalog and metadata storage
 #   - reference song with rich meta, sysex and sequencer_specific events in my
 #     personal collection:
 #       clav.toys/more clav files/2.NEW FollowLights/02.Prelude.s944.mid
-#   - catalog list format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...]
 #
 
-import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, random, mido, typer, parse, duckdb
+import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, random, mido, music21, typer, parse, duckdb
 from collections import defaultdict
-from music21 import midi
 
 homedir = pathlib.Path.home()
 settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json"))
@@ -46,7 +43,7 @@ app = typer.Typer()
 ## building blocks...
 def dump_midi(filename: str, metadata: bool = False):
     """Dump a MIDI file in raw text format, optionally metadata only"""
-    mf = midi.MidiFile()
+    mf = music21.midi.MidiFile()
     mf.open(filename)
     mf.read()
     mf.close()
@@ -55,7 +52,7 @@ def dump_midi(filename: str, metadata: bool = False):
     for i, track in enumerate(mf.tracks):
         time_delta = time_total = 0
         for event in track.events:
-            if isinstance(event, midi.DeltaTime):
+            if isinstance(event, music21.midi.DeltaTime):
                 time_delta = event.time
                 time_total += event.time
             elif (
@@ -136,9 +133,9 @@ def ingest_music(source_directory, destination_directory):
     typer.echo(
         f"ingesting source_directory: {source_directory} => destination_directory: {destination_directory}..."
     )
-    # locate candidate songs...
+    # locate candidate songs, hash for duplicates...
     typer.echo(f"  scanning for duplicate songs...")
-    songs = {}  # defaultdict(lambda: defaultdict(list)) not working...
+    songs = defaultdict(lambda: defaultdict(list))
     total_songs = 0  # total songs found, including dups...
     for dirpath, _, filenames in os.walk(source_directory):
         for filename in filenames:
@@ -146,16 +143,12 @@ def ingest_music(source_directory, destination_directory):
                 total_songs += 1
                 song = os.path.join(dirpath, filename)
                 hash = hashlib.md5(open(song, "rb").read()).hexdigest()
-                if not hash in songs:
-                    songs[hash] = {"sources": []}
                 songs[hash]["sources"].append(song)
-
-    # hash for duplicates...
     typer.echo(
         f"  found {total_songs} total songs of which {len(songs)} are actually unique..."
     )
 
-    # identify broken/unstreamable songs...
+    # identify mido broken/unstreamable songs...
     typer.echo(
         f"  scanning for broken or invalid song files, this will take a while..."
     )
@@ -165,7 +158,6 @@ def ingest_music(source_directory, destination_directory):
             mido.MidiFile(song)
         except:
             songs_broken_mido.add(hash)
-    # tbd: add broken identifier to catalog or remove broken songs...
 
     # copy unique songs to destination_directory...
     typer.echo("  copying unique songs to destination_directory, again patience...")
@@ -174,9 +166,6 @@ def ingest_music(source_directory, destination_directory):
         shutil.copyfile(
             v["sources"][0], pathlib.Path(destination_directory) / f"{hash}.mid"
         )
-
-    # generate catalog...
-    typer.echo("  generating song catalog...")
 
     # add metadata to catalog using dump_midi metadata...
     songs_broken_music21 = set()
@@ -232,8 +221,8 @@ def create_db() -> None:
     catalog_data = [
         {"id": k, **v} for k, v in json.load(open(db.replace(".db", ".json"))).items()
     ]
-    catalog_flat = db.replace(".db", "_flat.json")
     open(db.replace(".db", "_flat.json"), "w").write(json.dumps(catalog_data))
+    catalog_flat = db.replace(".db", "_flat.json")
     conn.execute(
         "create table catalog as select * from read_json('"
         + catalog_flat
@@ -282,6 +271,10 @@ def notify(title, subtitle):
             import sh
 
             sh.osascript(e=f'display notification "{title}" with title "{subtitle}"')
+        elif platform.system() == "Windows":
+            import win10toast
+
+            win10toast.ToastNotifier.show_toast(title, subtitle, duration=5)
     except:
         pass
 
@@ -311,8 +304,7 @@ def stream_revoiced(songfile, index, song_count, voice_preferences, device):
     midi = mido.MidiFile(songfile)
     title = get_title_mido(midi)
     typer.echo(f"{title} ({songfile}), song {index+1} of {song_count}")
-    if platform.system() == "Darwin":
-        notify(f"{'/'.join(songfile.split('/')[-2:])}, #{index+1}", title)
+    notify(f"{'/'.join(songfile.split('/')[-2:])}, #{index+1}", title)
     for event in midi.play():
         if event.type == "control_change" and event.control == 0:
             channels[event.channel]["msb"] = event.value
@@ -556,7 +548,7 @@ def verify(
     if is_midi(midi_or_json_file):
         typer.echo(f"verifying {midi_or_json_file} with mido and music21...")
         try:
-            midi.MidiFile()
+            music21.midi.MidiFile()
             typer.echo(f"  music21 ok!")
             mido.MidiFile(midi_or_json_file)
             typer.echo(f"  mido ok!")
@@ -655,6 +647,12 @@ def panic(
         for channel in range(16):  # MIDI channels 0-15
             for note in range(128):  # MIDI notes 0-127
                 outport.send(mido.Message("note_off", note=note, channel=channel))
+
+
+@app.command()
+def db():
+    """Analyze music catalog database with duckdb (enter ".quit" to exit when finished)."""
+    os.system(f'duckdb {pathlib.Path(settings["catalog"]) / "catalog.db"}')
 
 
 if __name__ == "__main__":

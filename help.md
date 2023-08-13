@@ -18,6 +18,7 @@ Options:
 
 Commands:
   catalog  Change to a new catalog file for streaming.
+  db       Analyze music catalog database with duckdb (enter ".quit" to...
   devices  List currently connected midi output devices attached via USB,...
   dump     Dump a MIDI song file in raw text format.
   fields   Show the fields in your catalog that you can use when querying...
@@ -78,7 +79,7 @@ Options:
                             file containing list of song titles and "hashes"
                             with the format: [{"title": "Autumn Leaves",
                             "song": "hash.mid"}, ...].  [default:
-                            /Users/dirkleas/h4x/clav.toys.unique]
+                            /tmp/foo.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
                             pick different music.  [default: 1]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
@@ -204,4 +205,13 @@ Options:
                  "Network Clavinova for WIFI, etc.))  [default: Clavinova Port
                  1]
   --help         Show this message and exit.
+
+$ miditoyz db --help
+Usage: miditoyz db [OPTIONS]
+
+  Analyze music catalog database with duckdb (enter ".quit" to exit when
+  finished).
+
+Options:
+  --help  Show this message and exit.
 ```
