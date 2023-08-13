@@ -27,7 +27,6 @@ Commands:
   query    Query a playlist from your catalog for later streaming.
   raw      Dump a MIDI song file in alternative raw text format with...
   stream   Stream music from a catalog song list, a midi file, or...
-  title    Show the title for a MIDI song file "id" from your catalog.
   verify   Verify MIDI song file can be processed with mido and music21...
   voices   Generate a list of voices for each track in a midi song file.
 
@@ -81,7 +80,7 @@ Options:
                             "song": "hash.mid"}, ...].  [default:
                             /tmp/foo.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 1]
+                            pick different music.  [default: 9]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
@@ -179,18 +178,6 @@ Usage: miditoyz fields [OPTIONS]
 
   Show the fields in your catalog that you can use when querying a playlist
   from your catalog for later streaming.
-
-Options:
-  --help  Show this message and exit.
-
-$ miditoyz title --help
-Usage: miditoyz title [OPTIONS] MIDI_FILE_ID
-
-  Show the title for a MIDI song file "id" from your catalog.
-
-Arguments:
-  MIDI_FILE_ID  MIDI song file "id" without the .mid file extension .mid for
-                title lookup.  [required]
 
 Options:
   --help  Show this message and exit.
