@@ -130,7 +130,6 @@ def get_title_mido(midi):
 
 def ingest_music(source_directory, destination_directory):
     """ingest music from source_directory into destination_directory"""
-    global settings
     typer.echo(
         f"ingesting source_directory: {source_directory} => destination_directory: {destination_directory}..."
     )
@@ -215,6 +214,7 @@ def ingest_music(source_directory, destination_directory):
 
 
 def create_db() -> None:
+    settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json"))
     db = f'{pathlib.Path(settings["catalog"]) / "catalog.db"}'
     if os.path.exists(db):
         os.remove(db)
