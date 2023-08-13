@@ -130,6 +130,7 @@ def get_title_mido(midi):
 
 def ingest_music(source_directory, destination_directory):
     """ingest music from source_directory into destination_directory"""
+    global settings
     typer.echo(
         f"ingesting source_directory: {source_directory} => destination_directory: {destination_directory}..."
     )
