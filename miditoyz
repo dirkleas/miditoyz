@@ -277,7 +277,7 @@ def notify(title, subtitle):
             from win10toast import ToastNotifier
 
             toaster = ToastNotifier()
-            toaster.show_toast(title, subtitle, duration=5)
+            toaster.show_toast(subtitle, title, duration=5)
     except:
         pass
 
