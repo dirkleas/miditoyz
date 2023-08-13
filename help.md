@@ -61,27 +61,24 @@ Usage: miditoyz stream [OPTIONS]
   Stream music from a catalog song list, a midi file, or directory full of
   midi files to a midi device with using bank selection and program changes
   based on voice preferences stored in "~/.miditoyz/settings.json" and saved
-  automatically each time you stream. Catalog song lists are JSON files with
-  the format: [{"title": "Autumn Leaves", "song": "HASH"}, ...] or CSV files
-  with a mandatory header of "title,id" -- don't forget to use comma to
-  separate for CSV fields, and double-quote fields with commas in them. can be
-  created from your collections "catalog.json". Bookmark values are based on
-  the sequential number of the song in the playlist or directory song list
-  starting with 1. We do the right thing if you specify a bookmark number
-  that's too big or small or your play different music than last time. Your
-  command line options are remembered between streaming sessions, so
-  subsequent streamings pick up from the last song played.
+  automatically each time you stream. Catalog song lists are CSV files with a
+  mandatory header of "title,id" -- don't forget to use comma to separate for
+  CSV fields, and double-quote fields with commas in them. Create song lists
+  using the "query" command.  Bookmark values are based on the sequential
+  number of the song in the playlist or directory song list starting with 1.
+  We do the right thing if you specify a bookmark number that's too big or
+  small or your play different music than last time. Don't want to play your
+  songs in order? Try the "shuffle" option. Your command line options are
+  remembered between streaming sessions, so subsequent streamings pick up from
+  the last song played.
 
 Options:
-  --music TEXT              MIDI song file, directory full of music, or
-                            catalog list to stream. A catalog list is a JSON
-                            file containing list of song titles and "hashes"
-                            with the format: [{"title": "Autumn Leaves",
-                            "song": "hash.mid"}, ...] or a CSV file with a
-                            manditory header "title,id".  [default:
+  --music TEXT              MIDI song file, directory full of music, or song
+                            list to stream. A song list is a CSV file with a
+                            mandatory header "title,id".  [default:
                             /tmp/foo.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 11]
+                            pick different music.  [default: 1]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
