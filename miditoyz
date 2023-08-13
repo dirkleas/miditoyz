@@ -384,7 +384,7 @@ def devices():
 def stream(
     music: str = typer.Option(
         settings.get("music") or settings.get("catalog"),  # default to last music
-        help='MIDI song file, directory full of music, or catalog list to stream. A catalog list is a JSON file containing list of song titles and "hashes" with the format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...].',
+        help='MIDI song file, directory full of music, or catalog list to stream. A catalog list is a JSON file containing list of song titles and "hashes" with the format: [{"title": "Autumn Leaves", "song": "hash.mid"}, ...] or a CSV file with a manditory header "title,id".',
     ),
     bookmark: int = typer.Option(
         settings.get("bookmark", 0),
@@ -408,7 +408,7 @@ def stream(
     bank selection and program changes based on voice preferences stored in "~/.miditoyz/settings.json"
     and saved automatically each time you stream.
     Catalog song lists are JSON files with the format: [{"title": "Autumn Leaves", "song": "HASH"}, ...] or CSV files with
-    a mandatory header of "title,id" -- don't forget to use comma to separate fields, and quote fields with commas in them.
+    a mandatory header of "title,id" -- don't forget to use comma to separate for CSV fields, and double-quote fields with commas in them.
     can be created from your collections "catalog.json". Bookmark values are based on the sequential number of the
     song in the playlist or directory song list starting with 1.
     We do the right thing if you specify a bookmark number that's too big or small or your play different music than last time.
