@@ -593,7 +593,7 @@ def query(
     ),
 ):
     """Query a playlist from your catalog for later streaming."""
-    db = f'{pathlib.Path(settings["catalog"]) / "catalog.db"}'
+    db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
     if setlist_file:
         query = f"copy (select title,id from catalog where {where_clause}) to '{setlist_file}' (header);"
         duckdb.connect(db).execute(query)
@@ -605,7 +605,7 @@ def query(
 @app.command()
 def fields():
     """Show the fields in your catalog that you can use when querying a playlist from your catalog for later streaming."""
-    db = f'{pathlib.Path(settings["catalog"]) / "catalog.db"}'
+    db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
     cols = (
         duckdb.connect(db)
         .execute(
@@ -631,9 +631,16 @@ def panic(
 
 
 @app.command()
-def db():
+def db(
+    init: bool = typer.Option(
+        False,
+        help="Initialize just the catalog database, useful if you break things while experimenting.",
+    )
+):
     """Analyze music catalog database with duckdb (enter ".quit" to exit when finished)."""
-    os.system(f'duckdb {pathlib.Path(settings["catalog"]) / "catalog.db"}')
+    if init:
+        create_db(settings.get("catalog"))
+    os.system(f'duckdb {pathlib.Path(settings.get("catalog")) / "catalog.db"}')
 
 
 if __name__ == "__main__":

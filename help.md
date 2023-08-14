@@ -76,9 +76,9 @@ Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id".  [default:
-                            /tmp/foo.csv]
+                            /Users/dirkleas/h4x/clav.toys.unique]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 13]
+                            pick different music.  [default: 1]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
@@ -198,5 +198,7 @@ Usage: miditoyz db [OPTIONS]
   finished).
 
 Options:
-  --help  Show this message and exit.
+  --init / --no-init  Initialize just the catalog database, useful if you
+                      break things while experimenting.  [default: no-init]
+  --help              Show this message and exit.
 ```
