@@ -22,6 +22,7 @@ Commands:
   devices  List currently connected midi output devices attached via USB,...
   dump     Dump a MIDI song file in raw text format.
   fields   Show the fields in your catalog that you can use when querying...
+  info     Show current miditoyz settings.
   init     Generate a new music collection from a source directory into a...
   panic    Send MIDI panic to turn off any hung notes.
   query    Query a playlist from your catalog for later streaming.
@@ -76,9 +77,9 @@ Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id".  [default:
-                            /Users/dirkleas/h4x/clav.toys.unique]
+                            /tmp/foo.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 1]
+                            pick different music.  [default: 3]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
@@ -151,6 +152,14 @@ Usage: miditoyz catalog [OPTIONS] CATALOG_DIRECTORY
 Arguments:
   CATALOG_DIRECTORY  Alternative catalog directory from one of your miditoyz
                      song collections.  [required]
+
+Options:
+  --help  Show this message and exit.
+
+$ miditoyz info --help
+Usage: miditoyz info [OPTIONS]
+
+  Show current miditoyz settings.
 
 Options:
   --help  Show this message and exit.

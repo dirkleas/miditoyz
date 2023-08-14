@@ -582,6 +582,19 @@ def catalog(
 
 
 @app.command()
+def info():
+    """Show current miditoyz settings."""
+    typer.echo(f"miditoyz settings:")
+    for k, v in settings.items():
+        if k == "voices":
+            typer.echo(f"  {k}")
+            for title, mapping in v.items():
+                typer.echo(f"    {title}: {mapping}")
+        else:
+            typer.echo(f"  {k}:{os.linesep}    {v}")
+
+
+@app.command()
 def query(
     where_clause: str = typer.Argument(
         ...,
