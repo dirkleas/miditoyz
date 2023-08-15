@@ -25,7 +25,7 @@ Commands:
   info     Show current miditoyz settings.
   init     Generate a new music collection from a source directory into a...
   panic    Send MIDI panic to turn off any hung notes.
-  query    Query a playlist from your catalog for later streaming.
+  query    Query a song list from your catalog for later streaming with...
   raw      Dump a MIDI song file in alternative raw text format with...
   stream   Stream music from a catalog song list, a midi file, or...
   verify   Verify MIDI song file can be processed with mido and music21...
@@ -79,7 +79,7 @@ Options:
                             mandatory header "title,id".  [default:
                             /tmp/foo.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 3]
+                            pick different music.  [default: 24]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
@@ -165,20 +165,27 @@ Options:
   --help  Show this message and exit.
 
 $ miditoyz query --help
-Usage: miditoyz query [OPTIONS] WHERE_CLAUSE
+Usage: miditoyz query [OPTIONS]
 
-  Query a playlist from your catalog for later streaming.
-
-Arguments:
-  WHERE_CLAUSE  SQL "where" clause w/t "where" keyword prefix to query catalog
-                (e.g. "lower(title) like '%love%'" would match All You Need is
-                Love, Love Her Madly, Imaginary Lover, etc. but not Used to Be
-                (L.O.V.E.))  [required]
+  Query a song list from your catalog for later streaming with several options
+  to choose from depending on whether you prefer a simple or advanced option.
+  Once you see the desired song list, you can save it to a .csv file for later
+  streaming with the --songlist-file option.
 
 Options:
-  --setlist-file TEXT  Setlist .csv file to save setlist query results to for
-                       later streaming.
-  --help               Show this message and exit.
+  --search TEXT         Query catalog for songs that match all the search
+                        words provided (e.g. Piano Bar would find Piano Bar
+                        and Bar Piano anywhere in the song metadata or
+                        sources). This options searches both song metadata and
+                        sources and is the most popular option.
+  --metadata TEXT       Query catalog song metadata only.
+  --sources TEXT        Query catalog song sources only.
+  --sql TEXT            Query using SQL without needing to specify fields or
+                        FROM clauses, starting with WHERE clause to query
+                        catalog (omit WHERE prefix).
+  --songlist-file TEXT  Save your song list query result to a .csv file for
+                        later streaming.
+  --help                Show this message and exit.
 
 $ miditoyz fields --help
 Usage: miditoyz fields [OPTIONS]

@@ -596,22 +596,48 @@ def info():
 
 @app.command()
 def query(
-    where_clause: str = typer.Argument(
-        ...,
-        help='SQL "where" clause w/t "where" keyword prefix to query catalog (e.g. "lower(title) like \'%love%\'" would match All You Need is Love, Love Her Madly, Imaginary Lover, etc. but not Used to Be (L.O.V.E.))',
-    ),
-    setlist_file: str = typer.Option(
+    search: str = typer.Option(
         None,
-        help="Setlist .csv file to save setlist query results to for later streaming.",
+        help="Query catalog for songs that match all the search words provided (e.g. Piano Bar would find Piano Bar and Bar Piano anywhere in the song metadata or sources). This options searches both song metadata and sources and is the most popular option.",
+    ),
+    metadata: str = typer.Option(None, help="Query catalog song metadata only."),
+    sources: str = typer.Option(None, help="Query catalog song sources only."),
+    sql: str = typer.Option(
+        None,
+        help="Query using SQL without needing to specify fields or FROM clauses, starting with WHERE clause to query catalog (omit WHERE prefix).",
+    ),
+    songlist_file: str = typer.Option(
+        None,
+        help="Save your song list query result to a .csv file for later streaming.",
     ),
 ):
-    """Query a playlist from your catalog for later streaming."""
+    """Query a song list from your catalog for later streaming with several options to choose from depending on whether you prefer a simple or advanced option. Once you see the desired song list, you can save it to a .csv file for later streaming with the --songlist-file option."""
+
+    def criteria(column, value):
+        return f"lower({column}) like '%{value.lower()}%'"
+
+    if metadata:
+        search = " and ".join([criteria("dump", x) for x in metadata.split()])
+    elif sources:
+        search = " and ".join([criteria("sources", x) for x in sources.split()])
+    elif sql:
+        search = sql
+    else:
+        search = " or ".join(
+            [
+                "(" + " and ".join([criteria("dump", x) for x in search.split()]) + ")",
+                "("
+                + " and ".join([criteria("sources", x) for x in search.split()])
+                + ")",
+            ]
+        )
     db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
-    if setlist_file:
-        query = f"copy (select title,id from catalog where {where_clause}) to '{setlist_file}' (header);"
+    if songlist_file:
+        query = f"copy (select title,id from catalog where {search}) to '{songlist_file}' (header);"
         duckdb.connect(db).execute(query)
     else:
-        query = f"select title,id from catalog where {where_clause};"
+        query = f"select title,id from catalog where {search};"
+        typer.echo(f"query: select id, title from catalog where {search};")
         typer.echo(format_query_result(duckdb.connect(db).execute(query).fetchall()))
 
 
