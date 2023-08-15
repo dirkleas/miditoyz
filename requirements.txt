@@ -5,6 +5,7 @@ typer
 PyPDF2
 parse
 duckdb
+# fastapi
+# uvicorn[standard]
 sh; sys_platform == "darwin"
 win10toast; sys_platform == "win32"
-

@@ -689,5 +689,27 @@ def db(
     os.system(f'duckdb {pathlib.Path(settings.get("catalog")) / "catalog.db"}')
 
 
+# @app.command()
+# def webserver():
+#     """Start local FastAPI webserver for miditoyz access from your browser. DEMO ONLY, NOT FEATURE COMPLETE!"""
+#     from typing import Union
+#     from fastapi import FastAPI, Response
+#     import uvicorn, subprocess
+
+#     server = FastAPI()
+
+#     @server.get("/")
+#     def server_root():
+#         result = subprocess.run(["miditoyz", "--help"], capture_output=True, text=True)
+#         return Response(content=f"<pre>{result.stdout}</pre>", media_type="text/html")
+
+#     @server.get("/devices")
+#     def server_devices():
+#         result = subprocess.run(["miditoyz", "devices"], capture_output=True, text=True)
+#         return Response(content=f"<pre>{result.stdout}</pre>", media_type="text/html")
+
+#     uvicorn.run(server, host="0.0.0.0", port=8000)
+
+
 if __name__ == "__main__":
     app()
