@@ -23,7 +23,7 @@ To understand what's available, you can use the built-in help by entering `midit
 1. `miditoyz dump` - display the specified midi song file in readable plain text from your song collection. Midi files are binary files that aren't readable by humans. 
 1. `miditoyz db` - access the embedded SQL song catalog database for hard-core wrangling, research, etc. -- anything goes, nothing hidden here.
 
-*Remember, help is always available by adding the `--help` option to the end of your request (e.g. `miditoyz --help`, `miditoyz stream --help`, etc.). For your convenience, a complete help reference is available online [here](help.md) and includes help for `miditoyz` and all the commands.*
+> Remember, help is always available by adding the `--help` option to the end of your request (e.g. `miditoyz --help`, `miditoyz stream --help`, etc.). For your convenience, a complete help reference is available online [here](help.md) and includes help for `miditoyz` and all the commands.*
 
 ## Installation/Setup
 
