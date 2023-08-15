@@ -628,7 +628,7 @@ def query(
         search = " and ".join([criteria("sources", x) for x in sources.split()])
     elif sql:
         search = sql
-    else:
+    elif search:
         search = " or ".join(
             [
                 "(" + " and ".join([criteria("dump", x) for x in search.split()]) + ")",
@@ -637,6 +637,11 @@ def query(
                 + ")",
             ]
         )
+    else:
+        typer.echo(
+            f"oops, you must use one of the following options to query songs from your catalog: --search, --title, --metadata, --sources, or --sql"
+        )
+        return
     db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
     if songlist_file:
         query = f"copy (select title,id from catalog where {search}) to '{songlist_file}' (header);"
