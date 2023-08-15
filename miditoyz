@@ -600,6 +600,7 @@ def query(
         None,
         help="Query catalog for songs that match all the search words provided (e.g. Piano Bar would find Piano Bar and Bar Piano anywhere in the song metadata or sources). This options searches both song metadata and sources and is the most popular option.",
     ),
+    title: str = typer.Option(None, help="Query catalog song title only."),
     metadata: str = typer.Option(None, help="Query catalog song metadata only."),
     sources: str = typer.Option(None, help="Query catalog song sources only."),
     sql: str = typer.Option(
@@ -610,13 +611,18 @@ def query(
         None,
         help="Save your song list query result to a .csv file for later streaming.",
     ),
+    debug: bool = typer.Option(
+        False, help="Show SQL generated based on selected query option."
+    ),
 ):
     """Query a song list from your catalog for later streaming with several options to choose from depending on whether you prefer a simple or advanced option. Once you see the desired song list, you can save it to a .csv file for later streaming with the --songlist-file option."""
 
     def criteria(column, value):
         return f"lower({column}) like '%{value.lower()}%'"
 
-    if metadata:
+    if title:
+        search = " and ".join([criteria("title", x) for x in title.split()])
+    elif metadata:
         search = " and ".join([criteria("dump", x) for x in metadata.split()])
     elif sources:
         search = " and ".join([criteria("sources", x) for x in sources.split()])
@@ -637,7 +643,8 @@ def query(
         duckdb.connect(db).execute(query)
     else:
         query = f"select title,id from catalog where {search};"
-        typer.echo(f"query: select id, title from catalog where {search};")
+        if debug:
+            typer.echo(f"query: select id, title from catalog where {search};")
         typer.echo(format_query_result(duckdb.connect(db).execute(query).fetchall()))
 
 

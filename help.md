@@ -178,6 +178,7 @@ Options:
                         and Bar Piano anywhere in the song metadata or
                         sources). This options searches both song metadata and
                         sources and is the most popular option.
+  --title TEXT          Query catalog song title only.
   --metadata TEXT       Query catalog song metadata only.
   --sources TEXT        Query catalog song sources only.
   --sql TEXT            Query using SQL without needing to specify fields or
@@ -185,6 +186,8 @@ Options:
                         catalog (omit WHERE prefix).
   --songlist-file TEXT  Save your song list query result to a .csv file for
                         later streaming.
+  --debug / --no-debug  Show SQL generated based on selected query option.
+                        [default: no-debug]
   --help                Show this message and exit.
 
 $ miditoyz fields --help
