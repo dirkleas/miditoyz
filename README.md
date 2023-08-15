@@ -61,6 +61,7 @@ This project uses the popular, free scripting language [Python](https://www.pyth
     cd C:\miditoyz                                                   # Windows
     
     git pull
+    pip install -r requirements.txt
     ```
 
 ## Roadmap
