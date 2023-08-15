@@ -16,14 +16,14 @@ To understand what's available, you can use the built-in help by entering `midit
 1. `miditoyz init` - create a new, cleaned-up version of your song collection without the duplicate, renamed versions of songs sprinkled across several directories and create a catalog of your new, epic song collection. The catalog includes helpful details like the song title, where it came from in your original song collection, and all the "metadata" inside the song midi files (e.g. everything but the performance details like notes played, pedals pressed, etc.).
 1. `miditoyz devices` - display a list of currently available midi devices to be used by other tools to allow you to connect to your Clavinova.
 1. `miditoyz stream` - stream a song list from your song catalog, a directory full of music/midi song files or a single midi song to your midi device (e.g. Yamaha CVP Clavinova, etc) using your voice personal preferences (see **Notes** below for more voice preferences) from your song collection. For your convenience, it'll remember where it left off when you stream a set list or ask it to play a folder full of songs.
-1. `miditoyz query` - query your song catalog to create a playlist you can use to stream particular songs. The query command uses the [SQL "where" clause](https://www.google.com/search?q=sql+where+clause+introduction+tutorial) syntax, providing lots of flexibility in terms of song selection, sorting, etc.. You can see the fields available to query from your catalog using the `miditoyz fields` command.
+1. `miditoyz query` - query your song catalog to create a song list you can use to stream your favorite songs. The query command includes several options allowing simple text search, more searches based on song titles, metadata, or original song sources -- you can even go hard-core with a [SQL "where" clause](https://www.google.com/search?q=sql+where+clause+introduction+tutorial) syntax. Once you've got your song list, you can save it for streaming any time you'd like.
 
 *Research/Technical Commands:*
 1. `miditoyz voices` - display a list of the tracks and voices for a specified song from your song collection.
 1. `miditoyz dump` - display the specified midi song file in readable plain text from your song collection. Midi files are binary files that aren't readable by humans. 
-1. `miditoyz raw` - display the specified midi song file in nerdier plain text from your song collection. "hexdump"-style details can optionally be displayed too.
+1. `miditoyz db` - access the embedded SQL song catalog database for hard-core wrangling, research, etc. -- anything goes, nothing hidden here.
 
-Remember, help is always available by adding the `--help` option (e.g. `miditoyz --help`, `miditoyz voices --help`, etc.). The current help generated from all commands is available online [here](help.md).
+*Remember, help is always available by adding the `--help` option to the end of your request (e.g. `miditoyz --help`, `miditoyz stream --help`, etc.). For your convenience, a complete help reference is available online [here](help.md) and includes help for `miditoyz` and all the commands.*
 
 ## Installation/Setup
 

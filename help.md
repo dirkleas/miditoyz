@@ -79,7 +79,7 @@ Options:
                             mandatory header "title,id".  [default:
                             /tmp/foo.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 24]
+                            pick different music.  [default: 9]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
