@@ -32,6 +32,12 @@ import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, random, 
 from collections import defaultdict
 
 homedir = pathlib.Path.home()
+if not os.path.exists(pathlib.Path(homedir) / ".miditoyz"):
+    typer.echo(
+        "oops, you need to complete all the Installation/Setup steps from the project README.md documentation before you can use miditoyz!!!"
+    )
+    exit(1)
+
 settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json"))
 voice_preferences = {
     tuple(v[0]): tuple(v[1]) for k, v in settings.get("voices").items()
