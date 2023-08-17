@@ -418,8 +418,9 @@ def stream(
      Bookmark values are based on the sequential number of the
     song in the playlist or directory song list starting with 1.
     We do the right thing if you specify a bookmark number that's too big or small or your play different music than
-    last time. Don't want to play your songs in order? Try the "shuffle" option. Your command line options are
-    remembered between streaming sessions, so subsequent streamings pick up from the last song played.
+    last time. Don't want to play your songs in order? Try the "shuffle" option. Your most important command line options are
+    remembered between streaming sessions, so subsequent streamings pick up
+    from the last song played if you don't include them (exceptions: shuffle, intermission, and debug).
     """
     try:  # pretest device...
         mido.open_output(device)
