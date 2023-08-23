@@ -47,6 +47,15 @@ app = typer.Typer()
 
 
 ## building blocks...
+def normalize_midi(file: str) -> str:
+    """Optionally prefix catalog path for unqualified catalog midi files"""
+    catalog_path = str(pathlib.Path(settings.get("catalog")) / file)
+    if is_midi(file) and not os.path.exists(file) and os.path.exists(catalog_path):
+        return catalog_path
+    else:
+        return file
+
+
 def dump_midi(filename: str, metadata: bool = False) -> list:
     """Dump a MIDI file in raw text format, optionally metadata only"""
     mf = music21.midi.MidiFile()
@@ -433,6 +442,7 @@ def stream(
         bookmark = 1
     serialize_settings({"music": music, "device": device, "bookmark": bookmark})
     if is_midi(music):  # stream file...
+        music = normalize_midi(music)
         songs = [
             music,
         ]
@@ -453,7 +463,7 @@ def stream(
         )
     else:
         typer.echo(
-            "oops, music must be a song list, midi file, or directory full of midi files"
+            "oops, music must be a song list, midi file ending .mid, or directory full of midi files"
         )
         return
     if bookmark > len(songs):
@@ -492,9 +502,10 @@ def voices(
     ),
 ):
     """Generate a list of voices for each track in a midi song file."""
+    midi_file = normalize_midi(midi_file)
     if not os.path.exists(midi_file) or not is_midi(midi_file):
         typer.echo(
-            f"oops, midi_file {midi_file} doesn't exist or isn't a midi song file"
+            f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
         )
         return
     get_track_channel_voices(midi_file, pickle.load(open(voices, "rb")))
@@ -506,9 +517,10 @@ def dump(
     metadata: bool = typer.Option(False, help="Show only metadata."),
 ):
     """Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug"."""
+    midi_file = normalize_midi(midi_file)
     if not os.path.exists(midi_file) or not is_midi(midi_file):
         typer.echo(
-            f"oops, midi_file {midi_file} doesn't exist or isn't a midi song file"
+            f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
         )
         return
     for dump in dump_midi(midi_file, metadata):
@@ -523,9 +535,10 @@ def raw(
     debug: bool = typer.Option(False, help="Enable extended raw debug mode."),
 ):
     """Dump a MIDI song file in alternative raw text format with optionally with hexdump-style debug output. See also: "miditoyz dump --metadata"."""
+    midi_file = normalize_midi(midi_file)
     if not os.path.exists(midi_file) or not is_midi(midi_file):
         typer.echo(
-            f"oops, midi_file {midi_file} doesn't exist or isn't a midi song file"
+            f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
         )
         return
     mido.MidiFile(midi_file, debug=debug).print_tracks()
