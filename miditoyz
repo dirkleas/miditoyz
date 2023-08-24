@@ -68,7 +68,11 @@ def dump_midi(filename: str, metadata: bool = False) -> list:
     """Dump a MIDI file in raw text format, optionally metadata only"""
     mf = music21.midi.MidiFile()
     mf.open(filename)
-    mf.read()
+    try:
+        mf.read()
+    except:  # skip broken songs...
+        typer.echo(f"oops, {filename} is a broken song file!")
+        return []
     mf.close()
 
     dump = []
@@ -467,7 +471,7 @@ def stream(
         )
     else:
         typer.echo(
-            "oops, music must be a song list, midi file ending .mid, or directory full of midi files"
+            "oops, music must be a song list, valid midi file ending .mid, or directory full of midi files"
         )
         return
     if bookmark > len(songs):
