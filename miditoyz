@@ -47,10 +47,14 @@ app = typer.Typer()
 
 
 ## building blocks...
+def is_midi(filename: str) -> bool:
+    return filename.lower().endswith((".midi", ".mid"))
+
+
 def normalize_midi(file: str) -> str:
     """Optionally prefix catalog path for unqualified catalog midi files and append .mid if not specified"""
-    if not is_midi(file):
-        file += ".mid"  # add .mid if not specified
+    if not is_midi(file):  # add .mid if not specified
+        file += ".mid"
     catalog_path = str(
         pathlib.Path(settings.get("catalog")) / file
     )  # prefix catalog path
@@ -123,10 +127,6 @@ def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
                     typer.echo(
                         f"      channel {channel+1}: unrecognized voice, MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
                     )
-
-
-def is_midi(filename: str) -> bool:
-    return filename.lower().endswith((".midi", ".mid"))
 
 
 def get_title_music21(dump: list) -> str:
