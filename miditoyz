@@ -48,8 +48,12 @@ app = typer.Typer()
 
 ## building blocks...
 def normalize_midi(file: str) -> str:
-    """Optionally prefix catalog path for unqualified catalog midi files"""
-    catalog_path = str(pathlib.Path(settings.get("catalog")) / file)
+    """Optionally prefix catalog path for unqualified catalog midi files and append .mid if not specified"""
+    if not is_midi(file):
+        file += ".mid"  # add .mid if not specified
+    catalog_path = str(
+        pathlib.Path(settings.get("catalog")) / file
+    )  # prefix catalog path
     if is_midi(file) and not os.path.exists(file) and os.path.exists(catalog_path):
         return catalog_path
     else:
