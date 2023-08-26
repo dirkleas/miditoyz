@@ -24,6 +24,7 @@ Commands:
   fields   Show the fields in your catalog that you can use when querying...
   info     Show current miditoyz settings.
   init     Generate a new music collection from a source directory into a...
+  merge    Merge source catalog into destination catalog, overwriting...
   panic    Send MIDI panic to turn off any hung notes.
   query    Query a song list from your catalog for later streaming with...
   raw      Dump a MIDI song file in alternative raw text format with...
@@ -47,6 +48,22 @@ Arguments:
 Options:
   --help  Show this message and exit.
 
+$ miditoyz merge --help
+Usage: miditoyz merge [OPTIONS] SOURCE DESTINATION
+
+  Merge source catalog into destination catalog, overwriting destination
+  catalog songs with source catalog songs if there are any duplicates.
+
+Arguments:
+  SOURCE       Source catalog to merge into destination catalog.  [required]
+  DESTINATION  Destination catalog to merge source catalog into, overriding
+               duplicates with source songs.  [required]
+
+Options:
+  --backup / --no-backup  Create destination catalog backup .zip archive
+                          before merging.  [default: backup]
+  --help                  Show this message and exit.
+
 $ miditoyz devices --help
 Usage: miditoyz devices [OPTIONS]
 
@@ -69,20 +86,21 @@ Usage: miditoyz stream [OPTIONS]
   number of the song in the playlist or directory song list starting with 1.
   We do the right thing if you specify a bookmark number that's too big or
   small or your play different music than last time. Don't want to play your
-  songs in order? Try the "shuffle" option. Your command line options are
-  remembered between streaming sessions, so subsequent streamings pick up from
-  the last song played.
+  songs in order? Try the "shuffle" option. Your most important command line
+  options are remembered between streaming sessions, so subsequent streamings
+  pick up from the last song played if you don't include them (exceptions:
+  shuffle, intermission, and debug).
 
 Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id".  [default:
-                            /tmp/foo.csv]
+                            /tmp/songs]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
                             pick different music.  [default: 1]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
-                            [default: Clavinova Port 1]
+                            [default: Network clavinova]
   --shuffle / --no-shuffle  Shuffle song order.  [default: no-shuffle]
   --intermission INTEGER    Add specified number of seconds intermission
                             between songs.  [default: 0]
@@ -206,8 +224,8 @@ Usage: miditoyz panic [OPTIONS]
 
 Options:
   --device TEXT  MIDI device to panic reset (e.g. "Clavinova Port 1" for USB,
-                 "Network Clavinova for WIFI, etc.))  [default: Clavinova Port
-                 1]
+                 "Network Clavinova for WIFI, etc.))  [default: Network
+                 clavinova]
   --help         Show this message and exit.
 
 $ miditoyz db --help

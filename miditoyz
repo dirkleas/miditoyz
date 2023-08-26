@@ -28,7 +28,7 @@
 #       clav.toys/more clav files/2.NEW FollowLights/02.Prelude.s944.mid
 #
 
-import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, random, mido, music21, typer, parse, duckdb
+import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, mido, music21, typer, parse, duckdb
 from collections import defaultdict
 
 homedir = pathlib.Path.home()
@@ -225,6 +225,7 @@ def ingest_music(source_directory: str, destination_directory: str) -> int:
                     "broken_mido": song in songs_broken_mido,
                     "broken_music21": False,
                     "dump": dump,
+                    "timestamp": datetime.datetime.now().isoformat(),
                 },
                 **songs[song],
             }
@@ -236,6 +237,7 @@ def ingest_music(source_directory: str, destination_directory: str) -> int:
                     "broken_mido": song in songs_broken_mido,
                     "broken_music21": True,
                     "dump": "n/a",
+                    "timestamp": datetime.datetime.now().isoformat(),
                 },
                 **songs[song],
             }
@@ -396,6 +398,61 @@ def init(
     typer.echo(
         f"  elapsed time was {elapsed:.2f} minutes, {elapsed/songs*1000:.2f} minutes/1000 songs..."
     )
+
+
+@app.command()
+def merge(
+    source: str = typer.Argument(
+        ..., help="Source catalog to merge into destination catalog."
+    ),
+    destination: str = typer.Argument(
+        ...,
+        help="Destination catalog to merge source catalog into, overriding duplicates with source songs.",
+    ),
+    backup: bool = typer.Option(
+        True, help="Create destination catalog backup .zip archive before merging."
+    ),
+):
+    """Merge source catalog into destination catalog, overwriting destination catalog songs with source catalog songs if there are any duplicates."""
+    if (
+        not os.path.exists(source)
+        and os.path.isdir(source)
+        and os.path.exists(pathlib.Path(destination) / "catalog.json")
+    ):
+        typer.echo(f"oops, source catalog {source} isn't a valid catalog!")
+        return
+    if (
+        not os.path.exists(destination)
+        and os.path.isdir(source)
+        and os.path.exists(pathlib.Path(destination) / "catalog.json")
+    ):
+        typer.echo(f"oops, destination catalog {destination} isn't a valid catalog!")
+        return
+    typer.echo(
+        f"merging source catalog {source} into destination catalog {destination}..."
+    )
+    if backup:
+        typer.echo(f"  backing up destination catalog...")
+        shutil.make_archive(
+            f"{destination}.backup.{datetime.datetime.now().isoformat()}",
+            "zip",
+            destination,
+        )
+    typer.echo(f"  merging catalogs...")
+    source_catalog = json.load(open(pathlib.Path(source) / "catalog.json"))
+    destination_catalog = json.load(open(pathlib.Path(destination) / "catalog.json"))
+    dupes = len(set(source_catalog).intersection(set(destination_catalog)))
+    typer.echo(
+        f"  merging {len(source_catalog)} source songs with destination: {len(destination_catalog)} destination songs, {dupes} duplicates..."
+    )
+    destination_catalog.update(source_catalog)
+    json.dump(
+        destination_catalog,
+        open(pathlib.Path(destination) / "catalog.json", "w"),
+        indent=2,
+    )
+    create_db(destination.replace(".json", ""))
+    typer.echo(f"  merged catalog saved to {destination}")
 
 
 @app.command()
