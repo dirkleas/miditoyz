@@ -8,4 +8,4 @@ duckdb
 # fastapi
 # uvicorn[standard]
 sh; sys_platform == "darwin"
-win10toast; sys_platform == "win32"
+plyer; sys_platform == "win32"
