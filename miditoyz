@@ -299,6 +299,7 @@ def notify(title: str, subtitle: str) -> None:
             import notifypy
 
             notification = notifypy.Notify()
+            notification.application_name = "miditoyz - streaming..."
             notification.title = subtitle
             notification.message = title
             notification.send(block=False)
