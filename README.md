@@ -29,7 +29,7 @@ To understand what's available, you can use the built-in help by entering `midit
 
 This project uses the popular, free scripting language [Python](https://www.python.org). Additional bits are required for handling midi files, working with your computer, and so forth. It's been successfully tested to work on reasonably current versions of Windows, MacOS, and Linux. Complete steps 4. and beyond via your the Windows Command Prompt or the MacOS/Linux terminal/shell by copying and pasting the steps from the grey "code" boxes below. Several steps require you to add things to your operating system (OS) path -- you can wait till the end of the list and add them all at the same time if more convenient.
 
-*Initial Installation*
+### Initial Installation
 
 Complete the following once before you can use `miditoyz`:
 
@@ -60,7 +60,7 @@ Complete the following once before you can use `miditoyz`:
     miditoyz init c:\music\collection c:\music\collection.new        # Windows
     ```
 
-*Update to Latest Release*
+### Update to Latest Release
 
 1. The project is under continuous development, so to keep up to date, complete the following from wherever you initially installed the project -- don't forget to update the example collection path with your actual path name:
     ```
