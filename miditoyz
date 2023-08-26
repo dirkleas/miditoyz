@@ -296,9 +296,12 @@ def notify(title: str, subtitle: str) -> None:
 
             sh.osascript(e=f'display notification "{title}" with title "{subtitle}"')
         elif platform.system() == "Windows":
-            from plyer import notification
+            import notifypy
 
-            notification.notify(title=title, message=subtitle, timeout=5)
+            notification = notifypy.Notify()
+            notification.title = subtitle
+            notification.message = title
+            notification.send(block=False)
     except:
         pass
 
