@@ -434,7 +434,7 @@ def merge(
     if backup:
         typer.echo(f"  backing up destination catalog...")
         shutil.make_archive(
-            f"{destination}.backup.{datetime.datetime.now().isoformat()}",
+            f"{destination}.backup.{datetime.datetime.now().isoformat().replace(':', '.')}",
             "zip",
             destination,
         )
