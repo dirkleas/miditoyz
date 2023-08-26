@@ -25,9 +25,13 @@ To understand what's available, you can use the built-in help by entering `midit
 
 > Remember, help is always available by adding the `--help` option to the end of your request (e.g. `miditoyz --help`, `miditoyz stream --help`, etc.). For your convenience, a complete help reference is available online [here](help.md) and includes help for `miditoyz` and all the commands.*
 
-## Installation/Setup
+## Installation and Update
 
 This project uses the popular, free scripting language [Python](https://www.python.org). Additional bits are required for handling midi files, working with your computer, and so forth. It's been successfully tested to work on reasonably current versions of Windows, MacOS, and Linux. Complete steps 4. and beyond via your the Windows Command Prompt or the MacOS/Linux terminal/shell by copying and pasting the steps from the grey "code" boxes below. Several steps require you to add things to your operating system (OS) path -- you can wait till the end of the list and add them all at the same time if more convenient.
+
+*Initial Installation*
+
+Complete the following once before you can use `miditoyz`:
 
 1. Install latest version of [python](https://www.python.org/downloads/) for your os and add it to your path. *On Windows, you can tick the last option in the installation prompt dialog to have the installer automatically add Python to your path!!!*
 1. Install latest version of [git](https://git-scm.com) for your OS and add it to your path.
@@ -55,10 +59,13 @@ This project uses the popular, free scripting language [Python](https://www.pyth
     miditoyz init ~/music/collection ~/music/collection.new          # MacOS or Linux
     miditoyz init c:\music\collection c:\music\collection.new        # Windows
     ```
-1. For future project updates, you can pull any changes from the official Github repository into wherever you cloned the project:
+
+*Update to Latest Release*
+
+1. The project is under continuous development, so to keep up to date, complete the following from wherever you initially installed the project -- don't forget to update the example collection path with your actual path name:
     ```
-    cd ~/miditoyz                                                    # MacOS or Linux
-    cd C:\miditoyz                                                   # Windows
+    cd ~/music/collection.test                                       # MacOS or Linux
+    cd c:\music\collection.test                                      # Windows
     
     git pull
     pip install -r requirements.txt
