@@ -730,14 +730,19 @@ def query(
             f"oops, you must use one of the following options to query songs from your catalog: --search, --title, --metadata, --sources, or --sql"
         )
         return
+    if debug:
+        typer.echo(f"query: select id, title from catalog where {search};")
     db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
     if songlist_file:
         query = f"copy (select title,id from catalog where {search}) to '{songlist_file}' (header);"
         duckdb.connect(db).execute(query)
+        if os.path.getsize(songlist_file) <= 10:
+            os.remove(songlist_file)
+            typer.echo(
+                f"oops, no songs match your query, {songlist_file} wasn't created..."
+            )
     else:
         query = f"select title,id from catalog where {search};"
-        if debug:
-            typer.echo(f"query: select id, title from catalog where {search};")
         typer.echo(format_query_result(duckdb.connect(db).execute(query).fetchall()))
 
 
