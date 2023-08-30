@@ -64,44 +64,6 @@ def normalize_midi(file: str) -> str:
         return file
 
 
-def dump_midi(filename: str, metadata: bool = False) -> list:
-    """Dump a MIDI file in raw text format, optionally metadata only"""
-    mf = music21.midi.MidiFile()
-    mf.open(filename)
-    try:
-        mf.read()
-    except:  # skip broken songs...
-        typer.echo(f"oops, {filename} is a broken song file!")
-        return []
-    mf.close()
-
-    dump = []
-    for i, track in enumerate(mf.tracks):
-        time_delta = time_total = 0
-        for event in track.events:
-            if isinstance(event, music21.midi.DeltaTime):
-                time_delta = event.time
-                time_total += event.time
-            elif (
-                metadata
-                and hasattr(event.type, "name")
-                and (
-                    event.type.name in ["NOTE_ON", "NOTE_OFF", "PITCH_BEND"]
-                    or (
-                        event.type.name == "CONTROLLER_CHANGE"
-                        and not event.parameter1 in [0, 32]
-                    )
-                    or event.type.name == "END_OF_TRACK"
-                )
-            ):
-                pass
-            else:
-                dump.append(
-                    f"{str(event).replace('<music21.midi.MidiEvent ', '')[:-1]}, time={time_delta}, clock={time_total}"
-                )
-    return dump
-
-
 def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
     typer.echo(f"song file: {midi_filename}")
     with mido.MidiFile(midi_filename) as mid:
@@ -391,6 +353,44 @@ def merge_json_metadata(data, types_to_merge=["text", "copyright", "lyrics"]):
         )
 
     return output_data
+
+
+def dump_midi(filename: str, metadata: bool = False) -> list:
+    """Dump a MIDI file in raw text format, optionally metadata only"""
+    mf = music21.midi.MidiFile()
+    mf.open(filename)
+    try:
+        mf.read()
+    except:  # skip broken songs...
+        typer.echo(f"oops, {filename} is a broken song file!")
+        return []
+    mf.close()
+
+    dump = []
+    for i, track in enumerate(mf.tracks):
+        time_delta = time_total = 0
+        for event in track.events:
+            if isinstance(event, music21.midi.DeltaTime):
+                time_delta = event.time
+                time_total += event.time
+            elif (
+                metadata
+                and hasattr(event.type, "name")
+                and (
+                    event.type.name in ["NOTE_ON", "NOTE_OFF", "PITCH_BEND"]
+                    or (
+                        event.type.name == "CONTROLLER_CHANGE"
+                        and not event.parameter1 in [0, 32]
+                    )
+                    or event.type.name == "END_OF_TRACK"
+                )
+            ):
+                pass
+            else:
+                dump.append(
+                    f"{str(event).replace('<music21.midi.MidiEvent ', '')[:-1]}, time={time_delta}, clock={time_total}"
+                )
+    return dump
 
 
 def dump_json(
