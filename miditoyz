@@ -28,7 +28,7 @@
 #       clav.toys/more clav files/2.NEW FollowLights/02.Prelude.s944.mid
 #
 
-import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, mido, music21, typer, parse, duckdb
+import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, mido, music21, typer, parse, duckdb, jinja2
 from collections import defaultdict
 
 homedir = pathlib.Path.home()
@@ -396,6 +396,7 @@ def dump_midi(filename: str, metadata: bool = False) -> list:
 def dump_json(
     midi_file: str = typer.Argument(..., help="MIDI song file to convert to JSON."),
     metadata: bool = typer.Option(False, help="Show only metadata."),
+    pretty: bool = typer.Option(False, help="Pretty print JSON output."),
 ):
     midi_file = normalize_midi(midi_file)
     if not os.path.exists(midi_file) or not is_midi(midi_file):
@@ -423,15 +424,24 @@ def dump_json(
                 events.append(vars(event).copy())
         events = merge_json_metadata(events)
         tracks.append({"track": i, "events": events})
-    typer.echo(
-        json.dumps(
-            {
-                "ticks_per_beat": mid.ticks_per_beat,
-                "tracks": tracks,
-            },
-            indent=2,
-        )
+    song = (
+        {
+            "ticks_per_beat": mid.ticks_per_beat,
+            "tracks": tracks,
+        },
     )
+
+    if pretty:
+        typer.echo(
+            jinja2.Environment().from_string(open("midi.j2").read()).render(song[0])
+        )
+    else:
+        typer.echo(
+            json.dumps(
+                song,
+                indent=2,
+            )
+        )
 
 
 ## cli commands...
@@ -651,6 +661,9 @@ def dump(
     midi_file: str = typer.Argument(..., help="MIDI song file to be analyzed."),
     json: bool = typer.Option(False, help="MIDI song file output in JSON format."),
     metadata: bool = typer.Option(False, help="Show only metadata."),
+    pretty: bool = typer.Option(
+        False, help="Pretty print JSON output (only available with --json option)."
+    ),
 ):
     """Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug"."""
     midi_file = normalize_midi(midi_file)
@@ -660,7 +673,7 @@ def dump(
         )
         return
     if json:
-        dump_json(midi_file, metadata)
+        dump_json(midi_file, metadata, pretty)
     else:
         for dump in dump_midi(midi_file, metadata):
             typer.echo(dump)

@@ -5,5 +5,6 @@ typer
 PyPDF2
 parse
 duckdb
+jinja2
 sh; sys_platform == "darwin"
 notify-py; sys_platform == "win32"
