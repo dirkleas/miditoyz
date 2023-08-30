@@ -95,12 +95,12 @@ Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id".  [default:
-                            /tmp/songs]
+                            /Users/dirkleas/h4x/clav.toys.unique]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
                             pick different music.  [default: 1]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
-                            [default: Network clavinova]
+                            [default: Clavinova Port 1]
   --shuffle / --no-shuffle  Shuffle song order.  [default: no-shuffle]
   --intermission INTEGER    Add specified number of seconds intermission
                             between songs.  [default: 0]
@@ -133,6 +133,8 @@ Arguments:
   MIDI_FILE  MIDI song file to be analyzed.  [required]
 
 Options:
+  --json / --no-json          MIDI song file output in JSON format.  [default:
+                              no-json]
   --metadata / --no-metadata  Show only metadata.  [default: no-metadata]
   --help                      Show this message and exit.
 
@@ -224,8 +226,8 @@ Usage: miditoyz panic [OPTIONS]
 
 Options:
   --device TEXT  MIDI device to panic reset (e.g. "Clavinova Port 1" for USB,
-                 "Network Clavinova for WIFI, etc.))  [default: Network
-                 clavinova]
+                 "Network Clavinova for WIFI, etc.))  [default: Clavinova Port
+                 1]
   --help         Show this message and exit.
 
 $ miditoyz db --help

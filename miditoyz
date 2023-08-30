@@ -367,6 +367,73 @@ def stream_revoiced(
             device.send(event)
 
 
+def merge_json_metadata(data, types_to_merge=["text", "copyright", "lyrics"]):
+    merged_records = defaultdict(str)
+    first_record_index = {}
+    output_data = []
+
+    # Iterate through the list to find and merge records of specified types
+    for i, record in enumerate(data):
+        record_type = record.get("type")
+        if record_type in types_to_merge:
+            if record_type not in first_record_index:
+                first_record_index[record_type] = i
+                merged_records[record_type] = record["text"]
+            else:
+                merged_records[record_type] += "\n" + record["text"]
+        else:
+            output_data.append(record)
+
+    # Replace the first instance of each merged type with the merged text
+    for record_type, index in first_record_index.items():
+        output_data.insert(
+            index, {"type": record_type, "text": merged_records[record_type], "time": 0}
+        )
+
+    return output_data
+
+
+def dump_json(
+    midi_file: str = typer.Argument(..., help="MIDI song file to convert to JSON."),
+    metadata: bool = typer.Option(False, help="Show only metadata."),
+):
+    midi_file = normalize_midi(midi_file)
+    if not os.path.exists(midi_file) or not is_midi(midi_file):
+        typer.echo(
+            f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
+        )
+        return
+    try:
+        mid = mido.MidiFile(midi_file)
+    except:
+        typer.echo(f"oops, {midi_file} is a broken song file!")
+        return
+    tracks = []
+    for i, track in enumerate(mid.tracks):
+        events = []
+        for event in track:
+            if metadata and (
+                event.type in ["note_on", "note_off", "pitch_bend"]
+                or (event.type == "control_change" and not event.control in [0, 32])
+                or event.type == "end_of_track"
+                or event.type.startswith("sequencer_specific")
+            ):
+                pass
+            else:
+                events.append(vars(event).copy())
+        events = merge_json_metadata(events)
+        tracks.append({"track": i, "events": events})
+    typer.echo(
+        json.dumps(
+            {
+                "ticks_per_beat": mid.ticks_per_beat,
+                "tracks": tracks,
+            },
+            indent=2,
+        )
+    )
+
+
 ## cli commands...
 @app.command()
 def init(
@@ -582,6 +649,7 @@ def voices(
 @app.command()
 def dump(
     midi_file: str = typer.Argument(..., help="MIDI song file to be analyzed."),
+    json: bool = typer.Option(False, help="MIDI song file output in JSON format."),
     metadata: bool = typer.Option(False, help="Show only metadata."),
 ):
     """Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug"."""
@@ -591,8 +659,11 @@ def dump(
             f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
         )
         return
-    for dump in dump_midi(midi_file, metadata):
-        typer.echo(dump)
+    if json:
+        dump_json(midi_file, metadata)
+    else:
+        for dump in dump_midi(midi_file, metadata):
+            typer.echo(dump)
 
 
 @app.command()
