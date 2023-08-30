@@ -95,9 +95,9 @@ Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id".  [default:
-                            /Users/dirkleas/h4x/clav.toys.unique]
+                            /tmp/foo.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 1]
+                            pick different music.  [default: 22]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
@@ -136,6 +136,8 @@ Options:
   --json / --no-json          MIDI song file output in JSON format.  [default:
                               no-json]
   --metadata / --no-metadata  Show only metadata.  [default: no-metadata]
+  --pretty / --no-pretty      Pretty print JSON output (only available with
+                              --json option).  [default: no-pretty]
   --help                      Show this message and exit.
 
 $ miditoyz raw --help
