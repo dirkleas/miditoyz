@@ -414,7 +414,16 @@ def dump_json(
         events = []
         for event in track:
             if metadata and (
-                event.type in ["note_on", "note_off", "pitch_bend"]
+                event.type
+                in [
+                    "note_on",
+                    "note_off",
+                    "pitch_bend",
+                    "pitchwheel",
+                    "aftertouch",
+                    "system_exclusive",
+                    "sysex",
+                ]
                 or (event.type == "control_change" and not event.control in [0, 32])
                 or event.type == "end_of_track"
                 or event.type.startswith("sequencer_specific")
@@ -433,7 +442,8 @@ def dump_json(
 
     if pretty:
         typer.echo(
-            jinja2.Environment()
+            f"MIDI File: {midi_file}{os.linesep}"
+            + jinja2.Environment()
             .from_string(open(pathlib.Path(homedir) / ".miditoyz" / "midi.j2").read())
             .render(song[0])
         )

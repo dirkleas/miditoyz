@@ -1,27 +1,25 @@
-Song Details:
-
-{% for track in tracks -%}
-Track: #{{ track.track+1 }}
+{%+ for track in tracks %}
+---------- Track #{{ track.track+1 }} --------------------------------------------------
 {% for event in track.events -%}
-{% if event.type == "track_name" %}Track Name: {{ event.name }}
-{% elif event.type == "text" %}Notes:
-{{ event.text }}
-{% elif event.type == "copyright" %}Copyright:
-{{ event.text }}
-{% elif event.type == "key_signature" %}Key Signature: {{ event.key }}
-{% elif event.type == "time_signature" %}Time Signature: {{ event.numerator }}/{{ event.denominator }}, clocks/click {{ event.clocks_per_click }}, 32nd notes/beat {{ event.notated_32nd_notes_per_beat }}    
-{% elif event.type == "set_tempo" %}Tempo: channel {{ event.tempo }}, {{ (60000000 / event.tempo)|int }} bpm
-{% elif event.type == "instrument_name" %}Instrument Name: {{ event.name }}
-{% elif event.type == "program_change" %}Program Change: channel {{ event.channel }}, program {{ event.program }}
-{% elif event.type == "control_change" %}Control Change: channel {{ event.channel }}, control {{ event.control }}, value {{ event.value }}
-{% elif event.type == "note_on" %}Note On: channel {{ event.channel }}, note {{ event.note }}, velocity {{ event.velocity }} @{{ event.time }}
-{% elif event.type == "note_off" %}Note Off: channel {{ event.channel }}, note {{ event.note }} @{{ event.time }}
-{% elif event.type == "sequencer_specific" %}Sequencer-specific Stream: raw data {{ event.data }} @{{ event.time }}
-{% elif event.type == "sysex" %}System Exclusive Message Stream: raw data {{ event.data }} @{{ event.time }}
-{% elif event.type == "pitchwheel" %}Pitchwheel: channel {{ event.channel }}, pitch {{ event.pitch }} @{{ event.time }}
-{% elif event.type == "aftertouch" %}Aftertouch: channel {{ event.channel }}, value {{ event.value }} @{{ event.time }}
-{% elif event.type == "end_of_track" %}End of Track @{{ event.time }}
-{% else %}{{ event }}
-{% endif %}
-{% endfor %}
-{% endfor %}
+{% if event.type == "track_name" -%}Track Name: {{ event.name }}
+{% elif event.type == "text" -%}Notes:
+  {{ event.text|replace("\n", "\n  ") }}
+{% elif event.type == "copyright" -%}Copyright:
+  {{ event.text|replace("\n", "\n  ") }}
+{% elif event.type == "key_signature" -%}Key Signature: {{ event.key }}
+{% elif event.type == "time_signature" -%}Time Signature: {{ event.numerator }}/{{ event.denominator }}, clocks/click {{ event.clocks_per_click }}, 32nd notes/beat {{ event.notated_32nd_notes_per_beat }}    
+{% elif event.type == "set_tempo" -%}Tempo: channel {{ event.tempo }}, {{ (60000000 / event.tempo)|int }} bpm
+{% elif event.type == "instrument_name" -%}Instrument Name: {{ event.name }}
+{% elif event.type == "program_change" -%}Program Change: channel {{ event.channel }}, program {{ event.program }}
+{% elif event.type == "control_change" -%}Control Change: channel {{ event.channel }}, control {{ event.control }}, value {{ event.value }}
+{% elif event.type == "note_on" -%}Note On: channel {{ event.channel }}, note {{ event.note }}, velocity {{ event.velocity }} @{{ event.time }}
+{% elif event.type == "note_off" -%}Note Off: channel {{ event.channel }}, note {{ event.note }} @{{ event.time }}
+{% elif event.type == "sequencer_specific" -%}Sequencer-specific Stream: raw data {{ event.data }} @{{ event.time }}
+{% elif event.type == "sysex" -%}System Exclusive Message Stream: raw data {{ event.data }} @{{ event.time }}
+{% elif event.type == "pitchwheel" -%}Pitchwheel: channel {{ event.channel }}, pitch {{ event.pitch }} @{{ event.time }}
+{% elif event.type == "aftertouch" -%}Aftertouch: channel {{ event.channel }}, value {{ event.value }} @{{ event.time }}
+{% elif event.type == "end_of_track" -%}End of Track @{{ event.time }}
+{% else -%}{{ event }}
+{% endif -%}
+{% endfor -%}
+{% endfor -%}
