@@ -42,10 +42,6 @@ settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json")
 voice_preferences = {
     tuple(v[0]): tuple(v[1]) for k, v in settings.get("voices").items()
 }
-performance_events = (
-    "note_on note_off pitch_bend pitchwheel aftertouch polytouch smpte_offset "
-    + "channel_prefix system_exclusive sysex cue_marker sequence_number midi_port unknown_meta"
-).split()
 
 app = typer.Typer()
 
@@ -358,7 +354,7 @@ def dump_json(midi_file, metadata: bool = True, raw_json: bool = False) -> str:
         events = []
         for event in track:
             if metadata and (
-                event.type in performance_events
+                event.type in settings.get("performanceEvents")
                 or (event.type == "control_change" and not event.control in [0, 32])
                 or event.type == "end_of_track"
                 or event.type.startswith("sequencer_specific")
@@ -378,7 +374,7 @@ def dump_json(midi_file, metadata: bool = True, raw_json: bool = False) -> str:
     if not raw_json:
         return (
             jinja2.Environment()
-            .from_string(open(pathlib.Path(homedir) / ".miditoyz" / "midi.j2").read())
+            .from_string(open(pathlib.Path(settings.get("root")) / "midi.j2").read())
             .render(song[0])
         )
     else:
