@@ -433,7 +433,9 @@ def dump_json(
 
     if pretty:
         typer.echo(
-            jinja2.Environment().from_string(open("midi.j2").read()).render(song[0])
+            jinja2.Environment()
+            .from_string(open(pathlib.Path(homedir) / ".miditoyz" / "midi.j2").read())
+            .render(song[0])
         )
     else:
         typer.echo(
