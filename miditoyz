@@ -28,13 +28,13 @@
 #       clav.toys/more clav files/2.NEW FollowLights/02.Prelude.s944.mid
 #
 
-import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, mido, music21, typer, parse, duckdb, jinja2
+import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, mido, typer, parse, duckdb, jinja2
 from collections import defaultdict
 
 homedir = pathlib.Path.home()
 if not os.path.exists(pathlib.Path(homedir) / ".miditoyz"):
     typer.echo(
-        "oops, you need to complete all the Installation/Setup steps from the project README.md documentation before you can use miditoyz!!!"
+        "oops, you need to complete all the Installation/Setup steps from the project README.md documentation before you can use miditoyz"
     )
     exit(1)
 
@@ -42,6 +42,10 @@ settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json")
 voice_preferences = {
     tuple(v[0]): tuple(v[1]) for k, v in settings.get("voices").items()
 }
+performance_events = (
+    "note_on note_off pitch_bend pitchwheel aftertouch polytouch smpte_offset "
+    + "channel_prefix system_exclusive sysex cue_marker sequence_number midi_port unknown_meta"
+).split()
 
 app = typer.Typer()
 
@@ -95,18 +99,6 @@ def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
                     )
 
 
-def get_title_music21(dump: list) -> str:
-    """get first title from dump"""
-    event = next(filter(lambda x: x.startswith("SEQUENCE_TRACK_NAME"), dump), None)
-    if not event:
-        return "untitled"
-    else:
-        return parse.parse(
-            "SEQUENCE_TRACK_NAME, track={track}, channel={channel}, data=b{title}, time={time}",
-            event,
-        )["title"][1:-1]
-
-
 def get_title_mido(midi: mido.MidiFile) -> str:
     """return song title from midi file object"""
     titles = [e.name for e in midi.tracks[0] if e.type == "track_name"]
@@ -127,7 +119,7 @@ def create_db(catalog: str) -> None:
     conn.execute(
         "create table catalog as select * from read_json('"
         + catalog_flat
-        + "', columns={id: 'varchar', title: 'varchar', broken_mido: 'boolean', broken_music21: 'boolean', dump: 'varchar', sources: 'varchar'});"
+        + "', columns={id: 'varchar', title: 'varchar', broken: 'boolean', dump: 'varchar', sources: 'varchar'});"
     )
     conn.execute("create index idx_catalog_id on catalog (id);")
     conn.commit()
@@ -155,56 +147,46 @@ def ingest_music(source_directory: str, destination_directory: str) -> int:
         f"  found {total_songs} total songs of which {len(songs)} are actually unique..."
     )
 
-    # identify mido broken/unstreamable songs...
-    typer.echo(
-        f"  scanning for broken or invalid song files, this will take a while..."
-    )
-    songs_broken_mido = set()
-    for song in [x["sources"][0] for x in songs.values()]:
-        try:
-            mido.MidiFile(song)
-        except:
-            songs_broken_mido.add(hash)
-
     # copy unique songs to destination_directory...
-    typer.echo("  copying unique songs to destination_directory, again patience...")
-    # if not len(os.listdir(destination_directory)) == len(songs.keys()):
+    typer.echo(f"  copying unique songs to {destination_directory}...")
     for hash, v in songs.items():  # fyi, this took 1m5.3s
         shutil.copyfile(
             v["sources"][0], pathlib.Path(destination_directory) / f"{hash}.mid"
         )
 
-    # add metadata to catalog using dump_midi metadata...
-    songs_broken_music21 = set()
-    for song in songs.keys():  # [s for s in songs.keys()]:
+    # add metadata to catalog using dump_json --metadata...
+    typer.echo("  gathering songs metadata, this takes a while...")
+    songs_broken = set()
+    for i, song in enumerate(songs.keys()):
+        if i % 1000 == 0 and i > 0:
+            typer.echo(f"    {i} of {len(songs)} songs processed...")
         try:
-            dump = dump_midi(
-                pathlib.Path(destination_directory) / f"{song}.mid", metadata=True
-            )
+            midi = mido.MidiFile(pathlib.Path(destination_directory) / f"{song}.mid")
+            dump = dump_json(midi, metadata=True).strip()
             songs[song] = {
                 **{
-                    "title": get_title_music21(dump),
-                    "broken_mido": song in songs_broken_mido,
-                    "broken_music21": False,
+                    "title": get_title_mido(midi),
+                    "broken": False,
                     "dump": dump,
                     "timestamp": datetime.datetime.now().isoformat(),
                 },
                 **songs[song],
             }
         except:
-            songs_broken_music21.add(song)
+            # import traceback
+            # print(traceback.format_exc())
+            songs_broken.add(song)
             songs[song] = {
                 **{
-                    "title": get_title_music21(dump),
-                    "broken_mido": song in songs_broken_mido,
-                    "broken_music21": True,
+                    "title": get_title_mido(midi),
+                    "broken": True,
                     "dump": "n/a",
                     "timestamp": datetime.datetime.now().isoformat(),
                 },
                 **songs[song],
             }
     typer.echo(
-        f'  {(len(songs_broken_mido) + len(songs_broken_music21)) / len(songs) * 100:.2f}% of songs are "broken" and have been logged...'
+        f'  {len(songs_broken) / len(songs) * 100:.2f}% of songs are "broken" and have been logged...'
     )
     json.dump(
         songs, open(pathlib.Path(destination_directory) / "catalog.json", "w"), indent=2
@@ -224,7 +206,7 @@ def ingest_music(source_directory: str, destination_directory: str) -> int:
 
 def format_query_result(data: list) -> str:
     if not data:
-        typer.echo("oops, no songs match your query...")
+        typer.echo("oops, no songs match your query")
         return
     HORIZONTAL = "─"
     VERTICAL = "│"
@@ -355,75 +337,28 @@ def merge_json_metadata(data, types_to_merge=["text", "copyright", "lyrics"]):
     return output_data
 
 
-def dump_midi(filename: str, metadata: bool = False) -> list:
-    """Dump a MIDI file in raw text format, optionally metadata only"""
-    mf = music21.midi.MidiFile()
-    mf.open(filename)
-    try:
-        mf.read()
-    except:  # skip broken songs...
-        typer.echo(f"oops, {filename} is a broken song file!")
-        return []
-    mf.close()
-
-    dump = []
-    for i, track in enumerate(mf.tracks):
-        time_delta = time_total = 0
-        for event in track.events:
-            if isinstance(event, music21.midi.DeltaTime):
-                time_delta = event.time
-                time_total += event.time
-            elif (
-                metadata
-                and hasattr(event.type, "name")
-                and (
-                    event.type.name in ["NOTE_ON", "NOTE_OFF", "PITCH_BEND"]
-                    or (
-                        event.type.name == "CONTROLLER_CHANGE"
-                        and not event.parameter1 in [0, 32]
-                    )
-                    or event.type.name == "END_OF_TRACK"
-                )
-            ):
-                pass
-            else:
-                dump.append(
-                    f"{str(event).replace('<music21.midi.MidiEvent ', '')[:-1]}, time={time_delta}, clock={time_total}"
-                )
-    return dump
-
-
-def dump_json(
-    midi_file: str = typer.Argument(..., help="MIDI song file to convert to JSON."),
-    metadata: bool = typer.Option(False, help="Show only metadata."),
-    pretty: bool = typer.Option(False, help="Pretty print JSON output."),
-):
-    midi_file = normalize_midi(midi_file)
-    if not os.path.exists(midi_file) or not is_midi(midi_file):
-        typer.echo(
-            f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
-        )
-        return
-    try:
-        mid = mido.MidiFile(midi_file)
-    except:
-        typer.echo(f"oops, {midi_file} is a broken song file!")
-        return
+def dump_json(midi_file, metadata: bool = True, raw_json: bool = False) -> str:
+    """dump midi file in raw json format passing either mido.MidiFile object or midi file path"""
+    if isinstance(midi_file, str):
+        midi_file = normalize_midi(midi_file)
+        if not os.path.exists(midi_file) or not is_midi(midi_file):
+            typer.echo(
+                f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
+            )
+            return
+        try:
+            mid = mido.MidiFile(midi_file)
+        except:
+            typer.echo(f"oops, {midi_file} is a broken song file")
+            return
+    else:
+        mid = midi_file
     tracks = []
     for i, track in enumerate(mid.tracks):
         events = []
         for event in track:
             if metadata and (
-                event.type
-                in [
-                    "note_on",
-                    "note_off",
-                    "pitch_bend",
-                    "pitchwheel",
-                    "aftertouch",
-                    "system_exclusive",
-                    "sysex",
-                ]
+                event.type in performance_events
                 or (event.type == "control_change" and not event.control in [0, 32])
                 or event.type == "end_of_track"
                 or event.type.startswith("sequencer_specific")
@@ -440,19 +375,16 @@ def dump_json(
         },
     )
 
-    if pretty:
-        typer.echo(
-            f"MIDI File: {midi_file}{os.linesep}"
-            + jinja2.Environment()
+    if not raw_json:
+        return (
+            jinja2.Environment()
             .from_string(open(pathlib.Path(homedir) / ".miditoyz" / "midi.j2").read())
             .render(song[0])
         )
     else:
-        typer.echo(
-            json.dumps(
-                song,
-                indent=2,
-            )
+        return json.dumps(
+            song,
+            indent=2,
         )
 
 
@@ -480,6 +412,11 @@ def init(
         return
     if not os.path.exists(destination_directory):
         os.makedirs(destination_directory)
+    else:
+        typer.echo(
+            f"oops, destination_directory {destination_directory} already exists"
+        )
+        return
 
     start_time = time.time()
     songs = ingest_music(source_directory, destination_directory)
@@ -508,14 +445,14 @@ def merge(
         and os.path.isdir(source)
         and os.path.exists(pathlib.Path(destination) / "catalog.json")
     ):
-        typer.echo(f"oops, source catalog {source} isn't a valid catalog!")
+        typer.echo(f"oops, source catalog {source} isn't a valid catalog")
         return
     if (
         not os.path.exists(destination)
         and os.path.isdir(source)
         and os.path.exists(pathlib.Path(destination) / "catalog.json")
     ):
-        typer.echo(f"oops, destination catalog {destination} isn't a valid catalog!")
+        typer.echo(f"oops, destination catalog {destination} isn't a valid catalog")
         return
     typer.echo(
         f"merging source catalog {source} into destination catalog {destination}..."
@@ -671,11 +608,8 @@ def voices(
 @app.command()
 def dump(
     midi_file: str = typer.Argument(..., help="MIDI song file to be analyzed."),
-    json: bool = typer.Option(False, help="MIDI song file output in JSON format."),
     metadata: bool = typer.Option(False, help="Show only metadata."),
-    pretty: bool = typer.Option(
-        False, help="Pretty print JSON output (only available with --json option)."
-    ),
+    json: bool = typer.Option(False, help="Convert MIDI song to raw JSON."),
 ):
     """Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug"."""
     midi_file = normalize_midi(midi_file)
@@ -684,11 +618,9 @@ def dump(
             f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
         )
         return
-    if json:
-        dump_json(midi_file, metadata, pretty)
-    else:
-        for dump in dump_midi(midi_file, metadata):
-            typer.echo(dump)
+    if not json:  # add file header for cli only...
+        typer.echo(f"MIDI File: {midi_file}")
+    typer.echo(dump_json(midi_file, metadata, json))
 
 
 @app.command()
@@ -714,7 +646,7 @@ def verify(
         ..., help="MIDI song, JSON, or CSV file to verify for correct format."
     )
 ):
-    """Verify MIDI song file can be processed with mido and music21 packages or that a JSON or CSV file is the correct format."""
+    """Verify MIDI song file can be processed with mido package or that a JSON or CSV file is the correct format."""
     if not os.path.exists(file_name) or not (
         is_midi(file_name)
         or file_name.lower().endswith(".json")
@@ -725,28 +657,26 @@ def verify(
         )
         return
     if is_midi(file_name):
-        typer.echo(f"verifying {file_name} with mido and music21...")
+        typer.echo(f"verifying {file_name} with mido...")
         try:
-            music21.midi.MidiFile()
-            typer.echo(f"  music21 ok!")
             mido.MidiFile(file_name)
             typer.echo(f"  mido ok!")
         except:
-            typer.echo(f"  oops, unable to verify with both mido and music21!")
+            typer.echo(f"  oops, unable to verify with mido")
     elif file_name.lower().endswith(".json"):
         typer.echo(f"verifying {file_name} is a valid JSON file...")
         try:
             json.load(open(file_name))
-            typer.echo(f"  JSON format ok!")
+            typer.echo(f"  JSON format ok")
         except:
-            typer.echo(f"  oops, invalid format!")
+            typer.echo(f"  oops, invalid format")
     else:
         typer.echo(f"verifying {file_name} is a valid CSV file...")
         try:
             csv.DictReader(open(file_name))
-            typer.echo(f"  CSV format ok!")
+            typer.echo(f"  CSV format ok")
         except:
-            typer.echo(f"  oops, invalid format!")
+            typer.echo(f"  oops, invalid format")
 
 
 @app.command()
@@ -835,7 +765,7 @@ def query(
         if os.path.getsize(songlist_file) <= 10:
             os.remove(songlist_file)
             typer.echo(
-                f"oops, no songs match your query, {songlist_file} wasn't created..."
+                f"oops, no songs match your query, {songlist_file} wasn't created"
             )
     else:
         query = f"select title,id from catalog where {search};"

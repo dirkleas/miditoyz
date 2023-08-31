@@ -29,7 +29,7 @@ Commands:
   query    Query a song list from your catalog for later streaming with...
   raw      Dump a MIDI song file in alternative raw text format with...
   stream   Stream music from a catalog song list, a midi file, or...
-  verify   Verify MIDI song file can be processed with mido and music21...
+  verify   Verify MIDI song file can be processed with mido package or...
   voices   Generate a list of voices for each track in a midi song file.
 
 $ miditoyz init --help
@@ -95,9 +95,9 @@ Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id".  [default:
-                            /tmp/foo.csv]
+                            /Users/dirkleas/h4x/clav.toys.unique]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 22]
+                            pick different music.  [default: 24]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
@@ -133,11 +133,9 @@ Arguments:
   MIDI_FILE  MIDI song file to be analyzed.  [required]
 
 Options:
-  --json / --no-json          MIDI song file output in JSON format.  [default:
-                              no-json]
   --metadata / --no-metadata  Show only metadata.  [default: no-metadata]
-  --pretty / --no-pretty      Pretty print JSON output (only available with
-                              --json option).  [default: no-pretty]
+  --json / --no-json          Convert MIDI song to raw JSON.  [default: no-
+                              json]
   --help                      Show this message and exit.
 
 $ miditoyz raw --help
@@ -156,8 +154,8 @@ Options:
 $ miditoyz verify --help
 Usage: miditoyz verify [OPTIONS] FILE_NAME
 
-  Verify MIDI song file can be processed with mido and music21 packages or
-  that a JSON or CSV file is the correct format.
+  Verify MIDI song file can be processed with mido package or that a JSON or
+  CSV file is the correct format.
 
 Arguments:
   FILE_NAME  MIDI song, JSON, or CSV file to verify for correct format.

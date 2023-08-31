@@ -1,10 +1,12 @@
 {%+ for track in tracks %}
----------- Track #{{ track.track+1 }} --------------------------------------------------
+---------- Track #{{ track.track+1 }} ----------
 {% for event in track.events -%}
 {% if event.type == "track_name" -%}Track Name: {{ event.name }}
 {% elif event.type == "text" -%}Notes:
   {{ event.text|replace("\n", "\n  ") }}
 {% elif event.type == "copyright" -%}Copyright:
+  {{ event.text|replace("\n", "\n  ") }}
+{% elif event.type == "lyrics" -%}Lyrics:
   {{ event.text|replace("\n", "\n  ") }}
 {% elif event.type == "key_signature" -%}Key Signature: {{ event.key }}
 {% elif event.type == "time_signature" -%}Time Signature: {{ event.numerator }}/{{ event.denominator }}, clocks/click {{ event.clocks_per_click }}, 32nd notes/beat {{ event.notated_32nd_notes_per_beat }}    
@@ -18,6 +20,7 @@
 {% elif event.type == "sysex" -%}System Exclusive Message Stream: raw data {{ event.data }} @{{ event.time }}
 {% elif event.type == "pitchwheel" -%}Pitchwheel: channel {{ event.channel }}, pitch {{ event.pitch }} @{{ event.time }}
 {% elif event.type == "aftertouch" -%}Aftertouch: channel {{ event.channel }}, value {{ event.value }} @{{ event.time }}
+{% elif event.type == "marker" -%}Marker: {{ event.text }} @{{ event.time }}
 {% elif event.type == "end_of_track" -%}End of Track @{{ event.time }}
 {% else -%}{{ event }}
 {% endif -%}
