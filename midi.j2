@@ -12,7 +12,7 @@
 {% elif event.type == "time_signature" -%}Time Signature: {{ event.numerator }}/{{ event.denominator }}, clocks/click {{ event.clocks_per_click }}, 32nd notes/beat {{ event.notated_32nd_notes_per_beat }}    
 {% elif event.type == "set_tempo" -%}Tempo: channel {{ event.tempo }}, {{ (60000000 / event.tempo)|int }} bpm
 {% elif event.type == "instrument_name" -%}Instrument Name: {{ event.name }}
-{% elif event.type == "program_change" -%}Program Change: channel {{ event.channel }}, program {{ event.program }}
+{% elif event.type == "program_change" -%}Program Change: channel {{ event.channel }}, program {{ event.program }} @{{ event.time }}
 {% elif event.type == "control_change" -%}Control Change: channel {{ event.channel }}, control {{ event.control }}, value {{ event.value }}
 {% elif event.type == "note_on" -%}Note On: channel {{ event.channel }}, note {{ event.note }}, velocity {{ event.velocity }} @{{ event.time }}
 {% elif event.type == "note_off" -%}Note Off: channel {{ event.channel }}, note {{ event.note }} @{{ event.time }}

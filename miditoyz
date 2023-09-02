@@ -28,7 +28,7 @@
 #       clav.toys/more clav files/2.NEW FollowLights/02.Prelude.s944.mid
 #
 
-import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, mido, typer, parse, duckdb, jinja2
+import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, mido, typer, textwrap, duckdb, jinja2
 from collections import defaultdict
 
 homedir = pathlib.Path.home()
@@ -69,7 +69,7 @@ def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
     with mido.MidiFile(midi_filename) as mid:
         for i, track in enumerate(mid.tracks):
             channels = defaultdict(dict)
-            typer.echo(f"  track: {i+1}")
+            typer.echo(f"  track: {i}")
             for msg in track:
                 if msg.type == "track_name":
                     typer.echo(f'    track name: {track.name.strip() or "n/a"}')
@@ -87,11 +87,11 @@ def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
                 )
                 if voice in voices.keys():
                     typer.echo(
-                        f"      channel {channel+1}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                        f"      channel {channel}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
                     )
                 else:
                     typer.echo(
-                        f"      channel {channel+1}: unrecognized voice, MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                        f"      channel {channel}: unrecognized voice, MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
                     )
 
 
@@ -695,13 +695,17 @@ def catalog(
 def info():
     """Show current miditoyz settings."""
     typer.echo(f"miditoyz settings:")
-    for k, v in settings.items():
+    for k, v in sorted(settings.items()):
         if k == "voices":
             typer.echo(f"  {k}")
             for title, mapping in v.items():
                 typer.echo(f"    {title}: {mapping}")
+        elif k == "performanceEvents":
+            typer.echo(f"  {k}:")
+            for line in textwrap.wrap(v, width=shutil.get_terminal_size().columns - 4):
+                typer.echo(f"    {line}")
         else:
-            typer.echo(f"  {k}:{os.linesep}    {v}")
+            typer.echo(f"  {k}: {v}")
 
 
 @app.command()
