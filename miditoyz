@@ -69,7 +69,7 @@ def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
     with mido.MidiFile(midi_filename) as mid:
         for i, track in enumerate(mid.tracks):
             channels = defaultdict(dict)
-            channels_voices_series = defaultdict(dict)
+            channels_over_time = defaultdict(dict)
             time_elapsed = 0
             typer.echo(f"  track: {i}")
             for msg in track:
@@ -82,15 +82,15 @@ def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
                     channels[msg.channel]["lsb"] = msg.value
                 elif msg.type == "program_change":
                     channels[msg.channel]["pc"] = msg.program + 1
-                    channels_voices_series[msg.channel, time_elapsed] = channels[
+                    channels_over_time[msg.channel, time_elapsed] = channels[
                         msg.channel
                     ]
                     del channels[msg.channel]
-            for channel in sorted(channels_voices_series):
+            for channel in sorted(channels_over_time):
                 voice = (
-                    channels_voices_series.get(channel).get("msb", 0),
-                    channels_voices_series.get(channel).get("lsb", 0),
-                    channels_voices_series.get(channel).get("pc", 1),
+                    channels_over_time.get(channel).get("msb", 0),
+                    channels_over_time.get(channel).get("lsb", 0),
+                    channels_over_time.get(channel).get("pc", 1),
                 )
                 if voice in voices.keys():
                     typer.echo(
