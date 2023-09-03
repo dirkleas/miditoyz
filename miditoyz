@@ -69,8 +69,11 @@ def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
     with mido.MidiFile(midi_filename) as mid:
         for i, track in enumerate(mid.tracks):
             channels = defaultdict(dict)
+            channels_voices_series = defaultdict(dict)
+            time_elapsed = 0
             typer.echo(f"  track: {i}")
             for msg in track:
+                time_elapsed += msg.time
                 if msg.type == "track_name":
                     typer.echo(f'    track name: {track.name.strip() or "n/a"}')
                 elif msg.type == "control_change" and msg.control == 0:
@@ -79,19 +82,23 @@ def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
                     channels[msg.channel]["lsb"] = msg.value
                 elif msg.type == "program_change":
                     channels[msg.channel]["pc"] = msg.program + 1
-            for channel in sorted(channels.keys()):
+                    channels_voices_series[msg.channel, time_elapsed] = channels[
+                        msg.channel
+                    ]
+                    del channels[msg.channel]
+            for channel in sorted(channels_voices_series):
                 voice = (
-                    channels.get(channel).get("msb", 0),
-                    channels.get(channel).get("lsb", 0),
-                    channels.get(channel).get("pc", 1),
+                    channels_voices_series.get(channel).get("msb", 0),
+                    channels_voices_series.get(channel).get("lsb", 0),
+                    channels_voices_series.get(channel).get("pc", 1),
                 )
                 if voice in voices.keys():
                     typer.echo(
-                        f"      channel {channel}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                        f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
                     )
                 else:
                     typer.echo(
-                        f"      channel {channel}: unrecognized voice, MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                        f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}: unrecognized voice, MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
                     )
 
 
