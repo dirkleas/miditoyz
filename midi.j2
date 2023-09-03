@@ -21,6 +21,8 @@
 {% elif event.type == "pitchwheel" -%}Pitchwheel: channel {{ event.channel }}, pitch {{ event.pitch }} @{{ event.time }}
 {% elif event.type == "aftertouch" -%}Aftertouch: channel {{ event.channel }}, value {{ event.value }} @{{ event.time }}
 {% elif event.type == "marker" -%}Marker: {{ event.text }} @{{ event.time }}
+{% elif event.type == "device_name" -%}Device Name: {{ event.name }}
+{% elif event.type == "marker" -%}Marker: {{ event.name }}
 {% elif event.type == "end_of_track" -%}End of Track @{{ event.time }}
 {% else -%}{{ event }}
 {% endif -%}
