@@ -590,7 +590,7 @@ def voices(
         ..., help="MIDI song file to generate voice list for."
     ),
     voices: str = typer.Option(
-        str(pathlib.Path(pathlib.Path.home()) / ".miditoyz" / "datalist.pickle"),
+        str(pathlib.Path(settings.get("root")) / "datalist.pickle"),
         help='Official Yamaha Clavinova "datalist" of voices. Check vendor documentation for other device voicing.',
     ),
     detail: bool = typer.Option(
