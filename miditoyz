@@ -102,7 +102,7 @@ def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
                     )
 
 
-def get_title_mido(midi: mido.MidiFile) -> str:
+def get_title(midi: mido.MidiFile) -> str:
     """return song title from midi file object"""
     titles = [e.name for e in midi.tracks[0] if e.type == "track_name"]
     return titles[0] if titles and len(titles) > 0 else "untitled"
@@ -168,7 +168,7 @@ def ingest_music(source_directory: str, destination_directory: str) -> int:
             dump = dump_json(midi, metadata=True).strip()
             songs[song] = {
                 **{
-                    "title": get_title_mido(midi),
+                    "title": get_title(midi),
                     "broken": False,
                     "dump": dump,
                     "timestamp": datetime.datetime.now().isoformat(),
@@ -181,7 +181,7 @@ def ingest_music(source_directory: str, destination_directory: str) -> int:
             songs_broken.add(song)
             songs[song] = {
                 **{
-                    "title": get_title_mido(midi),
+                    "title": get_title(midi),
                     "broken": True,
                     "dump": "n/a",
                     "timestamp": datetime.datetime.now().isoformat(),
@@ -274,16 +274,16 @@ def generate_midi_voice_events(ch: int, msb: int, lsb: int, pc: int) -> list:
     ]
 
 
-def stream_revoiced(
-    songfile: str, index: int, song_count: int, voice_preferences: dict, device
+def stream_preferred_voices(
+    midi_file: str, index: int, song_count: int, voice_preferences: dict, device
 ) -> None:
     """revoice midi file with voice preferences"""
     channels = defaultdict(dict)
     serialize_settings({"bookmark": index + 1})
-    midi = mido.MidiFile(songfile)
-    title = get_title_mido(midi)
-    typer.echo(f"{title} ({songfile}), song {index+1} of {song_count}")
-    notify(f"{'/'.join(songfile.split('/')[-2:])}, #{index+1}", title)
+    midi = mido.MidiFile(midi_file)
+    title = get_title(midi)
+    typer.echo(f"{title} ({midi_file}), song {index+1} of {song_count}")
+    notify(f"{'/'.join(midi_file.split('/')[-2:])}, #{index+1}", title)
     for event in midi.play():
         if event.type == "control_change" and event.control == 0:
             channels[event.channel]["msb"] = event.value
@@ -291,7 +291,7 @@ def stream_revoiced(
             channels[event.channel]["lsb"] = event.value
         elif event.type == "program_change":
             ch = event.channel
-            channels[event.channel]["pc"] = event.program + 1
+            channels[ch]["pc"] = event.program + 1
             voice = (
                 channels.get(ch).get("msb", 0),
                 channels.get(ch).get("lsb", 0),
@@ -575,7 +575,9 @@ def stream(
         device = mido.open_output(device)
         for skip, song in enumerate(songs):
             if skip >= bookmark - 1:
-                stream_revoiced(song, skip, len(songs), voice_preferences, device)
+                stream_preferred_voices(
+                    song, skip, len(songs), voice_preferences, device
+                )
                 time.sleep(intermission)
     except:  # skip broken songs...
         if not debug:
@@ -781,16 +783,16 @@ def query(
 
 @app.command()
 def fields():
-    """Show the fields in your catalog that you can use when querying a playlist from your catalog for later streaming."""
+    """Show the field names and types from your catalog that you can use when querying a playlist for later streaming."""
     db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
     cols = (
         duckdb.connect(db)
         .execute(
-            "select column_name from information_schema.columns where table_name='catalog'"
+            "select column_name, data_type from information_schema.columns where table_name='catalog'"
         )
         .fetchall()
     )
-    typer.echo(f'catalog fields: {", ".join([col[0] for col in cols])}')
+    typer.echo(f'catalog fields: {", ".join([f"{col[0]}: {col[1]}" for col in cols])}')
 
 
 @app.command()
