@@ -551,7 +551,9 @@ def stream(
                 if x.lower().endswith(".mid")
             ]
         )
-    elif music.lower().endswith(".csv"):  # stream or catalog list...
+    elif music.lower().endswith(".csv") and os.path.exists(
+        music
+    ):  # stream or catalog list...
         songs = list(  # includes header, format title,id
             map(
                 lambda x: f'{settings.get("catalog")}{os.sep}{x.get("id")}.mid',
