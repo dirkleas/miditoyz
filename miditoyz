@@ -34,7 +34,7 @@ from collections import defaultdict
 homedir = pathlib.Path.home()
 if not os.path.exists(pathlib.Path(homedir) / ".miditoyz"):
     typer.echo(
-        "oops, you need to complete all the Installation/Setup steps from the project README.md documentation before you can use miditoyz"
+        "oops, you need to complete all the Initial Installation steps from the project README.md documentation before you can use miditoyz"
     )
     exit(1)
 
@@ -46,27 +46,28 @@ voice_preferences = {
 app = typer.Typer()
 
 
-## building blocks...
 def is_midi(filename: str) -> bool:
     return filename.lower().endswith((".midi", ".mid"))
 
 
-def normalize_midi(file: str) -> str:
-    """Optionally prefix catalog path for unqualified catalog midi files and append .mid if not specified"""
-    if not is_midi(file):  # add .mid if not specified
-        file += ".mid"
-    catalog_path = str(
-        pathlib.Path(settings.get("catalog")) / file
-    )  # prefix catalog path
-    if is_midi(file) and not os.path.exists(file) and os.path.exists(catalog_path):
+def normalize_midi(midi_file: str) -> str:
+    """optionally prefix catalog path for unqualified catalog midi files and append .mid if not specified"""
+    if not is_midi(midi_file):
+        midi_file += ".mid"
+    catalog_path = str(pathlib.Path(settings.get("catalog")) / midi_file)
+    if (
+        is_midi(midi_file)
+        and not os.path.exists(midi_file)
+        and os.path.exists(catalog_path)
+    ):
         return catalog_path
     else:
-        return file
+        return midi_file
 
 
-def get_track_channel_voices(midi_filename: str, voices: dict) -> None:
-    typer.echo(f"song file: {midi_filename}")
-    with mido.MidiFile(midi_filename) as mid:
+def get_track_channel_voices(midi_file: str, voices: dict) -> None:
+    typer.echo(f"song file: {midi_file}")
+    with mido.MidiFile(midi_file) as mid:
         for i, track in enumerate(mid.tracks):
             channels = defaultdict(dict)
             channels_over_time = defaultdict(dict)
@@ -391,7 +392,6 @@ def dump_json(midi_file, metadata: bool = True, raw_json: bool = False) -> str:
         )
 
 
-## cli commands...
 @app.command()
 def init(
     source_directory: pathlib.Path = typer.Argument(
