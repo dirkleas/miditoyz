@@ -40,7 +40,8 @@ if not os.path.exists(pathlib.Path(homedir) / ".miditoyz"):
 
 settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json"))
 voice_preferences = {
-    tuple(v[0]): tuple(v[1]) for k, v in settings.get("voices").items()
+    tuple(v[0]): tuple(v[1])
+    for k, v in settings.get("voices").get(settings.get("instrument")).items()
 }
 
 app = typer.Typer()
