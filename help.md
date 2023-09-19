@@ -17,20 +17,21 @@ Options:
   --help                          Show this message and exit.
 
 Commands:
-  catalog  Change to a new catalog file for streaming.
-  db       Analyze music catalog database with duckdb (enter ".quit" to...
-  devices  List currently connected midi output devices attached via USB,...
-  dump     Dump a MIDI song file in raw text format.
-  fields   Show the fields in your catalog that you can use when querying...
-  info     Show current miditoyz settings.
-  init     Generate a new music collection from a source directory into a...
-  merge    Merge source catalog into destination catalog, overwriting...
-  panic    Send MIDI panic to turn off any hung notes.
-  query    Query a song list from your catalog for later streaming with...
-  raw      Dump a MIDI song file in alternative raw text format with...
-  stream   Stream music from a catalog song list, a midi file, or...
-  verify   Verify MIDI song file can be processed with mido package or...
-  voices   Generate a list of voices for each track in a midi song file.
+  catalog     Change to a new catalog file for streaming.
+  db          Analyze music catalog database with duckdb (enter ".quit"...
+  devices     List currently connected midi output devices attached via...
+  dump        Dump a MIDI song file in raw text format.
+  fields      Show the field names and types from your catalog that you...
+  info        Show current miditoyz settings.
+  init        Generate a new music collection from a source directory...
+  instrument  Change to a new instrument name for voicing streams.
+  merge       Merge source catalog into destination catalog, overwriting...
+  panic       Send MIDI panic to turn off any hung notes.
+  query       Query a song list from your catalog for later streaming...
+  raw         Dump a MIDI song file in alternative raw text format with...
+  stream      Stream music from a catalog song list, a midi file, or...
+  verify      Verify MIDI song file can be processed with mido package or...
+  voices      Generate a list of voices for each track in a midi song file.
 
 $ miditoyz init --help
 Usage: miditoyz init [OPTIONS] SOURCE_DIRECTORY DESTINATION_DIRECTORY
@@ -97,7 +98,7 @@ Options:
                             mandatory header "title,id".  [default:
                             /tmp/foo.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 4]
+                            pick different music.  [default: 35]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
@@ -118,7 +119,8 @@ Arguments:
 Options:
   --voices TEXT           Official Yamaha Clavinova "datalist" of voices.
                           Check vendor documentation for other device voicing.
-                          [default: /Users/dirkleas/.miditoyz/datalist.pickle]
+                          [default:
+                          /Users/dirkleas/h4x/miditoyz/datalist.pickle]
   --detail / --no-detail  Include voice MSB, LSB, PC voice values for
                           searching datalist csv or pdf for voice names.
                           [default: no-detail]
@@ -176,6 +178,17 @@ Arguments:
 Options:
   --help  Show this message and exit.
 
+$ miditoyz instrument --help
+Usage: miditoyz instrument [OPTIONS] INSTRUMENT_NAME
+
+  Change to a new instrument name for voicing streams.
+
+Arguments:
+  INSTRUMENT_NAME  Instrument name from voices.  [required]
+
+Options:
+  --help  Show this message and exit.
+
 $ miditoyz info --help
 Usage: miditoyz info [OPTIONS]
 
@@ -213,8 +226,8 @@ Options:
 $ miditoyz fields --help
 Usage: miditoyz fields [OPTIONS]
 
-  Show the fields in your catalog that you can use when querying a playlist
-  from your catalog for later streaming.
+  Show the field names and types from your catalog that you can use when
+  querying a playlist for later streaming.
 
 Options:
   --help  Show this message and exit.

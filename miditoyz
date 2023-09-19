@@ -704,6 +704,17 @@ def catalog(
 
 
 @app.command()
+def instrument(
+    instrument_name: str = typer.Argument(..., help="Instrument name from voices.")
+):
+    """Change to a new instrument name for voicing streams."""
+    if settings.get("voices").get(instrument_name, "not found") == "not found":
+        typer.echo(f"oops, {instrument_name} isn't a valid instrument name")
+    else:
+        serialize_settings({"instrument": instrument_name})
+
+
+@app.command()
 def info():
     """Show current miditoyz settings."""
     typer.echo(f"miditoyz settings:")
