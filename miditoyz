@@ -32,9 +32,15 @@ import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime
 from collections import defaultdict
 
 homedir = pathlib.Path.home()
+
+
+def oops(msg: str, prefix: str = "") -> None:
+    typer.echo(typer.style(f"{prefix}oops, {msg}", fg=typer.colors.RED, bold=True))
+
+
 if not os.path.exists(pathlib.Path(homedir) / ".miditoyz"):
-    typer.echo(
-        "oops, you need to complete all the Initial Installation steps from the project README.md documentation before you can use miditoyz"
+    oops(
+        "you need to complete all the Initial Installation steps from the project README.md documentation before you can use miditoyz"
     )
     exit(1)
 
@@ -211,7 +217,7 @@ def ingest_music(source_directory: str, destination_directory: str) -> int:
 
 def format_query_result(data: list) -> str:
     if not data:
-        typer.echo("oops, no songs match your query")
+        oops("no songs match your query")
         return
     HORIZONTAL = "─"
     VERTICAL = "│"
@@ -347,14 +353,14 @@ def dump_json(midi_file, metadata: bool = True, raw_json: bool = False) -> str:
     if isinstance(midi_file, str):
         midi_file = normalize_midi(midi_file)
         if not os.path.exists(midi_file) or not is_midi(midi_file):
-            typer.echo(
-                f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
+            oops(
+                f"midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
             )
             return
         try:
             mid = mido.MidiFile(midi_file)
         except:
-            typer.echo(f"oops, {midi_file} is a broken song file")
+            oops(f"{midi_file} is a broken song file")
             return
     else:
         mid = midi_file
@@ -407,19 +413,15 @@ def init(
     songs. Duplicates include same song in multiple directory paths, renamed versions of the same song, etc.
     that have identical song content "inside" the song MIDI file."""
     if not os.path.exists(source_directory):
-        typer.echo(f"oops, source_directory {source_directory} doesn't exist")
+        oops(f"source_directory {source_directory} doesn't exist")
         return
     if source_directory == destination_directory:
-        typer.echo(
-            f"oops, source_directory and destination_directory must be different"
-        )
+        oops(f"source_directory and destination_directory must be different")
         return
     if not os.path.exists(destination_directory):
         os.makedirs(destination_directory)
     else:
-        typer.echo(
-            f"oops, destination_directory {destination_directory} already exists"
-        )
+        oops(f"destination_directory {destination_directory} already exists")
         return
 
     start_time = time.time()
@@ -449,14 +451,14 @@ def merge(
         and os.path.isdir(source)
         and os.path.exists(pathlib.Path(destination) / "catalog.json")
     ):
-        typer.echo(f"oops, source catalog {source} isn't a valid catalog")
+        oops("source catalog {source} isn't a valid catalog")
         return
     if (
         not os.path.exists(destination)
         and os.path.isdir(source)
         and os.path.exists(pathlib.Path(destination) / "catalog.json")
     ):
-        typer.echo(f"oops, destination catalog {destination} isn't a valid catalog")
+        oops("destination catalog {destination} isn't a valid catalog")
         return
     typer.echo(
         f"merging source catalog {source} into destination catalog {destination}..."
@@ -532,8 +534,8 @@ def stream(
     try:  # pretest device...
         mido.open_output(device)
     except:
-        typer.echo(
-            f"oops, device {device} not found, please select from the following connected device list: {', '.join(set(mido.get_output_names()))}"
+        oops(
+            f"device {device} not found, please select from the following connected device list: {', '.join(set(mido.get_output_names()))}"
         )
         return
     if bookmark < 0 or music != settings.get("music") or is_midi(music):
@@ -562,14 +564,14 @@ def stream(
             )
         )
     else:
-        typer.echo(
-            "oops, music must be a song list, valid midi file ending .mid, or directory full of midi files"
+        oops(
+            "music must be a song list, valid midi file ending .mid, or directory full of midi files"
         )
         return
     if bookmark > len(songs):
         bookmark = 1
-        typer.echo(
-            f"{os.linesep}oops, your bookmark is beyond the last song in your music -- starting from the beginning...{os.linesep}"
+        oops(
+            f"your bookmark is beyond the last song in your music -- starting from the beginning...{os.linesep}"
         )
     try:  # revoice and stream songs...
         if shuffle:
@@ -606,8 +608,8 @@ def voices(
     """Generate a list of voices for each track in a midi song file."""
     midi_file = normalize_midi(midi_file)
     if not os.path.exists(midi_file) or not is_midi(midi_file):
-        typer.echo(
-            f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
+        oops(
+            f"midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
         )
         return
     get_track_channel_voices(midi_file, pickle.load(open(voices, "rb")))
@@ -622,8 +624,8 @@ def dump(
     """Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug"."""
     midi_file = normalize_midi(midi_file)
     if not os.path.exists(midi_file) or not is_midi(midi_file):
-        typer.echo(
-            f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
+        oops(
+            f"midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
         )
         return
     if not json:  # add file header for cli only...
@@ -641,8 +643,8 @@ def raw(
     """Dump a MIDI song file in alternative raw text format with optionally with hexdump-style debug output. See also: "miditoyz dump --metadata"."""
     midi_file = normalize_midi(midi_file)
     if not os.path.exists(midi_file) or not is_midi(midi_file):
-        typer.echo(
-            f"oops, midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
+        oops(
+            f"midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
         )
         return
     mido.MidiFile(midi_file, debug=debug).print_tracks()
@@ -660,8 +662,8 @@ def verify(
         or file_name.lower().endswith(".json")
         or file_name.lower().endswith(".csv")
     ):
-        typer.echo(
-            f"oops, specified {file_name} doesn't exist or isn't a midi song, JSON, or CSV file"
+        oops(
+            f"specified {file_name} doesn't exist or isn't a midi song, JSON, or CSV file"
         )
         return
     if is_midi(file_name):
@@ -670,21 +672,21 @@ def verify(
             mido.MidiFile(file_name)
             typer.echo(f"  mido ok!")
         except:
-            typer.echo(f"  oops, unable to verify with mido")
+            oops(f"unable to verify with mido", prefix="  ")
     elif file_name.lower().endswith(".json"):
         typer.echo(f"verifying {file_name} is a valid JSON file...")
         try:
             json.load(open(file_name))
             typer.echo(f"  JSON format ok")
         except:
-            typer.echo(f"  oops, invalid format")
+            oops(f"invalid format", prefix="  ")
     else:
         typer.echo(f"verifying {file_name} is a valid CSV file...")
         try:
             csv.DictReader(open(file_name))
             typer.echo(f"  CSV format ok")
         except:
-            typer.echo(f"  oops, invalid format")
+            oops(f"invalid format", prefix="  ")
 
 
 @app.command()
@@ -698,9 +700,7 @@ def catalog(
     if os.path.exists(catalog_directory):
         serialize_settings({"catalog": catalog_directory, "music": "", "bookmark": 1})
     else:
-        typer.echo(
-            f"oops, {catalog_directory} doesn't exist or isn't a catalog json file"
-        )
+        oops(f"{catalog_directory} doesn't exist or isn't a catalog json file")
 
 
 @app.command()
@@ -709,7 +709,7 @@ def instrument(
 ):
     """Change to a new instrument name for voicing streams."""
     if settings.get("voices").get(instrument_name, "not found") == "not found":
-        typer.echo(f"oops, {instrument_name} isn't a valid instrument name")
+        oops(f"{instrument_name} isn't a valid instrument name")
     else:
         serialize_settings({"instrument": instrument_name})
 
@@ -775,8 +775,8 @@ def query(
             ]
         )
     else:
-        typer.echo(
-            f"oops, you must use one of the following options to query songs from your catalog: --search, --title, --metadata, --sources, or --sql"
+        oops(
+            f"you must use one of the following options to query songs from your catalog: --search, --title, --metadata, --sources, or --sql"
         )
         return
     if debug:
@@ -787,9 +787,7 @@ def query(
         duckdb.connect(db).execute(query)
         if os.path.getsize(songlist_file) <= 10:
             os.remove(songlist_file)
-            typer.echo(
-                f"oops, no songs match your query, {songlist_file} wasn't created"
-            )
+            oops(f"no songs match your query, {songlist_file} wasn't created")
     else:
         query = f"select title,id from catalog where {search};"
         typer.echo(format_query_result(duckdb.connect(db).execute(query).fetchall()))
