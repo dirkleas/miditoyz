@@ -45,17 +45,17 @@ if not os.path.exists(pathlib.Path(homedir) / ".miditoyz"):
     exit(1)
 
 
-def get_instrument_voices(instrument: str) -> dict:
-    voices = settings.get("voices")
+def map_voicing(voicing: str) -> dict:
+    voicings = settings.get("voicings")
     return (
         {}
-        if not instrument in voices
-        else {tuple(v[0]): tuple(v[1]) for k, v in voices.get(instrument).items()}
+        if not voicing in voicings
+        else {tuple(v[0]): tuple(v[1]) for k, v in voicings.get(voicing).items()}
     )
 
 
 settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json"))
-voice_preferences = get_instrument_voices(settings.get("instrument"))
+voicing_default = map_voicing(settings.get("voicing_default"))
 
 app = typer.Typer()
 
@@ -289,8 +289,8 @@ def generate_midi_voice_events(ch: int, msb: int, lsb: int, pc: int) -> list:
     ]
 
 
-def stream_preferred_voices(
-    midi_file: str, index: int, song_count: int, voice_preferences: dict, device
+def stream_preferred_voicing(
+    midi_file: str, index: int, song_count: int, voicings: dict, device
 ) -> None:
     """revoice midi file with voice preferences"""
     channels = defaultdict(dict)
@@ -312,16 +312,14 @@ def stream_preferred_voices(
                 channels.get(ch).get("lsb", 0),
                 channels.get(ch).get("pc", 1),
             )
-            voice_preference = voice_preferences.get(voice, voice)
-            if voice == voice_preference:
+            voicing = voicings.get(voice, voice)
+            if voice == voicing:
                 typer.echo(f"  voicing channel {ch} with voice {voice}")
             else:
                 typer.echo(
-                    f"  revoicing channel {ch} from voice {voice} to preferred voice {voice_preference}"
+                    f"  revoicing channel {ch} from voice {voice} to preferred voice {voicing}"
                 )
-            for voice_event in generate_midi_voice_events(
-                *tuple([*[ch], *voice_preference])
-            ):
+            for voice_event in generate_midi_voice_events(*tuple([*[ch], *voicing])):
                 device.send(voice_event)
         elif event.type == "sequencer_specific":
             typer.echo(f"  seq: {event}")
@@ -516,7 +514,7 @@ def stream(
         settings.get("device", "Clavinova Port 1"),
         help='MIDI device to stream to (e.g. "Clavinova Port 1" for USB, "Network Clavinova for WIFI, etc.))',
     ),
-    instrument: str = typer.Option("", help="Instrument to use for voice preferences."),
+    voicing: str = typer.Option("", help="Voicing to use for voice preferences."),
     shuffle: bool = typer.Option(False, help="Shuffle song order."),
     intermission: int = typer.Option(
         0, help="Add specified number of seconds intermission between songs."
@@ -539,8 +537,8 @@ def stream(
     remembered between streaming sessions, so subsequent streamings pick up
     from the last song played if you don't include them (exceptions: shuffle, intermission, and debug).
     """
-    if instrument and not instrument in settings.get("voices"):
-        oops("no such instrument in your current voices")
+    if voicing and not voicing in settings.get("voicings"):
+        oops("no such voicing in your current voicings list")
         return
     try:  # pretest device...
         mido.open_output(device)
@@ -591,11 +589,11 @@ def stream(
         device = mido.open_output(device)
         for skip, song in enumerate(songs):
             if skip >= bookmark - 1:
-                stream_preferred_voices(
+                stream_preferred_voicing(
                     song,
                     skip,
                     len(songs),
-                    get_instrument_voices(instrument) or voice_preferences,
+                    map_voicing(voicing) or voicing_default,
                     device,
                 )
                 time.sleep(intermission)
@@ -719,7 +717,7 @@ def catalog(
 
 
 @app.command()
-def instrument(
+def voicing(
     instrument_name: str = typer.Argument(..., help="Instrument name from voices.")
 ):
     """Change to a new instrument name for voicing streams."""
