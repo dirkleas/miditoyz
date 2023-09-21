@@ -89,7 +89,36 @@ Complete the following once before you can use `miditoyz`:
 
 ## Notes/Other
 
-1. Several "datalist" files are included in more computer-friendly formats and are based on the official CVP-800 series [datalist](https://usa.yamaha.com/files/download/other_assets/7/1264707/cvp809_en_dl_c0.pdf) reference document from yamaha. You can alter/add to the default voice preferences in your home directory (i.e. `c:\users\YOUR_USERNAME` for Windows, `/Users/YOUR_USERNAME` for MacOS, and `/home/YOUR_USERNAME` for Linux) in the hidden directory `.miditoyz` in the [JSON](https://www.json.org/json-en.html)-format file `settings.json`. Inside you'll find a `voicings` section where entries map song midi song voices to preferred song voices using the **MSB**, **LSB**, **PC** values from `datalist.csv`. Defaults voice preferences include mapping standard midi "Grand Piano" to the better sounding "CFX Concert Grand", "Bosendorfer Grand", etc.. You can even map voices that aren't listed in `datalist.csv` to your preferred voices. This preference mapping strategy also works for midi song files that were produced using various DAWs, other music hardware, and music composition/notation software as long as voicing is manage via standard midi control change/program change events **MSB**, **LSB**, **PC**. You can even define multiple voicings and specify your default in the `voicing_default` setting, or choose it while streaming with the `--voicing` streaming option. You'll also find other interesting settings there, including the location of your collection catalog, last music streamed, and a bookmark for the last song number. An excellent free editor for JSON files is [Visual Studio Code](https://code.visualstudio.com) -- it makes it easy by color-coding the file contents and provides hints and reminders to help you maintain the correct JSON syntax/format. Notice that voices are by default associated with the default instrument "Clavinova CVP 809". Additional voicings can be added as you wish, and these can be used along with queried song lists to voice one more more songs any way you'd like. You can even sequence a series of `miditoyz --stream` commands with a batch file/script to play elaborate music orchestrations!
+1. Several Yamaha Clavinova "datalist" files are included in more computer-friendly formats in this project and are based on the official CVP-800 series [datalist](https://usa.yamaha.com/files/download/other_assets/7/1264707/cvp809_en_dl_c0.pdf) reference document.
+1. You can alter/add to the default voice preferences in your home directory (i.e. `c:\users\YOUR_USERNAME` for Windows, `/Users/YOUR_USERNAME` for MacOS, and `/home/YOUR_USERNAME` for Linux) in the hidden directory `.miditoyz` in the [JSON](https://www.json.org/json-en.html)-format file `settings.json`. Inside you'll find a `voicings` section where entries map song midi song voices to preferred song voices using the **MSB**, **LSB**, **PC** values from `datalist.csv`. Defaults voice preferences include mapping standard midi "Grand Piano" to the better sounding "CFX Concert Grand", "Bosendorfer Grand", etc.. You can even map voices that aren't listed in `datalist.csv` to your preferred voices. This preference mapping strategy also works for midi song files that were produced using various DAWs, other music hardware, and music composition/notation software as long as voicing is manage via standard midi control change/program change events **MSB**, **LSB**, **PC**. You can even define multiple voicings and specify your default in the `voicing_default` setting, or choose it while streaming with the `--voicing` streaming option. You'll also find other interesting settings there, including the location of your collection catalog, last music streamed, and a bookmark for the last song number. An excellent free editor for JSON files is [Visual Studio Code](https://code.visualstudio.com) -- it makes it easy by color-coding the file contents and provides hints and reminders to help you maintain the correct JSON syntax/format. Notice that voices are by default associated with the default voicing "Clavinova CVP 809". Additional voicings can be added as you wish, and these can be used along with queried song lists to voice one more more songs any way you'd like. You can even sequence a series of `miditoyz --stream` commands with a batch file/script to play elaborate music orchestrations. Conceptually, here's what the voicing looks like:
+
+    ```json
+    ...
+    "voicings": {
+        "myVoicing": {
+            "voice1": [[0,0,1], [108,0,1]],
+            "voice2": [[1,0,0], [104,2,6]]
+        }
+    }
+    ...
+    ```
+    A real-world example might look like this mapping general midi (GM) voices to higher fidelity, more lifelike Yamaha Clavinova voices:
+    ```json
+    ...
+    "voicings": {
+        "jazz standards": {
+            "piano": [[0,0,1], [108,0,0]],
+            "bass": [[0,0,36], [8,32,20]],
+            "sax": [[0,0,65], [8,65,85]]
+        },
+        "blues": {
+            "guitar": [[0,0,26], [104,9,26]],
+            "harmonica": [[0,0,23], [8,64,105]]
+        },
+    }
+    ...
+    ```
+    Notice the second example shows two different voicings based on voice preferences for two different styles of music, with different instruments. Don't worry, if you don't provide a mapping for every instrument voice used in the MIDI file you're streaming, it will default to the voice specified in the MIDI file.
 1. If your computer includes multiple versions of Python, this project uses version 3x or greater. You may need to specifically refer to Python as `python3` to reference the correct version.
 1. Consider creating/activating a virtual environment for your repo clone using (e.g. `venv`, `pipenv`, `conda`, etc.) and adjusting the **Installation/Setup** per your own system administration preferences.
 
