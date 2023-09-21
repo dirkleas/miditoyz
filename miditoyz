@@ -293,9 +293,6 @@ def stream_preferred_voices(
     midi_file: str, index: int, song_count: int, voice_preferences: dict, device
 ) -> None:
     """revoice midi file with voice preferences"""
-
-    print("spv:", voice_preferences)
-
     channels = defaultdict(dict)
     serialize_settings({"bookmark": index + 1})
     midi = mido.MidiFile(midi_file)
@@ -594,7 +591,6 @@ def stream(
         device = mido.open_output(device)
         for skip, song in enumerate(songs):
             if skip >= bookmark - 1:
-                print(get_instrument_voices(instrument) or voice_preferences)
                 stream_preferred_voices(
                     song,
                     skip,
