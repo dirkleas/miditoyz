@@ -54,7 +54,12 @@ def map_voicing(voicing: str) -> dict:
     )
 
 
-settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json"))
+try:
+    settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json"))
+except:
+    oops("your settings.json file is broken, please fix it and try again")
+    exit(1)
+
 voicing_default = map_voicing(settings.get("voicing_default"))
 
 app = typer.Typer()

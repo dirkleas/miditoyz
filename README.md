@@ -106,7 +106,7 @@ A real-world example might look like this mapping of arguably boring general mid
 
 Notice in this example, two different voicings are defined around two different styles of music, with different instruments. Don't worry, if you don't provide a mapping for every instrument voice used in the MIDI file you're streaming, it will default to the MIDI file voice.
 
-Bringing it all together, you can stream your with your voice preferences via `miditoyz stream --music "stds.csv" --voicing "jazz standards"` to chill with some jazz standards, or `miditoyz stream --music "blues.csv" --voicing blues` to kick back to some blues. See how easy it is to marry voicing preferences and musical selections with complete precision?!
+Bringing it all together, you can stream with your voice preferences via `miditoyz stream --music "stds.csv" --voicing "jazz standards"` to chill with some jazz standards, or `miditoyz stream --music "blues.csv" --voicing blues` to kick back to some blues. See how easy it is to marry voicing preferences and musical selections with complete precision?!
 
 ### Yamaha Clavinvova Datalists
 
