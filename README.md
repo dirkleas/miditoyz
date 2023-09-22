@@ -101,7 +101,7 @@ Complete the following once before you can use `miditoyz`:
     ```
     The two example voices `voice1` and `voice2` define the "from" and "to" voices using a three element list containing the **MSB**, **LSB**, and **PC** values. As a song is streamed, whenever the MIDI calls for a voice change, that voice is looked up in the default or specified voicing for a matching "from" voice. If a match is found, the voice is replaced with corresponding "to" voice, otherwise, it's played as is. In other words, `miditoyz` automatically maps found voices "from" the original MIDI file "to" your preferred voice(s) whenever possible.
 
-    A real-world example might look like this mapping general midi (GM) voices to higher fidelity, more lifelike Yamaha Clavinova voices where my music collection has lots of folders of music, including one named "jazz standards", and two more named "rhythm and blues" and "chicago blues". A query like `miditoyz query --sources "jazz standards --songlist-file "stds.csv"` would create a song list for my jazz standards, and another query like `miditoyz query --sources blues --songlist-file "blues.csv"` would do the same spanning both folders of blues tunes.
+    A real-world example might look like this mapping of arguably boring general midi (GM) voices to higher fidelity, more lifelike Yamaha Clavinova voices for a large music collection has lots of folders of music, including one named "jazz standards", and two more named "rhythm and blues" and "chicago blues". A query like `miditoyz query --sources "jazz standards --songlist-file "stds.csv"` would create a song list for my jazz standards, and another query like `miditoyz query --sources blues --songlist-file "blues.csv"` would do the same, merging music from both folders of blues tunes.
     ```json
     "voicings": {
         "jazz standards": {
@@ -115,9 +115,9 @@ Complete the following once before you can use `miditoyz`:
         },
     }
     ```
-    Notice the second example shows two different voicings based on voice preferences for two different styles of music, with different instruments. Don't worry, if you don't provide a mapping for every instrument voice used in the MIDI file you're streaming, it will default to the voice specified in the MIDI file.
+    Notice in this example, two different voicings are defined around two different styles of music, with different instruments. Don't worry, if you don't provide a mapping for every instrument voice used in the MIDI file you're streaming, it will default to the MIDI file voice.
 
-    Bringing it all together, I could them stream with my voice preferences via `miditoyz stream --music "stds.csv" --voicing "jazz standards"` to chill with some jazz standards, or `miditoyz stream --music "blues.csv" --voicing blues` to kick back to some blues. See how easy it is to marry voicing preferences and musical selections with complete precision?!
+    Bringing it all together, you can stream your with your voice preferences via `miditoyz stream --music "stds.csv" --voicing "jazz standards"` to chill with some jazz standards, or `miditoyz stream --music "blues.csv" --voicing blues` to kick back to some blues. See how easy it is to marry voicing preferences and musical selections with complete precision?!
 1. If your computer includes multiple versions of Python, this project uses version 3x or greater. You may need to specifically refer to Python as `python3` to reference the correct version.
 1. Consider creating/activating a virtual environment for your repo clone using (e.g. `venv`, `pipenv`, `conda`, etc.) and adjusting the **Installation/Setup** per your own system administration preferences.
 
