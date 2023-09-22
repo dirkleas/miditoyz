@@ -77,7 +77,7 @@ Complete the following once before you can use `miditoyz`:
 
 You can alter/add to the default voice preferences in your home directory (i.e. `c:\users\YOUR_USERNAME` for Windows, `/Users/YOUR_USERNAME` for MacOS, and `/home/YOUR_USERNAME` for Linux) in the hidden directory `.miditoyz` in the [JSON](https://www.json.org/json-en.html)-format file `settings.json`. Inside you'll find a `voicings` section where entries map song midi song voices to preferred song voices using the **MSB**, **LSB**, **PC** values from `datalist.csv`. Defaults voice preferences include mapping standard midi "Grand Piano" to the better sounding "CFX Concert Grand", "Bosendorfer Grand", etc.. You can even map voices that aren't listed in `datalist.csv` to your preferred voices. This preference mapping strategy also works for midi song files that were produced using various DAWs, other music hardware, and music composition/notation software as long as voicing is managed via standard midi control change/program change events **MSB**, **LSB**, **PC**. You can even define multiple voicings under `voicings` and specify your default in the `voicing_default` setting, or choose it while streaming with the `--voicing` streaming option. You'll also find other interesting settings there, including the location of your collection catalog, last music streamed, and a bookmark for the last song number. An excellent free editor for JSON files is [Visual Studio Code](https://code.visualstudio.com) -- it makes it easy by color-coding the file contents and provides hints and reminders to help you maintain the correct JSON syntax/format. Additional voicings can be added as you wish, and these can be used along with queried song lists to voice one more songs any way you'd like. You can even sequence a series of `miditoyz stream` commands with a batch file/script to play elaborate music orchestrations. Conceptually, here's what the voicing portion of `settings.json` looks like:
 
-    ```json
+    ```javascript
     "voicings": {
         "myVoicing": {
             "voice1": [[0,0,1], [108,0,1]],
@@ -90,7 +90,7 @@ You can alter/add to the default voice preferences in your home directory (i.e. 
 
     A real-world example might look like this mapping of arguably boring general midi (GM) voices to higher fidelity, more lifelike Yamaha Clavinova voices for a large music collection has lots of folders of music, including one named "jazz standards", and two more named "rhythm and blues" and "chicago blues". A query like `miditoyz query --sources "jazz standards --songlist-file "stds.csv"` would create a song list for my jazz standards, and another query like `miditoyz query --sources blues --songlist-file "blues.csv"` would do the same, merging music from both folders of blues tunes.
 
-    ```json
+    ```javascript
     "voicings": {
         "jazz standards": {
             "piano": [[0,0,1], [108,0,0]],
