@@ -77,36 +77,36 @@ Complete the following once before you can use `miditoyz`:
 
 You can alter/add to the default voice preferences in your home directory (i.e. `c:\users\YOUR_USERNAME` for Windows, `/Users/YOUR_USERNAME` for MacOS, and `/home/YOUR_USERNAME` for Linux) in the hidden directory `.miditoyz` in the [JSON](https://www.json.org/json-en.html)-format file `settings.json`. Inside you'll find a `voicings` section where entries map song midi song voices to preferred song voices using the **MSB**, **LSB**, **PC** values from `datalist.csv`. Defaults voice preferences include mapping standard midi "Grand Piano" to the better sounding "CFX Concert Grand", "Bosendorfer Grand", etc.. You can even map voices that aren't listed in `datalist.csv` to your preferred voices. This preference mapping strategy also works for midi song files that were produced using various DAWs, other music hardware, and music composition/notation software as long as voicing is managed via standard midi control change/program change events **MSB**, **LSB**, **PC**. You can even define multiple voicings under `voicings` and specify your default in the `voicing_default` setting, or choose it while streaming with the `--voicing` streaming option. You'll also find other interesting settings there, including the location of your collection catalog, last music streamed, and a bookmark for the last song number. An excellent free editor for JSON files is [Visual Studio Code](https://code.visualstudio.com) -- it makes it easy by color-coding the file contents and provides hints and reminders to help you maintain the correct JSON syntax/format. Additional voicings can be added as you wish, and these can be used along with queried song lists to voice one more songs any way you'd like. You can even sequence a series of `miditoyz stream` commands with a batch file/script to play elaborate music orchestrations. Conceptually, here's what the voicing portion of `settings.json` looks like:
 
-    ```javascript
-    "voicings": {
-        "myVoicing": {
-            "voice1": [[0,0,1], [108,0,1]],
-            "voice2": [[1,0,0], [104,2,6]]
-        }
+```json
+"voicings": {
+    "myVoicing": {
+        "voice1": [[0,0,1], [108,0,1]],
+        "voice2": [[1,0,0], [104,2,6]]
     }
-    ```
+}
+```
 
-    The two example voices `voice1` and `voice2` define the "from" and "to" voices using a three element list containing the **MSB**, **LSB**, and **PC** values. As a song is streamed, whenever the MIDI calls for a voice change, that voice is looked up in the default or specified voicing for a matching "from" voice. If a match is found, the voice is replaced with corresponding "to" voice, otherwise, it's played as is. In other words, `miditoyz` automatically maps found voices "from" the original MIDI file "to" your preferred voice(s) whenever possible.
+The two example voices `voice1` and `voice2` define the "from" and "to" voices using a three element list containing the **MSB**, **LSB**, and **PC** values. As a song is streamed, whenever the MIDI calls for a voice change, that voice is looked up in the default or specified voicing for a matching "from" voice. If a match is found, the voice is replaced with corresponding "to" voice, otherwise, it's played as is. In other words, `miditoyz` automatically maps found voices "from" the original MIDI file "to" your preferred voice(s) whenever possible.
 
-    A real-world example might look like this mapping of arguably boring general midi (GM) voices to higher fidelity, more lifelike Yamaha Clavinova voices for a large music collection has lots of folders of music, including one named "jazz standards", and two more named "rhythm and blues" and "chicago blues". A query like `miditoyz query --sources "jazz standards --songlist-file "stds.csv"` would create a song list for my jazz standards, and another query like `miditoyz query --sources blues --songlist-file "blues.csv"` would do the same, merging music from both folders of blues tunes.
+A real-world example might look like this mapping of arguably boring general midi (GM) voices to higher fidelity, more lifelike Yamaha Clavinova voices for a large music collection has lots of folders of music, including one named "jazz standards", and two more named "rhythm and blues" and "chicago blues". A query like `miditoyz query --sources "jazz standards --songlist-file "stds.csv"` would create a song list for my jazz standards, and another query like `miditoyz query --sources blues --songlist-file "blues.csv"` would do the same, merging music from both folders of blues tunes.
 
-    ```javascript
-    "voicings": {
-        "jazz standards": {
-            "piano": [[0,0,1], [108,0,0]],
-            "bass": [[0,0,36], [8,32,20]],
-            "sax": [[0,0,65], [8,65,85]]
-        },
-        "blues": {
-            "guitar": [[0,0,26], [104,9,26]],
-            "harmonica": [[0,0,23], [8,64,105]]
-        },
-    }
-    ```
+```json
+"voicings": {
+    "jazz standards": {
+        "piano": [[0,0,1], [108,0,0]],
+        "bass": [[0,0,36], [8,32,20]],
+        "sax": [[0,0,65], [8,65,85]]
+    },
+    "blues": {
+        "guitar": [[0,0,26], [104,9,26]],
+        "harmonica": [[0,0,23], [8,64,105]]
+    },
+}
+```
 
-    Notice in this example, two different voicings are defined around two different styles of music, with different instruments. Don't worry, if you don't provide a mapping for every instrument voice used in the MIDI file you're streaming, it will default to the MIDI file voice.
+Notice in this example, two different voicings are defined around two different styles of music, with different instruments. Don't worry, if you don't provide a mapping for every instrument voice used in the MIDI file you're streaming, it will default to the MIDI file voice.
 
-    Bringing it all together, you can stream your with your voice preferences via `miditoyz stream --music "stds.csv" --voicing "jazz standards"` to chill with some jazz standards, or `miditoyz stream --music "blues.csv" --voicing blues` to kick back to some blues. See how easy it is to marry voicing preferences and musical selections with complete precision?!
+Bringing it all together, you can stream your with your voice preferences via `miditoyz stream --music "stds.csv" --voicing "jazz standards"` to chill with some jazz standards, or `miditoyz stream --music "blues.csv" --voicing blues` to kick back to some blues. See how easy it is to marry voicing preferences and musical selections with complete precision?!
 
 ### Yamaha Clavinvova Datalists
 
