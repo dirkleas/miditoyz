@@ -99,7 +99,7 @@ Complete the following once before you can use `miditoyz`:
         }
     }
     ```
-    The two example voices `voice1` and `voice2` define the "from" and "to" voices using a three element list containing the **MSB**, **LSB**, and **PC** values. As a song is streamed, whenever the MIDI calls for a voice change, that voice is looked up in the default or specified voicing for a matching "from" voice. If a match is found, the voice is replaced with corresponding "to" voice, otherwise, it's played as is.
+    The two example voices `voice1` and `voice2` define the "from" and "to" voices using a three element list containing the **MSB**, **LSB**, and **PC** values. As a song is streamed, whenever the MIDI calls for a voice change, that voice is looked up in the default or specified voicing for a matching "from" voice. If a match is found, the voice is replaced with corresponding "to" voice, otherwise, it's played as is. In other words, `miditoyz` automatically maps found voices "from" the original MIDI file "to" your preferred voice(s) whenever possible.
 
     A real-world example might look like this mapping general midi (GM) voices to higher fidelity, more lifelike Yamaha Clavinova voices where my music collection has lots of folders of music, including one named "jazz standards", and two more named "rhythm and blues" and "chicago blues". A query like `miditoyz query --sources "jazz standards --songlist-file "stds.csv"` would create a song list for my jazz standards, and another query like `miditoyz query --sources blues --songlist-file "blues.csv"` would do the same spanning both folders of blues tunes.
     ```json
