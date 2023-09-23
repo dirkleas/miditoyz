@@ -46,12 +46,19 @@ if not os.path.exists(pathlib.Path(homedir) / ".miditoyz"):
 
 
 def map_voicing(voicing: str) -> dict:
+    """map voicing name to voice preferences with "from" voice being either a single voice or a list of voices"""
     voicings = settings.get("voicings")
-    return (
-        {}
-        if not voicing in voicings
-        else {tuple(v[0]): tuple(v[1]) for k, v in voicings.get(voicing).items()}
-    )
+    if not voicing in voicings:
+        return {}
+    else:
+        result = {}
+        for k, v in voicings.get(voicing).items():
+            if isinstance(v[0][0], int):
+                result[tuple(v[0])] = tuple(v[1])
+            else:
+                for i, voice in enumerate(v[0]):
+                    result[tuple(voice)] = tuple(v[1])
+        return result
 
 
 try:
