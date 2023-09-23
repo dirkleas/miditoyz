@@ -91,18 +91,20 @@ def normalize_midi(midi_file: str) -> str:
         return midi_file
 
 
-def get_track_channel_voices(midi_file: str, voices: dict) -> None:
-    typer.echo(f"song file: {midi_file}")
+def get_track_channel_voices(midi_file: str, voices: dict, echo=True) -> None:
+    result = [
+        f"song file: {midi_file}",
+    ]
     with mido.MidiFile(midi_file) as mid:
         for i, track in enumerate(mid.tracks):
             channels = defaultdict(dict)
             channels_over_time = defaultdict(dict)
             time_elapsed = 0
-            typer.echo(f"  track: {i}")
+            result.append(f"  track: {i}")
             for msg in track:
                 time_elapsed += msg.time
                 if msg.type == "track_name":
-                    typer.echo(f'    track name: {track.name.strip() or "n/a"}')
+                    result.append(f'    track name: {track.name.strip() or "n/a"}')
                 elif msg.type == "control_change" and msg.control == 0:
                     channels[msg.channel]["msb"] = msg.value
                 elif msg.type == "control_change" and msg.control == 32:
@@ -120,13 +122,18 @@ def get_track_channel_voices(midi_file: str, voices: dict) -> None:
                     channels_over_time.get(channel).get("pc", 1),
                 )
                 if voice in voices.keys():
-                    typer.echo(
-                        f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                    result.append(
+                        f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
                     )
                 else:
-                    typer.echo(
-                        f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}: unrecognized voice, MSB, LSB, PC: {voice[0]}, {voice[1]}, {voice[2]}"
+                    result.append(
+                        f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}: unrecognized voice, MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
                     )
+    result = os.linesep.join(result)
+    if echo:
+        typer.echo(result)
+    else:
+        return result
 
 
 def get_title(midi: mido.MidiFile) -> str:
@@ -149,7 +156,7 @@ def create_db(catalog: str) -> None:
     conn.execute(
         "create table catalog as select * from read_json('"
         + catalog_flat
-        + "', columns={id: 'varchar', title: 'varchar', broken: 'boolean', dump: 'varchar', sources: 'varchar'});"
+        + "', columns={id: 'varchar', title: 'varchar', broken: 'boolean', dump: 'varchar', voices: 'varchar', sources: 'varchar'});"
     )
     conn.execute("create index idx_catalog_id on catalog (id);")
     conn.commit()
@@ -157,7 +164,9 @@ def create_db(catalog: str) -> None:
     os.remove(catalog_flat)
 
 
-def ingest_music(source_directory: str, destination_directory: str) -> int:
+def ingest_music(
+    source_directory: str, destination_directory: str, voices: dict
+) -> int:
     """ingest music from source_directory into destination_directory"""
     typer.echo(
         f"ingesting source_directory: {source_directory} => destination_directory: {destination_directory}..."
@@ -185,32 +194,37 @@ def ingest_music(source_directory: str, destination_directory: str) -> int:
         )
 
     # add metadata to catalog using dump_json --metadata...
-    typer.echo("  gathering songs metadata, this takes a while...")
+    typer.echo("  gathering songs metadata and voicings, this takes a while...")
     songs_broken = set()
     for i, song in enumerate(songs.keys()):
         if i % 1000 == 0 and i > 0:
             typer.echo(f"    {i} of {len(songs)} songs processed...")
         try:
-            midi = mido.MidiFile(pathlib.Path(destination_directory) / f"{song}.mid")
+            dump = voice_dump = None
+            song_path = pathlib.Path(destination_directory) / f"{song}.mid"
+            midi = mido.MidiFile(song_path)
             dump = dump_json(midi, metadata=True).strip()
+            voice_dump = get_track_channel_voices(song_path, voices, echo=False).strip()
             songs[song] = {
                 **{
                     "title": get_title(midi),
                     "broken": False,
                     "dump": dump,
+                    "voices": voice_dump,
                     "timestamp": datetime.datetime.now().isoformat(),
                 },
                 **songs[song],
             }
         except:
             # import traceback
-            # print(traceback.format_exc())
+            # print(f"song: {song}{os.linesep}{traceback.format_exc()}")
             songs_broken.add(song)
             songs[song] = {
                 **{
                     "title": get_title(midi),
                     "broken": True,
-                    "dump": "n/a",
+                    "dump": dump or "n/a",
+                    "voices": voice_dump or "n/a",
                     "timestamp": datetime.datetime.now().isoformat(),
                 },
                 **songs[song],
@@ -425,6 +439,10 @@ def init(
         ...,
         help="Directory for cleaned up MIDI song collection with duplicates removed and catalog generated.",
     ),
+    voices: str = typer.Option(
+        str(pathlib.Path(settings.get("root")) / "datalist.pickle"),
+        help='Official Yamaha Clavinova "datalist" of voices. Check vendor documentation for other device voicing.',
+    ),
 ):
     """Generate a new music collection from a source directory into a destination directory removing duplicates
     songs. Duplicates include same song in multiple directory paths, renamed versions of the same song, etc.
@@ -442,7 +460,9 @@ def init(
         return
 
     start_time = time.time()
-    songs = ingest_music(source_directory, destination_directory)
+    songs = ingest_music(
+        source_directory, destination_directory, pickle.load(open(voices, "rb"))
+    )
     elapsed = (time.time() - start_time) / 60  # minutes
     typer.echo(
         f"  elapsed time was {elapsed:.2f} minutes, {elapsed/songs*1000:.2f} minutes/1000 songs..."
