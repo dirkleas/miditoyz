@@ -316,7 +316,7 @@ def generate_midi_voice_events(ch: int, msb: int, lsb: int, pc: int) -> list:
 
 
 def stream_preferred_voicing(
-    midi_file: str, index: int, song_count: int, voicings: dict, volume: int, device
+    midi_file: str, index: int, song_count: int, voicings: dict, device
 ) -> None:
     """revoice midi file with voice preferences"""
     channels = defaultdict(dict)
@@ -326,17 +326,7 @@ def stream_preferred_voicing(
     typer.echo(f"{title} ({midi_file}), song {index+1} of {song_count}")
     notify(f"{'/'.join(midi_file.split('/')[-2:])}, #{index+1}", title)
     for event in midi.play():
-        if event.type == "control_change" and event.control == 7:
-            device.send(
-                mido.Message(
-                    "control_change",
-                    channel=ch,
-                    control=7,
-                    value=volume / 127 * event.value,
-                    time=event.time,
-                )
-            ),
-        elif event.type == "control_change" and event.control == 0:
+        if event.type == "control_change" and event.control == 0:
             channels[event.channel]["msb"] = event.value
         elif event.type == "control_change" and event.control == 32:
             channels[event.channel]["lsb"] = event.value
@@ -557,10 +547,6 @@ def stream(
         help='MIDI device to stream to (e.g. "Clavinova Port 1" for USB, "Network Clavinova for WIFI, etc.))',
     ),
     voicing: str = typer.Option("", help="Voicing to use for voice preferences."),
-    volume: int = typer.Option(
-        settings.get("volume", 127 * 0.75),
-        help="Maximum volume to use for adjusting relative volumes across all MIDI channels.",
-    ),
     shuffle: bool = typer.Option(False, help="Shuffle song order."),
     intermission: int = typer.Option(
         0, help="Add specified number of seconds intermission between songs."
@@ -640,7 +626,6 @@ def stream(
                     skip,
                     len(songs),
                     map_voicing(voicing) or voicing_default,
-                    volume,
                     device,
                 )
                 time.sleep(intermission)
