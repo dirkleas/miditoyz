@@ -347,8 +347,6 @@ def stream_preferred_voicing(
                 )
             for voice_event in generate_midi_voice_events(*tuple([*[ch], *voicing])):
                 device.send(voice_event)
-        elif event.type == "sequencer_specific":
-            typer.echo(f"  seq: {event}")
         else:
             device.send(event)
 
