@@ -798,6 +798,10 @@ def query(
     def criteria(column, value):
         return f"lower({column}) like '%{value.lower()}%'"
 
+    db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
+    if not os.path.exists(db):
+        oops(f"catalog {db} doesn't exist")
+        return
     if title:
         search = " and ".join([criteria("title", x) for x in title.split()])
     elif metadata:
@@ -822,7 +826,6 @@ def query(
         return
     if debug:
         typer.echo(f"query: select id, title from catalog where {search};")
-    db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
     if songlist_file:
         query = f"copy (select title,id from catalog where {search}) to '{songlist_file}' (header);"
         duckdb.connect(db).execute(query)
