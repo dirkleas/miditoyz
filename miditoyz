@@ -91,44 +91,41 @@ def normalize_midi(midi_file: str) -> str:
         return midi_file
 
 
-def get_track_channel_voices(midi_file: str, voices: dict, echo=True) -> None:
+def get_track_channel_voices(midi_file: str, midi, voices: dict, echo=True) -> None:
     result = [
         f"song file: {midi_file}",
     ]
-    with mido.MidiFile(midi_file) as mid:
-        for i, track in enumerate(mid.tracks):
-            channels = defaultdict(dict)
-            channels_over_time = defaultdict(dict)
-            time_elapsed = 0
-            result.append(f"  track: {i}")
-            for msg in track:
-                time_elapsed += msg.time
-                if msg.type == "track_name":
-                    result.append(f'    track name: {track.name.strip() or "n/a"}')
-                elif msg.type == "control_change" and msg.control == 0:
-                    channels[msg.channel]["msb"] = msg.value
-                elif msg.type == "control_change" and msg.control == 32:
-                    channels[msg.channel]["lsb"] = msg.value
-                elif msg.type == "program_change":
-                    channels[msg.channel]["pc"] = msg.program + 1
-                    channels_over_time[msg.channel, time_elapsed] = channels[
-                        msg.channel
-                    ]
-                    del channels[msg.channel]
-            for channel in sorted(channels_over_time):
-                voice = (
-                    channels_over_time.get(channel).get("msb", 0),
-                    channels_over_time.get(channel).get("lsb", 0),
-                    channels_over_time.get(channel).get("pc", 1),
+    for i, track in enumerate(midi.tracks):
+        channels = defaultdict(dict)
+        channels_over_time = defaultdict(dict)
+        time_elapsed = 0
+        result.append(f"  track: {i}")
+        for msg in track:
+            time_elapsed += msg.time
+            if msg.type == "track_name":
+                result.append(f'    track name: {track.name.strip() or "n/a"}')
+            elif msg.type == "control_change" and msg.control == 0:
+                channels[msg.channel]["msb"] = msg.value
+            elif msg.type == "control_change" and msg.control == 32:
+                channels[msg.channel]["lsb"] = msg.value
+            elif msg.type == "program_change":
+                channels[msg.channel]["pc"] = msg.program + 1
+                channels_over_time[msg.channel, time_elapsed] = channels[msg.channel]
+                del channels[msg.channel]
+        for channel in sorted(channels_over_time):
+            voice = (
+                channels_over_time.get(channel).get("msb", 0),
+                channels_over_time.get(channel).get("lsb", 0),
+                channels_over_time.get(channel).get("pc", 1),
+            )
+            if voice in voices.keys():
+                result.append(
+                    f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
                 )
-                if voice in voices.keys():
-                    result.append(
-                        f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
-                    )
-                else:
-                    result.append(
-                        f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}: unrecognized voice, MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
-                    )
+            else:
+                result.append(
+                    f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}: unrecognized voice, MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
+                )
     result = os.linesep.join(result)
     if echo:
         typer.echo(result)
@@ -201,10 +198,12 @@ def ingest_music(
             typer.echo(f"    {i} of {len(songs)} songs processed...")
         try:
             dump = voice_dump = None
-            song_path = pathlib.Path(destination_directory) / f"{song}.mid"
-            midi = mido.MidiFile(song_path)
+            midi_filename = pathlib.Path(destination_directory) / f"{song}.mid"
+            midi = mido.MidiFile(midi_filename)
             dump = dump_json(midi, metadata=True).strip()
-            voice_dump = get_track_channel_voices(song_path, voices, echo=False).strip()
+            voice_dump = get_track_channel_voices(
+                midi_filename, midi, voices, echo=False
+            ).strip()
             songs[song] = {
                 **{
                     "title": get_title(midi),
@@ -321,34 +320,41 @@ def stream_preferred_voicing(
     """revoice midi file with voice preferences"""
     channels = defaultdict(dict)
     serialize_settings({"bookmark": index + 1})
-    midi = mido.MidiFile(midi_file)
-    title = get_title(midi)
-    typer.echo(f"{title} ({midi_file}), song {index+1} of {song_count}")
-    notify(f"{'/'.join(midi_file.split('/')[-2:])}, #{index+1}", title)
-    for event in midi.play():
-        if event.type == "control_change" and event.control == 0:
-            channels[event.channel]["msb"] = event.value
-        elif event.type == "control_change" and event.control == 32:
-            channels[event.channel]["lsb"] = event.value
-        elif event.type == "program_change":
-            ch = event.channel
-            channels[ch]["pc"] = event.program + 1
-            voice = (
-                channels.get(ch).get("msb", 0),
-                channels.get(ch).get("lsb", 0),
-                channels.get(ch).get("pc", 1),
-            )
-            voicing = voicings.get(voice, voice)
-            if voice == voicing:
-                typer.echo(f"  voicing channel {ch} with voice {voice}")
-            else:
-                typer.echo(
-                    f"  revoicing channel {ch} from voice {voice} to preferred voice {voicing}"
+    try:
+        midi = mido.MidiFile(midi_file)
+        title = get_title(midi)
+        typer.echo(f"{title} ({midi_file}), song {index+1} of {song_count}")
+        notify(f"{'/'.join(midi_file.split('/')[-2:])}, #{index+1}", title)
+        for event in midi.play():
+            if event.type == "control_change" and event.control == 0:
+                channels[event.channel]["msb"] = event.value
+            elif event.type == "control_change" and event.control == 32:
+                channels[event.channel]["lsb"] = event.value
+            elif event.type == "program_change":
+                ch = event.channel
+                channels[ch]["pc"] = event.program + 1
+                voice = (
+                    channels.get(ch).get("msb", 0),
+                    channels.get(ch).get("lsb", 0),
+                    channels.get(ch).get("pc", 1),
                 )
-            for voice_event in generate_midi_voice_events(*tuple([*[ch], *voicing])):
-                device.send(voice_event)
-        else:
-            device.send(event)
+                voicing = voicings.get(voice, voice)
+                if voice == voicing:
+                    typer.echo(f"  voicing channel {ch} with voice {voice}")
+                else:
+                    typer.echo(
+                        f"  revoicing channel {ch} from voice {voice} to preferred voice {voicing}"
+                    )
+                for voice_event in generate_midi_voice_events(
+                    *tuple([*[ch], *voicing])
+                ):
+                    device.send(voice_event)
+            else:
+                device.send(event)
+    except KeyboardInterrupt:
+        exit(0)
+    except:
+        oops(f"{midi_file} is a broken song file")
 
 
 def merge_json_metadata(data, types_to_merge=["text", "copyright", "lyrics"]):
@@ -377,24 +383,10 @@ def merge_json_metadata(data, types_to_merge=["text", "copyright", "lyrics"]):
     return output_data
 
 
-def dump_json(midi_file, metadata: bool = True, raw_json: bool = False) -> str:
-    """dump midi file in raw json format passing either mido.MidiFile object or midi file path"""
-    if isinstance(midi_file, str):
-        midi_file = normalize_midi(midi_file)
-        if not os.path.exists(midi_file) or not is_midi(midi_file):
-            oops(
-                f"midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
-            )
-            return
-        try:
-            mid = mido.MidiFile(midi_file)
-        except:
-            oops(f"{midi_file} is a broken song file")
-            return
-    else:
-        mid = midi_file
+def dump_json(midi, metadata: bool = True, raw_json: bool = False) -> str:
+    """dump midi object in raw json format"""
     tracks = []
-    for i, track in enumerate(mid.tracks):
+    for i, track in enumerate(midi.tracks):
         events = []
         for event in track:
             if metadata and (
@@ -410,21 +402,20 @@ def dump_json(midi_file, metadata: bool = True, raw_json: bool = False) -> str:
         tracks.append({"track": i, "events": events})
     song = (
         {
-            "ticks_per_beat": mid.ticks_per_beat,
+            "ticks_per_beat": midi.ticks_per_beat,
             "tracks": tracks,
         },
     )
-
-    if not raw_json:
+    if raw_json:
+        return json.dumps(
+            song,
+            indent=2,
+        )
+    else:
         return (
             jinja2.Environment()
             .from_string(open(pathlib.Path(settings.get("root")) / "midi.j2").read())
             .render(song[0])
-        )
-    else:
-        return json.dumps(
-            song,
-            indent=2,
         )
 
 
@@ -643,10 +634,6 @@ def voices(
         str(pathlib.Path(settings.get("root")) / "datalist.pickle"),
         help='Official Yamaha Clavinova "datalist" of voices. Check vendor documentation for other device voicing.',
     ),
-    detail: bool = typer.Option(
-        False,
-        help="Include voice MSB, LSB, PC voice values for searching datalist csv or pdf for voice names.",
-    ),
 ):
     """Generate a list of voices for each track in a midi song file."""
     midi_file = normalize_midi(midi_file)
@@ -655,7 +642,11 @@ def voices(
             f"midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
         )
         return
-    get_track_channel_voices(midi_file, pickle.load(open(voices, "rb")))
+    try:
+        midi = mido.MidiFile(midi_file)
+        get_track_channel_voices(midi_file, midi, pickle.load(open(voices, "rb")))
+    except:
+        oops(f"{midi_file} is a broken song file")
 
 
 @app.command()
@@ -671,9 +662,13 @@ def dump(
             f"midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
         )
         return
-    if not json:  # add file header for cli only...
-        typer.echo(f"MIDI File: {midi_file}")
-    typer.echo(dump_json(midi_file, metadata, json))
+    try:
+        midi = mido.MidiFile(midi_file)
+        if not json:
+            typer.echo(f"MIDI File: {midi_file}")
+        typer.echo(dump_json(midi, metadata, json))
+    except:
+        oops(f"{midi_file} is a broken song file")
 
 
 @app.command()
@@ -690,7 +685,10 @@ def raw(
             f"midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
         )
         return
-    mido.MidiFile(midi_file, debug=debug).print_tracks()
+    try:
+        mido.MidiFile(midi_file, debug=debug).print_tracks()
+    except:
+        oops(f"{midi_file} is a broken song file")
 
 
 @app.command()
