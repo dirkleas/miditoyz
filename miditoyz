@@ -289,8 +289,8 @@ def notify(title: str, subtitle: str) -> None:
 
             notification = notifypy.Notify()
             notification.application_name = "miditoyz - streaming..."
-            notification.title = subtitle.encode("unicode-escape")
-            notification.message = title.encode("unicode-escape")
+            notification.title = subtitle.replace("\\", "\\\\")
+            notification.message = title.replace("\\", "\\\\")
             notification.send(block=False)
     except:
         pass
