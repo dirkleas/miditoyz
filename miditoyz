@@ -285,12 +285,12 @@ def notify(title: str, subtitle: str) -> None:
 
             sh.osascript(e=f'display notification "{title}" with title "{subtitle}"')
         elif platform.system() == "Windows":
-            import notifypy
+            import notifypy, xml.sax.saxutils as saxutils
 
             notification = notifypy.Notify()
             notification.application_name = "miditoyz - streaming..."
-            notification.title = subtitle
-            notification.message = title
+            notification.title = saxutils.escape(subtitle)
+            notification.message = saxutils.escape(title)
             notification.send(block=False)
     except:
         pass
@@ -577,13 +577,7 @@ def stream(
             music,
         ]
     elif os.path.isdir(music):  # stream folder's midi files...
-        songs = sorted(
-            [
-                f"{music}{os.sep}{x}"
-                for x in os.listdir(music)
-                if x.lower().endswith(".mid")
-            ]
-        )
+        songs = sorted([f"{music}{os.sep}{x}" for x in os.listdir(music) if is_midi(x)])
     elif music.lower().endswith(".csv") and os.path.exists(
         music
     ):  # stream or catalog list...
