@@ -288,7 +288,7 @@ def notify(title: str, subtitle: str) -> None:
             import notifypy, xml.sax.saxutils as saxutils
 
             notification = notifypy.Notify()
-            notification.application_name = "miditoyz - streaming..."
+            notification.application_name = saxutils.escape("miditoyz - streaming...")
             notification.title = saxutils.escape(subtitle)
             notification.message = saxutils.escape(title)
             notification.send(block=False)
