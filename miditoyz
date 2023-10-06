@@ -285,12 +285,12 @@ def notify(title: str, subtitle: str) -> None:
 
             sh.osascript(e=f'display notification "{title}" with title "{subtitle}"')
         elif platform.system() == "Windows":
-            import notifypy, xml.sax.saxutils as saxutils
+            import notifypy
 
             notification = notifypy.Notify()
-            notification.application_name = saxutils.escape("miditoyz - streaming...")
-            notification.title = saxutils.escape(subtitle)
-            notification.message = saxutils.escape(title)
+            notification.application_name = "miditoyz - streaming..."
+            notification.title = subtitle.encode("unicode-escape")
+            notification.message = title.encode("unicode-escape")
             notification.send(block=False)
     except:
         pass
