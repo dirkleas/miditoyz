@@ -28,7 +28,7 @@
 #       clav.toys/more clav files/2.NEW FollowLights/02.Prelude.s944.mid
 #
 
-import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, mido, typer, textwrap, duckdb, jinja2
+import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, string, mido, typer, textwrap, duckdb, jinja2
 from collections import defaultdict
 
 homedir = pathlib.Path.home()
@@ -133,10 +133,15 @@ def get_track_channel_voices(midi_file: str, midi, voices: dict, echo=True) -> N
         return result
 
 
+def printable(s: str) -> str:
+    """return printable string"""
+    return "".join(filter(lambda x: x in string.printable, s))
+
+
 def get_title(midi: mido.MidiFile) -> str:
     """return song title from midi file object"""
     titles = [e.name for e in midi.tracks[0] if e.type == "track_name"]
-    return titles[0] if titles and len(titles) > 0 else "untitled"
+    return printable(titles[0]).strip() if titles and len(titles) > 0 else "untitled"
 
 
 def create_db(catalog: str) -> None:
@@ -289,9 +294,7 @@ def notify(title: str, subtitle: str) -> None:
 
             notification = notifypy.Notify()
             notification.application_name = "miditoyz - streaming..."
-            notification.title = "".join(  # found \x00 in metadata titles!
-                filter(lambda x: x in string.printable, subtitle)
-            )
+            notification.title = subtitle
             notification.message = title
             notification.send(block=False)
     except:
