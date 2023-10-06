@@ -289,10 +289,10 @@ def notify(title: str, subtitle: str) -> None:
 
             notification = notifypy.Notify()
             notification.application_name = "miditoyz - streaming..."
-            notification.title = subtitle
-            notification.message = "".join(
-                filter(lambda x: x in string.printable, title)
+            notification.title = "".join(  # found \x00 in metadata titles!
+                filter(lambda x: x in string.printable, subtitle)
             )
+            notification.message = title
             notification.send(block=False)
     except:
         pass
