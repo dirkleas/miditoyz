@@ -89,7 +89,7 @@ You can alter/add to the default voice preferences in your home directory (i.e. 
 
 The two example voices `voice1`, `voice2`, and `voice3` define the "from" and "to" voices using a three element list containing the **MSB**, **LSB**, and **PC** values. Multiple "from" voices can be included by specifying a series of voices surrounded by an additional set of square brackets. As a song is streamed, whenever the MIDI calls for a voice change, that voice is looked up in the default or specified voicing for a matching "from" voice. If a match is found, the voice is replaced with corresponding "to" voice, otherwise, it's played as-is. In other words, `miditoyz` automatically maps found voices "from" the original MIDI file "to" your preferred voice(s) whenever possible.
 
-A real-world example might look like this mapping of arguably boring general midi (GM) voices to higher fidelity, more lifelike Yamaha Clavinova voices for a large music collection has lots of folders of music, including one named "jazz standards", and two more named "rhythm and blues" and "chicago blues". A query like `miditoyz query --sources "jazz standards --songlist-file "stds.csv"` would create a song list for my jazz standards, and another query like `miditoyz query --sources blues --songlist-file "blues.csv"` would do the same, merging music from both folders of blues tunes.
+A real-world example might look like this mapping of arguably boring general midi (GM) voices to higher fidelity, more lifelike Yamaha Clavinova voices for a large music collection has lots of folders of music, including one named "jazz standards", and two more named "rhythm and blues" and "chicago blues". A query like `miditoyz query --sources "jazz standards --save "stds.csv"` would create a song list for my jazz standards, and another query like `miditoyz query --sources blues --save "blues.csv"` would do the same, merging music from both folders of blues tunes.
 
 ```json
 "voicings": {
@@ -124,7 +124,7 @@ Consider creating/activating a virtual environment for your repo clone using (e.
 
 ## Roadmap
 
-1. Installation tool to automate **installation/setup** section, housekeeping, [automated] testing, continued care-and-feeding, etc.
+1. Add support for user-supplied metadata to supplement potential FOO embedded in the MIDI song files (i.e. favorite, tags, genre, comments, references, etc.). Implement as with new `miditoyz metadata --query` command (i.e. `miditoyz query --title "Autumn Leaves" --genre "standard, piano_bar" --favorite --comment "I heard this at 1992 New Years Eve party at the Pump Room, NYC`). 
 1. Add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
 1. Add support for multiple instruments played concurrently (e.g. support independent instrument settings for settings like bookmark, device, and music) allowing multiple concurrent instances of `miditoyz`.
 1. Add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.), partially available from catalog `miditoyz dump` data.
@@ -137,7 +137,7 @@ Consider creating/activating a virtual environment for your repo clone using (e.
     ```
     * [nocodb](https://nocodb.com) - web-based spreadsheet-style option with expected search and filter options. This could be run locally or cloud with a bit of extra tooling to feed `midistream`.
     * AI/large language model (llm) interface for natural language search with support for providing song background, recommendations, etc. via text or voice (think "hey siri | alexa | siri, play some jazz standards or movie soundtracks or that song Brenda and Eddie by Billy Joel).
-
+1. Installation tool to automate **installation/setup** section, housekeeping, [automated] testing, continued care-and-feeding, etc.
 
 
 questions? suggestions? wanna help? reach out [here](https://github.com/dirkleas/miditoyz/issues) -- it's not just for issues and bugs!

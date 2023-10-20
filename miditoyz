@@ -160,7 +160,11 @@ def create_db(catalog: str) -> None:
         + catalog_flat
         + "', columns={id: 'varchar', title: 'varchar', broken: 'boolean', dump: 'varchar', voices: 'varchar', sources: 'varchar'});"
     )
-    conn.execute("create index idx_catalog_id on catalog (id);")
+    conn.execute(
+        """
+        alter table catalog add column favorite boolean default false;
+        create index idx_catalog_id on catalog (id);"""
+    )
     conn.commit()
     conn.close()
     os.remove(catalog_flat)
@@ -784,7 +788,7 @@ def query(
         None,
         help="Query using SQL without needing to specify fields or FROM clauses, starting with WHERE clause to query catalog (omit WHERE prefix).",
     ),
-    songlist_file: str = typer.Option(
+    save: str = typer.Option(
         None,
         help="Save your song list query result to a .csv file for later streaming.",
     ),
@@ -792,7 +796,7 @@ def query(
         False, help="Show SQL generated based on selected query option."
     ),
 ):
-    """Query a song list from your catalog for later streaming with several options to choose from depending on whether you prefer a simple or advanced option. Once you see the desired song list, you can save it to a .csv file for later streaming with the --songlist-file option."""
+    """Query a song list from your catalog for later streaming with several options to choose from depending on whether you prefer a simple or advanced option. Once you see the desired song list, you can save it to a .csv file for later streaming with the --save option."""
 
     def criteria(column, value):
         return f"lower({column}) like '%{value.lower()}%'"
@@ -825,15 +829,101 @@ def query(
         return
     if debug:
         typer.echo(f"query: select id, title from catalog where {search};")
-    if songlist_file:
-        query = f"copy (select title,id from catalog where {search}) to '{songlist_file}' (header);"
+    if save:
+        query = (
+            f"copy (select title,id from catalog where {search}) to '{save}' (header);"
+        )
         duckdb.connect(db).execute(query)
-        if os.path.getsize(songlist_file) <= 10:
-            os.remove(songlist_file)
-            oops(f"no songs match your query, {songlist_file} wasn't created")
+        if os.path.getsize(save) <= 10:
+            os.remove(save)
+            oops(f"no songs match your query, {save} wasn't created")
     else:
         query = f"select title,id from catalog where {search};"
         typer.echo(format_query_result(duckdb.connect(db).execute(query).fetchall()))
+
+
+@app.command()
+def metadata(
+    music: str = typer.Argument(
+        ...,
+        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id".',
+    ),
+    # delete: str = typer.Option(
+    #     None,
+    #     help="Delete specified option values.",
+    # ),
+    favorite: bool = typer.Option(False, help="Add to favorites."),
+    # tags: str = typer.Option(None, help="Query catalog song metadata only."),
+    # genres: str = typer.Option(None, help="Query catalog song sources only."),
+    # notes: str = typer.Option(
+    #     None,
+    #     help="Add short notes via command line or specify a plain text file for long form notes.",
+    # ),
+    backup: bool = typer.Option(
+        False,
+        help="Export metadata to a .csv file if you need to rerun init and later restore matching metadata.",
+    ),
+    restore: bool = typer.Option(
+        False,
+        help="Restore metadata from a .csv file if you need to rerun init and later restore matching metadata.",
+    ),
+):
+    """Add metadata to music."""
+
+    keys = []
+    if os.path.isfile(music) and is_midi(music):
+        keys.append(os.path.splitext(os.path.basename(music))[0])
+    elif os.path.isdir(music):
+        for file_name in os.listdir(music):
+            if is_midi(file_name):
+                keys.append(os.path.splitext(os.path.basename(file_name))[0])
+    elif music.lower().endswith(".csv") and os.path.exists(music):
+        keys = list(
+            map(
+                lambda x: x.get("id"),
+                csv.DictReader(open(music)),
+            )
+        )
+    elif music.endswith(".csv") and (backup or restore):
+        pass
+    else:
+        oops(
+            "music must be a song list, valid midi file ending .mid, or directory full of midi files"
+        )
+        return
+    set_clause = []
+    db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
+    if not os.path.exists(db):
+        oops(f"catalog {db} doesn't exist")
+        return
+    if backup or restore:
+        if music.endswith(".csv"):
+            if backup:
+                duckdb.connect(db).execute(
+                    f"COPY (SELECT id, favorite FROM catalog) TO '{music}' (DELIMITER ',', HEADER);"
+                )
+            elif restore:
+                duckdb.connect(db).execute(
+                    f"""
+                    CREATE TEMPORARY TABLE temp_restore (id VARCHAR, favorite BOOLEAN);
+                    COPY temp_restore FROM '{music}' (DELIMITER ',', HEADER);
+                    UPDATE catalog
+                        SET favorite = (SELECT favorite FROM temp_restore WHERE temp_restore.id = catalog.id)
+                        WHERE EXISTS (SELECT 1 FROM temp_restore WHERE temp_restore.id = catalog.id);
+                    DROP TABLE temp_restore;"""
+                )
+            return
+        else:
+            oops(f"backup and restore options only works with a .csv file")
+            return
+    elif restore:
+        pass
+    if favorite:
+        set_clause.append("favorite = TRUE")
+    if len(set_clause) > 0:
+        duckdb.connect(db).execute(
+            f"update catalog set {','.join(set_clause)} where id in {str(tuple(keys))}"
+        )
 
 
 @app.command()

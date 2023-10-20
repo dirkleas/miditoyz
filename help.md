@@ -17,21 +17,22 @@ Options:
   --help                          Show this message and exit.
 
 Commands:
-  catalog  Change to a new catalog file for streaming.
-  db       Analyze music catalog database with duckdb (enter ".quit" to...
-  devices  List currently connected midi output devices attached via USB,...
-  dump     Dump a MIDI song file in raw text format.
-  fields   Show the field names and types from your catalog that you can...
-  info     Show current miditoyz settings.
-  init     Generate a new music collection from a source directory into a...
-  merge    Merge source catalog into destination catalog, overwriting...
-  panic    Send MIDI panic to turn off any hung notes.
-  query    Query a song list from your catalog for later streaming with...
-  raw      Dump a MIDI song file in alternative raw text format with...
-  stream   Stream music from a catalog song list, a midi file, or...
-  verify   Verify MIDI song file can be processed with mido package or...
-  voices   Generate a list of voices for each track in a midi song file.
-  voicing  Change to a new instrument name for voicing streams.
+  catalog   Change to a new catalog file for streaming.
+  db        Analyze music catalog database with duckdb (enter ".quit" to...
+  devices   List currently connected midi output devices attached via...
+  dump      Dump a MIDI song file in raw text format.
+  fields    Show the field names and types from your catalog that you can...
+  info      Show current miditoyz settings.
+  init      Generate a new music collection from a source directory into...
+  merge     Merge source catalog into destination catalog, overwriting...
+  metadata  Add metadata to music.
+  panic     Send MIDI panic to turn off any hung notes.
+  query     Query a song list from your catalog for later streaming with...
+  raw       Dump a MIDI song file in alternative raw text format with...
+  stream    Stream music from a catalog song list, a midi file, or...
+  verify    Verify MIDI song file can be processed with mido package or...
+  voices    Generate a list of voices for each track in a midi song file.
+  voicing   Change to a new instrument name for voicing streams.
 
 $ miditoyz init --help
 Usage: miditoyz init [OPTIONS] SOURCE_DIRECTORY DESTINATION_DIRECTORY
@@ -47,7 +48,10 @@ Arguments:
                          duplicates removed and catalog generated.  [required]
 
 Options:
-  --help  Show this message and exit.
+  --voices TEXT  Official Yamaha Clavinova "datalist" of voices. Check vendor
+                 documentation for other device voicing.  [default:
+                 /Users/dirkleas/h4x/miditoyz/datalist.pickle]
+  --help         Show this message and exit.
 
 $ miditoyz merge --help
 Usage: miditoyz merge [OPTIONS] SOURCE DESTINATION
@@ -96,9 +100,9 @@ Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id".  [default:
-                            /tmp/foo.csv]
+                            /tmp/tunes]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 9]
+                            pick different music.  [default: 214]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
@@ -118,14 +122,10 @@ Arguments:
   MIDI_FILE  MIDI song file to generate voice list for.  [required]
 
 Options:
-  --voices TEXT           Official Yamaha Clavinova "datalist" of voices.
-                          Check vendor documentation for other device voicing.
-                          [default:
-                          /Users/dirkleas/h4x/miditoyz/datalist.pickle]
-  --detail / --no-detail  Include voice MSB, LSB, PC voice values for
-                          searching datalist csv or pdf for voice names.
-                          [default: no-detail]
-  --help                  Show this message and exit.
+  --voices TEXT  Official Yamaha Clavinova "datalist" of voices. Check vendor
+                 documentation for other device voicing.  [default:
+                 /Users/dirkleas/h4x/miditoyz/datalist.pickle]
+  --help         Show this message and exit.
 
 $ miditoyz dump --help
 Usage: miditoyz dump [OPTIONS] MIDI_FILE
@@ -204,7 +204,7 @@ Usage: miditoyz query [OPTIONS]
   Query a song list from your catalog for later streaming with several options
   to choose from depending on whether you prefer a simple or advanced option.
   Once you see the desired song list, you can save it to a .csv file for later
-  streaming with the --songlist-file option.
+  streaming with the --save option.
 
 Options:
   --search TEXT         Query catalog for songs that match all the search
@@ -218,11 +218,31 @@ Options:
   --sql TEXT            Query using SQL without needing to specify fields or
                         FROM clauses, starting with WHERE clause to query
                         catalog (omit WHERE prefix).
-  --songlist-file TEXT  Save your song list query result to a .csv file for
+  --save TEXT           Save your song list query result to a .csv file for
                         later streaming.
   --debug / --no-debug  Show SQL generated based on selected query option.
                         [default: no-debug]
   --help                Show this message and exit.
+
+$ miditoyz metadata --help
+Usage: miditoyz metadata [OPTIONS] MUSIC
+
+  Add metadata to music.
+
+Arguments:
+  MUSIC  MIDI song file, directory full of music, or song list to stream. A
+         song list is a CSV file with a mandatory header "title,id".
+         [required]
+
+Options:
+  --favorite / --no-favorite  Add to favorites.  [default: no-favorite]
+  --backup / --no-backup      Export metadata to a .csv file if you need to
+                              rerun init and later restore matching metadata.
+                              [default: no-backup]
+  --restore / --no-restore    Restore metadata from a .csv file if you need to
+                              rerun init and later restore matching metadata.
+                              [default: no-restore]
+  --help                      Show this message and exit.
 
 $ miditoyz fields --help
 Usage: miditoyz fields [OPTIONS]
