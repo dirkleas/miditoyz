@@ -102,7 +102,7 @@ Options:
                             mandatory header "title,id".  [default:
                             /tmp/tunes]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 214]
+                            pick different music.  [default: 1]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: Clavinova Port 1]
@@ -235,7 +235,10 @@ Arguments:
          [required]
 
 Options:
+  --delete / --no-delete      Delete specified option values.
   --favorite / --no-favorite  Add to favorites.  [default: no-favorite]
+  --tag TEXT                  A list of tags, provided separately.
+  --genre TEXT                A list of genres, provided separately.
   --backup / --no-backup      Export metadata to a .csv file if you need to
                               rerun init and later restore matching metadata.
                               [default: no-backup]

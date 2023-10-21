@@ -17,7 +17,7 @@ To understand what's available, you can use the built-in help by entering `midit
 1. `miditoyz devices` - display a list of currently available midi devices to be used by other tools to allow you to connect to your Clavinova.
 1. `miditoyz stream` - stream a song list from your song catalog, a directory full of music/midi song files or a single midi song to your midi device (e.g. Yamaha CVP Clavinova, etc) using your voice personal preferences (see **Notes** section below for more voice preferences) from your song collection. For your convenience, it'll remember where it left off when you stream a set list or ask it to play a folder full of songs.
 1. `miditoyz query` - query your song catalog to create a song list you can use to stream your favorite songs. The query command includes several options allowing simple text search, more searches based on song titles, metadata, or original song sources -- you can even go hard-core with a [SQL "where" clause](https://www.google.com/search?q=sql+where+clause+introduction+tutorial) syntax. Once you've got your song list, you can save it for streaming any time you'd like.
-1. `miditoyz metadata` - add metadata for music, initially included: favorite.
+1. `miditoyz metadata` - add metadata for music, initially included: favorite, tag, and genre.
 
 *Research/Technical Commands:*
 1. `miditoyz voices` - display a list of the tracks and voices for a specified song from your song collection.

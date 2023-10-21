@@ -30,6 +30,7 @@
 
 import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, string, mido, typer, textwrap, duckdb, jinja2
 from collections import defaultdict
+from typing import List
 
 homedir = pathlib.Path.home()
 
@@ -163,7 +164,10 @@ def create_db(catalog: str) -> None:
     conn.execute(
         """
         alter table catalog add column favorite boolean default false;
-        create index idx_catalog_id on catalog (id);"""
+        create index idx_catalog_id on catalog (id);
+        create table tag (id varchar, value varchar);
+        create table genre (id varchar, value varchar);
+        """
     )
     conn.commit()
     conn.close()
@@ -853,11 +857,11 @@ def metadata(
         help="Delete specified option values.",
     ),
     favorite: bool = typer.Option(False, help="Add to favorites."),
-    # tags: str = typer.Option(None, help="Query catalog song metadata only."),
-    # genres: str = typer.Option(None, help="Query catalog song sources only."),
-    # notes: str = typer.Option(
+    tag: List[str] = typer.Option([], help="A list of tags, provided separately."),
+    genre: List[str] = typer.Option([], help="A list of genres, provided separately."),
+    # note: str = typer.Option(
     #     None,
-    #     help="Add short notes via command line or specify a plain text file for long form notes.",
+    #     help="Add short notes via command line or specify a plain text file to load long form notes.",
     # ),
     backup: bool = typer.Option(
         False,
@@ -896,14 +900,15 @@ def metadata(
     if not os.path.exists(db):
         oops(f"catalog {db} doesn't exist")
         return
+    conn = duckdb.connect(db)
     if backup or restore:
         if music.endswith(".csv"):
             if backup:
-                duckdb.connect(db).execute(
+                conn.execute(
                     f"COPY (SELECT id, favorite FROM catalog) TO '{music}' (DELIMITER ',', HEADER);"
                 )
             elif restore:
-                duckdb.connect(db).execute(
+                conn.execute(
                     f"""
                     CREATE TEMPORARY TABLE temp_restore (id VARCHAR, favorite BOOLEAN);
                     COPY temp_restore FROM '{music}' (DELIMITER ',', HEADER);
@@ -918,8 +923,26 @@ def metadata(
             return
     if favorite:
         set_clause.append(f"favorite = {'FALSE' if delete else 'TRUE'}")
+    if tag:
+        for key in keys:
+            for t in tag:
+                if delete:
+                    conn.execute(
+                        f"delete from tag where id = '{key}' and value = '{t}'"
+                    )
+                else:
+                    conn.execute(f"insert into tag values ('{key}', '{t}')")
+    if genre:
+        for key in keys:
+            for t in tag:
+                if delete:
+                    conn.execute(
+                        f"delete from genre where id = '{key}' and value = '{t}'"
+                    )
+                else:
+                    conn.execute(f"insert into genre values ('{key}', '{t}')")
     if len(set_clause) > 0:
-        duckdb.connect(db).execute(
+        conn.execute(
             f"update catalog set {','.join(set_clause)} where id in {str(tuple(keys))}"
         )
 
