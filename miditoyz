@@ -848,10 +848,10 @@ def metadata(
         ...,
         help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id".',
     ),
-    # delete: str = typer.Option(
-    #     None,
-    #     help="Delete specified option values.",
-    # ),
+    delete: bool = typer.Option(
+        None,
+        help="Delete specified option values.",
+    ),
     favorite: bool = typer.Option(False, help="Add to favorites."),
     # tags: str = typer.Option(None, help="Query catalog song metadata only."),
     # genres: str = typer.Option(None, help="Query catalog song sources only."),
@@ -916,10 +916,8 @@ def metadata(
         else:
             oops(f"backup and restore options only works with a .csv file")
             return
-    elif restore:
-        pass
     if favorite:
-        set_clause.append("favorite = TRUE")
+        set_clause.append(f"favorite = {'FALSE' if delete else 'TRUE'}")
     if len(set_clause) > 0:
         duckdb.connect(db).execute(
             f"update catalog set {','.join(set_clause)} where id in {str(tuple(keys))}"
