@@ -30,7 +30,7 @@
 
 import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, string, mido, typer, textwrap, duckdb, jinja2
 from collections import defaultdict
-from typing import List
+from typing import List, Optional
 
 homedir = pathlib.Path.home()
 
@@ -432,6 +432,67 @@ def dump_json(midi, metadata: bool = True, raw_json: bool = False) -> str:
         )
 
 
+def create_query(
+    title: Optional[str] = None,
+    metadata: Optional[str] = None,
+    favorite: bool = False,
+    tags: List[str] = [],
+    genres: List[str] = [],
+    sources: Optional[str] = None,
+    voices: Optional[str] = None,
+    connective: Optional[str] = "OR",
+):
+    select_stmt = "SELECT id, title FROM catalog"
+    where_conditions = []
+
+    def prepare_conditions(field, values):
+        if values:
+            search_terms = [f"%{value.lower().strip()}%" for value in values.split()]
+            return " OR ".join(
+                [f"LOWER({field}) LIKE '{term}'" for term in search_terms]
+            )
+        return None
+
+    def compose_related_values(table, column, values, connective):
+        tags_conditions = f" {connective} ".join(
+            [
+                f"id IN (SELECT id FROM {table} WHERE LOWER({column}) = '{value.lower()}')"
+                for value in {table}
+            ]
+        )
+        where_conditions.append(f"({tags_conditions})")
+
+    if title:
+        condition = prepare_conditions("title", title)
+        if condition:
+            where_conditions.append(f"({condition})")
+    if metadata:
+        condition = prepare_conditions("dump", metadata)
+        if condition:
+            where_conditions.append(f"({condition})")
+    if sources:
+        condition = prepare_conditions("sources", sources)
+        if condition:
+            where_conditions.append(f"({condition})")
+    if voices:
+        condition = prepare_conditions("voices", voices)
+        if condition:
+            where_conditions.append(f"({condition})")
+    if favorite:
+        where_conditions.append("favorite = TRUE")
+    if tags:
+        conditions = compose_related_values("tag", "value", tags, connective)
+        if conditions:
+            where_conditions.append(f"({conditions})")
+    if genres:
+        conditions = compose_related_values("genre", "value", genres, connective)
+        if conditions:
+            where_conditions.append(f"({conditions})")
+    if where_conditions:
+        select_stmt += " WHERE " + f" {connective} ".join(where_conditions)
+    return select_stmt
+
+
 @app.command()
 def init(
     source_directory: pathlib.Path = typer.Argument(
@@ -560,16 +621,18 @@ def stream(
 ):
     """
     Stream music from a catalog song list, a midi file, or directory full of midi files to a midi device with using
-    bank selection and program changes based on voice preferences stored in "~/.miditoyz/settings.json"
+    bank selection and program changes based on voice preferences stored in your home directory on Windows as
+    ".miditoyz\settings.json" or ".miditoyz/settings.json" on MacOS/Linux. Your last song played
     and saved automatically each time you stream.
+
     Catalog song lists are CSV files with a mandatory header of "title,id" -- don't forget to use comma to separate for
     CSV fields, and double-quote fields with commas in them. Create song lists using the "query" command.
-     Bookmark values are based on the sequential number of the
-    song in the playlist or directory song list starting with 1.
+
+    Bookmark values are based on the sequential number of the song in the playlist or directory song list starting with 1.
     We do the right thing if you specify a bookmark number that's too big or small or your play different music than
     last time. Don't want to play your songs in order? Try the "shuffle" option. Your most important command line options are
-    remembered between streaming sessions, so subsequent streamings pick up
-    from the last song played if you don't include them (exceptions: shuffle, intermission, and debug).
+    remembered between streaming sessions, so subsequent streamings pick up from the last song played if you don't include
+    them (streaming exceptions: shuffle, intermission, and debug).
     """
     if voicing and not voicing in settings.get("voicings"):
         oops("no such voicing in your current voicings list")
@@ -781,69 +844,67 @@ def info():
 
 @app.command()
 def query(
-    search: str = typer.Option(
-        None,
-        help="Query catalog for songs that match all the search words provided (e.g. Piano Bar would find Piano Bar and Bar Piano anywhere in the song metadata or sources). This options searches both song metadata and sources and is the most popular option.",
+    title: Optional[str] = typer.Option(None, help="Query catalog song title."),
+    metadata: Optional[str] = typer.Option(
+        None, help="Query catalog song metadata, excluding user provided metadata."
     ),
-    title: str = typer.Option(None, help="Query catalog song title only."),
-    metadata: str = typer.Option(None, help="Query catalog song metadata only."),
-    sources: str = typer.Option(None, help="Query catalog song sources only."),
-    sql: str = typer.Option(
-        None,
-        help="Query using SQL without needing to specify fields or FROM clauses, starting with WHERE clause to query catalog (omit WHERE prefix).",
+    sources: Optional[str] = typer.Option(None, help="Query catalog song sources."),
+    voices: Optional[str] = typer.Option(None, help="Query catalog song voicing."),
+    favorite: bool = typer.Option(
+        False, help="Query catalog for songs that are marked as favorites."
+    ),
+    tag: List[str] = typer.Option(
+        [],
+        help="Query catalog with a list of one or more tags (e.g. --tag piano --tag karaoke).",
+    ),
+    genre: List[str] = typer.Option(
+        [],
+        help="Query catalog with a list of one or more genres (e.g. --genre jazz --genre newOrleans).",
+    ),
+    sql: Optional[str] = typer.Option(
+        None, help="Query using raw SQL (experts only!)."
     ),
     save: str = typer.Option(
         None,
-        help="Save your song list query result to a .csv file for later streaming.",
+        help="Save your song list query result to a .csv file for use with streaming or adding user metadata.",
     ),
     debug: bool = typer.Option(
         False, help="Show SQL generated based on selected query option."
     ),
+    connective: Optional[str] = typer.Option(
+        "OR", help="Use OR or AND logic when using multiple options."
+    ),
 ):
-    """Query a song list from your catalog for later streaming with several options to choose from depending on whether you prefer a simple or advanced option. Once you see the desired song list, you can save it to a .csv file for later streaming with the --save option."""
+    """Query a song list from your catalog for streaming or managing user metadata
+    with several options to choose from depending on whether you prefer a simple or
+    advanced capabilities. Once you see the desired song list, you can save it to a .csv
+    file with the --save option.
 
-    def criteria(column, value):
-        return f"lower({column}) like '%{value.lower()}%'"
+    The --connective option allows you to specify how multiple
+    options are evaluated (e.g. OR means at least one of the options match, and AND means
+    they all must match).
 
-    db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
-    if not os.path.exists(db):
-        oops(f"catalog {db} doesn't exist")
+    Options can be mixed and matched except for --sql."""
+    if connective.upper() not in ["OR", "AND"]:
+        typer.echo("Connective must be either OR or AND.")
         return
-    if title:
-        search = " and ".join([criteria("title", x) for x in title.split()])
-    elif metadata:
-        search = " and ".join([criteria("dump", x) for x in metadata.split()])
-    elif sources:
-        search = " and ".join([criteria("sources", x) for x in sources.split()])
-    elif sql:
-        search = sql
-    elif search:
-        search = " or ".join(
-            [
-                "(" + " and ".join([criteria("dump", x) for x in search.split()]) + ")",
-                "("
-                + " and ".join([criteria("sources", x) for x in search.split()])
-                + ")",
-            ]
-        )
+    if sql:
+        sql_query = sql
     else:
-        oops(
-            f"you must use one of the following options to query songs from your catalog: --search, --title, --metadata, --sources, or --sql"
+        sql_query = create_query(
+            title, metadata, favorite, tag, genre, sources, voices, connective
         )
-        return
     if debug:
-        typer.echo(f"query: select id, title from catalog where {search};")
+        typer.echo(f"query: {sql_query}")
+    db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
+    conn = duckdb.connect(db)
     if save:
-        query = (
-            f"copy (select title,id from catalog where {search}) to '{save}' (header);"
-        )
-        duckdb.connect(db).execute(query)
+        conn.execute(f"copy ({sql_query}) to '{save}' (header);")
         if os.path.getsize(save) <= 10:
             os.remove(save)
             oops(f"no songs match your query, {save} wasn't created")
     else:
-        query = f"select title,id from catalog where {search};"
-        typer.echo(format_query_result(duckdb.connect(db).execute(query).fetchall()))
+        typer.echo(format_query_result(conn.execute(sql_query).fetchall()))
 
 
 @app.command()
@@ -872,7 +933,10 @@ def metadata(
         help="Restore metadata from a .csv file if you need to rerun init and later restore matching metadata.",
     ),
 ):
-    """Add metadata to music."""
+    """Add user metadata to music to supplement the optional MIDI event metadata embedded in your song files.
+    User metadata is stored in your catalog database and is added to your music by using the query command
+    to identify the specific songs you want to specify metadata for. You can also use the --backup and --restore if
+    you wish to re-initialize your music collection and restore your metadata later."""
 
     keys = []
     if os.path.isfile(music) and is_midi(music):
@@ -957,14 +1021,14 @@ def metadata(
 def fields():
     """Show the field names and types from your catalog that you can use when querying a playlist for later streaming."""
     db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
-    cols = (
-        duckdb.connect(db)
-        .execute(
-            "select column_name, data_type from information_schema.columns where table_name='catalog'"
-        )
-        .fetchall()
-    )
-    typer.echo(f'catalog fields: {", ".join([f"{col[0]}: {col[1]}" for col in cols])}')
+    conn = duckdb.connect(db)
+    for table in ["catalog", "tag", "genre"]:
+        cols = conn.execute(
+            f"select column_name, data_type from information_schema.columns where table_name = '{table}'"
+        ).fetchall()
+        typer.echo(f"table {table} fields:")
+        for col in cols:
+            typer.echo(f"  {col[0]}: {col[1]}")
 
 
 @app.command()

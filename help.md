@@ -25,9 +25,9 @@ Commands:
   info      Show current miditoyz settings.
   init      Generate a new music collection from a source directory into...
   merge     Merge source catalog into destination catalog, overwriting...
-  metadata  Add metadata to music.
+  metadata  Add user metadata to music to supplement the optional MIDI...
   panic     Send MIDI panic to turn off any hung notes.
-  query     Query a song list from your catalog for later streaming with...
+  query     Query a song list from your catalog for streaming or managing...
   raw       Dump a MIDI song file in alternative raw text format with...
   stream    Stream music from a catalog song list, a midi file, or...
   verify    Verify MIDI song file can be processed with mido package or...
@@ -83,18 +83,22 @@ Usage: miditoyz stream [OPTIONS]
 
   Stream music from a catalog song list, a midi file, or directory full of
   midi files to a midi device with using bank selection and program changes
-  based on voice preferences stored in "~/.miditoyz/settings.json" and saved
-  automatically each time you stream. Catalog song lists are CSV files with a
-  mandatory header of "title,id" -- don't forget to use comma to separate for
-  CSV fields, and double-quote fields with commas in them. Create song lists
-  using the "query" command.  Bookmark values are based on the sequential
-  number of the song in the playlist or directory song list starting with 1.
-  We do the right thing if you specify a bookmark number that's too big or
-  small or your play different music than last time. Don't want to play your
-  songs in order? Try the "shuffle" option. Your most important command line
-  options are remembered between streaming sessions, so subsequent streamings
-  pick up from the last song played if you don't include them (exceptions:
-  shuffle, intermission, and debug).
+  based on voice preferences stored in your home directory on Windows as
+  ".miditoyz\settings.json" or ".miditoyz/settings.json" on MacOS/Linux. Your
+  last song played and saved automatically each time you stream.
+
+  Catalog song lists are CSV files with a mandatory header of "title,id" --
+  don't forget to use comma to separate for CSV fields, and double-quote
+  fields with commas in them. Create song lists using the "query" command.
+
+  Bookmark values are based on the sequential number of the song in the
+  playlist or directory song list starting with 1. We do the right thing if
+  you specify a bookmark number that's too big or small or your play different
+  music than last time. Don't want to play your songs in order? Try the
+  "shuffle" option. Your most important command line options are remembered
+  between streaming sessions, so subsequent streamings pick up from the last
+  song played if you don't include them (streaming exceptions: shuffle,
+  intermission, and debug).
 
 Options:
   --music TEXT              MIDI song file, directory full of music, or song
@@ -201,33 +205,47 @@ Options:
 $ miditoyz query --help
 Usage: miditoyz query [OPTIONS]
 
-  Query a song list from your catalog for later streaming with several options
-  to choose from depending on whether you prefer a simple or advanced option.
-  Once you see the desired song list, you can save it to a .csv file for later
-  streaming with the --save option.
+  Query a song list from your catalog for streaming or managing user metadata
+  with several options to choose from depending on whether you prefer a simple
+  or advanced capabilities. Once you see the desired song list, you can save
+  it to a .csv file with the --save option.
+
+  The --connective option allows you to specify how multiple options are
+  evaluated (e.g. OR means at least one of the options match, and AND means
+  they all must match).
+
+  Options can be mixed and matched except for --sql.
 
 Options:
-  --search TEXT         Query catalog for songs that match all the search
-                        words provided (e.g. Piano Bar would find Piano Bar
-                        and Bar Piano anywhere in the song metadata or
-                        sources). This options searches both song metadata and
-                        sources and is the most popular option.
-  --title TEXT          Query catalog song title only.
-  --metadata TEXT       Query catalog song metadata only.
-  --sources TEXT        Query catalog song sources only.
-  --sql TEXT            Query using SQL without needing to specify fields or
-                        FROM clauses, starting with WHERE clause to query
-                        catalog (omit WHERE prefix).
-  --save TEXT           Save your song list query result to a .csv file for
-                        later streaming.
-  --debug / --no-debug  Show SQL generated based on selected query option.
-                        [default: no-debug]
-  --help                Show this message and exit.
+  --title TEXT                Query catalog song title.
+  --metadata TEXT             Query catalog song metadata, excluding user
+                              provided metadata.
+  --sources TEXT              Query catalog song sources.
+  --voices TEXT               Query catalog song voicing.
+  --favorite / --no-favorite  Query catalog for songs that are marked as
+                              favorites.  [default: no-favorite]
+  --tag TEXT                  Query catalog with a list of one or more tags
+                              (e.g. --tag piano --tag karaoke).
+  --genre TEXT                Query catalog with a list of one or more genres
+                              (e.g. --genre jazz --genre newOrleans).
+  --sql TEXT                  Query using raw SQL (experts only!).
+  --save TEXT                 Save your song list query result to a .csv file
+                              for use with streaming or adding user metadata.
+  --debug / --no-debug        Show SQL generated based on selected query
+                              option.  [default: no-debug]
+  --connective TEXT           Use OR or AND logic when using multiple options.
+                              [default: OR]
+  --help                      Show this message and exit.
 
 $ miditoyz metadata --help
 Usage: miditoyz metadata [OPTIONS] MUSIC
 
-  Add metadata to music.
+  Add user metadata to music to supplement the optional MIDI event metadata
+  embedded in your song files. User metadata is stored in your catalog
+  database and is added to your music by using the query command to identify
+  the specific songs you want to specify metadata for. You can also use the
+  --backup and --restore if you wish to re-initialize your music collection
+  and restore your metadata later.
 
 Arguments:
   MUSIC  MIDI song file, directory full of music, or song list to stream. A
