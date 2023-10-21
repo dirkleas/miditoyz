@@ -905,7 +905,11 @@ def metadata(
         if music.endswith(".csv"):
             if backup:
                 conn.execute(
-                    f"COPY (SELECT id, favorite FROM catalog) TO '{music}' (DELIMITER ',', HEADER);"
+                    f"""
+                    COPY (SELECT id, favorite FROM catalog) TO '{music}' (DELIMITER ',', HEADER);
+                    COPY (SELECT id, value FROM tag) TO '{music[:-4]}.tag.csv' (DELIMITER ',', HEADER);
+                    COPY (SELECT id, value FROM genre) TO '{music[:-4]}.genre.csv' (DELIMITER ',', HEADER);
+                    """
                 )
             elif restore:
                 conn.execute(
@@ -915,7 +919,9 @@ def metadata(
                     UPDATE catalog
                         SET favorite = (SELECT favorite FROM temp_restore WHERE temp_restore.id = catalog.id)
                         WHERE EXISTS (SELECT 1 FROM temp_restore WHERE temp_restore.id = catalog.id);
-                    DROP TABLE temp_restore;"""
+                    COPY tag FROM '{music[:-4]}.tag.csv' (DELIMITER ',', HEADER);
+                    COPY temp_restore FROM '{music[:-4]}.genre.csv' (DELIMITER ',', HEADER);
+                    """
                 )
             return
         else:
