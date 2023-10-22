@@ -456,13 +456,13 @@ def create_query(
         return None
 
     def compose_related_values(table, column, values, connective):
-        tags_conditions = f" {connective} ".join(
+        conditions = f" {connective} ".join(
             [
                 f"id IN (SELECT id FROM {table} WHERE LOWER({column}) = '{value.lower()}')"
-                for value in {table}
+                for value in {values}
             ]
         )
-        where_conditions.append(f"({tags_conditions})")
+        where_conditions.append(f"({conditions})")
 
     if title:
         condition = prepare_conditions("title", title)
@@ -945,6 +945,16 @@ def metadata(
     to identify the specific songs you want to specify metadata for. You can also use the --backup and --restore if
     you wish to re-initialize your music collection and restore your metadata later."""
 
+    def compose_related_values(table, values, keys):
+        for key in keys:
+            for value in values:
+                if delete:
+                    conn.execute(
+                        f"delete from {table} where id = '{key}' and value = '{value}'"
+                    )
+                else:
+                    conn.execute(f"insert into {table} values ('{key}', '{value}')")
+
     keys = []
     if os.path.isfile(music) and is_midi(music):
         keys.append(os.path.splitext(os.path.basename(music))[0])
@@ -1001,23 +1011,9 @@ def metadata(
     if favorite:
         set_clause.append(f"favorite = {'FALSE' if delete else 'TRUE'}")
     if tag:
-        for key in keys:
-            for t in tag:
-                if delete:
-                    conn.execute(
-                        f"delete from tag where id = '{key}' and value = '{t}'"
-                    )
-                else:
-                    conn.execute(f"insert into tag values ('{key}', '{t}')")
+        compose_related_values("tag", tag, keys)
     if genre:
-        for key in keys:
-            for t in tag:
-                if delete:
-                    conn.execute(
-                        f"delete from genre where id = '{key}' and value = '{t}'"
-                    )
-                else:
-                    conn.execute(f"insert into genre values ('{key}', '{t}')")
+        compose_related_values("genre", genre, keys)
     if note:
         if os.path.exists(note):
             note = open(note).read()
