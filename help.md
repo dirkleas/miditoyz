@@ -21,7 +21,7 @@ Commands:
   db        Analyze music catalog database with duckdb (enter ".quit" to...
   devices   List currently connected midi output devices attached via...
   dump      Dump a MIDI song file in raw text format.
-  fields    Show the field names and types from your catalog that you can...
+  fields    Show the field names and types from your catalog database...
   info      Show current miditoyz settings.
   init      Generate a new music collection from a source directory into...
   merge     Merge source catalog into destination catalog, overwriting...
@@ -228,6 +228,7 @@ Options:
                               (e.g. --tag piano --tag karaoke).
   --genre TEXT                Query catalog with a list of one or more genres
                               (e.g. --genre jazz --genre newOrleans).
+  --note TEXT                 Query catalog song note.
   --sql TEXT                  Query using raw SQL (experts only!).
   --save TEXT                 Save your song list query result to a .csv file
                               for use with streaming or adding user metadata.
@@ -257,6 +258,8 @@ Options:
   --favorite / --no-favorite  Add to favorites.  [default: no-favorite]
   --tag TEXT                  A list of tags, provided separately.
   --genre TEXT                A list of genres, provided separately.
+  --note TEXT                 Add short notes via command line or specify a
+                              plain text file to load long form notes.
   --backup / --no-backup      Export metadata to a .csv file if you need to
                               rerun init and later restore matching metadata.
                               [default: no-backup]
@@ -268,8 +271,8 @@ Options:
 $ miditoyz fields --help
 Usage: miditoyz fields [OPTIONS]
 
-  Show the field names and types from your catalog that you can use when
-  querying a playlist for later streaming.
+  Show the field names and types from your catalog database tables that you
+  can use for advanced queries.
 
 Options:
   --help  Show this message and exit.

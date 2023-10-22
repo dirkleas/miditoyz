@@ -164,6 +164,7 @@ def create_db(catalog: str) -> None:
     conn.execute(
         """
         alter table catalog add column favorite boolean default false;
+        alter table catalog add column note varchar;
         create index idx_catalog_id on catalog (id);
         create table tag (id varchar, value varchar);
         create table genre (id varchar, value varchar);
@@ -438,6 +439,7 @@ def create_query(
     favorite: bool = False,
     tags: List[str] = [],
     genres: List[str] = [],
+    note: Optional[str] = None,
     sources: Optional[str] = None,
     voices: Optional[str] = None,
     connective: Optional[str] = "OR",
@@ -488,6 +490,10 @@ def create_query(
         conditions = compose_related_values("genre", "value", genres, connective)
         if conditions:
             where_conditions.append(f"({conditions})")
+    if note:
+        condition = prepare_conditions("note", note)
+        if condition:
+            where_conditions.append(f"({condition})")
     if where_conditions:
         select_stmt += " WHERE " + f" {connective} ".join(where_conditions)
     return select_stmt
@@ -861,6 +867,7 @@ def query(
         [],
         help="Query catalog with a list of one or more genres (e.g. --genre jazz --genre newOrleans).",
     ),
+    note: Optional[str] = typer.Option(None, help="Query catalog song note."),
     sql: Optional[str] = typer.Option(
         None, help="Query using raw SQL (experts only!)."
     ),
@@ -892,7 +899,7 @@ def query(
         sql_query = sql
     else:
         sql_query = create_query(
-            title, metadata, favorite, tag, genre, sources, voices, connective
+            title, metadata, favorite, tag, genre, note, sources, voices, connective
         )
     if debug:
         typer.echo(f"query: {sql_query}")
@@ -920,10 +927,10 @@ def metadata(
     favorite: bool = typer.Option(False, help="Add to favorites."),
     tag: List[str] = typer.Option([], help="A list of tags, provided separately."),
     genre: List[str] = typer.Option([], help="A list of genres, provided separately."),
-    # note: str = typer.Option(
-    #     None,
-    #     help="Add short notes via command line or specify a plain text file to load long form notes.",
-    # ),
+    note: str = typer.Option(
+        None,
+        help="Add short notes via command line or specify a plain text file to load long form notes.",
+    ),
     backup: bool = typer.Option(
         False,
         help="Export metadata to a .csv file if you need to rerun init and later restore matching metadata.",
@@ -1011,6 +1018,13 @@ def metadata(
                     )
                 else:
                     conn.execute(f"insert into genre values ('{key}', '{t}')")
+    if note:
+        if os.path.exists(note):
+            note = open(note).read()
+        if delete:
+            set_clause.append("note = null")
+        else:
+            set_clause.append("note = '" + note.replace("'", "''") + "'")
     if len(set_clause) > 0:
         conn.execute(
             f"update catalog set {','.join(set_clause)} where id in {str(tuple(keys))}"
@@ -1019,7 +1033,7 @@ def metadata(
 
 @app.command()
 def fields():
-    """Show the field names and types from your catalog that you can use when querying a playlist for later streaming."""
+    """Show the field names and types from your catalog database tables that you can use for advanced queries."""
     db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
     conn = duckdb.connect(db)
     for table in ["catalog", "tag", "genre"]:
