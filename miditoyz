@@ -165,9 +165,11 @@ def create_db(catalog: str) -> None:
         """
         alter table catalog add column favorite boolean default false;
         alter table catalog add column note varchar;
-        create index idx_catalog_id on catalog (id);
+        create unique index idx_catalog_id on catalog (id);
         create table tag (id varchar, value varchar);
+        create unique index idx_tag on tag (id, value);
         create table genre (id varchar, value varchar);
+        create unique index idx_genre on genre (id, value);
         """
     )
     conn.commit()
@@ -953,7 +955,10 @@ def metadata(
                         f"delete from {table} where id = '{key}' and value = '{value}'"
                     )
                 else:
-                    conn.execute(f"insert into {table} values ('{key}', '{value}')")
+                    try:
+                        conn.execute(f"insert into {table} values ('{key}', '{value}')")
+                    except:  # ignore duplicates...
+                        pass
 
     keys = []
     if os.path.isfile(music) and is_midi(music):
@@ -993,18 +998,48 @@ def metadata(
                     """
                 )
             elif restore:
-                conn.execute(
-                    f"""
-                    CREATE TEMPORARY TABLE temp_restore (id VARCHAR, favorite BOOLEAN, note VARCHAR);
-                    COPY temp_restore FROM '{music}' (DELIMITER ',', HEADER);
-                    UPDATE catalog
-                        SET favorite = (SELECT favorite FROM temp_restore WHERE temp_restore.id = catalog.id)
-                        SET note = (SELECT note FROM temp_restore WHERE temp_restore.id = catalog.id)
-                        WHERE EXISTS (SELECT 1 FROM temp_restore WHERE temp_restore.id = catalog.id);
-                    COPY tag FROM '{music[:-4]}.tag.csv' (DELIMITER ',', HEADER);
-                    COPY temp_restore FROM '{music[:-4]}.genre.csv' (DELIMITER ',', HEADER);
-                    """
-                )
+                try:
+                    conn.execute(
+                        f"""
+                        CREATE TEMPORARY TABLE temp_restore (id VARCHAR, favorite BOOLEAN, note VARCHAR);
+                        COPY temp_restore FROM '{music}' (DELIMITER ',', HEADER);
+                        UPDATE catalog
+                            SET 
+                                favorite = (SELECT favorite FROM temp_restore WHERE temp_restore.id = catalog.id),
+                                note = (SELECT note FROM temp_restore WHERE temp_restore.id = catalog.id)
+                            WHERE EXISTS (SELECT 1 FROM temp_restore WHERE temp_restore.id = catalog.id);
+                        DROP TABLE temp_restore;
+
+                        -- Step 1: Create temporary tables and import data
+                        CREATE TEMPORARY TABLE temp_tag (id VARCHAR, value VARCHAR);
+                        CREATE TEMPORARY TABLE temp_genre (id VARCHAR, value VARCHAR);
+                        COPY temp_tag FROM '{music[:-4]}.tag.csv' (DELIMITER ',', HEADER);
+                        COPY temp_genre FROM '{music[:-4]}.genre.csv' (DELIMITER ',', HEADER);
+                        -- Step 2: 'Upsert' into the main tables from the temporary tables
+                        -- Update existing records
+                        UPDATE tag
+                            SET value = (SELECT value FROM temp_tag WHERE temp_tag.id = tag.id),
+                            WHERE EXISTS (SELECT 1 FROM temp_tag WHERE temp_tag.id = tag.id);
+                        UPDATE genre
+                            SET value = (SELECT value FROM temp_genre WHERE temp_genre.id = genre.id),
+                            WHERE EXISTS (SELECT 1 FROM temp_genre WHERE temp_genre.id = genre.id);
+                        -- Insert new records
+                        INSERT INTO tag (id, value)
+                            SELECT id, value
+                            FROM temp_tag
+                            WHERE NOT EXISTS (SELECT 1 FROM tag WHERE tag.id = temp_tag.id);
+                        INSERT INTO genre (id, value)
+                            SELECT id, value
+                            FROM temp_genre
+                            WHERE NOT EXISTS (
+                                SELECT 1 FROM genre WHERE genre.id = temp_genre.id
+                            );
+                        DROP TABLE temp_tag;
+                        DROP TABLE temp_genre;
+                        """
+                    )
+                except:
+                    oops("you've already restored your metadata from this backup set")
             return
         else:
             oops(f"backup and restore options only works with a .csv file")
