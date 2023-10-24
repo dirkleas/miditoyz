@@ -44,7 +44,7 @@ Complete the following once before you can use `miditoyz`:
     ```
 1. Create default project configuration in your home directory. You may optionally alter the default voice preferences (see **Notes** section, item #1 below for more details on voice preferences):
     ```
-    python -c "import os,pathlib,shutil,json; x=f'{pathlib.Path.home()}{os.sep}.miditoyz'; os.mkdir(x); [shutil.copyfile(f,f'{x}{os.sep}{f}') for f in ['settings.json','datalist.pickle','midi.j2']]; open('miditoyz.bat', 'w').write(f'@echo off{os.linesep}python {os.getcwd()}{os.sep}miditoyz %*{os.linesep}'); s=json.load(open(f'{x}{os.sep}settings.json')); s['root']=os.getcwd(); json.dump(s, open(f'{x}{os.sep}settings.json','w'));"
+    python -c "import os,pathlib,shutil,json; x=f'{pathlib.Path.home()}{os.sep}.miditoyz'; os.mkdir(x); [shutil.copyfile(f,f'{x}{os.sep}{f}') for f in ['settings.json','datalist.pickle','midi.j2']]; open('miditoyz.bat', 'w').write(f'@echo off{os.linesep}python {os.getcwd()}{os.sep}miditoyz %*{os.linesep}'); shutil.copyfile('miditoyz.bat', 'mt.bat'); s=json.load(open(f'{x}{os.sep}settings.json')); s['root']=os.getcwd(); json.dump(s, open(f'{x}{os.sep}settings.json','w'));"
     ```
 1. Install required Python packages:
     ```
