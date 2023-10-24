@@ -281,7 +281,7 @@ def format_query_result(data: list) -> str:
     max_width_col1 = max(len(row[0]) for row in data)
     max_width_col2 = max(len(row[1]) for row in data)
     header_top = f"{TOP_LEFT}{HORIZONTAL * (max_width_col1 + 2)}{T_TOP}{HORIZONTAL * (max_width_col2 + 2)}{TOP_RIGHT}"
-    header_row = f"{VERTICAL} {'title'.ljust(max_width_col1)} {VERTICAL} {'id'.ljust(max_width_col2)} {VERTICAL}"
+    header_row = f"{VERTICAL} {'id'.ljust(max_width_col1)} {VERTICAL} {'title'.ljust(max_width_col2)} {VERTICAL}"
     header_middle = f"{T_LEFT}{HORIZONTAL * (max_width_col1 + 2)}{CROSS}{HORIZONTAL * (max_width_col2 + 2)}{T_RIGHT}"
     rows_box = [header_top, header_row, header_middle]
     for row in data:
@@ -461,7 +461,7 @@ def create_query(
         conditions = f" {connective} ".join(
             [
                 f"id IN (SELECT id FROM {table} WHERE LOWER({column}) = '{value.lower()}')"
-                for value in {values}
+                for value in values
             ]
         )
         where_conditions.append(f"({conditions})")
