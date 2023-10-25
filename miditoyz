@@ -619,6 +619,7 @@ def stream(
     ),
     voicing: str = typer.Option("", help="Voicing to use for voice preferences."),
     shuffle: bool = typer.Option(False, help="Shuffle song order."),
+    repeat: bool = typer.Option(False, help="Repeat your music forever."),
     intermission: int = typer.Option(
         0, help="Add specified number of seconds intermission between songs."
     ),
@@ -696,6 +697,11 @@ def stream(
                     device,
                 )
                 time.sleep(intermission)
+        if repeat:
+            device = device.name  # reset back to name for repeat...
+            stream(
+                music, bookmark, device, voicing, shuffle, repeat, intermission, debug
+            )
     except:  # skip broken songs...
         if not debug:
             pass

@@ -104,14 +104,15 @@ Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id".  [default:
-                            /tmp/tunes]
+                            /Users/dirkleas/Desktop/runt.mid]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
                             pick different music.  [default: 1]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
-                            [default: Clavinova Port 1]
+                            [default: chowchip Port 1]
   --voicing TEXT            Voicing to use for voice preferences.
   --shuffle / --no-shuffle  Shuffle song order.  [default: no-shuffle]
+  --repeat / --no-repeat    Repeat your music forever.  [default: no-repeat]
   --intermission INTEGER    Add specified number of seconds intermission
                             between songs.  [default: 0]
   --debug / --no-debug      Debug output.))  [default: no-debug]
@@ -284,7 +285,7 @@ Usage: miditoyz panic [OPTIONS]
 
 Options:
   --device TEXT  MIDI device to panic reset (e.g. "Clavinova Port 1" for USB,
-                 "Network Clavinova for WIFI, etc.))  [default: Clavinova Port
+                 "Network Clavinova for WIFI, etc.))  [default: chowchip Port
                  1]
   --help         Show this message and exit.
 
