@@ -125,23 +125,18 @@ Consider creating/activating a virtual environment for your repo clone using (e.
 
 ## Roadmap
 
-1. Add support for user-supplied metadata to supplement potential FOO embedded in the MIDI song files (i.e. favorite, tags, genre, comments, references, etc.). Implement as with new `miditoyz metadata --query` command (i.e. `miditoyz query --title "Autumn Leaves" --genre "standard, piano_bar" --favorite --comment "I heard this at 1992 New Years Eve party at the Pump Room, NYC`). 
+Roadmap priority and timing are tbd.
+
+1. Add basic transport capabilities
+1. Add webapp front end for cli-based **fastapi** server w/ optional conversation ux
+1. Add pub/sub wrapper for integration/collaboration
 1. Add ability to specify voicing preferences based for genres/styles, individual songs, sequencer specific settings, track title heuristics, etc.
 1. Add support for multiple instruments played concurrently (e.g. support independent instrument settings for settings like bookmark, device, and music) allowing multiple concurrent instances of `miditoyz`.
 1. Add unique song-level metadata (e.g. genre/style, performer, songwriter, lyrics, applicable arranger style lists, custom tags, etc.), partially available from catalog `miditoyz dump` data.
-1. Command line, OS-native, or web-based gui front end for tools to complement.
-1. Implement a number of search and query options for choosing songs from the song catalog. Possible considerations:
-    * [jq](https://jqlang.github.io/jq/) - query directly or with a wrapper tool, for example query for songs by Ronnell Bright and view numbered songs with the bit of bash/shell scripting magic if on MacOS/Linux/Windows + WSL:
-    ```
-    jq 'to_entries | map(select(.value.dump != null and (.value.dump[] | contains("Ronnell"))) | {"title": .value.title, "song": ("\(.key).mid")})' /tmp/songs.unique/catalog.json > /tmp/ronnell.json
-    grep title /tmp/ronnell.json | cut -d'"' -f4 | nl -n ln
-    ```
-    * [nocodb](https://nocodb.com) - web-based spreadsheet-style option with expected search and filter options. This could be run locally or cloud with a bit of extra tooling to feed `midistream`.
-    * AI/large language model (llm) interface for natural language search with support for providing song background, recommendations, etc. via text or voice (think "hey siri | alexa | siri, play some jazz standards or movie soundtracks or that song Brenda and Eddie by Billy Joel).
 1. Installation tool to automate **installation/setup** section, housekeeping, [automated] testing, continued care-and-feeding, etc.
 
 
-questions? suggestions? wanna help? reach out [here](https://github.com/dirkleas/miditoyz/issues) -- it's not just for issues and bugs!
+Questions? Suggestions? Wanna help? Reach out [here](https://github.com/dirkleas/miditoyz/issues) -- it's not just for issues and bugs!
 
 --
 
