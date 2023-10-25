@@ -698,9 +698,8 @@ def stream(
                 )
                 time.sleep(intermission)
         if repeat:
-            device = device.name  # reset back to name for repeat...
             stream(
-                music, bookmark, device, voicing, shuffle, repeat, intermission, debug
+                music, bookmark, device.name, voicing, shuffle, repeat, intermission, debug
             )
     except:  # skip broken songs...
         if not debug:
