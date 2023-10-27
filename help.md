@@ -104,9 +104,9 @@ Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id".  [default:
-                            /Users/dirkleas/Desktop/runt.mid]
+                            /tmp/pianoBar.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 1]
+                            pick different music.  [default: 3]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
                             [default: chowchip Port 1]
@@ -256,6 +256,7 @@ Arguments:
 
 Options:
   --delete / --no-delete      Delete specified option values.
+  --title TEXT                Add/update song title.
   --favorite / --no-favorite  Add to favorites.  [default: no-favorite]
   --tag TEXT                  A list of tags, provided separately.
   --genre TEXT                A list of genres, provided separately.

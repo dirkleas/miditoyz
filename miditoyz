@@ -938,6 +938,10 @@ def metadata(
         None,
         help="Delete specified option values.",
     ),
+    title: str = typer.Option(
+        None,
+        help="Add/update song title.",
+    ),
     favorite: bool = typer.Option(False, help="Add to favorites."),
     tag: List[str] = typer.Option([], help="A list of tags, provided separately."),
     genre: List[str] = typer.Option([], help="A list of genres, provided separately."),
@@ -1056,6 +1060,11 @@ def metadata(
         else:
             oops(f"backup and restore options only works with a .csv file")
             return
+    if title:
+        if delete:
+            set_clause.append("title = null")
+        else:
+            set_clause.append("title = '" + title.replace("'", "''") + "'")
     if favorite:
         set_clause.append(f"favorite = {'FALSE' if delete else 'TRUE'}")
     if tag:
