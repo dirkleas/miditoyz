@@ -449,10 +449,10 @@ def create_query(
     select_stmt = "SELECT id, title FROM catalog"
     where_conditions = []
 
-    def prepare_conditions(field, values):
+    def prepare_conditions(field, values, connective):
         if values:
             search_terms = [f"%{value.lower().strip()}%" for value in values.split()]
-            return " OR ".join(
+            return f" {connective} ".join(
                 [f"LOWER({field}) LIKE '{term}'" for term in search_terms]
             )
         return None
@@ -467,19 +467,19 @@ def create_query(
         where_conditions.append(f"({conditions})")
 
     if title:
-        condition = prepare_conditions("title", title)
+        condition = prepare_conditions("title", title, connective)
         if condition:
             where_conditions.append(f"({condition})")
     if metadata:
-        condition = prepare_conditions("dump", metadata)
+        condition = prepare_conditions("dump", metadata, connective)
         if condition:
             where_conditions.append(f"({condition})")
     if sources:
-        condition = prepare_conditions("sources", sources)
+        condition = prepare_conditions("sources", sources, connective)
         if condition:
             where_conditions.append(f"({condition})")
     if voices:
-        condition = prepare_conditions("voices", voices)
+        condition = prepare_conditions("voices", voices, connective)
         if condition:
             where_conditions.append(f"({condition})")
     if favorite:
@@ -493,7 +493,7 @@ def create_query(
         if conditions:
             where_conditions.append(f"({conditions})")
     if note:
-        condition = prepare_conditions("note", note)
+        condition = prepare_conditions("note", note, connective)
         if condition:
             where_conditions.append(f"({condition})")
     if where_conditions:
