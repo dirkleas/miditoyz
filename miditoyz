@@ -699,7 +699,14 @@ def stream(
                 time.sleep(intermission)
         if repeat:
             stream(
-                music, bookmark, device.name, voicing, shuffle, repeat, intermission, debug
+                music,
+                bookmark,
+                device.name,
+                voicing,
+                shuffle,
+                repeat,
+                intermission,
+                debug,
             )
     except:  # skip broken songs...
         if not debug:
@@ -1063,9 +1070,14 @@ def metadata(
         else:
             set_clause.append("note = '" + note.replace("'", "''") + "'")
     if len(set_clause) > 0:
-        conn.execute(
-            f"update catalog set {','.join(set_clause)} where id in {str(tuple(keys))}"
-        )
+        try:
+            conn.execute(
+                f"update catalog set {','.join(set_clause)} where id in {str(tuple(keys))}"
+            )
+        except:
+            oops(
+                "metdata can only be added to music in your catalog, not standalone folders/MIDI files"
+            )
 
 
 @app.command()
