@@ -613,6 +613,10 @@ def stream(
         settings.get("bookmark", 0),
         help="Bookmark for last song played assuming you don't pick different music.",
     ),
+    skip: bool = typer.Option(
+        False,
+        help="Skip to next song in music list if not shuffling instead of replaying bookmarked song.",
+    ),
     device: str = typer.Option(
         settings.get("device", "Clavinova Port 1"),
         help='MIDI device to stream to (e.g. "Clavinova Port 1" for USB, "Network Clavinova for WIFI, etc.))',
@@ -677,6 +681,8 @@ def stream(
             "music must be a song list, valid midi file ending .mid, or directory full of midi files"
         )
         return
+    if skip:
+        bookmark += 1
     if bookmark > len(songs):
         bookmark = 1
         oops(
@@ -687,11 +693,11 @@ def stream(
             bookmark = 1
             random.shuffle(songs)
         device = mido.open_output(device)
-        for skip, song in enumerate(songs):
-            if skip >= bookmark - 1:
+        for idx, song in enumerate(songs):
+            if idx >= bookmark - 1:
                 stream_preferred_voicing(
                     song,
-                    skip,
+                    idx,
                     len(songs),
                     map_voicing(voicing) or voicing_default,
                     device,
@@ -708,7 +714,7 @@ def stream(
                 intermission,
                 debug,
             )
-    except:  # skip broken songs...
+    except:  # ignore broken songs...
         if not debug:
             pass
         else:  # debug...

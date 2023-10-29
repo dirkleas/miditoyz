@@ -104,12 +104,15 @@ Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id".  [default:
-                            /tmp/pianoBar.csv]
+                            /tmp/chopin.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 3]
+                            pick different music.  [default: 14]
+  --skip / --no-skip        Skip to next song in music list if not shuffling
+                            instead of replaying bookmarked song.  [default:
+                            no-skip]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
-                            [default: chowchip Port 1]
+                            [default: Clavinova Port 1]
   --voicing TEXT            Voicing to use for voice preferences.
   --shuffle / --no-shuffle  Shuffle song order.  [default: no-shuffle]
   --repeat / --no-repeat    Repeat your music forever.  [default: no-repeat]
@@ -286,7 +289,7 @@ Usage: miditoyz panic [OPTIONS]
 
 Options:
   --device TEXT  MIDI device to panic reset (e.g. "Clavinova Port 1" for USB,
-                 "Network Clavinova for WIFI, etc.))  [default: chowchip Port
+                 "Network Clavinova for WIFI, etc.))  [default: Clavinova Port
                  1]
   --help         Show this message and exit.
 
