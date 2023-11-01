@@ -94,17 +94,17 @@ def normalize_midi(midi_file: str) -> str:
 
 def get_track_channel_voices(midi_file: str, midi, voices: dict, echo=True) -> None:
     result = [
-        f"song file: {midi_file}",
+        f"MIDI File: {midi_file}",
     ]
     for i, track in enumerate(midi.tracks):
         channels = defaultdict(dict)
         channels_over_time = defaultdict(dict)
         time_elapsed = 0
-        result.append(f"  track: {i}")
+        result.append(f"  Track: {i}")
         for msg in track:
             time_elapsed += msg.time
             if msg.type == "track_name":
-                result.append(f'    track name: {track.name.strip() or "n/a"}')
+                result.append(f'    Track Name: {track.name.strip() or "n/a"}')
             elif msg.type == "control_change" and msg.control == 0:
                 channels[msg.channel]["msb"] = msg.value
             elif msg.type == "control_change" and msg.control == 32:
@@ -121,11 +121,11 @@ def get_track_channel_voices(midi_file: str, midi, voices: dict, echo=True) -> N
             )
             if voice in voices.keys():
                 result.append(
-                    f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
+                    f"      Channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
                 )
             else:
                 result.append(
-                    f"      channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}: unrecognized voice, MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
+                    f"      Channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}: unrecognized voice, MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
                 )
     result = os.linesep.join(result)
     if echo:
@@ -553,7 +553,10 @@ def merge(
         True, help="Create destination catalog backup .zip archive before merging."
     ),
 ):
-    """Merge source catalog into destination catalog, overwriting destination catalog songs with source catalog songs if there are any duplicates."""
+    """Merge source JSON catalog into destination JSON catalog, overwriting destination catalog songs with
+    source catalog songs if there are any duplicates -- this is only merging JSON files, not the catalog
+    database or user metadata.
+    """
     if (
         not os.path.exists(source)
         and os.path.isdir(source)
@@ -785,6 +788,17 @@ def raw(
         mido.MidiFile(midi_file, debug=debug).print_tracks()
     except:
         oops(f"{midi_file} is a broken song file")
+
+
+@app.command()
+def summarize(
+    midi_file: str = typer.Argument(..., help="MIDI song file to be summarized."),
+):
+    """Summarize MIDI song metadata and voices (e.g. convenience command which runs both dump with metadata and voices commands)."""
+    typer.echo(f"METADATA{os.linesep}========")
+    dump(midi_file, metadata=True, json=False)
+    typer.echo(f"VOICES{os.linesep}======")
+    voices(midi_file, str(pathlib.Path(settings.get("root")) / "datalist.pickle"))
 
 
 @app.command()
