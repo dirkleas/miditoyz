@@ -854,6 +854,18 @@ def voicing(
 @app.command()
 def info():
     """Show current miditoyz settings."""
+
+    def format_metadata(conn, table):
+        cols = conn.execute(
+            f"select value, count(*) from {table} group by value order by count(*) desc;"
+        ).fetchall()
+        typer.echo(f"    {table}s:")
+        for line in textwrap.wrap(
+            ", ".join([f"{x[0]} ({x[1]}x)" for x in cols]),
+            width=shutil.get_terminal_size().columns - 4,
+        ):
+            typer.echo(f"      {line}")
+
     typer.echo(f"miditoyz settings:")
     for k, v in sorted(settings.items()):
         if k == "voicings":
@@ -866,6 +878,11 @@ def info():
                 typer.echo(f"    {line}")
         else:
             typer.echo(f"  {k}: {v}")
+
+    typer.echo("  metadata:")
+    conn = duckdb.connect(f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}')
+    format_metadata(conn, "tag")
+    format_metadata(conn, "genre")
 
 
 @app.command()
