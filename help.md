@@ -17,22 +17,23 @@ Options:
   --help                          Show this message and exit.
 
 Commands:
-  catalog   Change to a new catalog file for streaming.
-  db        Analyze music catalog database with duckdb (enter ".quit" to...
-  devices   List currently connected midi output devices attached via...
-  dump      Dump a MIDI song file in raw text format.
-  fields    Show the field names and types from your catalog database...
-  info      Show current miditoyz settings.
-  init      Generate a new music collection from a source directory into...
-  merge     Merge source catalog into destination catalog, overwriting...
-  metadata  Add user metadata to music to supplement the optional MIDI...
-  panic     Send MIDI panic to turn off any hung notes.
-  query     Query a song list from your catalog for streaming or managing...
-  raw       Dump a MIDI song file in alternative raw text format with...
-  stream    Stream music from a catalog song list, a midi file, or...
-  verify    Verify MIDI song file can be processed with mido package or...
-  voices    Generate a list of voices for each track in a midi song file.
-  voicing   Change to a new instrument name for voicing streams.
+  catalog    Change to a new catalog file for streaming.
+  db         Analyze music catalog database with duckdb (enter ".quit" to...
+  devices    List currently connected midi output devices attached via...
+  dump       Dump a MIDI song file in raw text format.
+  fields     Show the field names and types from your catalog database...
+  info       Show current miditoyz settings.
+  init       Generate a new music collection from a source directory into...
+  merge      Merge source JSON catalog into destination JSON catalog,...
+  metadata   Add user metadata to music to supplement the optional MIDI...
+  panic      Send MIDI panic to turn off any hung notes.
+  query      Query a song list from your catalog for streaming or...
+  raw        Dump a MIDI song file in alternative raw text format with...
+  stream     Stream music from a catalog song list, a midi file, or...
+  summarize  Summarize MIDI song metadata and voices (e.g.
+  verify     Verify MIDI song file can be processed with mido package or...
+  voices     Generate a list of voices for each track in a midi song file.
+  voicing    Change to a new instrument name for voicing streams.
 
 $ miditoyz init --help
 Usage: miditoyz init [OPTIONS] SOURCE_DIRECTORY DESTINATION_DIRECTORY
@@ -56,8 +57,10 @@ Options:
 $ miditoyz merge --help
 Usage: miditoyz merge [OPTIONS] SOURCE DESTINATION
 
-  Merge source catalog into destination catalog, overwriting destination
-  catalog songs with source catalog songs if there are any duplicates.
+  Merge source JSON catalog into destination JSON catalog, overwriting
+  destination catalog songs with source catalog songs if there are any
+  duplicates -- this is only merging JSON files, not the catalog database or
+  user metadata.
 
 Arguments:
   SOURCE       Source catalog to merge into destination catalog.  [required]
@@ -104,15 +107,15 @@ Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id".  [default:
-                            /tmp/chopin.csv]
+                            /tmp/pianoBar.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 14]
+                            pick different music.  [default: 31]
   --skip / --no-skip        Skip to next song in music list if not shuffling
                             instead of replaying bookmarked song.  [default:
                             no-skip]
   --device TEXT             MIDI device to stream to (e.g. "Clavinova Port 1"
                             for USB, "Network Clavinova for WIFI, etc.))
-                            [default: Clavinova Port 1]
+                            [default: chowchip Port 1]
   --voicing TEXT            Voicing to use for voice preferences.
   --shuffle / --no-shuffle  Shuffle song order.  [default: no-shuffle]
   --repeat / --no-repeat    Repeat your music forever.  [default: no-repeat]
@@ -161,6 +164,18 @@ Arguments:
 Options:
   --debug / --no-debug  Enable extended raw debug mode.  [default: no-debug]
   --help                Show this message and exit.
+
+$ miditoyz summarize --help
+Usage: miditoyz summarize [OPTIONS] MIDI_FILE
+
+  Summarize MIDI song metadata and voices (e.g. convenience command which runs
+  both dump with metadata and voices commands).
+
+Arguments:
+  MIDI_FILE  MIDI song file to be summarized.  [required]
+
+Options:
+  --help  Show this message and exit.
 
 $ miditoyz verify --help
 Usage: miditoyz verify [OPTIONS] FILE_NAME
@@ -289,7 +304,7 @@ Usage: miditoyz panic [OPTIONS]
 
 Options:
   --device TEXT  MIDI device to panic reset (e.g. "Clavinova Port 1" for USB,
-                 "Network Clavinova for WIFI, etc.))  [default: Clavinova Port
+                 "Network Clavinova for WIFI, etc.))  [default: chowchip Port
                  1]
   --help         Show this message and exit.
 
