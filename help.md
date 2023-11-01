@@ -109,7 +109,7 @@ Options:
                             mandatory header "title,id".  [default:
                             /tmp/pianoBar.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 31]
+                            pick different music.  [default: 1]
   --skip / --no-skip        Skip to next song in music list if not shuffling
                             instead of replaying bookmarked song.  [default:
                             no-skip]
@@ -125,12 +125,14 @@ Options:
   --help                    Show this message and exit.
 
 $ miditoyz voices --help
-Usage: miditoyz voices [OPTIONS] MIDI_FILE
+Usage: miditoyz voices [OPTIONS] MUSIC
 
   Generate a list of voices for each track in a midi song file.
 
 Arguments:
-  MIDI_FILE  MIDI song file to generate voice list for.  [required]
+  MUSIC  MIDI song file, directory full of music, or song list to stream. A
+         song list is a CSV file with a mandatory header "title,id" to
+         generate voice list(s) for.  [required]
 
 Options:
   --voices TEXT  Official Yamaha Clavinova "datalist" of voices. Check vendor
@@ -139,12 +141,14 @@ Options:
   --help         Show this message and exit.
 
 $ miditoyz dump --help
-Usage: miditoyz dump [OPTIONS] MIDI_FILE
+Usage: miditoyz dump [OPTIONS] MUSIC
 
   Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug".
 
 Arguments:
-  MIDI_FILE  MIDI song file to be analyzed.  [required]
+  MUSIC  MIDI song file, directory full of music, or song list to stream. A
+         song list is a CSV file with a mandatory header "title,id" to be
+         analyzed.  [required]
 
 Options:
   --metadata / --no-metadata  Show only metadata.  [default: no-metadata]
@@ -153,26 +157,30 @@ Options:
   --help                      Show this message and exit.
 
 $ miditoyz raw --help
-Usage: miditoyz raw [OPTIONS] MIDI_FILE
+Usage: miditoyz raw [OPTIONS] MUSIC
 
   Dump a MIDI song file in alternative raw text format with optionally with
   hexdump-style debug output. See also: "miditoyz dump --metadata".
 
 Arguments:
-  MIDI_FILE  MIDI file to analyze in extended raw debug format.  [required]
+  MUSIC  MIDI song file, directory full of music, or song list to stream. A
+         song list is a CSV file with a mandatory header "title,id" to be
+         analyzed.  [required]
 
 Options:
   --debug / --no-debug  Enable extended raw debug mode.  [default: no-debug]
   --help                Show this message and exit.
 
 $ miditoyz summarize --help
-Usage: miditoyz summarize [OPTIONS] MIDI_FILE
+Usage: miditoyz summarize [OPTIONS] MUSIC
 
   Summarize MIDI song metadata and voices (e.g. convenience command which runs
   both dump with metadata and voices commands).
 
 Arguments:
-  MIDI_FILE  MIDI song file to be summarized.  [required]
+  MUSIC  MIDI song file, directory full of music, or song list to stream. A
+         song list is a CSV file with a mandatory header "title,id" to be
+         summarized.  [required]
 
 Options:
   --help  Show this message and exit.

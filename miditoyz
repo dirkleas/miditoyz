@@ -7,20 +7,6 @@
 #
 # miditoyz - care and feeding for you midi song collection
 #
-# todo:
-#   general:
-#       - tbd
-#   init:
-#       - scan songs looking for other instruments via track titles or
-#         sequencer_specific meta events, plus add extra cli arg "genre" and append
-#         to event.track_name for preference key mapping
-#         (e.g. "Jazz Drums" => (0, 0, 1) Jazz Brush Expanded)
-#       - consider integrating music/folder and song metadata like genre,
-#         favorites, wikipedia summaries, etc. renderable to stdout
-#       - consider advanced analytics in clav repo datalist.ipynb for resolving
-#         sequencer_specific events or metaMessage.track[0[]['title] to resolve
-#         voices for voice_preferences
-#
 # notes/references:
 #   - duckdb is used for catalog and metadata storage
 #   - reference song with rich meta, sysex and sequencer_specific events in my
@@ -501,6 +487,32 @@ def create_query(
     return select_stmt
 
 
+def list_music(music) -> list:
+    """list music from a catalog song list, a midi file, or directory full of midi files"""
+    if is_midi(music):  # stream file...
+        music = normalize_midi(music)
+        songs = [
+            music,
+        ]
+    elif os.path.isdir(music):  # stream folder's midi files...
+        songs = sorted([f"{music}{os.sep}{x}" for x in os.listdir(music) if is_midi(x)])
+    elif music.lower().endswith(".csv") and os.path.exists(
+        music
+    ):  # stream or catalog list...
+        songs = list(  # includes header, format title,id
+            map(
+                lambda x: f'{settings.get("catalog")}{os.sep}{x.get("id")}.mid',
+                csv.DictReader(open(music)),
+            )
+        )
+    else:
+        oops(
+            "music must be a song list, valid midi file ending .mid, or directory full of midi files"
+        )
+        return
+    return songs
+
+
 @app.command()
 def init(
     source_directory: pathlib.Path = typer.Argument(
@@ -663,27 +675,7 @@ def stream(
     if bookmark < 0 or music != settings.get("music") or is_midi(music):
         bookmark = 1
     serialize_settings({"music": music, "device": device, "bookmark": bookmark})
-    if is_midi(music):  # stream file...
-        music = normalize_midi(music)
-        songs = [
-            music,
-        ]
-    elif os.path.isdir(music):  # stream folder's midi files...
-        songs = sorted([f"{music}{os.sep}{x}" for x in os.listdir(music) if is_midi(x)])
-    elif music.lower().endswith(".csv") and os.path.exists(
-        music
-    ):  # stream or catalog list...
-        songs = list(  # includes header, format title,id
-            map(
-                lambda x: f'{settings.get("catalog")}{os.sep}{x.get("id")}.mid',
-                csv.DictReader(open(music)),
-            )
-        )
-    else:
-        oops(
-            "music must be a song list, valid midi file ending .mid, or directory full of midi files"
-        )
-        return
+    songs = list_music(music)
     if skip:
         bookmark += 1
     if bookmark > len(songs):
@@ -726,8 +718,9 @@ def stream(
 
 @app.command()
 def voices(
-    midi_file: str = typer.Argument(
-        ..., help="MIDI song file to generate voice list for."
+    music: str = typer.Argument(
+        ...,
+        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to generate voice list(s) for.',
     ),
     voices: str = typer.Option(
         str(pathlib.Path(settings.get("root")) / "datalist.pickle"),
@@ -735,70 +728,94 @@ def voices(
     ),
 ):
     """Generate a list of voices for each track in a midi song file."""
-    midi_file = normalize_midi(midi_file)
-    if not os.path.exists(midi_file) or not is_midi(midi_file):
-        oops(
-            f"midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
-        )
-        return
-    try:
-        midi = mido.MidiFile(midi_file)
-        get_track_channel_voices(midi_file, midi, pickle.load(open(voices, "rb")))
-    except:
-        oops(f"{midi_file} is a broken song file")
+    music = list_music(music)
+    typer.echo(f"MUSIC VOICES{os.linesep}============")
+    for midi_file in music:
+        try:
+            midi = mido.MidiFile(midi_file)
+            get_track_channel_voices(midi_file, midi, pickle.load(open(voices, "rb")))
+        except:
+            oops(f"{midi_file} is a broken song file")
+        if len(music) > 1:
+            typer.echo(
+                f'{os.linesep}{"~"*shutil.get_terminal_size().columns}{os.linesep}'
+            )
 
 
 @app.command()
 def dump(
-    midi_file: str = typer.Argument(..., help="MIDI song file to be analyzed."),
+    music: str = typer.Argument(
+        ...,
+        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to be analyzed.',
+    ),
     metadata: bool = typer.Option(False, help="Show only metadata."),
     json: bool = typer.Option(False, help="Convert MIDI song to raw JSON."),
 ):
     """Dump a MIDI song file in raw text format. See also: "miditoyz raw --debug"."""
-    midi_file = normalize_midi(midi_file)
-    if not os.path.exists(midi_file) or not is_midi(midi_file):
-        oops(
-            f"midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
-        )
-        return
-    try:
-        midi = mido.MidiFile(midi_file)
-        if not json:
-            typer.echo(f"MIDI File: {midi_file}")
-        typer.echo(dump_json(midi, metadata, json))
-    except:
-        oops(f"{midi_file} is a broken song file")
+    music = list_music(music)
+    if len(music) > 1 and not json:
+        typer.echo(f"MUSIC DUMP{os.linesep}==========")
+    elif json:
+        typer.echo("[")
+    for midi_file in music:
+        try:
+            midi = mido.MidiFile(midi_file)
+            if not json:
+                typer.echo(f"MIDI File: {midi_file}")
+            typer.echo(dump_json(midi, metadata, json))
+        except:
+            oops(f"{midi_file} is a broken song file")
+        if len(music) > 1 and not json:
+            typer.echo(
+                f'{os.linesep}{"~"*shutil.get_terminal_size().columns}{os.linesep}'
+            )
+        elif json and midi_file != music[-1]:
+            typer.echo(",")
+    if json:
+        typer.echo("]")
 
 
 @app.command()
 def raw(
-    midi_file: str = typer.Argument(
-        ..., help="MIDI file to analyze in extended raw debug format."
+    music: str = typer.Argument(
+        ...,
+        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to be analyzed.',
     ),
     debug: bool = typer.Option(False, help="Enable extended raw debug mode."),
 ):
     """Dump a MIDI song file in alternative raw text format with optionally with hexdump-style debug output. See also: "miditoyz dump --metadata"."""
-    midi_file = normalize_midi(midi_file)
-    if not os.path.exists(midi_file) or not is_midi(midi_file):
-        oops(
-            f"midi_file {midi_file} doesn't exist, doesn't end with .mid, or isn't a midi song file"
-        )
-        return
-    try:
-        mido.MidiFile(midi_file, debug=debug).print_tracks()
-    except:
-        oops(f"{midi_file} is a broken song file")
+    music = list_music(music)
+    typer.echo(f"MUSIC RAW DUMP{os.linesep}==============")
+    for midi_file in music:
+        try:
+            mido.MidiFile(midi_file, debug=debug).print_tracks()
+        except:
+            oops(f"{midi_file} is a broken song file")
+        if len(music) > 1:
+            typer.echo(
+                f'{os.linesep}{"~"*shutil.get_terminal_size().columns}{os.linesep}'
+            )
 
 
 @app.command()
 def summarize(
-    midi_file: str = typer.Argument(..., help="MIDI song file to be summarized."),
+    music: str = typer.Argument(
+        ...,
+        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to be summarized.',
+    ),
 ):
     """Summarize MIDI song metadata and voices (e.g. convenience command which runs both dump with metadata and voices commands)."""
-    typer.echo(f"METADATA{os.linesep}========")
-    dump(midi_file, metadata=True, json=False)
-    typer.echo(f"VOICES{os.linesep}======")
-    voices(midi_file, str(pathlib.Path(settings.get("root")) / "datalist.pickle"))
+    music = list_music(music)
+    for midi_file in music:
+        typer.echo(f"SUMMARY{os.linesep}=======")
+        typer.echo(f"METADATA{os.linesep}--------")
+        dump(midi_file, metadata=True, json=False)
+        typer.echo(f"VOICES{os.linesep}------")
+        voices(midi_file, str(pathlib.Path(settings.get("root")) / "datalist.pickle"))
+        if len(music) > 1:
+            typer.echo(
+                f'{os.linesep}{"~"*shutil.get_terminal_size().columns}{os.linesep}'
+            )
 
 
 @app.command()
@@ -1013,7 +1030,7 @@ def metadata(
                     except:  # ignore duplicates...
                         pass
 
-    keys = []
+    keys = list_music(music)
     if os.path.isfile(music) and is_midi(music):
         keys.append(os.path.splitext(os.path.basename(music))[0])
     elif os.path.isdir(music):
