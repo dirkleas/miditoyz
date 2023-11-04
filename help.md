@@ -22,7 +22,7 @@ Commands:
   devices    List currently connected midi output devices attached via...
   dump       Dump a MIDI song file in raw text format.
   fields     Show the field names and types from your catalog database...
-  info       Show current miditoyz settings.
+  info       Show current miditoyz settings, including user metadata tags...
   init       Generate a new music collection from a source directory into...
   merge      Merge source JSON catalog into destination JSON catalog,...
   metadata   Add user metadata to music to supplement the optional MIDI...
@@ -106,10 +106,11 @@ Usage: miditoyz stream [OPTIONS]
 Options:
   --music TEXT              MIDI song file, directory full of music, or song
                             list to stream. A song list is a CSV file with a
-                            mandatory header "title,id".  [default:
+                            mandatory header "title,id". You can specify
+                            "LAST" for last song streamed.  [default:
                             /tmp/pianoBar.csv]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 1]
+                            pick different music.  [default: 3]
   --skip / --no-skip        Skip to next song in music list if not shuffling
                             instead of replaying bookmarked song.  [default:
                             no-skip]
@@ -132,7 +133,8 @@ Usage: miditoyz voices [OPTIONS] MUSIC
 Arguments:
   MUSIC  MIDI song file, directory full of music, or song list to stream. A
          song list is a CSV file with a mandatory header "title,id" to
-         generate voice list(s) for.  [required]
+         generate voice list(s) for. You can specify "LAST" for last song
+         streamed.  [required]
 
 Options:
   --voices TEXT  Official Yamaha Clavinova "datalist" of voices. Check vendor
@@ -148,7 +150,7 @@ Usage: miditoyz dump [OPTIONS] MUSIC
 Arguments:
   MUSIC  MIDI song file, directory full of music, or song list to stream. A
          song list is a CSV file with a mandatory header "title,id" to be
-         analyzed.  [required]
+         analyzed. You can specify "LAST" for last song streamed.  [required]
 
 Options:
   --metadata / --no-metadata  Show only metadata.  [default: no-metadata]
@@ -165,7 +167,7 @@ Usage: miditoyz raw [OPTIONS] MUSIC
 Arguments:
   MUSIC  MIDI song file, directory full of music, or song list to stream. A
          song list is a CSV file with a mandatory header "title,id" to be
-         analyzed.  [required]
+         analyzed. You can specify "LAST" for last song streamed.  [required]
 
 Options:
   --debug / --no-debug  Enable extended raw debug mode.  [default: no-debug]
@@ -180,7 +182,8 @@ Usage: miditoyz summarize [OPTIONS] MUSIC
 Arguments:
   MUSIC  MIDI song file, directory full of music, or song list to stream. A
          song list is a CSV file with a mandatory header "title,id" to be
-         summarized.  [required]
+         summarized. You can specify "LAST" for last song streamed.
+         [required]
 
 Options:
   --help  Show this message and exit.
@@ -224,10 +227,11 @@ Options:
 $ miditoyz info --help
 Usage: miditoyz info [OPTIONS]
 
-  Show current miditoyz settings.
+  Show current miditoyz settings, including user metadata tags and genres.
 
 Options:
-  --help  Show this message and exit.
+  --json / --no-json  Convert info to JSON.  [default: no-json]
+  --help              Show this message and exit.
 
 $ miditoyz query --help
 Usage: miditoyz query [OPTIONS]
@@ -277,8 +281,8 @@ Usage: miditoyz metadata [OPTIONS] MUSIC
 
 Arguments:
   MUSIC  MIDI song file, directory full of music, or song list to stream. A
-         song list is a CSV file with a mandatory header "title,id".
-         [required]
+         song list is a CSV file with a mandatory header "title,id". You can
+         specify "LAST" for last song streamed.  [required]
 
 Options:
   --delete / --no-delete      Delete specified option values.

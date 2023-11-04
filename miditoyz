@@ -321,7 +321,7 @@ def stream_preferred_voicing(
 ) -> None:
     """revoice midi file with voice preferences"""
     channels = defaultdict(dict)
-    serialize_settings({"bookmark": index + 1})
+    serialize_settings({"song": midi_file, "bookmark": index + 1})
     try:
         midi = mido.MidiFile(midi_file)
         title = get_title(midi)
@@ -488,13 +488,17 @@ def create_query(
 
 
 def list_music(music) -> list:
-    """list music from a catalog song list, a midi file, or directory full of midi files"""
-    if is_midi(music):  # stream file...
+    """list music from a catalog song list, a midi file, directory full of midi files, or last music played"""
+    if music.lower() == "last":  # last music played...
+        songs = [
+            settings.get("song"),
+        ]
+    elif is_midi(music):  # file...
         music = normalize_midi(music)
         songs = [
             music,
         ]
-    elif os.path.isdir(music):  # stream folder's midi files...
+    elif os.path.isdir(music):  # folder's midi files...
         songs = sorted([f"{music}{os.sep}{x}" for x in os.listdir(music) if is_midi(x)])
     elif music.lower().endswith(".csv") and os.path.exists(
         music
@@ -622,7 +626,7 @@ def devices():
 def stream(
     music: str = typer.Option(
         settings.get("music") or settings.get("catalog"),  # default to last music
-        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id".',
+        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id". You can specify "LAST" for last song streamed.',
     ),
     bookmark: int = typer.Option(
         settings.get("bookmark", 0),
@@ -720,7 +724,7 @@ def stream(
 def voices(
     music: str = typer.Argument(
         ...,
-        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to generate voice list(s) for.',
+        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to generate voice list(s) for. You can specify "LAST" for last song streamed.',
     ),
     voices: str = typer.Option(
         str(pathlib.Path(settings.get("root")) / "datalist.pickle"),
@@ -746,7 +750,7 @@ def voices(
 def dump(
     music: str = typer.Argument(
         ...,
-        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to be analyzed.',
+        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to be analyzed. You can specify "LAST" for last song streamed.',
     ),
     metadata: bool = typer.Option(False, help="Show only metadata."),
     json: bool = typer.Option(False, help="Convert MIDI song to raw JSON."),
@@ -779,7 +783,7 @@ def dump(
 def raw(
     music: str = typer.Argument(
         ...,
-        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to be analyzed.',
+        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to be analyzed. You can specify "LAST" for last song streamed.',
     ),
     debug: bool = typer.Option(False, help="Enable extended raw debug mode."),
 ):
@@ -801,7 +805,7 @@ def raw(
 def summarize(
     music: str = typer.Argument(
         ...,
-        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to be summarized.',
+        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id" to be summarized. You can specify "LAST" for last song streamed.',
     ),
 ):
     """Summarize MIDI song metadata and voices (e.g. convenience command which runs both dump with metadata and voices commands)."""
@@ -883,37 +887,46 @@ def voicing(
 
 
 @app.command()
-def info():
-    """Show current miditoyz settings."""
+def info(
+    json: bool = typer.Option(False, help="Convert info to JSON."),
+):
+    """Show current miditoyz settings, including user metadata tags and genres."""
+    from json import dumps
 
-    def format_metadata(conn, table):
-        cols = conn.execute(
-            f"select value, count(*) from {table} group by value order by count(*) desc;"
-        ).fetchall()
-        typer.echo(f"    {table}s:")
-        for line in textwrap.wrap(
-            ", ".join([f"{x[0]} ({x[1]}x)" for x in cols]),
-            width=shutil.get_terminal_size().columns - 4,
-        ):
-            typer.echo(f"      {line}")
+    def to_dict(sql_list, columns):
+        return [{columns[i]: row[i] for i in range(len(columns))} for row in sql_list]
 
-    typer.echo(f"miditoyz settings:")
-    for k, v in sorted(settings.items()):
-        if k == "voicings":
-            typer.echo(f"  {k}")
-            for title, mapping in v.items():
-                typer.echo(f"    {title}: {mapping}")
-        elif k == "performanceEvents":
-            typer.echo(f"  {k}:")
-            for line in textwrap.wrap(v, width=shutil.get_terminal_size().columns - 4):
-                typer.echo(f"    {line}")
-        else:
-            typer.echo(f"  {k}: {v}")
-
-    typer.echo("  metadata:")
+    result = {"settings": settings, "metadata": {}}
     conn = duckdb.connect(f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}')
-    format_metadata(conn, "tag")
-    format_metadata(conn, "genre")
+    for table in ["tag", "genre"]:
+        result["metadata"][table] = to_dict(
+            conn.execute(
+                f"select value, count(*) as uses from {table} group by value order by count(*) desc;"
+            ).fetchall(),
+            ["value", "count"],
+        )
+    if json:
+        typer.echo(dumps(result, indent=2))
+    else:
+        typer.echo(f"miditoyz settings:")
+        for k, v in sorted(settings.items()):
+            if k == "voicings":
+                typer.echo(f"  {k}")
+                for title, mapping in v.items():
+                    typer.echo(f"    {title}: {mapping}")
+            elif k == "performanceEvents":
+                typer.echo(f"  {k}:")
+                for line in textwrap.wrap(
+                    v, width=shutil.get_terminal_size().columns - 4
+                ):
+                    typer.echo(f"    {line}")
+            else:
+                typer.echo(f"  {k}: {v}")
+        typer.echo("  metadata:")
+        for table, values in result["metadata"].items():
+            typer.echo(f"    {table}:")
+            for value in values:
+                typer.echo(f"      {value['value']}: {value['count']}x")
 
 
 @app.command()
@@ -986,7 +999,7 @@ def query(
 def metadata(
     music: str = typer.Argument(
         ...,
-        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id".',
+        help='MIDI song file, directory full of music, or song list to stream. A song list is a CSV file with a mandatory header "title,id". You can specify "LAST" for last song streamed.',
     ),
     delete: bool = typer.Option(
         None,
