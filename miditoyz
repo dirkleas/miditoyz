@@ -81,46 +81,46 @@ def normalize_midi(midi_file: str) -> str:
         return midi_file
 
 
-def get_track_channel_voices(midi_file: str, midi, voices: dict, echo=True) -> None:
-    result = [
-        f"MIDI File: {midi_file}",
-    ]
+def get_track_channel_voices(midi_file: str, midi, voices: dict) -> str:
+    result = {"filename": midi_file, "tracks": []}
     for i, track in enumerate(midi.tracks):
+        track_info = {"track": i, "channels": []}
         channels = defaultdict(dict)
-        channels_over_time = defaultdict(dict)
+        channels_over_time = defaultdict(lambda: defaultdict(dict))
         time_elapsed = 0
-        result.append(f"  Track: {i}")
         for msg in track:
             time_elapsed += msg.time
             if msg.type == "track_name":
-                result.append(f'    Track Name: {track.name.strip() or "n/a"}')
+                track_info["title"] = track.name.strip() or "n/a"
             elif msg.type == "control_change" and msg.control == 0:
                 channels[msg.channel]["msb"] = msg.value
             elif msg.type == "control_change" and msg.control == 32:
                 channels[msg.channel]["lsb"] = msg.value
             elif msg.type == "program_change":
                 channels[msg.channel]["pc"] = msg.program + 1
-                channels_over_time[msg.channel, time_elapsed] = channels[msg.channel]
+                channels_over_time[msg.channel][time_elapsed] = channels[
+                    msg.channel
+                ].copy()
                 del channels[msg.channel]
-        for channel in sorted(channels_over_time):
-            voice = (
-                channels_over_time.get(channel).get("msb", 0),
-                channels_over_time.get(channel).get("lsb", 0),
-                channels_over_time.get(channel).get("pc", 1),
-            )
-            if voice in voices.keys():
-                result.append(
-                    f"      Channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}, datalist voice MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
+        for channel, times in channels_over_time.items():
+            for time_elapsed, channel_info in times.items():
+                voice = (
+                    channel_info.get("msb", 0),
+                    channel_info.get("lsb", 0),
+                    channel_info.get("pc", 1),
                 )
-            else:
-                result.append(
-                    f"      Channel {channel[0]} @{channel[1]}: {voices.get(voice, voice)}: unrecognized voice, MSB, LSB, PC: [{voice[0]}, {voice[1]}, {voice[2]}]"
-                )
-    result = os.linesep.join(result)
-    if echo:
-        typer.echo(result)
-    else:
-        return result
+                voice_name = voices.get(voice, "unrecognized voice")
+                channel_data = {
+                    "channel": channel,
+                    "time": time_elapsed,
+                    "voice": voice_name,
+                    "MSB": voice[0],
+                    "LSB": voice[1],
+                    "PC": voice[2],
+                }
+                track_info["channels"].append(channel_data)
+        result["tracks"].append(track_info)
+    return result
 
 
 def printable(s: str) -> str:
@@ -743,20 +743,42 @@ def voices(
         str(pathlib.Path(settings.get("root")) / "datalist.pickle"),
         help='Official Yamaha Clavinova "datalist" of voices. Check vendor documentation for other device voicing.',
     ),
+    json: bool = typer.Option(False, help="Convert MIDI song to raw JSON."),
 ):
     """Generate a list of voices for each track in a midi song file."""
     music = list_music(music)
-    typer.echo(f"MUSIC VOICES{os.linesep}============")
+    if json:
+        typer.echo("[")
+    else:
+        typer.echo(f"MUSIC VOICES{os.linesep}============{os.linesep}")
     for midi_file in music:
         try:
             midi = mido.MidiFile(midi_file)
-            get_track_channel_voices(midi_file, midi, pickle.load(open(voices, "rb")))
+            voice_data = get_track_channel_voices(
+                midi_file, midi, pickle.load(open(voices, "rb"))
+            )
+            if json:
+                typer.echo(json_pkg.dumps(voice_data))
+            else:
+                typer.echo(f"MIDI File: {midi_file}")
+                for track in voice_data["tracks"]:
+                    typer.echo(f'  Track: {track.get("track")}')
+                    typer.echo(f'    Track Name: {track.get("title")}')
+                    for channel in track.get("channels"):
+                        typer.echo(
+                            f'      Channel {channel.get("channel")} @{channel.get("time")}: {channel.get("voice")}, datalist voice MSB, LSB, PC: [{channel.get("MSB")}, {channel.get("LSB")}, {channel.get("PC")}]'
+                        )
         except:
-            oops(f"{midi_file} is a broken song file")
-        if len(music) > 1:
+            if not json:
+                oops(f"{midi_file} is a broken song file")
+        if not json and len(music) > 1:
             typer.echo(
                 f'{os.linesep}{"~"*shutil.get_terminal_size().columns}{os.linesep}'
             )
+        elif json and midi_file != music[-1]:
+            typer.echo(",")
+    if json:
+        typer.echo("]")
 
 
 @app.command()
@@ -828,7 +850,11 @@ def summarize(
         typer.echo(f"METADATA{os.linesep}--------")
         dump(midi_file, metadata=True, json=False)
         typer.echo(f"VOICES{os.linesep}------")
-        voices(midi_file, str(pathlib.Path(settings.get("root")) / "datalist.pickle"))
+        voices(
+            midi_file,
+            str(pathlib.Path(settings.get("root")) / "datalist.pickle"),
+            json=False,
+        )
         if len(music) > 1:
             typer.echo(
                 f'{os.linesep}{"~"*shutil.get_terminal_size().columns}{os.linesep}'

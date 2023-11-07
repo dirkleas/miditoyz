@@ -138,10 +138,11 @@ Arguments:
          streamed.  [required]
 
 Options:
-  --voices TEXT  Official Yamaha Clavinova "datalist" of voices. Check vendor
-                 documentation for other device voicing.  [default:
-                 /Users/dirkleas/h4x/miditoyz/datalist.pickle]
-  --help         Show this message and exit.
+  --voices TEXT       Official Yamaha Clavinova "datalist" of voices. Check
+                      vendor documentation for other device voicing.
+                      [default: /Users/dirkleas/h4x/miditoyz/datalist.pickle]
+  --json / --no-json  Convert MIDI song to raw JSON.  [default: no-json]
+  --help              Show this message and exit.
 
 $ miditoyz dump --help
 Usage: miditoyz dump [OPTIONS] MUSIC
