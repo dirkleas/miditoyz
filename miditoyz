@@ -14,7 +14,8 @@
 #       clav.toys/more clav files/2.NEW FollowLights/02.Prelude.s944.mid
 #
 
-import os, hashlib, shutil, json, csv, pathlib, platform, pickle, time, datetime, random, string, mido, typer, textwrap, duckdb, jinja2
+import os, hashlib, shutil, csv, pathlib, platform, pickle, time, datetime, random, string, mido, typer, textwrap, duckdb, jinja2
+import json as json_pkg
 from collections import defaultdict
 from typing import List, Optional
 
@@ -49,7 +50,9 @@ def map_voicing(voicing: str) -> dict:
 
 
 try:
-    settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json"))
+    settings = json_pkg.load(
+        open(pathlib.Path(homedir) / ".miditoyz" / "settings.json")
+    )
 except:
     oops("your settings.json file is broken, please fix it and try again")
     exit(1)
@@ -138,9 +141,10 @@ def create_db(catalog: str) -> None:
     typer.echo(f"  creating duckdb database {db}, just a sec...")
     conn = duckdb.connect(db, config={"max_memory": "5G"})
     catalog_data = [
-        {"id": k, **v} for k, v in json.load(open(db.replace(".db", ".json"))).items()
+        {"id": k, **v}
+        for k, v in json_pkg.load(open(db.replace(".db", ".json"))).items()
     ]
-    open(db.replace(".db", "_flat.json"), "w").write(json.dumps(catalog_data))
+    open(db.replace(".db", "_flat.json"), "w").write(json_pkg.dumps(catalog_data))
     catalog_flat = db.replace(".db", "_flat.json")
     conn.execute(
         "create table catalog as select * from read_json('"
@@ -233,13 +237,15 @@ def ingest_music(
     typer.echo(
         f'  {len(songs_broken) / len(songs) * 100:.2f}% of songs are "broken" and have been logged...'
     )
-    json.dump(
+    json_pkg.dump(
         songs, open(pathlib.Path(destination_directory) / "catalog.json", "w"), indent=2
     )
-    settings = json.load(open(pathlib.Path(homedir) / ".miditoyz" / "settings.json"))
+    settings = json_pkg.load(
+        open(pathlib.Path(homedir) / ".miditoyz" / "settings.json")
+    )
     settings["catalog"] = str(pathlib.Path(destination_directory))
     settings["music"] = ""
-    json.dump(
+    json_pkg.dump(
         settings, open(pathlib.Path(homedir) / ".miditoyz" / "settings.json", "w")
     )
     create_db(settings.get("catalog"))
@@ -301,7 +307,7 @@ def notify(title: str, subtitle: str) -> None:
 def serialize_settings(new_settings: dict) -> None:
     """update settings.json with specified dictionary"""
     settings.update(new_settings)
-    json.dump(
+    json_pkg.dump(
         settings,
         open(pathlib.Path(homedir) / ".miditoyz" / "settings.json", "w"),
     )
@@ -409,7 +415,7 @@ def dump_json(midi, metadata: bool = True, raw_json: bool = False) -> str:
         },
     )
     if raw_json:
-        return json.dumps(
+        return json_pkg.dumps(
             song,
             indent=2,
         )
@@ -598,14 +604,16 @@ def merge(
             destination,
         )
     typer.echo(f"  merging catalogs...")
-    source_catalog = json.load(open(pathlib.Path(source) / "catalog.json"))
-    destination_catalog = json.load(open(pathlib.Path(destination) / "catalog.json"))
+    source_catalog = json_pkg.load(open(pathlib.Path(source) / "catalog.json"))
+    destination_catalog = json_pkg.load(
+        open(pathlib.Path(destination) / "catalog.json")
+    )
     dupes = len(set(source_catalog).intersection(set(destination_catalog)))
     typer.echo(
         f"  merging {len(source_catalog)} source songs with destination: {len(destination_catalog)} destination songs, {dupes} duplicates..."
     )
     destination_catalog.update(source_catalog)
-    json.dump(
+    json_pkg.dump(
         destination_catalog,
         open(pathlib.Path(destination) / "catalog.json", "w"),
         indent=2,
@@ -615,11 +623,16 @@ def merge(
 
 
 @app.command()
-def devices():
+def devices(
+    json: bool = typer.Option(False, help="Convert devices to JSON."),
+):
     """List currently connected midi output devices attached via USB, WIFI, or Bluetooth."""
-    typer.echo("connected midi device(s):")
-    for device in mido.get_output_names():
-        typer.echo(f'  "{device}"')
+    if json:
+        typer.echo(json_pkg.dumps(mido.get_output_names()))
+    else:
+        typer.echo("connected midi device(s):")
+        for device in mido.get_output_names():
+            typer.echo(f'  "{device}"')
 
 
 @app.command()
@@ -848,7 +861,7 @@ def verify(
     elif file_name.lower().endswith(".json"):
         typer.echo(f"verifying {file_name} is a valid JSON file...")
         try:
-            json.load(open(file_name))
+            json_pkg.load(open(file_name))
             typer.echo(f"  JSON format ok")
         except:
             oops(f"invalid format", prefix="  ")
@@ -891,7 +904,6 @@ def info(
     json: bool = typer.Option(False, help="Convert info to JSON."),
 ):
     """Show current miditoyz settings, including user metadata tags and genres."""
-    from json import dumps
 
     def to_dict(sql_list, columns):
         return [{columns[i]: row[i] for i in range(len(columns))} for row in sql_list]
@@ -906,7 +918,7 @@ def info(
             ["value", "count"],
         )
     if json:
-        typer.echo(dumps(result, indent=2))
+        typer.echo(json_pkg.dumps(result, indent=2))
     else:
         typer.echo(f"miditoyz settings:")
         for k, v in sorted(settings.items()):
@@ -956,6 +968,7 @@ def query(
         None,
         help="Save your song list query result to a .csv file for use with streaming or adding user metadata.",
     ),
+    json: bool = typer.Option(False, help="Convert query result to JSON."),
     debug: bool = typer.Option(
         False, help="Show SQL generated based on selected query option."
     ),
@@ -991,6 +1004,16 @@ def query(
         if os.path.getsize(save) <= 10:
             os.remove(save)
             oops(f"no songs match your query, {save} wasn't created")
+    elif json:
+        typer.echo(
+            json_pkg.dumps(
+                [
+                    {"id": x[0], "title": x[1]}
+                    for x in conn.execute(sql_query).fetchall()
+                ],
+                indent=2,
+            )
+        )
     else:
         typer.echo(format_query_result(conn.execute(sql_query).fetchall()))
 
@@ -1157,17 +1180,26 @@ def metadata(
 
 
 @app.command()
-def fields():
+def fields(
+    json: bool = typer.Option(False, help="Convert fields to JSON."),
+):
     """Show the field names and types from your catalog database tables that you can use for advanced queries."""
     db = f'{pathlib.Path(settings.get("catalog")) / "catalog.db"}'
     conn = duckdb.connect(db)
+    tables_info = {}
     for table in ["catalog", "tag", "genre"]:
         cols = conn.execute(
-            f"select column_name, data_type from information_schema.columns where table_name = '{table}'"
+            f"SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '{table}'"
         ).fetchall()
-        typer.echo(f"table {table} fields:")
-        for col in cols:
-            typer.echo(f"  {col[0]}: {col[1]}")
+        fields_info = [{"field": col[0], "type": col[1]} for col in cols]
+        if json:
+            tables_info[table] = fields_info
+        else:
+            typer.echo(f"table {table} fields:")
+            for col_dict in fields_info:
+                typer.echo(f"  {col_dict['field']}: {col_dict['type']}")
+    if json:
+        typer.echo(json_pkg.dumps(tables_info, indent=2))
 
 
 @app.command()

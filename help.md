@@ -79,7 +79,8 @@ Usage: miditoyz devices [OPTIONS]
   Bluetooth.
 
 Options:
-  --help  Show this message and exit.
+  --json / --no-json  Convert devices to JSON.  [default: no-json]
+  --help              Show this message and exit.
 
 $ miditoyz stream --help
 Usage: miditoyz stream [OPTIONS]
@@ -108,9 +109,9 @@ Options:
                             list to stream. A song list is a CSV file with a
                             mandatory header "title,id". You can specify
                             "LAST" for last song streamed.  [default:
-                            /tmp/pianoBar.csv]
+                            /Users/dirkleas/Downloads/NowandThen_midi.mid]
   --bookmark INTEGER        Bookmark for last song played assuming you don't
-                            pick different music.  [default: 3]
+                            pick different music.  [default: 1]
   --skip / --no-skip        Skip to next song in music list if not shuffling
                             instead of replaying bookmarked song.  [default:
                             no-skip]
@@ -263,6 +264,8 @@ Options:
   --sql TEXT                  Query using raw SQL (experts only!).
   --save TEXT                 Save your song list query result to a .csv file
                               for use with streaming or adding user metadata.
+  --json / --no-json          Convert query result to JSON.  [default: no-
+                              json]
   --debug / --no-debug        Show SQL generated based on selected query
                               option.  [default: no-debug]
   --connective TEXT           Use OR or AND logic when using multiple options.
@@ -307,7 +310,8 @@ Usage: miditoyz fields [OPTIONS]
   can use for advanced queries.
 
 Options:
-  --help  Show this message and exit.
+  --json / --no-json  Convert fields to JSON.  [default: no-json]
+  --help              Show this message and exit.
 
 $ miditoyz panic --help
 Usage: miditoyz panic [OPTIONS]
