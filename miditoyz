@@ -1,4 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv --quiet run --script
+# /// script
+# requires-python = ">=3.12.6"
+# dependencies = [
+#     "mido", "typer", "duckdb", "jinja2"
+# ]
+# ///
 
 # Copyright (c) 2023 Dirk Leas
 # This software is released under the MIT License.
@@ -667,7 +673,7 @@ def stream(
     """
     Stream music from a catalog song list, a midi file, or directory full of midi files to a midi device with using
     bank selection and program changes based on voice preferences stored in your home directory on Windows as
-    ".miditoyz\settings.json" or ".miditoyz/settings.json" on MacOS/Linux. Your last song played
+    ".miditoyz\\settings.json" or ".miditoyz/settings.json" on MacOS/Linux. Your last song played
     and saved automatically each time you stream.
 
     Catalog song lists are CSV files with a mandatory header of "title,id" -- don't forget to use comma to separate for
