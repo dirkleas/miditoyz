@@ -1,3 +1,12 @@
+#!/usr/bin/env -S uv --quiet run --script
+# /// script
+# requires-python = ">=3.12.6"
+# dependencies = [
+#     "duckdb"
+# ]
+# ///
+
+
 # Copyright (c) 2023 Dirk Leas
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
