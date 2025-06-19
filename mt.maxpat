@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 50.0, 119.0, 778.0, 410.0 ],
+		"rect" : [ 50.0, 119.0, 636.0, 315.0 ],
 		"gridsize" : [ 15.0, 15.0 ],
 		"boxes" : [ 			{
 				"box" : 				{
@@ -21,6 +21,8 @@
 					"numoutlets" : 5,
 					"outlettype" : [ "preset", "int", "preset", "int", "" ],
 					"patching_rect" : [ 273.0, 167.5, 480.0, 29.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 77.0, 258.0, 480.0, 29.0 ],
 					"preset_data" : [ 						{
 							"number" : 1,
 							"data" : [ 4, "obj-1", "kslider", "chord" ]
@@ -63,6 +65,8 @@
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 165.0, 23.5, 249.0, 22.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 23.0, 142.0, 249.0, 22.0 ],
 					"text_width" : 60.0
 				}
 
@@ -101,6 +105,8 @@
 					"outlettype" : [ "int", "int" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 165.0, 68.0, 588.0, 87.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 23.0, 166.0, 588.0, 87.0 ],
 					"varname" : "keyboard"
 				}
 
@@ -163,7 +169,9 @@
 					"maxclass" : "ezdac~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 23.0, 333.0, 45.0, 45.0 ]
+					"patching_rect" : [ 23.0, 333.0, 45.0, 45.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 179.0, 82.0, 45.0, 45.0 ]
 				}
 
 			}
